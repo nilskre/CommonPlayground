@@ -1,8 +1,6 @@
 <div class="Section1">
 
-Common Playground
-
-Software Requirements Specification
+<h2> Common Playground - Software Requirements Specification </h2>
 
 For <Subsystem or Feature>
 

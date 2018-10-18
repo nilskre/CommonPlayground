@@ -1,8 +1,6 @@
-<font face="Arial" size="1">![](./Software Requirements Specification_files/artfc_w.gif) [Artifacts](http://sce.uhcl.edu/helm/RationalUnifiedProcess/process/artifact/ovu_arts.htm) > ![](./Software Requirements Specification_files/artfc_y.gif) [Requirements Artifact Set](http://sce.uhcl.edu/helm/RationalUnifiedProcess/process/artifact/ars_req.htm) > ![](./Software Requirements Specification_files/additional.gif) [{More Requirements Artifacts}](http://sce.uhcl.edu/helm/RationalUnifiedProcess/process/artifact/arp_req_add.htm) > ![](./Software Requirements Specification_files/ar_srs.gif) [Software Requirements Specification](http://sce.uhcl.edu/helm/RationalUnifiedProcess/process/artifact/ar_srs.htm) > ![](./Software Requirements Specification_files/ie.gif) SRS traditional</font>
-
 <div class="Section1">
 
-<Project Name>
+Common Playground
 
 Software Requirements Specification
 

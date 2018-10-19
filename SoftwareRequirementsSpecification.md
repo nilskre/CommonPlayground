@@ -117,6 +117,7 @@ There are also some functionalities for the admin. He will get the possibility t
 
 #### 3.3.2 
 
+
 ### 3.4 Perfomance
 
 - Kapazität
@@ -125,49 +126,68 @@ There are also some functionalities for the admin. He will get the possibility t
 speicherbedarf etc.
 - app perfomance
 
-#### 3.4.1 
+#### 3.4.1 Capacity
+The system should be able to manga thousands of requests. Also it should be possible to register as many users as necessary.
+
+#### 3.4.2 Storage 
+Smartphones don't provide much storage. Therefore we are aiming to keep the needed Storage as small as possible.
+
 
 
 ### 3.5 Supportability
 
-- Clean code
-- Modularisierung
-- gute Testabdeckung
-- automatisierte tests
+#### 3.5.1 Coding Standards
+We are going to write the Code by using all of the most common clean code standards. For example we will name our variables and methods by their functionalities. This will keep the Code easy to read by everyone and make further developement much easier.
 
-#### 3.5.1 
+### 3.5.2 Testing Strategy
+The Application will have a high test coverage and all important functionalities and edge cases should be tested. Further mistakes in the Implementation will be discovered instant and it will be easy to locate the error. 
 
 ### 3.6 Design Constraints
+We are trying to provide a modern and easy to handle design for the UI aswell as for the Architecture of our Application. To achieve that the functionalities will be kept as modular as possible.
 
-- Examples include software languages, software process requirements, prescribed use of developmental tools, architectural and design constraints, purchased components, class libraries, etc
+Because we are progamming an android app we chose Java as our programming Language. Also we are using the common MVC-Architecture to keep the frontend and backend seperated. To make the communication between these two parts easy, we will implement a RESTful-API between them which will provide the data in JSON-Format. 
+The supported Platforms will be:
+- Android 4.4 and higher
+- Java 8 and higher
 
 ### 3.7 On-line User Documentation and Help System Requirements
-
-- keine Dokumentation nötig
-- Help Button in der app
-- FAQ
+The usage of the app should be as intuitive as possible so it won't need any further documentation. If the user needs some help we will implement a "Help"-Button in the App which includes a FAQ and a formular to contact the developement team.
 
 ### 3.8 Purchased Components
-- not yet
+We don't have any purchased Components yet. If there will be purchased Components in the future we will list them here.
 
 ### 3.9 Interfaces
-tbd
 
-#### 3.9.1 
+#### 3.9.1 User Interfaces
+The User interfaces that will be implented are:
+- Dashboard - lists all session and makes it possible to filter session
+- Session Page - shows detailed information about the session and makes it possible to connect session attendants for example via chat
+- Friend List - friends can be added and joined
+- Profile - makes it possible to post information about yourself
+- User Information - shows additional information about users (for example: Language, Country, Favourite Games, etc.)
+- Settings - shows the Settings
+
+#### 3.9.2 Hardware Interfaces
+(n/a)
+
+#### 3.9.3 Software Interfaces
+The app will be runnable on Android 4.4 and higher. IOS won't be featured at the Moment.
+
+#### 3.9.4 Communication Interfaces
+The Server and Hardware will communicate using the http protocol. 
 
 ### 3.10 Licensing Requirements
 
-tbd
-
 ### 3.11 Legal, Copyright, and Other Notices
-
-Copyright siehe andere
+The Logo is licensed to the Common Playground Team and is only allowed to use for the application. We do not take responsibilty for any incorrect data or errors in the application.
 
 ### 3.12 Applicable Standards
-
- Clean code
- DoD
+The development will follow the common clean code standards and naming conventions. Also we will creat a Definition of Done which will be added here as soon as its complete.
 
 ## 4. Supporting Information
-
-- Team members etc.
+For any further information cou can contact the Common Playground Team or check our [Common Playground Blog](http://commonplayground.wordpress.com). 
+The Team Members are:
+- Celina Adam
+- Inga Batton
+- Nils Krehl 
+- Denis Reibel

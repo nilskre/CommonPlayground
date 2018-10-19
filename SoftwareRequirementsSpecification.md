@@ -52,7 +52,7 @@ User data for accounts and possibly profiles has to be stored. Also the game ses
 We need a tag system so everyone looking to join a game can search for the kind of games they are interested in. Possibly other aspects can be searchable, such as place or date. Tags must be stored and a search function developed. 
 
 ### 1.3 Definitions, Acronyms and Abbreviations
-| Abbrevation |                                        |
+| Abbrevation | Explanation                            |
 | ----------- | -------------------------------------- |
 | SRS         | Software Requirements Specification    |
 | UC          | Use Case                               |
@@ -187,7 +187,7 @@ The User interfaces that will be implented are:
 (n/a)
 
 #### 3.9.3 Software Interfaces
-The app will be runnable on Android 4.4 and higher. IOS won't be featured at the Moment.
+The app will be runnable on Android 4.4 and higher. iOS won't be featured at the moment.
 
 #### 3.9.4 Communication Interfaces
 The Server and Hardware will communicate using the http protocol. 
@@ -198,7 +198,7 @@ The Server and Hardware will communicate using the http protocol.
 The Logo is licensed to the Common Playground Team and is only allowed to use for the application. We do not take responsibilty for any incorrect data or errors in the application.
 
 ### 3.12 Applicable Standards
-The development will follow the common clean code standards and naming conventions. Also we will creat a Definition of Done which will be added here as soon as its complete.
+The development will follow the common clean code standards and naming conventions. Also we will create a Definition of Done which will be added here as soon as its complete.
 
 ## 4. Supporting Information
 For any further information you can contact the Common Playground Team or check our [Common Playground Blog](http://commonplayground.wordpress.com). 

@@ -29,20 +29,37 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-
-    - Einführung 
+This Software Requirements Specification (SRS) describes all specifications for the Application "Common Playground". It includes an overview about this project and its vision, detailed information about the planned features and boundary conditions of the development process.
 
 
 ### 1.2 Scope
-
- - Type of application: App
- - Actors
- - Subsystems
+The project is going to be realized as an Android App.  
+  
+Actors of this App can be users or moderators.  
+  
+Planned Subsystems are: 
+* Notice Board:  
+The notice board is the essential part of the user interface. Game sessions should be visualized as postings including relevant information about the session. Those should be partly standardized by a form with a free text option for specifics. The data must be stored accordingly.
+* Account System:  
+Users can create Accounts so sessions can be connected to a person as well as join requests. User data must be stored alongside the post data.
+* Friend List and User Rating:  
+Once the account system is created there will be the option to mark users as favorites. Also users or game sessions should get a rating to counter abuse.
+* Connecting People:  
+The host of a game session has to be notified when someone wants to join their game. Both must be able to get in touch to organize the details so messages between the host and the guest have to be connected. This could be done via automated emails or a custom in-app system. For this an account system is needed.
+* Storing Data:  
+User data for accounts and possibly profiles has to be stored. Also the game sessions have to be stored as datasets containing the form contents and possibly contact data. The data storage will form the foundation for the visualization, account system and the search feature.
+* Finding your Game:  
+We need a tag system so everyone looking to join a game can search for the kind of games they are interested in. Possibly other aspects can be searchable, such as place or date. Tags must be stored and a search function developed. 
 
 ### 1.3 Definitions, Acronyms and Abbreviations
-
-    - Abkürzungen
-    - Synonyme
+| Abbrevation |                                        |
+| ----------- | -------------------------------------- |
+| SRS         | Software Requirements Specification    |
+| UC          | Use Case                               |
+| n/a         | not applicable                         |
+| tbd         | to be determined                       |
+| UCD         | overall Use Case Diagram               |
+| FAQ         | Frequently asked Questions             |
 
 ### 1.4 References
 
@@ -53,9 +70,7 @@
 
 
 ### 1.5 Overview
-
-    - Dokumenten aufbau
-    - Leserhinweise
+The following chapter provides an overview of this project with vision and overall Use Case Diagram. The third chapter (Requirements Specification) deliveres more details about the specific requirements in terms of functionality, usability and design parameters. Finally there is a chapter with supporting information. 
     
 ## 2. Overall Description
 

@@ -132,7 +132,8 @@ The system should be able to manga thousands of requests. Also it should be poss
 #### 3.4.2 Storage 
 Smartphones don't provide much storage. Therefore we are aiming to keep the needed Storage as small as possible.
 
-
+#### 3.4.3 App perfomance / Response time
+To provide the best App perfomance we aim to keep the response time as low as possible. This will make the user experience much better.
 
 ### 3.5 Supportability
 
@@ -185,7 +186,7 @@ The Logo is licensed to the Common Playground Team and is only allowed to use fo
 The development will follow the common clean code standards and naming conventions. Also we will creat a Definition of Done which will be added here as soon as its complete.
 
 ## 4. Supporting Information
-For any further information cou can contact the Common Playground Team or check our [Common Playground Blog](http://commonplayground.wordpress.com). 
+For any further information you can contact the Common Playground Team or check our [Common Playground Blog](http://commonplayground.wordpress.com). 
 The Team Members are:
 - Celina Adam
 - Inga Batton

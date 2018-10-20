@@ -84,9 +84,7 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 ## 3. Specific Requirements
 
 ### 3.1 Functionality
-
-    - UML Diagramm erklärung
-    - Use Cases/Übersichtsseiten Erklärung
+This section will explain the different use cases, you could see in the Use Case Diagram, and their functionality.
 
 #### 3.1.1 Posting a session
 This feature is the essential one of our project. The user gets the possibility to post a session. Therefore, he has to select a game and also set the time when he wants to play. Later on, when we also implemented offline games, he has to set a location, too.
@@ -97,7 +95,7 @@ There is also the possibility to join an existing game session. Therefore, the u
 #### 3.1.3 Getting in touch
 There must be the possibility that two people who want to play together can communicate with each other. At first, we want to implement that when a user post a session, he has to enter his mail address. The player who joins the session gets than the possibility to contact the first user. Later on, when we will have implemented profiles, then there will be another way to communicate with each other.
 
-#### 3.1.4 Manage your sessions and leave a session
+#### 3.1.4 Keeping track of your sessions and leave a session
 The app provides the user with a seperate page view where he gets an overview of all sessions he posted or he joined in. Here, the user can see who joined his posted session. The user gets also the possibility to delete a session he posted or to leave a session he joined in.
 
 #### 3.1.5 Logging in
@@ -106,40 +104,30 @@ Later on, the app will provide the possibility to register and log in. This will
 #### 3.1.6 Presenting yourself and checking out others
 With the possibility to log in there comes another functionality, the profile. Every user will have his one profile where he can write some informations about hisself. Because of the privacy policy in Europe, the user has the possibility to only write those information he wants other people to see. Owing to the profile, users can also check out other players and learn e.g. the favorite games about the user.
 
-#### 3.1.7 Rating users and managing friends
-After a session, the app provides the users with the possibility to rate the other participants. When they found an interesting person they can also add them to there friend list which also has a seperate page view.
+#### 3.1.7 Reporting users and managing friends
+After a session, the app provides the users with the possibility to report the other participants. This is helpful because we want a community with fair players. Additionally, when they found an interesting person they can also add them to there friend list which also has a seperate page view.
 
 #### 3.1.8 Ban users and deleting posts
 There are also some functionalities for the admin. He will get the possibility to ban users and to delete any posts.
 
 ### 3.2 Usability
+We plan on designing the user interface as intuitive and self-explanatory as possible to make the user feel as comfortable as possible using the app. Though help documents will be available, it should not be necessary to use them.
 
-- User-feeling beim Bedienen
+#### 3.2.1 No training time needed
+Our goal is that a user installs the android application, opens it, get’s a small introduction screen and is able to use all features without any explanation or help.
 
-
-#### 3.2.1
-
-
-#### 3.2.2 
+#### 3.2.2 Familiar Feeling
+We want to implement an app with familiar designs and functions. This way the user is able to interact in familiar ways with the app without having to get to know new interfaces.
 
 ### 3.3 Reliability
 
-    - Ausfallsicherheit
-    - Datenspeicherung
+#### 3.3.1 Availability
+The server shall be available 95% of the time. This also means we have to figure out the "rush hours" of our app because the downtime of the server is only tolerable when as less as possible players want to use the app.
 
-#### 3.3.1 
-
-
-#### 3.3.2 
-
+#### 3.3.2 Defect Rate
+Our goal is that we have no lost of any data. This is important that the game sessions can carry on, even after a downtime of the server.
 
 ### 3.4 Perfomance
-
-- Kapazität
-- Bandbereitenbedarf
-- antwortzeiten
-speicherbedarf etc.
-- app perfomance
 
 #### 3.4.1 Capacity
 The system should be able to manga thousands of requests. Also it should be possible to register as many users as necessary.

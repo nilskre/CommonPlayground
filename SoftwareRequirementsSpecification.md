@@ -79,7 +79,7 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 
 ### 2.2 Use Case Diagram
 
-
+![OUCD]
 
 ## 3. Specific Requirements
 
@@ -196,3 +196,6 @@ The Team Members are:
 - Inga Batton
 - Nils Krehl 
 - Denis Reibel
+
+<!-- Picture-Link definitions: -->
+[OUCD]: https://github.com/IB-KA/CommonPlayground/blob/master/UseCaseDiagramCP.png "Overall Use Case Diagram"

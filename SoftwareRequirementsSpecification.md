@@ -166,6 +166,7 @@ We don't have any purchased Components yet. If there will be purchased Component
 The User interfaces that will be implented are:
 - Dashboard - lists all session and makes it possible to filter session
 - Session Page - shows detailed information about the session and makes it possible to connect session attendants for example via chat
+- Overwiew of the sessions - shows all the sessions a user participate in
 - Friend List - friends can be added and joined
 - Profile - makes it possible to post information about yourself
 - User Information - shows additional information about users (for example: Language, Country, Favourite Games, etc.)

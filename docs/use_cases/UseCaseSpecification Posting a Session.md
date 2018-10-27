@@ -4,23 +4,26 @@
 
 ## 1.1 Brief Description
 This use case allows users to post a session onto the session overview page. A session should include all important information that is necessary for other users. If a user wants to post a new session he needs to fill in the template, which includes the points:
--Name (short name for the session)
--Game (which game is the session for)
--Players participating/players possible (count of Players already participating/ Count of Players that are possible)
--Language 
--Communication (Email address, Skype Name, Ts3 server, Discord tag, etc.)
+- Name (short name for the session)
+- Game (which game is the session for)
+- Players participating/players possible (count of Players already participating/ Count of Players that are possible)
+- Language 
+- Communication (Email address, Skype Name, Ts3 server, Discord tag, etc.)
+
+## 1.2 Mockup 
+![Mockup Post a Session](../mockups/post_a_session_mockup.png)
 
 # 2. Flow of Events
 
 ## 2.1 Basic Flow
--Users klicks on "Post a Session"-Button
--"Post-Session"-Template pops up
--User fills in Template
--User klicks on Finish
--Session gets Posted
+- Users klicks on "Post new Session"-Button
+- "Post-Session"-Template pops up
+- User fills in Template
+- User klicks on Finish
+- Session gets Posted
 
 ### Activity Diagram
-tbd
+![Activity Diagram](UseCaseDiagram_posting_a_session.png)
 
 ### .feature File
 n/a

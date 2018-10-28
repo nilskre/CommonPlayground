@@ -17,12 +17,12 @@ This uses cases allows a user to join an existing game session that is not yet f
 # 2. Flow of Events
 
 ## 2.1 Basic Flow
--User selects session of interest
--User pushes join button
--Host gets notified and decides to accept or reject the request
--User gets notified of request result
--Session is added to User's sessions
--Session is updated
+- User selects session of interest
+- User pushes join button
+- Host gets notified and decides to accept or reject the request
+- User gets notified of request result
+- Session is added to User's sessions
+- Session is updated
 
 ### Activity Diagram
 ![Activity Diagram](../activity_diagrams/UCD2_Join_Session.png)

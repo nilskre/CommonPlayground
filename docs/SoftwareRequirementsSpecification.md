@@ -88,9 +88,11 @@ This section will explain the different use cases, you could see in the Use Case
 
 #### 3.1.1 Posting a session
 This feature is the essential one of our project. The user gets the possibility to post a session. Therefore, he has to select a game and also set the time when he wants to play. Later on, when we also implemented offline games, he has to set a location, too.
+- ![Post a Session](./use_cases/UCS_Post_Session.md)
 
 #### 3.1.2 Finding and joining a session
 There is also the possibility to join an existing game session. Therefore, the user can find a session by tags and then by pressing a button join the session by another player. Later on, finding a session will be provided by geolocalization that the users can search for a session in a specific area.
+- ![Join a Session](./use_cases/UCS_Join_Session.md)
 
 #### 3.1.3 Getting in touch
 There must be the possibility that two people who want to play together can communicate with each other. At first, we want to implement that when a user post a session, he has to enter his mail address. The player who joins the session gets than the possibility to contact the first user. Later on, when we will have implemented profiles, then there will be another way to communicate with each other.

@@ -23,7 +23,7 @@ This use case allows users to post a session onto the session overview page. A s
 - Session gets Posted
 
 ### Activity Diagram
-![Activity Diagram](../activity_diagrams/UCD1_Posting_a_Session.png)
+![Activity Diagram](../activity_diagrams/UCD1_Post_Session.png)
 
 ### .feature File
 n/a

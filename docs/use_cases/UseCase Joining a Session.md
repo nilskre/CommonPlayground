@@ -7,6 +7,10 @@ This uses cases allows a user to join an existing game session that is not yet f
 
 
 ## 1.2 Mockup
+![Mockup Post a Session](../mockups/Join_Session_prejoin.png)
+![Mockup Post a Session](../mockups/Join_session_full.png)
+![Mockup Post a Session](../mockups/Join_Session_afterjoin.png)
+
 
 ## 1.3 Screenshot
 
@@ -21,7 +25,7 @@ This uses cases allows a user to join an existing game session that is not yet f
 -Session is updated
 
 ### Activity Diagram
-
+![Activity Diagram](UCD Joining a Session.png)
 
 ### .feature File
 

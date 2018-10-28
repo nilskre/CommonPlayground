@@ -1,4 +1,4 @@
-# Use-Case Specification: Posting a Session
+# Use-Case Specification: Joining a Session
 
 # 1. Posting a Sesson
 

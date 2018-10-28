@@ -25,7 +25,7 @@ This uses cases allows a user to join an existing game session that is not yet f
 -Session is updated
 
 ### Activity Diagram
-![Activity Diagram](UCD Joining a Session.png)
+![Activity Diagram](../activity_diagrams/UCD2_Joining_a_Session.png)
 
 ### .feature File
 

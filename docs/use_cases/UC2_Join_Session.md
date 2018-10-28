@@ -1,4 +1,4 @@
-# Use-Case Specification: Joining a Session
+# Use-Case Specification: Posting a Session
 
 # 1. Posting a Sesson
 
@@ -25,7 +25,7 @@ This uses cases allows a user to join an existing game session that is not yet f
 -Session is updated
 
 ### Activity Diagram
-![Activity Diagram](../activity_diagrams/UCD2_Joining_a_Session.png)
+![Activity Diagram](UCD_Join_Session.png)
 
 ### .feature File
 

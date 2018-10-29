@@ -94,6 +94,7 @@ Until december we plan to implement:
 
 #### 3.1.1 Posting a session
 This feature is the essential one of our project. The user gets the possibility to post a session. Therefore, he has to select a game and also set the time when he wants to play. Later on, when we also implemented offline games, he has to set a location, too.
+
 [Post a Session](./use_cases/UC1_Post_Session.md)
 
 #### 3.1.2 Session overview
@@ -107,6 +108,7 @@ The app will provide the possibility to register and log in. This will also make
 
 #### 3.1.5 Joining a session
 There is also the possibility to join an existing game session. Therefore, the user can select a specific session.
+
 [Join a Session](./use_cases/UC2_Join_Session.md)
 
 #### 3.1.6 Keeping track of your sessions

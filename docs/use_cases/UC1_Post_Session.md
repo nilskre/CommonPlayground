@@ -1,6 +1,6 @@
 # Use-Case Specification: Posting a Session
 
-# 1. Posting a Sesson
+# 1. Posting a Session
 
 ## 1.1 Brief Description
 This use case allows users to post a session onto the session overview page. A session should include all important information that is necessary for other users. If a user wants to post a new session he needs to fill in the template, which includes the points:

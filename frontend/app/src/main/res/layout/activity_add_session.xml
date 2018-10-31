@@ -84,4 +84,14 @@
             android:hint="@string/new_description" />
     </android.support.design.widget.TextInputLayout>
 
+    <Button
+        android:id="@+id/button_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="120dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/new_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/todoDescriptionInput" />
+
 </android.support.constraint.ConstraintLayout>

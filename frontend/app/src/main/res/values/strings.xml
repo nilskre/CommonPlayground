@@ -12,4 +12,5 @@
     <string name="new_time">Time</string>
     <string name="new_players">Players</string>
     <string name="new_description">Description</string>
+    <string name="new_button">Publish</string>
 </resources>

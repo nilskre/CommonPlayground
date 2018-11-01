@@ -22,6 +22,30 @@ public class Session {
         // players.size() == numberOfPlayers
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getGame() {
+        return game;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public List getPlayers() {
+        return players;
+    }
+
     @Override
     public String toString() {
         return "Session name=" + name + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " players=" + players;

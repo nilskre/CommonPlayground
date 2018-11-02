@@ -5,6 +5,7 @@ Feature: The user is able to post a new session
     When I click on the Plus Button on the right side at the bottom
     Then A screen with the possibility for posting a session appears
     And The user types the title <title>
+    And The user types the description <description>
     And The user types the game <game>
     And The user types the place <place>
     And The user types the date <date>
@@ -14,6 +15,6 @@ Feature: The user is able to post a new session
     And The posting screen is closed
 
   Examples:
-  | title   | game         | place         | date       | numberOfPlayers  |
-  |  Raid   |  Game        |  web          | 01.11.2018 | 10               |
-  |  Cards  |  Doppelkopf  |  Schlosspark  | 29.10.2019 | 4                |
+  | title   | description  | game         | place         | date        | numberOfPlayers   |
+  |  Raid   |  online Game |  Game        |  web          |  01.11.2018 |  10               |
+  |  Cards  |  fun         |  Doppelkopf  |  Schlosspark  |  29.10.2019 |  4                |

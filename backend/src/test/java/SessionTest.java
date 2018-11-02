@@ -9,12 +9,17 @@ public class SessionTest {
 
     @BeforeClass
     public static void setUp() {
-        testSession = new Session("Name", "Game", "Place", "Date", 42);
+        testSession = new Session("Title", "Description", "Game", "Place", "Date", 42);
     }
 
     @Test
     public void testName(){
-        assertEquals(testSession.getName(), "Name");
+        assertEquals(testSession.getTitle(), "Title");
+    }
+
+    @Test
+    public void testDescription(){
+        assertEquals(testSession.getDescription(), "Description");
     }
 
     @Test

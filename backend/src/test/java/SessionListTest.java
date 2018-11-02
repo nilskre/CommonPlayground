@@ -13,14 +13,14 @@ public class SessionListTest {
 
     @Test
     public void testAddSessionToList() {
-        Session testSession = new Session("Name", "Game", "Place", "Date", 42);
+        Session testSession = new Session("Title", "Description", "Game", "Place", "Date", 42);
         testSessionList.addSession(testSession);
         assert (testSessionList.getAllSessions().contains(testSession));
     }
 
     @Test
     public void testRemoveSessionFromList() {
-        Session testSession = new Session("Name", "Game", "Place", "Date", 42);
+        Session testSession = new Session("Title","Description",  "Game", "Place", "Date", 42);
         testSessionList.addSession(testSession);
         testSessionList.removeSession(testSession);
         assert (!testSessionList.getAllSessions().contains(testSession));

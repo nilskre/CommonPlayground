@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Session {
-    private String name;
+    private String title;
+    private String description;
     private String game;
     private String place;
     private String date;
     private int numberOfPlayers;
     private List players  = new ArrayList();
 
-    public Session(String name, String game, String place, String date, int numberOfPlayers) {
-        this.name = name;
+    public Session(String title, String description, String game, String place, String date, int numberOfPlayers) {
+        this.title = title;
+        this.description = description;
         this.game = game;
         this.place = place;
         this.date = date;
@@ -22,8 +24,8 @@ public class Session {
         // players.size() == numberOfPlayers
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public String getGame() {
@@ -46,8 +48,12 @@ public class Session {
         return players;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
-        return "Session name=" + name + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " players=" + players;
+        return "Session title=" + title + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " players=" + players;
     }
 }

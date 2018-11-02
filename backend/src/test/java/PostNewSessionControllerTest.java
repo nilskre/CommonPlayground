@@ -23,6 +23,7 @@ public class PostNewSessionControllerTest {
         try {
             String body =
                     "name=" + URLEncoder.encode( "NAMETEST", "UTF-8" ) + "&" +
+                    "description=" + URLEncoder.encode( "DESCIPTIONTEST", "UTF-8" ) + "&" +
                     "game=" + URLEncoder.encode( "GAMETEST", "UTF-8" ) + "&" +
                     "place=" + URLEncoder.encode( "PLACETEST", "UTF-8" ) + "&" +
                     "date=" + URLEncoder.encode( "DATETEST", "UTF-8" ) + "&" +

@@ -54,6 +54,6 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session title=" + title + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " players=" + players;
+        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " players=" + players;
     }
 }

@@ -87,7 +87,7 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 This section will explain the different use cases, you could see in the Use Case Diagram, and their functionality.  
 Until december we plan to implement:
 - 3.1.1 Posting a session
-- 3.1.2 Session overview
+- 3.1.2 Getting an overview
 - 3.1.3 Create account
 - 3.1.4 Login
 - 3.1.5 Joining a session
@@ -97,13 +97,15 @@ This feature is the essential one of our project. The user gets the possibility 
 
 [Post a Session](./use_cases/UC1_Post_Session.md)
 
-#### 3.1.2 Session overview
+#### 3.1.2 Getting an overview
 This feature provides a basic overview over all current sessions. All posted sessions are added here. From this overview you can select a session and join this session.
 
-#### 3.1.3 Create account
+[Session overview](./use_cases/UC3_Session_Overview.md)
+
+#### 3.1.3 Creating an account
 To identify all useres we need an account system. This account system enables us to build important functions such as joining a session, leaving a session or a personalized overview over all sessions (Keeping track of your sessions).
 
-#### 3.1.4 Login
+#### 3.1.4 Logging in
 The app will provide the possibility to register and log in. This will also make the usability easier when a user wants to manage his sessions, post or join a session because he doesn't have to enter his mail address every time.
 
 #### 3.1.5 Joining a session

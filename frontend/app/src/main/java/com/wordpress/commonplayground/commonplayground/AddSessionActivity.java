@@ -6,6 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
 public class AddSessionActivity extends AppCompatActivity {
 
     @Override
@@ -20,28 +27,47 @@ public class AddSessionActivity extends AppCompatActivity {
                 TextInputLayout title = (TextInputLayout) findViewById(R.id.TitleInput);
                 TextInputLayout game = (TextInputLayout) findViewById(R.id.GameInput);
                 TextInputLayout place = (TextInputLayout) findViewById(R.id.PlaceInput);
-                TextInputLayout time = (TextInputLayout) findViewById(R.id.TimeInput);
-                TextInputLayout players = (TextInputLayout) findViewById(R.id.PlayersInput);
+                TextInputLayout date = (TextInputLayout) findViewById(R.id.DateInput);
+                TextInputLayout numberOfPlayers = (TextInputLayout) findViewById(R.id.PlayersInput);
                 TextInputLayout description = (TextInputLayout) findViewById(R.id.DescriptionInput);
 
-                //String session = title.toString();
-                //session += game.toString();
+                try {
+                    String body =
+                            "name=" + URLEncoder.encode( title.toString(), "UTF-8" ) + "&" +
+                                    "description=" + URLEncoder.encode( description.toString(), "UTF-8" ) + "&" +
+                                    "game=" + URLEncoder.encode( game.toString(), "UTF-8" ) + "&" +
+                                    "place=" + URLEncoder.encode( place.toString(), "UTF-8" ) + "&" +
+                                    "date=" + URLEncoder.encode( date.toString(), "UTF-8" ) + "&" +
+                                    "numberOfPlayers=" + URLEncoder.encode( numberOfPlayers.toString(), "UTF-8" );
 
+                    URL url = new URL( "http://localhost:8080/postNewSession" );
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod( "POST" );
+                    connection.setDoInput( true );
+                    connection.setDoOutput( true );
+                    connection.setUseCaches( false );
+                    connection.setRequestProperty( "Content-Type",
+                            "application/x-www-form-urlencoded" );
+                    connection.setRequestProperty( "Content-Length", String.valueOf(body.length()) );
+
+                    OutputStreamWriter writer = new OutputStreamWriter( connection.getOutputStream() );
+                    writer.write( body );
+                    writer.flush();
+
+                    BufferedReader reader = new BufferedReader(
+                            new InputStreamReader(connection.getInputStream()) );
+
+                    for ( String line; (line = reader.readLine()) != null; )
+                    {
+                        System.out.println( line );
+                    }
+
+                    writer.close();
+                    reader.close();
+                } catch (Exception e){
+                    assert false;
+                }
             }
         });
     }
 }
-
-/**public class PostNewSessionController {
-    private SessionList sessionList = new SessionList();
-
-    @RequestMapping("/postNewSession")
-    public void postNewSession(@RequestParam(value = "name", defaultValue = "not given") String name,
-                               @RequestParam(value = "game", defaultValue = "not given") String game,
-                               @RequestParam(value = "place", defaultValue = "not given") String place,
-                               @RequestParam(value = "date", defaultValue = "not given") String date,
-                               @RequestParam(value = "numberOfPlayers", defaultValue = "1") int numberOfPlayers) {
-        Session addedSession = new Session(name, game, place, date, numberOfPlayers);
-        this.sessionList.addSession(addedSession);
-    }
-}*/

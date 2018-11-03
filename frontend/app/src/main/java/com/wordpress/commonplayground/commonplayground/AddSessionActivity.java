@@ -33,12 +33,14 @@ public class AddSessionActivity extends AppCompatActivity {
 
                 try {
                     String body =
-                            "name=" + URLEncoder.encode( title.toString(), "UTF-8" ) + "&" +
-                                    "description=" + URLEncoder.encode( description.toString(), "UTF-8" ) + "&" +
-                                    "game=" + URLEncoder.encode( game.toString(), "UTF-8" ) + "&" +
-                                    "place=" + URLEncoder.encode( place.toString(), "UTF-8" ) + "&" +
-                                    "date=" + URLEncoder.encode( date.toString(), "UTF-8" ) + "&" +
-                                    "numberOfPlayers=" + URLEncoder.encode( numberOfPlayers.toString(), "UTF-8" );
+                            "name=" + URLEncoder.encode( title.getEditText().getText().toString(), "UTF-8" ) + "&" +
+                                    "description=" + URLEncoder.encode( description.getEditText().getText().toString(), "UTF-8" ) + "&" +
+                                    "game=" + URLEncoder.encode( game.getEditText().getText().toString(), "UTF-8" ) + "&" +
+                                    "place=" + URLEncoder.encode( place.getEditText().getText().toString(), "UTF-8" ) + "&" +
+                                    "date=" + URLEncoder.encode( date.getEditText().getText().toString(), "UTF-8" ) + "&" +
+                                    "numberOfPlayers=" + URLEncoder.encode( numberOfPlayers.getEditText().getText().toString(), "UTF-8" );
+
+                    //System.out.println(body);
 
                     URL url = new URL( "http://localhost:8080/postNewSession" );
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();

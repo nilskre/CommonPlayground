@@ -26,7 +26,7 @@ This use case allows users to post a session onto the session overview page. A s
 ![Activity Diagram](../activity_diagrams/UCD1_Post_Session.png)
 
 ### .feature File
-n/a
+![.feature File Posting a session](../../frontend/app/src/androidTest/assets/UC1_Post_Session.feature)
 
 
 ## 2.2 Alternative Flows

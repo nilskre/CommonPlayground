@@ -6,7 +6,7 @@
 This uses cases allows a user to get an overview about all exisitng sessions. From this screen he can select a session an join it ([Join a Session](./UC2_Join_Session.md)).
 
 ## 1.2 Mockup
-![Mockup getting an overview](../mockups/TBD)
+![Mockup getting an overview](../mockups/Session_Overview.png)
 
 # 2. Flow of Events
 

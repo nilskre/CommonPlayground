@@ -3,6 +3,7 @@ package com.wordpress.commonplayground.commonplayground;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,6 +13,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class AddSessionActivity extends AppCompatActivity {
 
@@ -40,9 +43,9 @@ public class AddSessionActivity extends AppCompatActivity {
                                     "date=" + URLEncoder.encode( date.getEditText().getText().toString(), "UTF-8" ) + "&" +
                                     "numberOfPlayers=" + URLEncoder.encode( numberOfPlayers.getEditText().getText().toString(), "UTF-8" );
 
-                    //System.out.println(body);
+                    Log.v("AddSessionActivity", body);
 
-                    URL url = new URL( "http://localhost:8080/postNewSession" );
+                    URL url = new URL( "192.168.178.33:8080/postNewSession" );
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod( "POST" );
                     connection.setDoInput( true );

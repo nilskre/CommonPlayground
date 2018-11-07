@@ -1,6 +1,6 @@
 # Use-Case Specification: Posting a Session
 
-# 1. Posting a Sesson
+# 1. Posting a Session
 
 ## 1.1 Brief Description
 This use case allows users to post a session onto the session overview page. A session should include all important information that is necessary for other users. If a user wants to post a new session he needs to fill in the template, which includes the points:
@@ -26,8 +26,9 @@ This use case allows users to post a session onto the session overview page. A s
 ![Activity Diagram](../activity_diagrams/UCD1_Post_Session.png)
 
 ### .feature File
-![.feature File Posting a session](../../frontend/app/src/androidTest/assets/UC1_Post_Session.feature)
 
+[.feature File Posting a session](../../frontend/app/src/androidTest/assets/UC1_Post_Session.feature)
+![.feature File Posting a Session](../UC1_Feature_File.png)
 
 ## 2.2 Alternative Flows
 n/a
@@ -51,4 +52,4 @@ If a session gets posted it needs to get synced with the server, so that every u
 
 
 # 6. Function Points
-n/a
+tbd

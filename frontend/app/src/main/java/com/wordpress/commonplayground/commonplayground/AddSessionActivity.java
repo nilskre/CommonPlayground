@@ -111,7 +111,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
 
-                            date.getEditText().setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            date.getEditText().setText(((dayOfMonth >= 10)? "" : "0") + dayOfMonth + "-" + ((monthOfYear + 1 >= 10)? "" : "0") + (monthOfYear + 1) + "-" + year);
 
                         }
                     }, mYear, mMonth, mDay);
@@ -133,9 +133,9 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                         public void onTimeSet(TimePicker view, int hourOfDay,
                                               int minute) {
 
-                            time.getEditText().setText(hourOfDay + ":" + minute);
+                            time.getEditText().setText(((hourOfDay >= 10)? "" : "0") + hourOfDay + ":" + ((minute >= 10)? "" : "0") + minute);
                         }
-                    }, mHour, mMinute, false);
+                    }, mHour, mMinute, true);
             timePickerDialog.show();
         }
     }

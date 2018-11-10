@@ -62,7 +62,6 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                                 "game=" + URLEncoder.encode( game.getEditText().getText().toString(), "UTF-8" ) + "&" +
                                 "place=" + URLEncoder.encode( place.getEditText().getText().toString(), "UTF-8" ) + "&" +
                                 "date=" + URLEncoder.encode( date.getEditText().getText().toString(), "UTF-8" ) + "&" +
-                                "time=" + URLEncoder.encode( time.getEditText().getText().toString(), "UTF-8" ) + "&" +
                                 "numberOfPlayers=" + URLEncoder.encode( numberOfPlayers.getEditText().getText().toString(), "UTF-8" );
 
                 Log.v("AddSessionActivity", body);

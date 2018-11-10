@@ -1,6 +1,7 @@
 package com.wordpress.commonplayground.commonplayground;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -36,10 +38,14 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         btnDatePicker = (Button)findViewById(R.id.btn_date);
         btnDatePicker.setOnClickListener(this);
 
+        btnTimePicker=(Button)findViewById(R.id.btn_time);
+        btnTimePicker.setOnClickListener(this);
+
         title = (TextInputLayout) findViewById(R.id.TitleInput);
         game = (TextInputLayout) findViewById(R.id.GameInput);
         place = (TextInputLayout) findViewById(R.id.PlaceInput);
         date = (TextInputLayout) findViewById(R.id.DateInput);
+        time = (TextInputLayout) findViewById(R.id.TimeInput);
         numberOfPlayers = (TextInputLayout) findViewById(R.id.PlayersInput);
         description = (TextInputLayout) findViewById(R.id.DescriptionInput);
 
@@ -56,6 +62,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                                 "game=" + URLEncoder.encode( game.getEditText().getText().toString(), "UTF-8" ) + "&" +
                                 "place=" + URLEncoder.encode( place.getEditText().getText().toString(), "UTF-8" ) + "&" +
                                 "date=" + URLEncoder.encode( date.getEditText().getText().toString(), "UTF-8" ) + "&" +
+                                "time=" + URLEncoder.encode( time.getEditText().getText().toString(), "UTF-8" ) + "&" +
                                 "numberOfPlayers=" + URLEncoder.encode( numberOfPlayers.getEditText().getText().toString(), "UTF-8" );
 
                 Log.v("AddSessionActivity", body);
@@ -88,6 +95,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 assert false;
             }
         }
+
         if (v == btnDatePicker) {
 
             // Get Current Date
@@ -96,7 +104,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             mMonth = c.get(Calendar.MONTH);
             mDay = c.get(Calendar.DAY_OF_MONTH);
 
-
+            // Launch Date Picker Dialog
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                     new DatePickerDialog.OnDateSetListener() {
 
@@ -109,6 +117,27 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                         }
                     }, mYear, mMonth, mDay);
             datePickerDialog.show();
+        }
+
+        if (v == btnTimePicker) {
+
+            // Get Current Time
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            time.getEditText().setText(hourOfDay + ":" + minute);
+                        }
+                    }, mHour, mMinute, false);
+            timePickerDialog.show();
         }
     }
 }

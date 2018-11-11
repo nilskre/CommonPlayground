@@ -3,6 +3,7 @@ import hello.SessionList;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+@Deprecated
 public class SessionListTest {
     private static SessionList testSessionList;
 

@@ -11,15 +11,33 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import static java.security.AccessController.getContext;
 
 public class AddSessionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -55,8 +73,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         if (v == publish) {
 
-            try {
-                String body =
+           /* try {
+               /*String body =
                         "name=" + URLEncoder.encode( title.getEditText().getText().toString(), "UTF-8" ) + "&" +
                                 "description=" + URLEncoder.encode( description.getEditText().getText().toString(), "UTF-8" ) + "&" +
                                 "game=" + URLEncoder.encode( game.getEditText().getText().toString(), "UTF-8" ) + "&" +
@@ -66,7 +84,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
                 Log.v("AddSessionActivity", body);
 
-                URL url = new URL( "192.168.178.33:8080/postNewSession" );
+                URL url = new URL( "https://936a3ec9-22c9-44ac-8c08-0d942a1b7569.mock.pstmn.io" );
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod( "POST" );
                 connection.setDoInput( true );
@@ -89,10 +107,41 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 }
 
                 writer.close();
-                reader.close();
-            } catch (Exception e){
-                assert false;
+                reader.close();*/
+
+                RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+                String url = "http://10.0.2.2:8080/postNewSession";
+                StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //This code is executed if the server responds, whether or not the response contains data.
+                        //The String 'response' contains the server's response.
+                    }
+                }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //This code is executed if there is an error.
+                    }
+                }) {
+                    protected Map<String, String> getParams() {
+                        Map<String, String> MyData = new HashMap<String, String>();
+                        MyData.put("Field", "Value"); //Add the data you'd like to send to the server.
+                        return MyData;
+                    }
+                };
+
+            try {
+                Log.d("myTag", String.valueOf(MyStringRequest.getBody()));
+            } catch (AuthFailureError authFailureError) {
+                authFailureError.printStackTrace();
             }
+
+            MyRequestQueue.add(MyStringRequest);
+
+
+        /*    } catch (Exception e){
+                assert false;
+            }*/
         }
 
         if (v == btnDatePicker) {

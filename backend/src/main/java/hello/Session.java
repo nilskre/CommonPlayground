@@ -1,16 +1,24 @@
 package hello;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Session {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
     private String title;
     private String description;
     private String game;
     private String place;
     private String date;
     private int numberOfPlayers;
-    private List players  = new ArrayList();
+//    private List players  = new ArrayList();
+
+    protected Session() {}
 
     public Session(String title, String description, String game, String place, String date, int numberOfPlayers) {
         this.title = title;
@@ -20,7 +28,7 @@ public class Session {
         this.date = date;
         this.numberOfPlayers = numberOfPlayers;
 
-        players.add("Host");
+        //players.add("Host");
         // players.size() == numberOfPlayers
     }
 
@@ -44,9 +52,9 @@ public class Session {
         return numberOfPlayers;
     }
 
-    public List getPlayers() {
+    /*public List getPlayers() {
         return players;
-    }
+    }*/
 
     public String getDescription() {
         return description;
@@ -54,6 +62,6 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " players=" + players;
+        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " players="; //+ players;
     }
 }

@@ -1,4 +1,4 @@
-# Use-Case Specification: Getting an overview
+# Use-Case Specification: Login
 
 # 1. Login
 
@@ -13,10 +13,11 @@ This uses cases allows a user with an account to log which is the basis for post
 ## 2.1 Basic Flow
 - User starts app
 - User automatically gets promted to sign in
-- User provides correct credentials and is forwarded to welcome stream
+- User provides correct credentials
+- Login is confirmed
 
 ### Activity Diagram
-![Activity Diagram](../activity_diagrams/UCD5_Login.png)
+![Activity Diagram](../activity_diagrams/UC5_Login.png)
 
 ### .feature File
 
@@ -25,12 +26,11 @@ This uses cases allows a user with an account to log which is the basis for post
 - User provides wrong credentials and is informed that login failed
 
 # 3. Special Requirements
-n/a
+- The user already has set up an account
 
 # 4. Preconditions
 The Preconditions for this use case are:
 1. The user has started the App
-2. The user already has set up an account
 
 # 5. Postconditions
 n/a

@@ -16,7 +16,12 @@ public class Session {
     private String place;
     private String date;
     private int numberOfPlayers;
-//    private List players  = new ArrayList();
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<User> users = new ArrayList();
 
     protected Session() {}
 
@@ -28,8 +33,9 @@ public class Session {
         this.date = date;
         this.numberOfPlayers = numberOfPlayers;
 
-        //players.add("Host");
-        // players.size() == numberOfPlayers
+        users.add(new User("Host"));
+        users.add(new User("User 2"));
+        // users.size() == numberOfPlayers
     }
 
     public String getTitle() {
@@ -52,9 +58,9 @@ public class Session {
         return numberOfPlayers;
     }
 
-    /*public List getPlayers() {
-        return players;
-    }*/
+    public List getPlayers() {
+        return users;
+    }
 
     public String getDescription() {
         return description;
@@ -62,6 +68,6 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " players="; //+ players;
+        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " users="; //+ users;
     }
 }

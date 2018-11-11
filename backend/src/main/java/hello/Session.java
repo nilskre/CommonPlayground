@@ -16,6 +16,7 @@ public class Session {
     private String place;
     private String date;
     private int numberOfPlayers;
+    private Long idOfHost;
 
     @OneToMany(
             cascade = CascadeType.ALL,

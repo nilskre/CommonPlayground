@@ -21,7 +21,8 @@ public class PostNewSessionController {
                                @RequestParam(value = "game", defaultValue = "not given") String game,
                                @RequestParam(value = "place", defaultValue = "not given") String place,
                                @RequestParam(value = "date", defaultValue = "not given") String date,
-                               @RequestParam(value = "numberOfPlayers", defaultValue = "1") int numberOfPlayers) {
+                               @RequestParam(value = "numberOfPlayers", defaultValue = "1") int numberOfPlayers,
+                               @RequestParam(value = "idOfHost", defaultValue = "-1") Long idOfHost){
         Session addedSession = new Session(title, description, game, place, date, numberOfPlayers);
         sessionRepository.save(addedSession);
     }

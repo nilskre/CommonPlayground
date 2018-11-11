@@ -72,76 +72,42 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         if (v == publish) {
+            /*get screen content*/
+            final String sessionTitle = title.getEditText().getText().toString();
+            final String sessionGame = game.getEditText().getText().toString();
+            final String sessionPlace = place.getEditText().getText().toString();
+            final String sessionDate = date.getEditText().getText().toString();
+            final String sessionTime = time.getEditText().getText().toString();
+            final String sessionPlayers = numberOfPlayers.getEditText().getText().toString();
+            final String sessionDesc = description.getEditText().getText().toString();
 
-           /* try {
-               /*String body =
-                        "name=" + URLEncoder.encode( title.getEditText().getText().toString(), "UTF-8" ) + "&" +
-                                "description=" + URLEncoder.encode( description.getEditText().getText().toString(), "UTF-8" ) + "&" +
-                                "game=" + URLEncoder.encode( game.getEditText().getText().toString(), "UTF-8" ) + "&" +
-                                "place=" + URLEncoder.encode( place.getEditText().getText().toString(), "UTF-8" ) + "&" +
-                                "date=" + URLEncoder.encode( date.getEditText().getText().toString(), "UTF-8" ) + "&" +
-                                "numberOfPlayers=" + URLEncoder.encode( numberOfPlayers.getEditText().getText().toString(), "UTF-8" );
-
-                Log.v("AddSessionActivity", body);
-
-                URL url = new URL( "https://936a3ec9-22c9-44ac-8c08-0d942a1b7569.mock.pstmn.io" );
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod( "POST" );
-                connection.setDoInput( true );
-                connection.setDoOutput( true );
-                connection.setUseCaches( false );
-                connection.setRequestProperty( "Content-Type",
-                        "application/x-www-form-urlencoded" );
-                connection.setRequestProperty( "Content-Length", String.valueOf(body.length()) );
-
-                OutputStreamWriter writer = new OutputStreamWriter( connection.getOutputStream() );
-                writer.write( body );
-                writer.flush();
-
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(connection.getInputStream()) );
-
-                for ( String line; (line = reader.readLine()) != null; )
-                {
-                    System.out.println( line );
+            RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+            String url = "http://10.0.2.2:8080/postNewSession";
+            StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //This code is executed if the server responds, whether or not the response contains data.
+                    //The String 'response' contains the server's response.
                 }
-
-                writer.close();
-                reader.close();*/
-
-                RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-                String url = "http://10.0.2.2:8080/postNewSession";
-                StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //This code is executed if the server responds, whether or not the response contains data.
-                        //The String 'response' contains the server's response.
-                    }
-                }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //This code is executed if there is an error.
-                    }
-                }) {
-                    protected Map<String, String> getParams() {
-                        Map<String, String> MyData = new HashMap<String, String>();
-                        MyData.put("Field", "Value"); //Add the data you'd like to send to the server.
-                        return MyData;
-                    }
-                };
-
-            try {
-                Log.d("myTag", String.valueOf(MyStringRequest.getBody()));
-            } catch (AuthFailureError authFailureError) {
-                authFailureError.printStackTrace();
-            }
+            }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //This code is executed if there is an error.
+                }
+            }) {
+                protected Map<String, String> getParams() {
+                    Map<String, String> MyData = new HashMap<String, String>();
+                    MyData.put("title", sessionTitle); //Add the data you'd like to send to the server.
+                    MyData.put("description", sessionDesc); //Add the data you'd like to send to the server.
+                    MyData.put("game", sessionGame); //Add the data you'd like to send to the server.
+                    MyData.put("place", sessionPlace); //Add the data you'd like to send to the server.
+                    MyData.put("date", sessionDate); //Add the data you'd like to send to the server.
+                    MyData.put("numberOfPlayers", sessionPlayers); //Add the data you'd like to send to the server.
+                    return MyData;
+                }
+            };
 
             MyRequestQueue.add(MyStringRequest);
-
-
-        /*    } catch (Exception e){
-                assert false;
-            }*/
         }
 
         if (v == btnDatePicker) {

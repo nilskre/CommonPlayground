@@ -103,7 +103,7 @@ tbd
 ## 9. Data View
 Database ER-Diagram:
 
-![Database ER-Diagram](../database_scheme/2018-11-11_database_scheme_.png)
+![Database ER-Diagram](./database_scheme/2018-11-11_database_scheme_.png)
 
 ## 10. Size and Performance
 n/a

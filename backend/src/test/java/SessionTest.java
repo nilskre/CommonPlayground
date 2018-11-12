@@ -1,4 +1,5 @@
 import hello.Session;
+import hello.User;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -42,8 +43,10 @@ public class SessionTest {
         assertEquals(testSession.getNumberOfPlayers(), 42);
     }
 
-    /*@Test
+    @Test
     public void testPlayers(){
-        assertEquals(testSession.getPlayers().get(0), "Host");
-    }*/
+        User assertHost = testSession.getUsers().get(0);
+        String hostName = assertHost.getName();
+        assertEquals(hostName, "Host");
+    }
 }

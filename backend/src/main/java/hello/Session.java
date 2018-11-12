@@ -59,7 +59,7 @@ public class Session {
         return numberOfPlayers;
     }
 
-    public List getPlayers() {
+    public List<User> getUsers() {
         return users;
     }
 

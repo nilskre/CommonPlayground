@@ -80,11 +80,11 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 protected Map<String, String> getParams() {
                     Map<String, String> MyData = new HashMap<String, String>();
                     MyData.put("title", sessionTitle); //Add the data you'd like to send to the server.
-                    MyData.put("description", sessionDesc); //Add the data you'd like to send to the server.
-                    MyData.put("game", sessionGame); //Add the data you'd like to send to the server.
-                    MyData.put("place", sessionPlace); //Add the data you'd like to send to the server.
-                    MyData.put("date", sessionDate); //Add the data you'd like to send to the server.
-                    MyData.put("numberOfPlayers", sessionPlayers); //Add the data you'd like to send to the server.
+                    MyData.put("description", sessionDesc);
+                    MyData.put("game", sessionGame);
+                    MyData.put("place", sessionPlace);
+                    MyData.put("date", sessionDate);
+                    MyData.put("numberOfPlayers", sessionPlayers);
                     return MyData;
                 }
             };

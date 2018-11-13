@@ -6,7 +6,9 @@
 This uses cases allows a user with an account to log which is the basis for posting and joining sessions as well as tracking one's sessions.
 
 ## 1.2 Mockup
-![Mockup login](../mockups/TBD)
+![Mockup login](../mockups/Login.png)
+![Mockup login fail1](../mockups/Login_Fail1.png)
+![Mockup login fail2](../mockups/Login_Fail2.png)
 
 # 2. Flow of Events
 

@@ -1,4 +1,4 @@
-package com.wordpress.commonplayground.commonplayground;
+package com.wordpress.commonplayground.test;
 
 import android.os.Bundle;
 import android.support.test.runner.MonitoringInstrumentation;

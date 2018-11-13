@@ -8,7 +8,8 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "com.wordpress.commonplayground.commonplayground.Instrumentation"
+        testApplicationId "com.wordpress.commonplayground.test"
+        testInstrumentationRunner "com.wordpress.commonplayground.test.Instrumentation"
     }
     buildTypes {
         release {
@@ -20,6 +21,10 @@ android {
         androidTest {
             assets.srcDirs = ['src/androidTest/assets']
         }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
     }
 }
 
@@ -38,5 +43,6 @@ dependencies {
     androidTestImplementation 'info.cukes:cucumber-android:1.2.5@jar'
     androidTestImplementation 'info.cukes:cucumber-picocontainer:1.2.4'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
 }

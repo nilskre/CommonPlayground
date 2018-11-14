@@ -3,4 +3,8 @@
 .idea/modules/
 .idea/workspace.xml
 .idea/libraries/
+.idea/backend.iml
+.idea/uiDesigner.xml
+.idea/dataSources.local.xml
 build/
+out/

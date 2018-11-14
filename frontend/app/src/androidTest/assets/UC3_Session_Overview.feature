@@ -1,4 +1,8 @@
-Feature: The user is able to get an overview of all current open Sessions
+Feature: Use Case 3 Session Overview
+    As a USER
+    I want to open the app and navigate to the Session Overview page
+    On this page I want to see a full overview of all currently available sessions
+    Also I want to see detailed information about the Sessions
 
   Scenario: I want to see all current active Sessions
     Given I open the App

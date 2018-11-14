@@ -1,4 +1,4 @@
-package com.wordpress.commonplayground.commonplayground;
+package com.wordpress.commonplayground.test;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,7 +1,8 @@
-package com.wordpress.commonplayground.commonplayground;
+package com.wordpress.commonplayground.test;
 
 
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -9,8 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.wordpress.commonplayground.commonplayground.MainActivity;
+import com.wordpress.commonplayground.commonplayground.R;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
@@ -39,7 +44,7 @@ public class AddSessionActivityTest {
     @Test
     public void addSessionActivityTest() {
         ViewInteraction floatingActionButton = onView(
-                allOf(withId(R.id.fab),
+                Matchers.allOf(ViewMatchers.withId(R.id.fab),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.drawer_layout),

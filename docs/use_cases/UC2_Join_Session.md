@@ -1,15 +1,15 @@
 # Use-Case Specification: Joining a Session
 
-# 1. Posting a Sesson
+# 1. Joining a Session
 
 ## 1.1 Brief Description
 This uses cases allows a user to join an existing game session that is not yet full. For a user to join the session host has to accept a join request. Then the user will be informed whether the request was successfull and the session will be added to the user's "My Sessions" page. The session member count will be increased and if capacity is reached the session will be closed for further join request.
 
 
 ## 1.2 Mockup
-![Mockup Post a Session](../mockups/Join_Session_prejoin.png)
-![Mockup Post a Session](../mockups/Join_session_full.png)
-![Mockup Post a Session](../mockups/Join_Session_afterjoin.png)
+![Mockup Joining a Session](../mockups/Join_Session_prejoin.png)
+![Mockup Joining a Session](../mockups/Join_session_full.png)
+![Mockup Joining a Session](../mockups/Join_Session_afterjoin.png)
 
 
 ## 1.3 Screenshot
@@ -17,12 +17,12 @@ This uses cases allows a user to join an existing game session that is not yet f
 # 2. Flow of Events
 
 ## 2.1 Basic Flow
--User selects session of interest
--User pushes join button
--Host gets notified and decides to accept or reject the request
--User gets notified of request result
--Session is added to User's sessions
--Session is updated
+- User selects session of interest
+- User pushes join button
+- Host gets notified and decides to accept or reject the request
+- User gets notified of request result
+- Session is added to User's sessions
+- Session is updated
 
 ### Activity Diagram
 ![Activity Diagram](../activity_diagrams/UCD2_Join_Session.png)

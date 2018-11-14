@@ -24,7 +24,7 @@ public class Session {
     )
     private List<User> users = new ArrayList();
 
-    protected Session() {}
+    public Session() {}
 
     public Session(String title, String description, String game, String place, String date, int numberOfPlayers) {
         this.title = title;

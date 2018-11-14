@@ -10,3 +10,4 @@
 /captures
 .externalNativeBuild
 /.idea/runConfigurations.xml
+.idea/vcs.xml

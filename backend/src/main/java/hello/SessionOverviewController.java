@@ -7,12 +7,13 @@ import java.util.*;
 
 @RestController
 public class SessionOverviewController {
-    private SessionList sessionList = new SessionList();
-    private List<Session> sessions = new ArrayList<>();
 
-    @RequestMapping("/getSessionList")
-    public List<Session> getSessionList() {
-        sessions= sessionList.getAllSessions();
-        return sessions;
+    private SessionRepository sessionRepository;
+    private List sessions = new ArrayList();
+
+    @RequestMapping("/sessionList")
+    public String getSessionList() {
+        String hi= "hi";
+        return hi;
     }
 }

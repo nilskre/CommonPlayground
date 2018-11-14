@@ -1,5 +1,6 @@
 package hello;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,24 +9,18 @@ import java.util.*;
 @RestController
 public class SessionOverviewController {
 
-    private SessionRepository sessionRepository;
-    private List sessions = new ArrayList();
-    private Session session1;
-    private Session session2;
+    private List<Session> sessions = new ArrayList();
+    private final SessionRepository sessionRepository;
+    @Autowired
+    public SessionOverviewController(SessionRepository sessionRepository) {
+        this.sessionRepository = sessionRepository;
+    }
 
     @RequestMapping("/getSessionList")
     public List<Session> getSessionList() {
-
-        //session1= new Session("lol", "dkwoap", "jdwakl", "buidjwnk", "ndiwu", 23);
-        //session2= new Session("aaa", "bbbb", "cccc", "dddd", "eeee", 12);
-        //sessions.add(session1);
-        //sessions.add(session2);
-        for (Session s: sessionRepository.findAll()
-             ) {
-            System.out.println(s.toString());
-            sessions.add(s);
+        for (Session session: sessionRepository.findAll()) {
+            sessions.add(session);
         }
-
         return sessions;
     }
 }

@@ -14,7 +14,7 @@ Feature: Use Case 1 Post a Session
     And The user types the place <place> and the input is correct
     And The user types the date <date> and the input is correct
     And The user types the number of players <numberOfPlayers> and the input is correct
-    And The user taps the publish button
+    And The user presses the publish button
     Then A Request is sent
     And The posting screen is closed
 
@@ -22,8 +22,7 @@ Feature: Use Case 1 Post a Session
   | title   | description  | game         | place         | date        | numberOfPlayers   |
   |  Raid   |  online Game |  Game        |  web          |  01.11.2018 |  10               |
   |  Cards  |  fun         |  Doppelkopf  |  Schlosspark  |  29.10.2019 |  4                |
-  
-  
+
   Scenario: Leaving the Activity New Session without sending a Request
     When The user presses the Back button
 	  Then No Request is sent

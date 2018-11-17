@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -103,12 +104,12 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onResponse(String response) {
                 //This code is executed if the server responds, whether or not the response contains data.
-                //The String 'response' contains the server's response.
+                Log.d("Response", response.toString());
             }
         }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
             public void onErrorResponse(VolleyError error) {
-                //This code is executed if there is an error.
+                Log.d("Error.Response", String.valueOf(error));
             }
         }) {
             protected Map<String, String> getParams() {

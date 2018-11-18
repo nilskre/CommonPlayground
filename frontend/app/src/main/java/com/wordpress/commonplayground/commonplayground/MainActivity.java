@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -24,13 +26,24 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    ArrayList<Session> activeSessions;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        RecyclerView rvSessions = (RecyclerView) findViewById(R.id.rvSessions);
+
+        createDummySessions();
+        SessionsAdapter adapter= new SessionsAdapter(activeSessions);
+        rvSessions.setAdapter(adapter);
+        rvSessions.setLayoutManager(new LinearLayoutManager(this));
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -51,7 +64,16 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        getSessions();
+       // getSessions();
+
+
+    }
+
+    private void createDummySessions() {
+        activeSessions= new ArrayList<Session>();
+        for (int i = 0; i < 5; i++) {
+            activeSessions.add(i, new Session("title: "+i, "description: "+i, "game :"+i, "place: "+i, "date: "+i, i));
+        }
     }
 
     private void getSessions() {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class SessionsAdapter extends RecyclerView.Adapter {
+public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.SessionViewHolder> {
 
     private List<Session> activeSessions;
 
@@ -33,12 +33,8 @@ public class SessionsAdapter extends RecyclerView.Adapter {
         return viewHolder;
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
-    }
-
-    //@Override
     public void onBindViewHolder( SessionViewHolder viewHolder, int position) {
         // Get the data model based on position
         Session session = activeSessions.get(position);

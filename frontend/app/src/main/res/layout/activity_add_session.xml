@@ -89,12 +89,13 @@
                     android:hint="@string/new_date" />
             </android.support.design.widget.TextInputLayout>
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="SELECT DATE"
+                android:src="@drawable/ic_calendar"
+                android:tint="@color/colorIcons"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/DateInput" />
 
@@ -115,12 +116,13 @@
                     android:hint="@string/new_time" />
             </android.support.design.widget.TextInputLayout>
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="SELECT TIME"
+                android:src="@drawable/ic_clock"
+                android:tint="@color/colorIcons"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/TimeInput" />
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TimePicker;
 
 import com.android.volley.Request;
@@ -23,7 +24,8 @@ import java.util.Map;
 
 public class AddSessionActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button publish, btnDatePicker, btnTimePicker;
+    private Button publish;
+    private ImageButton btnDatePicker, btnTimePicker;
     private TextInputLayout title, game, place, date, time, numberOfPlayers, description;
     private int mYear, mMonth, mDay, mHour, mMinute;
 
@@ -35,10 +37,10 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         publish = (Button) findViewById(R.id.ButtonPublish);
         publish.setOnClickListener(this);
 
-        btnDatePicker = (Button) findViewById(R.id.btn_date);
+        btnDatePicker = (ImageButton) findViewById(R.id.btn_date);
         btnDatePicker.setOnClickListener(this);
 
-        btnTimePicker = (Button) findViewById(R.id.btn_time);
+        btnTimePicker = (ImageButton) findViewById(R.id.btn_time);
         btnTimePicker.setOnClickListener(this);
 
         title = (TextInputLayout) findViewById(R.id.TitleInput);

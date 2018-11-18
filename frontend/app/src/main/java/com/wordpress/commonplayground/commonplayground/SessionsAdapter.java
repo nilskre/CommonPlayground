@@ -3,6 +3,7 @@ package com.wordpress.commonplayground.commonplayground;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
         View sessionView = inflater.inflate(R.layout.item_session, parent, false);
 
         // Return a new holder instance
-        SessionViewHolder viewHolder = new SessionViewHolder(sessionView);
+        SessionViewHolder viewHolder = new SessionViewHolder(context, sessionView);
         return viewHolder;
     }
 
@@ -50,12 +51,23 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
         return activeSessions.size();
     }
 
-    public static class SessionViewHolder extends RecyclerView.ViewHolder {
+    public class SessionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView sessionTextView;
+        private Context context;
 
-        public SessionViewHolder(View itemView) {
+        public SessionViewHolder(Context context, View itemView) {
             super(itemView);
             sessionTextView = (TextView) itemView.findViewById(R.id.session_id);
+            this.context = context;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition(); // gets item position
+            long currentSession = activeSessions.get(position).getId();
+            Log.d("ClickTest", "Id:"+currentSession);
+            //Here goes opening the SessionDetails Activity, just pass the ID
         }
     }
 }

@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void createDummySessions() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 25; i++) {
             activeSessions.add(i, new Session("title: "+i, "description: "+i, "game :"+i, "place: "+i, "date: "+i, i));
             Log.d("Session", activeSessions.get(i).toString());
         }

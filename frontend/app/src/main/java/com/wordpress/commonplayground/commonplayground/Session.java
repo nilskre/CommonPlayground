@@ -2,6 +2,7 @@ package com.wordpress.commonplayground.commonplayground;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Session {
     private Long id;
@@ -24,11 +25,13 @@ public class Session {
         this.place = place;
         this.date = date;
         this.numberOfPlayers = numberOfPlayers;
-
+        this.id  = (long) 1; /*REMOVE THIS once get Sessions works*/
         users.add(new User("Host"));
         users.add(new User("User 2"));
         // users.size() == numberOfPlayers
     }
+
+    public Long getId() {return id;}
 
     public String getTitle() {
         return title;

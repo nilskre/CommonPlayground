@@ -13,47 +13,38 @@ import java.util.List;
 
 public class SessionsAdapter extends RecyclerView.Adapter {
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameTextView;
-        public Button messageButton;
+    private List<Session> activeSessions;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-            nameTextView = (TextView) itemView.findViewById(R.id.session_id);
-        }
+    // Pass in the sessions array into the constructor
+    public SessionsAdapter(List<Session> sessions) {
+        this.activeSessions = sessions;
     }
 
-        private List<Session> activeSessions;
-        // Pass in the sessions array into the constructor
-        public SessionsAdapter(List<Session> sessions) {
-            activeSessions = sessions;
-        }
-
     @Override
-    public SessionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SessionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.item_session, parent, false);
+        View sessionView = inflater.inflate(R.layout.item_session, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        SessionViewHolder viewHolder = new SessionViewHolder(sessionView);
         return viewHolder;
     }
 
-  @Override
+    @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-       // aus irgendeinem Grund akzeptiert er hier nur RecyclerView.ViewHolder und nicht den Selbstgebauten,
-      // weshalb er die folgende onBindViewHolder nicht als implementierung der super Methode erkennt
+
     }
 
-    public void onBindViewHolder(SessionsAdapter.ViewHolder viewHolder, int position) {
+    //@Override
+    public void onBindViewHolder( SessionViewHolder viewHolder, int position) {
         // Get the data model based on position
         Session session = activeSessions.get(position);
 
         // Set item views based on your views and data model
-        TextView textView = viewHolder.nameTextView;
+        TextView textView = viewHolder.sessionTextView;
         textView.setText(session.getTitle());
     }
 
@@ -62,5 +53,14 @@ public class SessionsAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return activeSessions.size();
     }
+
+    public static class SessionViewHolder extends RecyclerView.ViewHolder {
+        public TextView sessionTextView;
+
+        public SessionViewHolder(View itemView) {
+            super(itemView);
+            sessionTextView = (TextView) itemView.findViewById(R.id.session_id);
+        }
     }
+}
 

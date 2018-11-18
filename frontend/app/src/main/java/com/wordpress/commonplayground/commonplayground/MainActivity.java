@@ -30,16 +30,17 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    ArrayList<Session> activeSessions;
+    ArrayList<Session> activeSessions = new ArrayList<Session>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RecyclerView rvSessions = (RecyclerView) findViewById(R.id.rvSessions);
 
+        RecyclerView rvSessions = (RecyclerView) findViewById(R.id.rvSessions);
         createDummySessions();
+
         SessionsAdapter adapter= new SessionsAdapter(activeSessions);
         rvSessions.setAdapter(adapter);
         rvSessions.setLayoutManager(new LinearLayoutManager(this));
@@ -70,9 +71,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void createDummySessions() {
-        activeSessions= new ArrayList<Session>();
         for (int i = 0; i < 5; i++) {
             activeSessions.add(i, new Session("title: "+i, "description: "+i, "game :"+i, "place: "+i, "date: "+i, i));
+            Log.d("Session", activeSessions.get(i).toString());
         }
     }
 

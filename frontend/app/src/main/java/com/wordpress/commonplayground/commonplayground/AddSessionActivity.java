@@ -2,9 +2,12 @@ package com.wordpress.commonplayground.commonplayground;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -54,16 +57,23 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
-    public void onClick(View v) {
-        if (v == publish) {
-            post();
+    public void onClick(View view) {
+        if (view == publish) {
+            post(view);
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    AddSessionActivity.this.finish();
+                }
+            }, 2000);
         }
 
-        if (v == btnDatePicker) {
+        if (view == btnDatePicker) {
             getDate();
         }
 
-        if (v == btnTimePicker) {
+        if (view == btnTimePicker) {
             getTime();
         }
 
@@ -89,7 +99,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         timePickerDialog.show();
     }
 
-    public void post() {
+    public void post(View view) {
         /*get screen content*/
         final String sessionTitle = title.getEditText().getText().toString();
         final String sessionGame = game.getEditText().getText().toString();
@@ -105,12 +115,16 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onResponse(String response) {
                 //This code is executed if the server responds, whether or not the response contains data.
-                //The String 'response' contains the server's response.
+                Log.d("Response", response.toString());
+                Snackbar.make(view, getString(R.string.new_response_fine), 5000)
+                        .setAction("Action", null).show();
             }
         }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
             public void onErrorResponse(VolleyError error) {
-                //This code is executed if there is an error.
+                Log.d("Error.Response", String.valueOf(error));
+                Snackbar.make(view, getString(R.string.new_error), 5000)
+                        .setAction("Action", null).show();
             }
         }) {
             protected Map<String, String> getParams() {

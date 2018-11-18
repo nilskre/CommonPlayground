@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.2.2:8080/sessionList";
 
-// prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>()
                 {
@@ -99,8 +98,6 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
         );
-
-// add it to the RequestQueue
         queue.add(getRequest);
 
     }

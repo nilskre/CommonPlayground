@@ -14,6 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/TitleInputField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/new_title" />
@@ -27,6 +28,7 @@
         app:layout_constraintTop_toTopOf="@+id/TitleInput">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/GameInputField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/new_game" />
@@ -40,6 +42,7 @@
         app:layout_constraintTop_toTopOf="@+id/GameInput">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/PlaceInputField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/new_place" />
@@ -53,6 +56,7 @@
         app:layout_constraintTop_toTopOf="@+id/PlaceInput">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/DateInputField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/new_date" />
@@ -76,6 +80,7 @@
         app:layout_constraintTop_toTopOf="@+id/DateInput">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/TimeInputField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/new_time" />
@@ -99,6 +104,7 @@
         app:layout_constraintTop_toTopOf="@+id/TimeInput">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/PlayersInputField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/new_players" />
@@ -112,6 +118,7 @@
         app:layout_constraintTop_toTopOf="@+id/PlayersInput">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/DescriptionInputField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/new_description" />

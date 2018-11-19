@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    ArrayList<Session> activeSessions = new ArrayList<Session>();
+    ArrayList<Session> activeSessions;
 
 
     @Override
@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         RecyclerView rvSessions = (RecyclerView) findViewById(R.id.rvSessions);
-
         getSessions();
+
         SessionsAdapter adapter= new SessionsAdapter(activeSessions);
         rvSessions.setAdapter(adapter);
         rvSessions.setLayoutManager(new LinearLayoutManager(this));
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private void getSessions() {
+        activeSessions = new ArrayList<Session>();
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.2.2:8080/getSessionList";
@@ -87,9 +88,7 @@ public class MainActivity extends AppCompatActivity
                     public void onResponse(JSONArray response) {
                         for (int i = 0; i < response.length(); i++) {
                             try {
-                                Session parse = Session.parseSession(response.getJSONObject(i));
-                                activeSessions.add(parse);
-                                Log.d("Parse.Session.Main", activeSessions.get(i).toString());
+                                activeSessions.add(i, Session.parseSession(response.getJSONObject(i)));
                             } catch (JSONException e) {
                                 Log.d("Parse.Error.Main", e.toString());
                             }

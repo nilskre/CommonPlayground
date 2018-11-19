@@ -1,5 +1,11 @@
 package com.wordpress.commonplayground.commonplayground;
 
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -16,7 +22,8 @@ public class Session {
     private List<User> users = new ArrayList();
 
 
-    public Session() {}
+    public Session() {
+    }
 
     public Session(String title, String description, String game, String place, String date, int numberOfPlayers) {
         this.title = title;
@@ -25,13 +32,30 @@ public class Session {
         this.place = place;
         this.date = date;
         this.numberOfPlayers = numberOfPlayers;
-        this.id  = (long) 1; /*REMOVE THIS once get Sessions works*/
-        users.add(new User("Host"));
-        users.add(new User("User 2"));
+        this.id = (long) 1; /*REMOVE THIS once id can be passed*/
         // users.size() == numberOfPlayers
     }
 
-    public Long getId() {return id;}
+    public static Session parseSession(JSONObject sessionObject) {
+        List<User> users = new ArrayList();
+        try {
+            JSONArray parsedUsers = sessionObject.getJSONArray("users");
+            for (int i = 0; i < parsedUsers.length(); i++) {
+                users.add(new User(parsedUsers.getJSONObject(i).getString("name")));
+            }
+            Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getInt("numberOfPlayers"));
+            parsed.users = users;
+            return parsed;
+
+        } catch (JSONException e) {
+            Log.d("Parse.Session", e.toString());
+        }
+        return null;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;

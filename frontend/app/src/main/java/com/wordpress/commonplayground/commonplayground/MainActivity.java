@@ -21,9 +21,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -39,8 +42,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         RecyclerView rvSessions = (RecyclerView) findViewById(R.id.rvSessions);
-        createDummySessions();
 
+        getSessions();
         SessionsAdapter adapter= new SessionsAdapter(activeSessions);
         rvSessions.setAdapter(adapter);
         rvSessions.setLayoutManager(new LinearLayoutManager(this));
@@ -65,36 +68,40 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-       getSessions();
+
+
 
 
     }
 
-    private void createDummySessions() {
-        for (int i = 0; i < 25; i++) {
-            activeSessions.add(i, new Session("title: "+i, "description: "+i, "game :"+i, "place: "+i, "date: "+i, i));
-            Log.d("Session", activeSessions.get(i).toString());
-        }
-    }
 
     private void getSessions() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.2.2:8080/getSessionList";
 
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>()
-                {
+        JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("Response", response.toString());
+                    public void onResponse(JSONArray response) {
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                Session parse = Session.parseSession(response.getJSONObject(i));
+                                activeSessions.add(parse);
+                                Log.d("Parse.Session.Main", activeSessions.get(i).toString());
+                            } catch (JSONException e) {
+                                Log.d("Parse.Error.Main", e.toString());
+                            }
+                        }
+
                     }
                 },
                 new Response.ErrorListener()
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("Error.Response", String.valueOf(error));
+                        Log.d("Parse.Response", String.valueOf(error));
                     }
                 }
         );

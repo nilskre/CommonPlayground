@@ -66,7 +66,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 public void run() {
                     AddSessionActivity.this.finish();
                 }
-            }, 2000);
+            }, 100);
         }
 
         if (view == btnDatePicker) {

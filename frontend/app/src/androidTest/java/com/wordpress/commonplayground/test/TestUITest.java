@@ -23,7 +23,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 @RunWith(AndroidJUnit4.class)
 public class TestUITest {
 
-    @Rule
+    /*@Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     private Activity activity;
@@ -43,5 +43,5 @@ public class TestUITest {
     public void useAppContext() {
         ViewInteraction floatingActionButton = onView(withId(R.id.fab));
         floatingActionButton.perform(click());
-    }
+    }*/
 }

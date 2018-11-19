@@ -9,7 +9,7 @@
     android:paddingBottom="10dp">
 
     <TextView
-        android:id="@+id/session_id"
+        android:id="@+id/session_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -31,7 +31,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/session_id" />
+        app:layout_constraintTop_toBottomOf="@+id/session_title" />
 
     <TextView
         android:id="@+id/session_date"

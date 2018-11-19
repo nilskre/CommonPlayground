@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-       // getSessions();
+       getSessions();
 
 
     }
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
     private void getSessions() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2:8080/sessionList";
+        String url = "http://10.0.2.2:8080/getSessionList";
 
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>()

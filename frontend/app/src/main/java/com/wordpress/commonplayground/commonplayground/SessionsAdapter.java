@@ -36,13 +36,20 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
 
     @Override
-    public void onBindViewHolder( SessionViewHolder viewHolder, int position) {
+    public void onBindViewHolder(SessionViewHolder viewHolder, int position) {
         // Get the data model based on position
         Session session = activeSessions.get(position);
 
         // Set item views based on your views and data model
-        TextView textView = viewHolder.sessionTextView;
-        textView.setText(session.getTitle());
+        TextView titleTextView = viewHolder.titleTextView;
+        titleTextView.setText(session.getTitle());
+        TextView gameTextView = viewHolder.gameTextView;
+        gameTextView.setText(session.getGame());
+        TextView placeTextView = viewHolder.placeTextView;
+        placeTextView.setText(session.getPlace());
+        TextView dateTextView = viewHolder.dateTextView;
+        dateTextView.setText(session.getDate());
+
     }
 
     // Returns the total count of items in the list
@@ -52,12 +59,15 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
     }
 
     public class SessionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView sessionTextView;
+        public TextView titleTextView, dateTextView, gameTextView, placeTextView;
         private Context context;
 
         public SessionViewHolder(Context context, View itemView) {
             super(itemView);
-            sessionTextView = (TextView) itemView.findViewById(R.id.session_id);
+            titleTextView = (TextView) itemView.findViewById(R.id.session_title);
+            gameTextView = (TextView) itemView.findViewById(R.id.session_game);
+            placeTextView = (TextView) itemView.findViewById(R.id.session_place);
+            dateTextView = (TextView) itemView.findViewById(R.id.session_date);
             this.context = context;
             itemView.setOnClickListener(this);
         }
@@ -66,7 +76,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
         public void onClick(View v) {
             int position = getAdapterPosition(); // gets item position
             long currentSession = activeSessions.get(position).getId();
-            Log.d("ClickTest", "Id:"+currentSession);
+            Log.d("ClickTest", "Id:" + currentSession);
             //Here goes opening the SessionDetails Activity, just pass the ID
         }
     }

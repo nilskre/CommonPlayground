@@ -3,6 +3,7 @@ Feature: Use Case 5 Login
     I want to open the app and log into my exisitng account to be able to use the app.
     I want to provide username and password and to be forwarded to the main page while the app recognizes me.
 
+  @login-feature
   Scenario: I attempt to log in with an unknown user
     Given I open the app and I am prompted to provide my user credentials
     When I type in an unknown username <account>
@@ -10,6 +11,7 @@ Feature: Use Case 5 Login
     Then The app should show a warning saying "username unknown"
     And the active view remains <login>
 
+  @login-feature
   Scenario: I attempt to log in with a known user and a wrong password
     Given I open the app and I am prompted to provide my user credentials
     When I type in an incorrect password <password>
@@ -17,6 +19,7 @@ Feature: Use Case 5 Login
     Then The app should show a warning saying "user password combination incorrect"
     And the active view remains <login>
 
+  @login-feature
   Scenario: I attempt to log in with correct credentials
     Given I open the app and I am prompted to provide my user credentials
     When I type in a known username <account>

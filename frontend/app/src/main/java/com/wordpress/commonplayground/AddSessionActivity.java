@@ -1,4 +1,4 @@
-package com.wordpress.commonplayground.commonplayground;
+package com.wordpress.commonplayground;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;

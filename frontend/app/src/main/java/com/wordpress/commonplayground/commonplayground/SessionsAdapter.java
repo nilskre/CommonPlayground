@@ -80,5 +80,21 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
             //Here goes opening the SessionDetails Activity, just pass the ID
         }
     }
+
+    // Clean all elements of the recycler
+
+    public void clear() {
+        activeSessions.clear();
+        notifyDataSetChanged();
+    }
+
+
+
+// Add a list of items -- change to type used
+
+    public void addAll(List<Session> list) {
+        activeSessions.addAll(list);
+        notifyDataSetChanged();
+    }
 }
 

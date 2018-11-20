@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="207bdc2f-1cf2-4b7d-83a3-3848e1b56c8a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" afterDir="false" />
+    <list default="true" id="7b0c8173-c895-42c2-b6e3-7ae6cbbcc830" name="CPG-104 API Test with rest-assured" comment="" />
+    <list id="207bdc2f-1cf2-4b7d-83a3-3848e1b56c8a" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/cucumber/sessionOverview.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -41,58 +41,44 @@
     <session id="-1220794171">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.11" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="feature" value="352" />
+          <entry key="youtrack" value="13" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Cucumber" value="352" />
+          <entry key="YouTrack Commands" value="13" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="feature" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Cucumber" value="2" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/hello/SessionOverviewController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="19" column="10" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/hello/Trial.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/cucumber/sessionOverview.feature">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/hello/Session.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/hello/PostNewSessionController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="17" column="36" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="36" />
-              <folding>
-                <element signature="e#468#469#0" expanded="true" />
-                <element signature="e#526#527#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="119">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
@@ -545,6 +531,7 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/hello/Trial.java" />
         <option value="$PROJECT_DIR$/src/main/java/hello/SessionOverviewController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/cucumber/sessionOverview.feature" />
       </list>
     </option>
   </component>
@@ -586,16 +573,22 @@
               <item name="backend" type="b2602c69:ProjectViewProjectNode" />
               <item name="backend" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="backend" type="b2602c69:ProjectViewProjectNode" />
               <item name="backend" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="hello" type="462c0819:PsiDirectoryNode" />
+              <item name="cucumber" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -607,7 +600,10 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542733064280" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="tasks.open.task.update.state.enabled" value="false" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -692,12 +688,12 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
+    <task id="Default" summary="Default task">
       <changelist id="207bdc2f-1cf2-4b7d-83a3-3848e1b56c8a" name="Default" comment="" />
       <created>1540985238415</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1540985238415</updated>
+      <updated>1542733213146</updated>
       <workItem from="1540985240383" duration="24000" />
       <workItem from="1541181706293" duration="129000" />
       <workItem from="1541181852808" duration="19000" />
@@ -709,18 +705,36 @@
       <workItem from="1541935523472" duration="617000" />
       <workItem from="1542195604352" duration="5842000" />
       <workItem from="1542579724650" duration="68000" />
-      <workItem from="1542724292464" duration="746000" />
+      <workItem from="1542724292464" duration="1572000" />
+      <workItem from="1542731849970" duration="1361000" />
     </task>
-    <servers />
+    <task active="true" id="CPG-104" summary="API Test with rest-assured">
+      <changelist id="7b0c8173-c895-42c2-b6e3-7ae6cbbcc830" name="CPG-104 API Test with rest-assured" comment="" />
+      <created>1542733113395</created>
+      <option name="issue" value="true" />
+      <url>https://commonplayground.myjetbrains.com/youtrack/issue/CPG-104</url>
+      <option name="number" value="104" />
+      <option name="presentableId" value="CPG-104" />
+      <option name="project" value="CPG" />
+      <updated>1542733213180</updated>
+      <workItem from="1542733213511" duration="176000" />
+    </task>
+    <option name="createBranch" value="false" />
+    <servers>
+      <YouTrack url="https://commonplayground.myjetbrains.com/youtrack">
+        <password>dfecdfcfdfdfdfd8dfc3dfcfdfcddfcfdfc6dff8df93df93</password>
+        <username>Denis</username>
+      </YouTrack>
+    </servers>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12043000" />
+    <option name="totallyTimeSpent" value="14406000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2793177" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.282516" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -728,6 +742,7 @@
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="YouTrack" sideWeight="0.49946696" visible="true" weight="0.37744033" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32972974" />
@@ -735,8 +750,8 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3470716" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3470716" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50053304" side_tool="true" weight="0.37744033" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.32972974" />
       <window_info anchor="bottom" id="Spring" order="11" />
@@ -829,9 +844,10 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hello/Trial.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/hello/SessionOverviewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="323">
           <caret line="19" column="10" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -848,7 +864,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/hello/PostNewSessionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="237">
           <caret line="17" column="36" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="36" />
           <folding>
             <element signature="e#468#469#0" expanded="true" />
@@ -857,13 +873,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hello/Trial.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/cucumber/sessionOverview.feature">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>

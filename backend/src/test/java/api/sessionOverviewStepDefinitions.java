@@ -20,6 +20,7 @@ public class sessionOverviewStepDefinitions {
 
     @Then("^There should be sessions$")
     public void thereShouldBeSessions(){
-        get("/getSessionList").then().statusCode(200);
+        get("/getSessionList").then().
+                assertThat().body("title", hasItem("Title INIT"));
     }
 }

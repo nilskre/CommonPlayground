@@ -1,13 +1,11 @@
-package com.wordpress.commonplayground.commonplayground;
+package com.wordpress.commonplayground;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -79,22 +77,6 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
             Log.d("ClickTest", "Id:" + currentSession);
             //Here goes opening the SessionDetails Activity, just pass the ID
         }
-    }
-
-    // Clean all elements of the recycler
-
-    public void clear() {
-        activeSessions.clear();
-        notifyDataSetChanged();
-    }
-
-
-
-// Add a list of items -- change to type used
-
-    public void addAll(List<Session> list) {
-        activeSessions.addAll(list);
-        notifyDataSetChanged();
     }
 }
 

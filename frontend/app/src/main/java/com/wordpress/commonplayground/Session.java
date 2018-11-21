@@ -1,4 +1,4 @@
-package com.wordpress.commonplayground.commonplayground;
+package com.wordpress.commonplayground;
 
 import android.util.Log;
 
@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Session {
     private Long id;

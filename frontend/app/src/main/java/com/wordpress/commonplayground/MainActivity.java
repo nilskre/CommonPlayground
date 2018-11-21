@@ -1,4 +1,4 @@
-package com.wordpress.commonplayground.commonplayground;
+package com.wordpress.commonplayground;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,6 +34,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ArrayList<Session> activeSessions;
+    SessionsAdapter adapter;
 
 
     @Override
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         RecyclerView rvSessions = (RecyclerView) findViewById(R.id.rvSessions);
         getSessions();
 
-        SessionsAdapter adapter= new SessionsAdapter(activeSessions);
+        adapter = new SessionsAdapter(activeSessions);
         rvSessions.setAdapter(adapter);
         rvSessions.setLayoutManager(new LinearLayoutManager(this));
 
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity
                                 Log.d("Parse.Error.Main", e.toString());
                             }
                         }
-
+                        adapter.notifyDataSetChanged();
                     }
                 },
                 new Response.ErrorListener()
@@ -105,7 +106,6 @@ public class MainActivity extends AppCompatActivity
                 }
         );
         queue.add(getRequest);
-
     }
 
     @Override

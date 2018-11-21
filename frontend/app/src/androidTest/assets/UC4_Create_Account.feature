@@ -15,4 +15,4 @@ Feature: Use Case 4 Create Account
     Examples:
       | username   | password  | repeatPassword |
       |  iBims     |  1234Game |  1234Game      |
-      |  hello     |  fun      |  fun           |  
+      |  hello     |  fun      |  fun           |

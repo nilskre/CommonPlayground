@@ -3,7 +3,7 @@
 # 1. Login
 
 ## 1.1 Brief Description
-This uses cases allows a user with an account to log which is the basis for posting and joining sessions as well as tracking one's sessions.
+This use case allows a user with an account to log in which is the basis for posting and joining sessions as well as tracking one's sessions.
 
 ## 1.2 Mockup
 ![Mockup login](../mockups/Login.png)

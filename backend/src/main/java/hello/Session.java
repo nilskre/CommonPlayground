@@ -1,5 +1,11 @@
 package hello;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +40,8 @@ public class Session {
         this.date = date;
         this.numberOfPlayers = numberOfPlayers;
 
-        users.add(new User("Host"));
-        users.add(new User("User 2"));
+        users.add(new User("My Name"));
+        users.add(new User("Test User"));
         // users.size() == numberOfPlayers
     }
 

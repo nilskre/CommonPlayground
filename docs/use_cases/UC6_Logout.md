@@ -22,7 +22,7 @@ TBD
 ### .feature File
 [.feature File Login](../../frontend/app/src/androidTest/assets/UC6_Logout.feature)
 ```Cucumber
-Feature: Use Case 6 Login
+Feature: Use Case 6 Logout
     As a USER
     I want to log out of my currently active session
 

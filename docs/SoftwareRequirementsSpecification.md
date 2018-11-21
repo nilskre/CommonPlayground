@@ -105,6 +105,8 @@ This feature provides a basic overview over all current sessions. All posted ses
 #### 3.1.3 Creating an account
 To identify all useres we need an account system. This account system enables us to build important functions such as joining a session, leaving a session or a personalized overview over all sessions (Keeping track of your sessions).
 
+[Create an account](./use_cases/UC4_Create_Account.md)
+
 #### 3.1.4 Logging in
 The app will provide the possibility to register and log in. This will also make the usability easier when a user wants to manage his sessions, post or join a session because he doesn't have to enter his mail address every time.
 

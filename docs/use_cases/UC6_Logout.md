@@ -1,4 +1,4 @@
-# Use-Case Specification: Login
+# Use-Case Specification: Logout
 
 # 1. Logout
 

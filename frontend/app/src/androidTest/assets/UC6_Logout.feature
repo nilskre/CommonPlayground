@@ -1,4 +1,4 @@
-Feature: Use Case 6 Login
+Feature: Use Case 6 Logout
     As a USER
     I want to log out of my currently active session
 

@@ -18,7 +18,7 @@ TBD
 - data will be validated and send to the databse
 
 ### Activity Diagram
-![Activity Diagram](../activity_diagrams/UC4_Create_Account.png)
+![Activity Diagram](../activity_diagrams/UCD4_Create_Account.png)
 
 ### .feature File
 [.feature File Login](../../frontend/app/src/androidTest/assets/UC4_Create_Account.feature)

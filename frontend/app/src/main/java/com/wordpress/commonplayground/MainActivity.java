@@ -27,7 +27,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -70,14 +69,25 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
-
     }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        activeSessions.clear();
+        getSessions();
+    }
+
+  /*  @Override
+    public void onResume() {
+        super.onResume();
+        activeSessions.clear();
+        getSessions();
+    }*/
 
     private void getSessions() {
-        activeSessions = new ArrayList<Session>();
+        if (activeSessions==null){ activeSessions = new ArrayList<Session>();}
+        else {activeSessions.clear();}
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.2.2:8080/getSessionList";
@@ -97,8 +107,7 @@ public class MainActivity extends AppCompatActivity
                         adapter.notifyDataSetChanged();
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("Parse.Response", String.valueOf(error));

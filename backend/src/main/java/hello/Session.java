@@ -1,16 +1,36 @@
 package hello;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Session {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
     private String title;
     private String description;
     private String game;
     private String place;
     private String date;
     private int numberOfPlayers;
-    private List players  = new ArrayList();
+    private Long idOfHost;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<User> users = new ArrayList();
+
+    public Session() {}
 
     public Session(String title, String description, String game, String place, String date, int numberOfPlayers) {
         this.title = title;
@@ -20,8 +40,9 @@ public class Session {
         this.date = date;
         this.numberOfPlayers = numberOfPlayers;
 
-        players.add("Host");
-        // players.size() == numberOfPlayers
+        users.add(new User("My Name"));
+        users.add(new User("Test User"));
+        // users.size() == numberOfPlayers
     }
 
     public String getTitle() {
@@ -44,8 +65,8 @@ public class Session {
         return numberOfPlayers;
     }
 
-    public List getPlayers() {
-        return players;
+    public List<User> getUsers() {
+        return users;
     }
 
     public String getDescription() {
@@ -54,6 +75,6 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " players=" + players;
+        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " users="; //+ users;
     }
 }

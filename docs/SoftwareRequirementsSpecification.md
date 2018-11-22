@@ -89,8 +89,8 @@ Until december we plan to implement:
 - 3.1.1 Posting a session
 - 3.1.2 Getting an overview
 - 3.1.3 Create account
-- 3.1.4 Login
-- 3.1.5 Joining a session
+- 3.1.4 Logging in
+- 3.1.5 Logging out
 
 #### 3.1.1 Posting a session
 This feature is the essential one of our project. The user gets the possibility to post a session. Therefore, he has to select a game and also set the time when he wants to play. Later on, when we also implemented offline games, he has to set a location, too.
@@ -105,33 +105,42 @@ This feature provides a basic overview over all current sessions. All posted ses
 #### 3.1.3 Creating an account
 To identify all useres we need an account system. This account system enables us to build important functions such as joining a session, leaving a session or a personalized overview over all sessions (Keeping track of your sessions).
 
+[Create an account](./use_cases/UC4_Create_Account.md)
+
 #### 3.1.4 Logging in
 The app will provide the possibility to register and log in. This will also make the usability easier when a user wants to manage his sessions, post or join a session because he doesn't have to enter his mail address every time.
 
-#### 3.1.5 Joining a session
+[Login](./use_cases/UC5_Login.md)
+
+#### 3.1.5 Logging out
+In case you share your phone, have multiple accounts or just want to be cautius about your privacy you should be able to cancle a session manually by loggin out.
+
+[Logout](./use_cases/UC6_Logout.md)
+
+#### 3.1.6 Joining a session
 There is also the possibility to join an existing game session. Therefore, the user can select a specific session.
 
 [Join a Session](./use_cases/UC2_Join_Session.md)
 
-#### 3.1.6 Keeping track of your sessions
+#### 3.1.7 Keeping track of your sessions
 The app provides the user with a seperate page view where he gets an overview of all sessions he posted or he joined in. Here, the user can see who joined his posted session.
 
-#### 3.1.7 Leaving a session
+#### 3.1.8 Leaving a session
 The user gets also the possibility to delete a session he posted or to leave a session he joined in.
 
-#### 3.1.8 Finding a session
+#### 3.1.9 Finding a session
 Based on the overview over all sessions this features enables the user to find sessions by specific parameters. Therefore, the user can find a session by tags and then by pressing a button join the session by another player. Later on, finding a session will be provided by geolocalization that the users can search for a session in a specific area.
 
-#### 3.1.9 Getting in touch
+#### 3.1.10 Getting in touch
 There must be the possibility that two people who want to play together can communicate with each other. At first, we want to implement that when a user post a session, he has to enter his mail address. The player who joins the session gets than the possibility to contact the first user. Later on, when we will have implemented profiles, then there will be another way to communicate with each other.
 
-#### 3.1.10 Presenting yourself and checking out others
+#### 3.1.11 Presenting yourself and checking out others
 With the possibility to log in there comes another functionality, the profile. Every user will have his one profile where he can write some informations about hisself. Because of the privacy policy in Europe, the user has the possibility to only write those information he wants other people to see. Owing to the profile, users can also check out other players and learn e.g. the favorite games about the user.
 
-#### 3.1.11 Reporting users and managing friends
+#### 3.1.12 Reporting users and managing friends
 After a session, the app provides the users with the possibility to report the other participants. This is helpful because we want a community with fair players. Additionally, when they found an interesting person they can also add them to there friend list which also has a seperate page view.
 
-#### 3.1.12 Ban users and deleting posts
+#### 3.1.13 Banning users and deleting posts
 There are also some functionalities for the admin. He will get the possibility to ban users and to delete any posts.
 
 ### 3.2 Usability

@@ -6,4 +6,14 @@
     <string name="nav_header_subtitle">CommonPlaygroundApp@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="new_title">Title</string>
+    <string name="new_game">Game</string>
+    <string name="new_place">Place</string>
+    <string name="new_date">Date</string>
+    <string name="new_time">Time</string>
+    <string name="new_players">How many Players?</string>
+    <string name="new_description">Description</string>
+    <string name="new_button">Publish</string>
+    <string name="new_response_fine">Your Session is saved!</string>
+    <string name="new_error">Something went wrong! Please try it again later.</string>
 </resources>

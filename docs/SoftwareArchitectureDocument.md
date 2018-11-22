@@ -66,7 +66,8 @@ as the Logical, Deployment, Implementation and Data Views.
 ## 2. Architectural Representation
 This project uses the MVC Pattern for the Frontend (Android App) and for the Backend (Spring). So the Model (data model, domain specific classes), the view (user interface) and the Controller c(controls the Application) are separated. The MVC Pattern can be seen in the next picture:
 
-![MVC](./SAD_imgaes/MVC.png)
+![MVC](./SAD_images/MVC.png)
+
 https://www.techyourchance.com/wp-content/uploads/2015/06/MVC_MVP.png
 
 ## 3. Architectural Goals and Constraints

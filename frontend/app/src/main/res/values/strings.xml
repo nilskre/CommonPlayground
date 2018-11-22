@@ -14,4 +14,6 @@
     <string name="new_players">How many Players?</string>
     <string name="new_description">Description</string>
     <string name="new_button">Publish</string>
+    <string name="new_response_fine">Your Session is saved!</string>
+    <string name="new_error">Something went wrong! Please try it again later.</string>
 </resources>

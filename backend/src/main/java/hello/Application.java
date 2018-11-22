@@ -19,7 +19,9 @@ public class Application{
     @Bean
     public CommandLineRunner demo(SessionRepository sessionRepository, UserRepository userRepository) {
         return (args) -> {
-            sessionRepository.save(new Session("Title INIT", "Description", "Game", "Place", "Date", 42));
+            sessionRepository.save(new Session("Card Game", "Card fun", "Doppelkopf", "Schlosspark", "22.11.2018", 4));
+            sessionRepository.save(new Session("Raid", "Raid together", "CS", "WWW", "12.12.2018", 42));
+            userRepository.save(new User("Test User"));
 
             // fetch all sessions
             log.info("Customers found with findAll():");
@@ -37,8 +39,6 @@ public class Application{
                         log.info(customer.toString());
                         log.info("");
                     });
-
-            userRepository.save(new User("Username"));
         };
     }
 

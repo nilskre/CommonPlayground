@@ -79,8 +79,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //int imageResource = getResources().getIdentifier("@drawable/logo", null, this.getPackageName());
         logo.setImageDrawable(getResources().getDrawable(R.drawable.logo));
 
+        //setupActionBar();
 
-        setupActionBar();
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();

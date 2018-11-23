@@ -35,7 +35,11 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wordpress.commonplayground.LoginActivity" />
+        </activity>
         <activity
             android:name=".RegistrationActivity"
             android:label="@string/title_activity_registration"

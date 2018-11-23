@@ -34,44 +34,46 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ArrayList<Session> activeSessions;
     SessionsAdapter adapter;
-
+    int loggedIn = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(true) {
+
+        setContentView(R.layout.activity_main);
+
+        RecyclerView rvSessions = (RecyclerView) findViewById(R.id.rvSessions);
+        getSessions();
+
+        adapter = new SessionsAdapter(activeSessions);
+        rvSessions.setAdapter(adapter);
+        rvSessions.setLayoutManager(new LinearLayoutManager(this));
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openAddSessionActivity = new Intent(MainActivity.this, AddSessionActivity.class);
+                startActivity(openAddSessionActivity);
+            }
+        });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        if(loggedIn == 0) {
+            loggedIn++;
             Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(openLoginActivity);
-        } else {
-            setContentView(R.layout.activity_main);
-
-            RecyclerView rvSessions = (RecyclerView) findViewById(R.id.rvSessions);
-            getSessions();
-
-            adapter = new SessionsAdapter(activeSessions);
-            rvSessions.setAdapter(adapter);
-            rvSessions.setLayoutManager(new LinearLayoutManager(this));
-
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent openAddSessionActivity = new Intent(MainActivity.this, AddSessionActivity.class);
-                    startActivity(openAddSessionActivity);
-                }
-            });
-
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawer.addDrawerListener(toggle);
-            toggle.syncState();
-
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            navigationView.setNavigationItemSelectedListener(this);
         }
     }
 

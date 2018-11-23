@@ -58,7 +58,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
 
     // UI references.
     private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
+    private EditText mPasswordView, mPasswordConfirmView;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -83,10 +83,13 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        mPasswordConfirmView = (EditText) findViewById(R.id.password_confirm);
+
+        Button mRegistrationButton = (Button) findViewById(R.id.registration_button);
+        mRegistrationButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Methode einfügen, die an das Backend die Daten sendet.
                 attemptLogin();
             }
         });
@@ -162,20 +165,15 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
+        mPasswordConfirmView.setError(null);
 
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+        String passwordConfirm = mPasswordConfirmView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
@@ -185,6 +183,28 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
         } else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
+            cancel = true;
+        }
+
+        // Check for a valid password.
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (!isPasswordValid(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
+        //Check for a valid confirm.
+        if (TextUtils.isEmpty(email)) {
+            mPasswordConfirmView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordConfirmView;
+            cancel = true;
+        } else if (!isPasswordConfirmed(password, passwordConfirm)) {
+            mPasswordConfirmView.setError(getString(R.string.error_invalid_password_confirm));
+            focusView = mPasswordConfirmView;
             cancel = true;
         }
 
@@ -209,6 +229,14 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
+    }
+
+    private boolean isPasswordConfirmed(String password, String passwordConfirm) {
+        if(password.equals(passwordConfirm)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

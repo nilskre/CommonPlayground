@@ -24,14 +24,14 @@ public class Session {
     public Session() {
     }
 
-    public Session(String title, String description, String game, String place, String date, int numberOfPlayers) {
+    public Session(String title, String description, String game, String place, String date, int numberOfPlayers, Long sessionId) {
         this.title = title;
         this.description = description;
         this.game = game;
         this.place = place;
         this.date = date;
         this.numberOfPlayers = numberOfPlayers;
-        this.id = (long) 1; /*REMOVE THIS once id can be passed*/
+        this.id = sessionId; /*REMOVE THIS once id can be passed*/
         // users.size() == numberOfPlayers
     }
 
@@ -42,8 +42,9 @@ public class Session {
             for (int i = 0; i < parsedUsers.length(); i++) {
                 users.add(new User(parsedUsers.getJSONObject(i).getString("name")));
             }
-            Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getInt("numberOfPlayers"));
+            Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"));
             parsed.users = users;
+            Log.v("PARSED", String.valueOf("ID: " + parsed.getId()));
             return parsed;
 
         } catch (JSONException e) {
@@ -86,6 +87,6 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " users="; //+ users;
+        return "Session id=" + id + "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " users="; //+ users;
     }
 }

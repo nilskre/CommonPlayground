@@ -21,7 +21,7 @@ public class Application{
         return (args) -> {
             sessionRepository.save(new Session("Card Game", "Card fun", "Doppelkopf", "Schlosspark", "22.11.2018", 4));
             sessionRepository.save(new Session("Raid", "Raid together", "CS", "WWW", "12.12.2018", 42));
-            userRepository.save(new User("Test User"));
+            userRepository.save(new User("Test User", "12345"));
 
             // fetch all sessions
             log.info("Customers found with findAll():");

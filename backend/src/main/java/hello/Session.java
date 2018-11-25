@@ -40,8 +40,8 @@ public class Session {
         this.date = date;
         this.numberOfPlayers = numberOfPlayers;
 
-        users.add(new User("My Name"));
-        users.add(new User("Test User"));
+        users.add(new User("My Name","12345"));
+        users.add(new User("Test User", "abcde"));
         // users.size() == numberOfPlayers
     }
 

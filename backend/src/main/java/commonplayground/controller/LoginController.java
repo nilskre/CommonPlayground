@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class LoginController {
-    User userTriedToLogin;
+    private User userTriedToLogin;
 
     private final UserRepository userRepository;
     @Autowired

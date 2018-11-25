@@ -1,4 +1,4 @@
-package hello.database;
+package commonplayground.model;
 
 import org.springframework.data.repository.CrudRepository;
 

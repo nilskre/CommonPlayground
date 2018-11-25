@@ -1,9 +1,9 @@
-package hello;
+package commonplayground;
 
-import hello.database.Session;
-import hello.database.SessionRepository;
-import hello.database.User;
-import hello.database.UserRepository;
+import commonplayground.model.Session;
+import commonplayground.model.SessionRepository;
+import commonplayground.model.User;
+import commonplayground.model.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

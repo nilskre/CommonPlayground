@@ -1,4 +1,4 @@
-import hello.Application;
+import commonplayground.Application;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.boot.SpringApplication;

@@ -1,5 +1,5 @@
-import hello.database.Session;
-import hello.database.User;
+import commonplayground.model.Session;
+import commonplayground.model.User;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

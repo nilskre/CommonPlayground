@@ -1,4 +1,4 @@
-package hello.database;
+package commonplayground.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;

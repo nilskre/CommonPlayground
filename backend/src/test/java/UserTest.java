@@ -1,4 +1,4 @@
-import hello.database.User;
+import commonplayground.model.User;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

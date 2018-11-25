@@ -1,7 +1,7 @@
-package hello.controller;
+package commonplayground.controller;
 
-import hello.database.Session;
-import hello.database.SessionRepository;
+import commonplayground.model.Session;
+import commonplayground.model.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

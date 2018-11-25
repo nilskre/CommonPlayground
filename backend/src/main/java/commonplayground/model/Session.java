@@ -1,10 +1,4 @@
-package hello;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.stereotype.Component;
+package commonplayground.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -40,8 +34,8 @@ public class Session {
         this.date = date;
         this.numberOfPlayers = numberOfPlayers;
 
-        users.add(new User("My Name"));
-        users.add(new User("Test User"));
+        users.add(new User("My Name","12345"));
+        users.add(new User("Test User", "abcde"));
         // users.size() == numberOfPlayers
     }
 

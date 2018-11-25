@@ -1,5 +1,4 @@
 import hello.Application;
-import hello.PostNewSessionController;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.boot.SpringApplication;

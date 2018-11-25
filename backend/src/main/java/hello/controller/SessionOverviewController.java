@@ -1,5 +1,7 @@
-package hello;
+package hello.controller;
 
+import hello.database.Session;
+import hello.database.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

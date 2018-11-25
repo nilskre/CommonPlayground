@@ -1,5 +1,9 @@
 package hello;
 
+import hello.database.Session;
+import hello.database.SessionRepository;
+import hello.database.User;
+import hello.database.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

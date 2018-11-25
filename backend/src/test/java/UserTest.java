@@ -1,4 +1,4 @@
-import hello.User;
+import hello.database.User;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

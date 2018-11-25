@@ -1,10 +1,4 @@
-package hello;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.stereotype.Component;
+package hello.database;
 
 import javax.persistence.*;
 import java.util.ArrayList;

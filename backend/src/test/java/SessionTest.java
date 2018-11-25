@@ -1,5 +1,5 @@
-import hello.Session;
-import hello.User;
+import hello.database.Session;
+import hello.database.User;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

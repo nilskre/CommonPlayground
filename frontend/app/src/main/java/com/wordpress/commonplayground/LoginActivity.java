@@ -68,7 +68,11 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        UserID = getIntent().getIntExtra("UserID", 0);
+        Bundle extras;
+        extras = getIntent().getExtras();
+        if (extras!=null) {
+            UserID = Long.parseLong(extras.getString("UserID"));
+        }
         Log.d(TAG, "onCreate: started.");
         ImageView logo = (ImageView) findViewById(R.id.logoView);
 
@@ -183,10 +187,8 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
             public void onResponse(String response) {
                 //This code is executed if the server responds, whether or not the response contains data.
                 Log.d("Response.Login", response.toString());
-                UserID=(Long.parseLong(response.toString()));
-                Log.d("Response.Test", String.valueOf(UserID));
                 Intent openMain = new Intent(LoginActivity.this, MainActivity.class);
-                openMain.putExtra("UserID", UserID);
+                openMain.putExtra("UserID", response.toString());
                 startActivity(openMain);
             }
         }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.

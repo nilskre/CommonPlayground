@@ -38,7 +38,11 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
-        UserID = getIntent().getIntExtra("UserID", 0);
+        Bundle extras;
+        extras = getIntent().getExtras();
+        if (extras!=null) {
+            UserID = Long.parseLong(extras.getString("UserID"));
+        }
 
         publish = (Button) findViewById(R.id.ButtonPublish);
         publish.setOnClickListener(this);
@@ -68,7 +72,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 @Override
                 public void run() {
                     Intent openMain = new Intent(AddSessionActivity.this, MainActivity.class);
-                    openMain.putExtra("UserID", UserID);
+                    openMain.putExtra("UserID", String.valueOf(UserID));
                     startActivity(openMain);
 
                 }

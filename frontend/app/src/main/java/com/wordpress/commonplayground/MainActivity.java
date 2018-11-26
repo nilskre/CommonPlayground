@@ -34,16 +34,21 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ArrayList<Session> activeSessions;
     SessionsAdapter adapter;
-    private long UserID =0;
+    private long UserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UserID = getIntent().getIntExtra("UserID", 0);
+        UserID = 0;
+        Bundle extras;
+        extras = getIntent().getExtras();
+        if (extras!=null){
+            UserID=Long.parseLong(extras.getString("UserID"));
+        }
 
         if(UserID == 0) {
             Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
-            openLoginActivity.putExtra("UserID", UserID);
+            openLoginActivity.putExtra("UserID", String.valueOf(UserID));
             startActivity(openLoginActivity);
         }
 
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent openAddSessionActivity = new Intent(MainActivity.this, AddSessionActivity.class);
-                openAddSessionActivity.putExtra("UserID", UserID);
+                openAddSessionActivity.putExtra("UserID", String.valueOf(UserID));
                 startActivity(openAddSessionActivity);
             }
         });

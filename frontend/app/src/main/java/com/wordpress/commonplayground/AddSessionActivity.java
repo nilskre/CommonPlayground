@@ -2,6 +2,7 @@ package com.wordpress.commonplayground;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -31,11 +32,13 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     private ImageButton btnDatePicker, btnTimePicker;
     private TextInputLayout title, game, place, date, time, numberOfPlayers, description;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private long UserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
+        UserID = getIntent().getIntExtra("UserID", 0);
 
         publish = (Button) findViewById(R.id.ButtonPublish);
         publish.setOnClickListener(this);
@@ -64,7 +67,10 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    AddSessionActivity.this.finish();
+                    Intent openMain = new Intent(AddSessionActivity.this, MainActivity.class);
+                    openMain.putExtra("UserID", UserID);
+                    startActivity(openMain);
+
                 }
             }, 100);
         }

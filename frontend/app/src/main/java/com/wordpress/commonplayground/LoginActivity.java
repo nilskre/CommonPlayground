@@ -58,6 +58,9 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private long UserID;
+
+
 
     private static final String TAG = "LoginActivity";
 
@@ -65,6 +68,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        UserID = getIntent().getIntExtra("UserID", 0);
         Log.d(TAG, "onCreate: started.");
         ImageView logo = (ImageView) findViewById(R.id.logoView);
 
@@ -74,12 +78,12 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         mEmailView = (EditText) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
 
-        /*Problem: welche View übergeben?*/
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin(textView);
+                    attemptLogin(textView); /* RICHTIGE VIEW?!*/
                     return true;
                 }
                 return false;
@@ -178,14 +182,17 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
             @Override
             public void onResponse(String response) {
                 //This code is executed if the server responds, whether or not the response contains data.
-                Log.d("Response", response.toString());
-                /*Snackbar.make(view, getString(R.string.new_response_fine), 5000)
-                        .setAction("Action", null).show();*/
+                Log.d("Response.Login", response.toString());
+                UserID=(Long.parseLong(response.toString()));
+                Log.d("Response.Test", String.valueOf(UserID));
+                Intent openMain = new Intent(LoginActivity.this, MainActivity.class);
+                openMain.putExtra("UserID", UserID);
+                startActivity(openMain);
             }
         }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Response", String.valueOf(error));
+                Log.d("Error.Login", String.valueOf(error));
                 Snackbar.make(view, getString(R.string.new_error), 5000)
                         .setAction("Action", null).show();
             }

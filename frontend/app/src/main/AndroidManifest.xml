@@ -49,5 +49,4 @@
                 android:value="com.wordpress.commonplayground.LoginActivity" />
         </activity>
     </application>
-
 </manifest>

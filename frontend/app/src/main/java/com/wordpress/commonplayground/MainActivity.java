@@ -34,11 +34,15 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ArrayList<Session> activeSessions;
     SessionsAdapter adapter;
-    int loggedIn = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(UserCred.getCurrentUserID() == 0) {
+            Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(openLoginActivity);
+        }
 
         setContentView(R.layout.activity_main);
 
@@ -70,11 +74,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if(loggedIn == 0) {
-            loggedIn++;
-            Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(openLoginActivity);
-        }
     }
 
     @Override
@@ -83,13 +82,6 @@ public class MainActivity extends AppCompatActivity
         activeSessions.clear();
         getSessions();
     }
-
-  /*  @Override
-    public void onResume() {
-        super.onResume();
-        activeSessions.clear();
-        getSessions();
-    }*/
 
     private void getSessions() {
         if (activeSessions==null){ activeSessions = new ArrayList<Session>();}

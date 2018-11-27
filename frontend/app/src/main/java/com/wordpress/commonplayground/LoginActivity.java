@@ -238,5 +238,12 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        //Man könnte wohl auch einfach nichts tun... vllt?
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
+    }
 }
 

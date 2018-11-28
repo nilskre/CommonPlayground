@@ -197,8 +197,9 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        String validpassword = "^([a-zA-Z0-9@*#!?$&]{8,30})$";
+        Matcher matcher = Pattern.compile(validpassword).matcher(password);
+        return matcher.matches();
     }
 
     /**

@@ -202,8 +202,9 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        String validpassword = "^([a-zA-Z0-9@*#!?$&]{8,30})$";
+        Matcher matcher = Pattern.compile(validpassword).matcher(password);
+        return matcher.matches();
     }
 
     private boolean isPasswordConfirmed(String password, String passwordConfirm) {

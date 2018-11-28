@@ -160,7 +160,9 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 MyData.put("game", sessionGame);
                 MyData.put("place", sessionPlace);
                 MyData.put("date", sessionDate);
+                MyData.put("time", sessionTime);
                 MyData.put("numberOfPlayers", sessionPlayers);
+                MyData.put("idOfHost", userID);
                 return MyData;
             }
         };

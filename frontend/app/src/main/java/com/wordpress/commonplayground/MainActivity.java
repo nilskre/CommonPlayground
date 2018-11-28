@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity
 
         if(userID == null) {
             Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
-            openLoginActivity.putExtra("userID", userID);
             startActivity(openLoginActivity);
         }
 

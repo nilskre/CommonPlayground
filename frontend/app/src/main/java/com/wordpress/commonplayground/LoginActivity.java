@@ -50,11 +50,6 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Bundle extras;
-        extras = getIntent().getExtras();
-        if (extras!=null) {
-            userID = extras.getString("userID");
-        }
         Log.d(TAG, "onCreate: started.");
         ImageView logo = (ImageView) findViewById(R.id.logoView);
 
@@ -167,13 +162,16 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //This code is executed if the server responds, whether or not the response contains data.
-                Log.d("Response.Login", response.toString());
-                Intent openMain = new Intent(LoginActivity.this, MainActivity.class);
-                openMain.putExtra("userID", response.toString());
-                startActivity(openMain);
+                if (Integer.parseInt(response.toString())!=-1) {
+                    Intent openMain = new Intent(LoginActivity.this, MainActivity.class);
+                    openMain.putExtra("userID", response.toString());
+                    startActivity(openMain);
+                }else{
+                    Snackbar.make(view, getString(R.string.login_error), 5000)
+                        .setAction("Action", null).show();
+                }
             }
-        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("Error.Login", String.valueOf(error));

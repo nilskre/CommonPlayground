@@ -2,12 +2,15 @@ package com.wordpress.commonplayground;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,11 +34,17 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     private ImageButton btnDatePicker, btnTimePicker;
     private TextInputLayout title, game, place, date, time, numberOfPlayers, description;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
+        Bundle extras;
+        extras = getIntent().getExtras();
+        if (extras!=null) {
+            userID = extras.getString("userID");
+        }
 
         publish = (Button) findViewById(R.id.ButtonPublish);
         publish.setOnClickListener(this);
@@ -57,6 +66,22 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    public void onBackPressed() {
+        Intent openMain = new Intent();
+        openMain.putExtra("userID", userID);
+        setResult(RESULT_OK, openMain);
+        finish();
+        //super.onBackPressed();
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     public void onClick(View view) {
         if (view == publish) {
             post(view);
@@ -64,7 +89,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    AddSessionActivity.this.finish();
+                    onBackPressed();
+
                 }
             }, 100);
         }

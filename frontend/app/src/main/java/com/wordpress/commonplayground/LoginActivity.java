@@ -40,8 +40,6 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private String userID;
-
 
 
     private static final String TAG = "LoginActivity";

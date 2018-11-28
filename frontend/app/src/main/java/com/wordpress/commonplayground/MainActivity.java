@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Bundle extras;
         extras = getIntent().getExtras();
-        if (extras!=null){
-            userID =extras.getString("userID");
+        if (extras != null){
+            userID = extras.getString("userID");
         }
 
         if(userID == null) {
@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity
             if (resultCode == RESULT_OK) {
                 Bundle extras;
                 extras = data.getExtras();
-                if (extras!=null){
-                    userID =extras.getString("userID");
+                if (extras != null){
+                    userID = extras.getString("userID");
                     Log.d("IntendResult", extras.getString("userID"));
                 }
             }
@@ -187,6 +187,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_friendlist) {
 
         } else if (id == R.id.nav_logout) {
+            userID = null;
+            Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(openLoginActivity);
 
         } else if (id == R.id.nav_share) {
 

@@ -6,7 +6,10 @@
 This use case allows anyone to register and create an account. Also the data will be secure saved in our data base.
 
 ## 1.2 Mockup
-TBD
+![Registration](../mockups/Registration.png)
+![Registration Fail 1](../mockups/Registration_Fail1.png)
+![Registration Fail 2](../mockups/Registration_Fail2.png)
+![Registration Fail 3](../mockups/Registration_Fail3.png)
 
 # 2. Flow of Events
 

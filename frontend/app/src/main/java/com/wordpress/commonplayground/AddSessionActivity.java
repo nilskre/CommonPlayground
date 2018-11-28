@@ -42,7 +42,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_add_session);
         Bundle extras;
         extras = getIntent().getExtras();
-        if (extras!=null) {
+        if (extras != null) {
             userID = extras.getString("userID");
         }
 
@@ -71,8 +71,6 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         openMain.putExtra("userID", userID);
         setResult(RESULT_OK, openMain);
         finish();
-        //super.onBackPressed();
-
     }
 
     @Override
@@ -90,7 +88,6 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 @Override
                 public void run() {
                     onBackPressed();
-
                 }
             }, 100);
         }

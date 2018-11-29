@@ -105,13 +105,13 @@ The logical view for our Android based frontend looks like shown here:
 ![Android Frontend](./SAD_images/android_logical_view.png)
 
 The logical view for our backend which is based on the Spring Boot architecture looks like:
-![Spring Boot Backend](./SAD_images/spring_boot_logical_view.png)
+![Spring Boot Backend](./SAD_images/spring_boot_logical_view.PNG)
 
 ### 5.2 Architecturally Significant Design Packages
 On this section you can find our class diagrams for the frontend and the backend. We have clearly marked which parts fulfill the model, the view and the controller tasks.
 
 Here is the class diagram for the backend. As the backend has no view part we only highlighted the model and the controller parts.
-![MVC Class Diagram Backend](./SAD_images/backend_mvc_diagram.png)
+![MVC Class Diagram Backend](./SAD_images/backend_mvc_diagram.PNG)
 
 
 ## 6. Process View

@@ -100,6 +100,16 @@ n/a
 
 ### 5.1 Overview
 
+As the architecture of our project is divided into a frontend and a backend with different logical structures we are providing two different pictures.
+
+The logical view for our Android based frontend looks like shown here:
+
+![Android Frontend](./SAD_images/android_logical_view.png)
+
+The logical view for our backend which is based on the Spring Boot architecture looks like:
+
+![Spring Boot Backend](./SAD_images/spring_boot_logical_view.png)
+
 ### 5.2 Architecturally Significant Design Packages
 tbd: UML Diagram with marked MVC for Frontend and Backend
 

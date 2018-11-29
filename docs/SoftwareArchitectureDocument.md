@@ -99,19 +99,19 @@ n/a
 ## 5. Logical View
 
 ### 5.1 Overview
-
 As the architecture of our project is divided into a frontend and a backend with different logical structures we are providing two different pictures.
 
 The logical view for our Android based frontend looks like shown here:
-
 ![Android Frontend](./SAD_images/android_logical_view.png)
 
 The logical view for our backend which is based on the Spring Boot architecture looks like:
-
 ![Spring Boot Backend](./SAD_images/spring_boot_logical_view.png)
 
 ### 5.2 Architecturally Significant Design Packages
-tbd: UML Diagram with marked MVC for Frontend and Backend
+On this section you can find our class diagrams for the frontend and the backend. We have clearly marked which parts fulfill the model, the view and the controller tasks.
+
+Here is the class diagram for the backend. As the backend has no view part we only highlighted the model and the controller parts.
+![MVC Class Diagram Backend](./SAD_images/backend_mvc_diagram.png)
 
 
 ## 6. Process View

@@ -121,6 +121,26 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         boolean cancel = false;
         View focusView = null;
 
+        // Check for valid input from the bottom to the top that the focus is at the top if there are several mistakes
+        // Check for a valid password.
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (password.length() < 8) {
+            mPasswordView.setError(getString(R.string.error_short_password));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (password.length() > 30) {
+            mPasswordView.setError(getString(R.string.error_long_password));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (!isPasswordValid(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
@@ -129,17 +149,6 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         } else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
-            cancel = true;
-        }
-
-        // Check for a valid password.
-        if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (!isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
             cancel = true;
         }
 
@@ -197,7 +206,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
     }
 
     private boolean isPasswordValid(String password) {
-        String validpassword = "^([a-zA-Z0-9@*#!?$&]{8,30})$";
+        String validpassword = "^([a-zA-Z0-9@*#!?$&.-_]{8,30})$";
         Matcher matcher = Pattern.compile(validpassword).matcher(password);
         return matcher.matches();
     }

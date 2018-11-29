@@ -54,8 +54,9 @@ This document describes the architecture of the CommonPlayground project.
 | [UC1 Posting a session](./use_cases/UC1_Post_Session.md)           | 2018-11-04 | CommonPlayground Team     |
 | [UC2 Joining a session](./use_cases/UC2_Join_Session.md)           | 2018-10-28 | CommonPlayground Team     |
 | [UC3 Getting an overview](./use_cases/UC3_Session_Overview.md)     | 2018-10-28 | CommonPlayground Team     |
-| [UC4 Getting an overview](./use_cases/UC4_Session_Overview.md)     | 2018-11-04 | CommonPlayground Team     |
+| [UC4 Create Account](./use_cases/UC4_Create_Account.md)            | 2018-11-04 | CommonPlayground Team     |
 | [UC5 Logging in](./use_cases/UC5_Login.md)                         | 2018-11-12 | CommonPlayground Team     |
+| [UC6 Logout](./use_cases/UC6_Logout.md)                            | 2018-11-12 | CommonPlayground Team     |
 | [tbd Test Plan](../tbd)                                            | tbd 2018-XX-XX | CommonPlayground Team     |
 | [SRS](./SoftwareRequirementsSpecification.md)                      | tbd 2018-10-14 | CommonPlayground Team     |
 

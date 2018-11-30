@@ -10,7 +10,7 @@ public class SessionTest {
 
     @BeforeClass
     public static void setUp() {
-        testSession = new Session("Title", "Description", "Game", "Place", "Date", 42);
+        testSession = new Session("Title", "Description", "Game", "Place", "Date", 42, "drölf", (long)4);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class SessionTest {
     @Test
     public void testPlayers(){
         User assertHost = testSession.getUsers().get(0);
-        String hostName = assertHost.getName();
+        String hostName = assertHost.getUsername();
         assertEquals(hostName, "Host");
     }
 }

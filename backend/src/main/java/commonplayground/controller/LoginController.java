@@ -13,16 +13,17 @@ public class LoginController {
     private User userTriedToLogin;
 
     private final UserRepository userRepository;
+
     @Autowired
     public LoginController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @RequestMapping("/login")
-    public Long postNewSession(@RequestParam(value = "username", defaultValue = "not given") String username,
+    public Long postNewSession(@RequestParam(value = "email", defaultValue = "not given") String email,
                                @RequestParam(value = "password", defaultValue = "not given") String triedPassword) {
-        userTriedToLogin = userRepository.findAllByName(username);
-        if (userExists(username) && passwordCorrect(triedPassword)){
+        userTriedToLogin = userRepository.findAllByUsername(email);
+        if (userExists(email) && passwordCorrect(triedPassword)){
             return userTriedToLogin.getId();
         } else {
             return (long) -1;
@@ -30,7 +31,7 @@ public class LoginController {
     }
 
     private boolean userExists(String username) {
-        return userRepository.findAllByName(username) != null;
+        return userRepository.findAllByUsername(username) != null;
     }
 
     private boolean passwordCorrect(String triedPassword) {

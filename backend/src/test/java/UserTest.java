@@ -9,11 +9,11 @@ public class UserTest {
 
     @BeforeClass
     public static void setUp() {
-        testUser = new User("Username");
+        testUser = new User("Username", "_pswAPP89.", "test@test.de");
     }
 
     @Test
     public void testUserName() {
-        assertEquals(testUser.getName(), "Username");
+        assertEquals(testUser.getUsername(), "Username");
     }
 }

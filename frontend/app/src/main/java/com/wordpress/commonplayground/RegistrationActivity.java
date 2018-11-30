@@ -44,8 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     // UI references.
-    private EditText mEmailView;
-    private EditText mPasswordView, mPasswordConfirmView;
+    private EditText mUsernameView, mEmailView, mPasswordView, mPasswordConfirmView;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -56,6 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         setupActionBar();
         // Set up the login form.
+        mUsernameView = (EditText) findViewById(R.id.username);
         mEmailView = (EditText) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -106,11 +106,13 @@ public class RegistrationActivity extends AppCompatActivity {
     private void attemptRegister(View view) {
 
         // Reset errors.
+        mUsernameView.setError(null);
         mEmailView.setError(null);
         mPasswordView.setError(null);
         mPasswordConfirmView.setError(null);
 
         // Store values at the time of the login attempt.
+        String username = mUsernameView.getText().toString();
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
         String passwordConfirm = mPasswordConfirmView.getText().toString();
@@ -160,6 +162,13 @@ public class RegistrationActivity extends AppCompatActivity {
             cancel = true;
         }
 
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(username)) {
+            mUsernameView.setError(getString(R.string.error_field_required));
+            focusView = mUsernameView;
+            cancel = true;
+        }
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -172,7 +181,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void requestRegister(View view) {
         /*get screen content*/
-        final String eMail = mEmailView.getText().toString();
+        final String username = mUsernameView.getText().toString();
+        final String email = mEmailView.getText().toString();
         final String password = mPasswordView.getText().toString();
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
@@ -195,7 +205,8 @@ public class RegistrationActivity extends AppCompatActivity {
         }) {
             protected Map<String, String> getParams() {
                 Map<String, String> MyData = new HashMap<String, String>();
-                MyData.put("username", eMail);
+                MyData.put("username", username);
+                MyData.put("email", email);
                 MyData.put("password", password);
                 return MyData;
             }
@@ -205,7 +216,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private boolean isEmailValid(String email) {
-        String validemail = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +"\\@" +"[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +"(" +"\\." +"[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +")+";
+        String validemail = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+";
         Matcher matcher = Pattern.compile(validemail).matcher(email);
         return matcher.matches();
     }

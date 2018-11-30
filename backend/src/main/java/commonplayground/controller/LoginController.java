@@ -30,8 +30,8 @@ public class LoginController {
         }
     }
 
-    private boolean userExists(String username) {
-        return userRepository.findAllByUsername(username) != null;
+    private boolean userExists(String email) {
+        return userRepository.findAllByEmail(email) != null;
     }
 
     private boolean passwordCorrect(String triedPassword) {

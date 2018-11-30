@@ -119,8 +119,8 @@ Here is the class diagram for the backend. As the backend has no view part we on
 n/a
 
 ## 7. Deployment View
-tbd
-![Deployment View](./tbd)
+Here you can see our Deployement view diagram:
+![Deployement View](./SAD_images/deployement_view.png)
 
 ## 8. Implementation View
 n/a

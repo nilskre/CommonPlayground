@@ -9,7 +9,7 @@ public class UserTest {
 
     @BeforeClass
     public static void setUp() {
-        testUser = new User("Username", "1234", "test@test.de");
+        testUser = new User("Username", "_pswAPP89.", "test@test.de");
     }
 
     @Test

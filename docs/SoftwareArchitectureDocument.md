@@ -64,41 +64,59 @@ This document contains the Architectural Representation, Goals and Constraints a
 as the Logical, Deployment, Implementation and Data Views.
 
 ## 2. Architectural Representation
+This project uses the MVC Pattern for the Frontend (Android App) and for the Backend (Spring). So the Model (data model, domain specific classes), the view (user interface) and the Controller c(controls the Application) are separated. The MVC Pattern can be seen in the next picture:
 
+![MVC](./SAD_images/MVC.png)
 
+https://www.techyourchance.com/wp-content/uploads/2015/06/MVC_MVP.png
 
 ## 3. Architectural Goals and Constraints
--[This section describes the software requirements and objectives that have some significant impact on the architecture, for example, safety, security, privacy, use of an off-the-shelf product, portability, distribution, and reuse. It also captures the special constraints that may apply: design and implementation strategy, development tools, team structure, schedule, legacy code, and so on.]
 
+### MVC
+As mentioned in chapter two Frontend and Backend are using the MVC Pattern. This enables a clean software architecture with separate Model View and Controller.
+
+### Frontend
+The Android App Client is written in Java. In the Frontend no MVC Tool is needed, because the MVC Pattern is integrated into Android development.
+MVC: 
+* Model: domain specific classes
+* View: Layout files
+* Controller: Activities 
+
+### Backend
+The Backend is also written in Java. As MVC Tool we use Spring Boot. For the account system Spring security is used. As a database we use H2. 
+The Server offers multiple REST Apis which are accessed by our Frontend. 
+MVC: 
+* Model: domain specific classes
+* View: no view available
+* Controller: RestController
 
 ## 4. Use-Case View
 ![Overall-Use-Case-Diagram](./UseCaseDiagramCP.png)
 
 ### 4.1 Use-Case Realizations
-tbd
+n/a
 
 ## 5. Logical View
 
 ### 5.1 Overview
 
 ### 5.2 Architecturally Significant Design Packages
-
+tbd: UML Diagram with marked MVC for Frontend and Backend
 
 
 ## 6. Process View
-tbd
-![Android Process View](./tbd)
+n/a
 
 ## 7. Deployment View
 tbd
 ![Deployment View](./tbd)
 
 ## 8. Implementation View
-
+n/a
 ### 8.1 Overview
-
+n/a
 ### 8.2 Layers
-
+n/a
 
 ## 9. Data View
 Database ER-Diagram:

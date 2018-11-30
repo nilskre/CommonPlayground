@@ -6,7 +6,7 @@
 This use case allows a logged in user to log out again.
 
 ## 1.2 Mockup
-TBD
+![Mockup](../mockups/Logout.png)
 
 # 2. Flow of Events
 

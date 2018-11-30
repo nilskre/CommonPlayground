@@ -3,7 +3,6 @@ package com.wordpress.commonplayground;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,7 +21,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -34,11 +32,23 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ArrayList<Session> activeSessions;
     SessionsAdapter adapter;
-
+    private String userID;
+    static final int returnUserID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle extras;
+        extras = getIntent().getExtras();
+        if (extras != null){
+            userID = extras.getString("userID");
+        }
+
+        if(userID == null) {
+            Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(openLoginActivity);
+        }
+
         setContentView(R.layout.activity_main);
 
         RecyclerView rvSessions = (RecyclerView) findViewById(R.id.rvSessions);
@@ -56,7 +66,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent openAddSessionActivity = new Intent(MainActivity.this, AddSessionActivity.class);
-                startActivity(openAddSessionActivity);
+                openAddSessionActivity.putExtra("userID", userID);
+                startActivityForResult(openAddSessionActivity, returnUserID);
             }
         });
 
@@ -78,12 +89,23 @@ public class MainActivity extends AppCompatActivity
         getSessions();
     }
 
-  /*  @Override
-    public void onResume() {
-        super.onResume();
-        activeSessions.clear();
-        getSessions();
-    }*/
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("IntendResult", String.valueOf(resultCode));
+        Log.d("IntendCode", String.valueOf(requestCode));
+        // Check which request we're responding to
+        if (requestCode == returnUserID) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                Bundle extras;
+                extras = data.getExtras();
+                if (extras != null){
+                    userID = extras.getString("userID");
+                    Log.d("IntendResult", extras.getString("userID"));
+                }
+            }
+        }
+    }
 
     private void getSessions() {
         if (activeSessions==null){ activeSessions = new ArrayList<Session>();}
@@ -165,6 +187,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_friendlist) {
 
         } else if (id == R.id.nav_logout) {
+            userID = null;
+            Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(openLoginActivity);
 
         } else if (id == R.id.nav_share) {
 

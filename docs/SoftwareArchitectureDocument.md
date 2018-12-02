@@ -113,10 +113,10 @@ Any actual manipulation of the model is handled by the backend.
 On this section you can find our class diagrams for the frontend and the backend. We have clearly marked which parts fulfill the model, the view and the controller tasks.
 
 Here is the class diagram for the backend. As the backend has no view part we only highlighted the model and the controller parts.
-![MVC Class Diagram Backend](./SAD_images/backend_mvc_diagram.PNG)
+![MVC Class Diagram Backend](./SAD_images/backend_class_diagram_mvc.png)
 
 Here is the class diagram for the frontend. The Frontend consists of the view, and duplicated domain specific classes from the Backend (model).
-![MVC Class Diagram Frontend](./SAD_images/ClassDiagramFronted_MVC.png)
+![MVC Class Diagram Frontend](./SAD_images/frontend_class_diagram_mvc.png)
 
 
 ## 6. Process View
@@ -124,7 +124,7 @@ n/a
 
 ## 7. Deployment View
 Here you can see our Deployement view diagram:
-![Deployement View](./SAD_images/deployement_view.png)
+![Deployement View](./SAD_images/deployment_view.png)
 
 ## 8. Implementation View
 n/a

@@ -40,7 +40,7 @@ public class Session {
         try {
             JSONArray parsedUsers = sessionObject.getJSONArray("users");
             for (int i = 0; i < parsedUsers.length(); i++) {
-                users.add(new User(parsedUsers.getJSONObject(i).getString("name")));
+                users.add(new User(parsedUsers.getJSONObject(i).getString("username")));
             }
             Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"));
             parsed.users = users;

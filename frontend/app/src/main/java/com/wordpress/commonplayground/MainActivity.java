@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.d("ServerResponse", response.toString());
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 activeSessions.add(i, Session.parseSession(response.getJSONObject(i)));

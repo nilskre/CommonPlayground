@@ -78,10 +78,11 @@ As mentioned in chapter two Frontend and Backend are using the MVC Pattern. This
 
 ### Frontend
 The Android App Client is written in Java. In the Frontend no MVC Tool is needed, because the MVC Pattern is integrated into Android development.
-MVC: 
-* Model: domain specific classes
-* View: Layout files
-* Controller: Activities 
+However, since the App only serves as as frontend the MVC it serves as the V component to the overall application formed by frontend and backend together.
+MVC:
+* Model: domain specific classes modeled after backend classes
+* View: activities
+* Controller: no controller available
 
 ### Backend
 The Backend is also written in Java. As MVC Tool we use Spring Boot. For the account system Spring security is used. As a database we use H2. 
@@ -100,19 +101,22 @@ n/a
 ## 5. Logical View
 
 ### 5.1 Overview
-As the architecture of our project is divided into a frontend and a backend with different logical structures we are providing two different pictures.
+The logical view for our application follows the Spring Boot architecture and looks like:
+![Spring Boot Backend](./SAD_images/spring_boot_logical_view.PNG)  
+In our specific case the view however is not part of spring but provided separately as an android frontend.
+The android application handles all the user interaction and independently handles the view coordnation thus fulfilling the roles of view and dispatcher alike.
+However the frontend does not interact with the model itself. Model classes are duplicated into the fronted for consistency reasons but are only used to populate the corresponding views.
+Any actual manipulation of the model is handled by the backend.
 
-The logical view for our Android based frontend looks like shown here:
-![Android Frontend](./SAD_images/android_logical_view.png)
-
-The logical view for our backend which is based on the Spring Boot architecture looks like:
-![Spring Boot Backend](./SAD_images/spring_boot_logical_view.PNG)
 
 ### 5.2 Architecturally Significant Design Packages
 On this section you can find our class diagrams for the frontend and the backend. We have clearly marked which parts fulfill the model, the view and the controller tasks.
 
 Here is the class diagram for the backend. As the backend has no view part we only highlighted the model and the controller parts.
 ![MVC Class Diagram Backend](./SAD_images/backend_mvc_diagram.PNG)
+
+Here is the class diagram for the frontend. Teh Frontend consists of the view, and duplicated domain specific classes from the Backend (model).
+![MVC Class Diagram Frontend](./SAD_images/ClassDiagramFronted_MVC.png)
 
 
 ## 6. Process View

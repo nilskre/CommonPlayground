@@ -27,7 +27,7 @@ public class Session {
 
     public Session() {}
 
-    public Session(String title, String description, String game, String place, String date, int numberOfPlayers, String time, Long idOfHost) {
+    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long idOfHost) {
         this.title = title;
         this.description = description;
         this.game = game;

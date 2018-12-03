@@ -32,7 +32,7 @@ public class PostNewSessionController {
                                @RequestParam(value = "idOfHost", defaultValue = "-1") String idOfHost){
         Long idOfHostAsLong = Long.parseLong(idOfHost);
         User sessionHost = userRepository.findAllById(idOfHostAsLong);
-        Session addedSession = new Session(title, description, game, place, date, numberOfPlayers, time, idOfHostAsLong);
+        Session addedSession = new Session(title, description, game, place, date, time, numberOfPlayers, idOfHostAsLong);
         addedSession.addUserToSession(sessionHost);
         sessionRepository.save(addedSession);
     }

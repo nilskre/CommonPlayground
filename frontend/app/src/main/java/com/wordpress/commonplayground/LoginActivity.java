@@ -163,7 +163,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
 
     private void requestLogin(View view) {
         /*get screen content*/
-        final String eMail = mEmailView.getText().toString();
+        final String email = mEmailView.getText().toString();
         final String password = mPasswordView.getText().toString();
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
@@ -190,7 +190,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         }) {
             protected Map<String, String> getParams() {
                 Map<String, String> MyData = new HashMap<String, String>();
-                MyData.put("username", eMail);
+                MyData.put("email", email);
                 MyData.put("password", password);
                 return MyData;
             }
@@ -200,7 +200,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
     }
 
     private boolean isEmailValid(String email) {
-        String validemail = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +"\\@" +"[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +"(" +"\\." +"[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +")+";
+        String validemail = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+";
         Matcher matcher = Pattern.compile(validemail).matcher(email);
         return matcher.matches();
     }

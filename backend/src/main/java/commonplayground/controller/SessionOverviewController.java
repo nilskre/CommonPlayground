@@ -20,6 +20,7 @@ public class SessionOverviewController {
 
     @RequestMapping("/getSessionList")
     public List<Session> getSessionList() {
+        sessions.clear();
         for (Session session: sessionRepository.findAll()) {
             sessions.add(session);
         }

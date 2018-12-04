@@ -19,9 +19,8 @@ public class Session {
     private int numberOfPlayers;
     private Long idOfHost;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+    @ManyToMany(
+            cascade = CascadeType.ALL
     )
     private List<User> users = new ArrayList();
 

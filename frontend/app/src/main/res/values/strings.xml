@@ -6,6 +6,14 @@
     <string name="nav_header_title">Common Playground</string>
     <string name="nav_header_subtitle">CommonPlaygroundApp@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="menu_dashboard">Dashboard</string>
+    <string name="menu_mySessions">My Sessions</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_friendlist">Friendlist</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_faq">FAQ</string>
+    <string name="menu_contactAdmin">Contact Admin</string>
     <string name="action_settings">Settings</string>
     <!-- Strings related to AddSession -->
     <string name="new_title">Title</string>

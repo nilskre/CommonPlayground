@@ -40,14 +40,14 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Bundle extras;
         extras = getIntent().getExtras();
-        if (extras != null){
+        /*if (extras != null){
             userID = extras.getString("userID");
         }
 
         if(userID == null) {
             Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(openLoginActivity);
-        }
+        }*/
 
         setContentView(R.layout.activity_main);
 
@@ -191,9 +191,9 @@ public class MainActivity extends AppCompatActivity
             Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(openLoginActivity);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_faq) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_contactAdmin) {
 
         }
 

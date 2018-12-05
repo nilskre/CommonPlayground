@@ -16,6 +16,7 @@ public class Session {
     private String game;
     private String place;
     private String date;
+    private String time;
     private int numberOfPlayers;
     private Long idOfHost;
     private List<User> users = new ArrayList();
@@ -24,12 +25,13 @@ public class Session {
     public Session() {
     }
 
-    public Session(String title, String description, String game, String place, String date, int numberOfPlayers, Long sessionId) {
+    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId) {
         this.title = title;
         this.description = description;
         this.game = game;
         this.place = place;
         this.date = date;
+        this.time = time;
         this.numberOfPlayers = numberOfPlayers;
         this.id = sessionId; /*REMOVE THIS once id can be passed*/
         // users.size() == numberOfPlayers
@@ -40,9 +42,9 @@ public class Session {
         try {
             JSONArray parsedUsers = sessionObject.getJSONArray("users");
             for (int i = 0; i < parsedUsers.length(); i++) {
-                users.add(new User(parsedUsers.getJSONObject(i).getString("name")));
+                users.add(new User(parsedUsers.getJSONObject(i).getString("username")));
             }
-            Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"));
+            Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"));
             parsed.users = users;
             Log.v("PARSED", String.valueOf("ID: " + parsed.getId()));
             return parsed;
@@ -73,6 +75,8 @@ public class Session {
         return date;
     }
 
+    public String getTime() { return time; }
+
     public int getNumberOfPlayers() {
         return numberOfPlayers;
     }
@@ -87,6 +91,6 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session id=" + id + "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " users="; //+ users;
+        return "Session id=" + id + "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " time=" + time + " numberOfPlayers=" + numberOfPlayers + " users="; //+ users;
     }
 }

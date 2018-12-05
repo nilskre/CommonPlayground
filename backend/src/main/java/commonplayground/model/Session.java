@@ -15,28 +15,32 @@ public class Session {
     private String game;
     private String place;
     private String date;
+    private String time;
     private int numberOfPlayers;
     private Long idOfHost;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+    @ManyToMany(
+            cascade = CascadeType.ALL
     )
     private List<User> users = new ArrayList();
 
     public Session() {}
 
-    public Session(String title, String description, String game, String place, String date, int numberOfPlayers) {
+    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long idOfHost) {
         this.title = title;
         this.description = description;
         this.game = game;
         this.place = place;
         this.date = date;
+        this.time = time;
         this.numberOfPlayers = numberOfPlayers;
+        this.idOfHost = idOfHost;
 
-        users.add(new User("My Name","12345"));
-        users.add(new User("Test User", "abcde"));
         // users.size() == numberOfPlayers
+    }
+
+    public void addUserToSession(User user){
+        this.users.add(user);
     }
 
     public String getTitle() {
@@ -65,6 +69,10 @@ public class Session {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public Long getId() {

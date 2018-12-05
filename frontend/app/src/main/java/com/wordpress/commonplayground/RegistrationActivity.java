@@ -29,6 +29,8 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A login screen that offers login via email/password.
@@ -42,8 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     // UI references.
-    private EditText mEmailView;
-    private EditText mPasswordView, mPasswordConfirmView;
+    private EditText mUsernameView, mEmailView, mPasswordView, mPasswordConfirmView;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -54,6 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         setupActionBar();
         // Set up the login form.
+        mUsernameView = (EditText) findViewById(R.id.username);
         mEmailView = (EditText) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -104,17 +106,50 @@ public class RegistrationActivity extends AppCompatActivity {
     private void attemptRegister(View view) {
 
         // Reset errors.
+        mUsernameView.setError(null);
         mEmailView.setError(null);
         mPasswordView.setError(null);
         mPasswordConfirmView.setError(null);
 
         // Store values at the time of the login attempt.
+        String username = mUsernameView.getText().toString();
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
         String passwordConfirm = mPasswordConfirmView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
+
+        // Check for valid input from the bottom to the top that the focus is at the top if there are several mistakes
+        //Check for a valid confirm.
+        if (TextUtils.isEmpty(passwordConfirm)) {
+            mPasswordConfirmView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordConfirmView;
+            cancel = true;
+        } else if (!isPasswordConfirmed(password, passwordConfirm)) {
+            mPasswordConfirmView.setError(getString(R.string.error_invalid_password_confirm));
+            focusView = mPasswordConfirmView;
+            cancel = true;
+        }
+
+        // Check for a valid password.
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (password.length() < 8) {
+            mPasswordView.setError(getString(R.string.error_short_password));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (password.length() > 30) {
+            mPasswordView.setError(getString(R.string.error_long_password));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (!isPasswordValid(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
@@ -127,25 +162,10 @@ public class RegistrationActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        // Check for a valid password.
-        if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (!isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        //Check for a valid confirm.
-        if (TextUtils.isEmpty(email)) {
-            mPasswordConfirmView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordConfirmView;
-            cancel = true;
-        } else if (!isPasswordConfirmed(password, passwordConfirm)) {
-            mPasswordConfirmView.setError(getString(R.string.error_invalid_password_confirm));
-            focusView = mPasswordConfirmView;
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(username)) {
+            mUsernameView.setError(getString(R.string.error_field_required));
+            focusView = mUsernameView;
             cancel = true;
         }
 
@@ -161,7 +181,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void requestRegister(View view) {
         /*get screen content*/
-        final String eMail = mEmailView.getText().toString();
+        final String username = mUsernameView.getText().toString();
+        final String email = mEmailView.getText().toString();
         final String password = mPasswordView.getText().toString();
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
@@ -184,7 +205,8 @@ public class RegistrationActivity extends AppCompatActivity {
         }) {
             protected Map<String, String> getParams() {
                 Map<String, String> MyData = new HashMap<String, String>();
-                MyData.put("username", eMail);
+                MyData.put("username", username);
+                MyData.put("email", email);
                 MyData.put("password", password);
                 return MyData;
             }
@@ -194,13 +216,15 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+        String validemail = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+";
+        Matcher matcher = Pattern.compile(validemail).matcher(email);
+        return matcher.matches();
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        String validpassword = "^([a-zA-Z0-9@*#!?$&.-_]{8,30})$";
+        Matcher matcher = Pattern.compile(validpassword).matcher(password);
+        return matcher.matches();
     }
 
     private boolean isPasswordConfirmed(String password, String passwordConfirm) {

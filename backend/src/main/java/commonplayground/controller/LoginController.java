@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
     private User userTriedToLogin;
+    private boolean userExists;
+    private boolean passwordCorrect;
 
     private final UserRepository userRepository;
 
@@ -22,8 +24,21 @@ public class LoginController {
     @RequestMapping("/login")
     public Long login(@RequestParam(value = "email", defaultValue = "not given") String email,
                       @RequestParam(value = "password", defaultValue = "not given") String triedPassword) {
-        userTriedToLogin = userRepository.findAllByEmail(email);
-        if (userExists(email) && passwordCorrect(triedPassword)){
+        if (userRepository.findAllByEmail(email) != null){
+            userTriedToLogin = userRepository.findAllByEmail(email);
+        }
+        userExists = userExists(email);
+        passwordCorrect = passwordCorrect(triedPassword);
+
+        return generateResponse();
+    }
+
+    private Long generateResponse() {
+        if (!userExists){
+            return (long) -4;
+        } else if(userExists && !passwordCorrect){
+            return (long) -5;
+        } else if (userExists && passwordCorrect){
             return userTriedToLogin.getId();
         } else {
             return (long) -1;

@@ -35,14 +35,11 @@ import com.android.volley.toolbox.Volley;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity /*implements LoaderCallbacks<Cursor>*/ {
-
-    // UI references.
+public class LoginActivity extends AppCompatActivity {
     private EditText mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-
 
     private static final String TAG = "LoginActivity";
 
@@ -51,34 +48,45 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Log.d(TAG, "onCreate: started.");
+
+        displayLogo();
+        setupLoginForm();
+        setupLoginButton();
+        setupRegisteringButton();
+        setupViews();
+    }
+
+    private void displayLogo() {
         ImageView logo = (ImageView) findViewById(R.id.logoView);
-
         logo.setImageDrawable(getResources().getDrawable(R.drawable.logo));
+    }
 
-        // Set up the login form.
+    private void setupLoginForm() {
         mEmailView = (EditText) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
-
-
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin(textView); /* RICHTIGE VIEW?!*/
+                    attemptLogin(textView);
                     return true;
                 }
                 return false;
             }
         });
+    }
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+    private void setupLoginButton() {
+        Button mEmailLoginButton = (Button) findViewById(R.id.email_sign_in_button);
+        mEmailLoginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin(view);
             }
         });
+    }
 
+    private void setupRegisteringButton() {
         Button mRegisterButton = (Button) findViewById(R.id.register_button);
         mRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -87,7 +95,9 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
                 startActivity(openRegistrationActivity);
             }
         });
+    }
 
+    private void setupViews() {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
@@ -118,11 +128,16 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
+        // Check for valid input from the bottom to the top that the focus is at the top if there are several mistakes
+        // Check for a valid password.
+        checkIfValidInput(email, password, view);
+
+    }
+
+    private void checkIfValidInput(String email, String password, View view) {
         boolean cancel = false;
         View focusView = null;
 
-        // Check for valid input from the bottom to the top that the focus is at the top if there are several mistakes
-        // Check for a valid password.
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
@@ -157,7 +172,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
             // form field with an error.
             focusView.requestFocus();
         } else {
-           requestLogin(view);
+            requestLogin(view);
         }
     }
 

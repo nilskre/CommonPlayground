@@ -4,8 +4,8 @@
     android:viewportWidth="32.0"
     android:viewportHeight="32.0">
     <group
-        android:scaleX="1.5"
-        android:scaleY="1.5" >
+        android:scaleX="1.35"
+        android:scaleY="1.35" >
         <path
             android:pathData="M 0 0 h 24 v 24 H 0 z" />
         <path

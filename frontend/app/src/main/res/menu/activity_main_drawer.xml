@@ -10,19 +10,19 @@
             android:title="@string/menu_dashboard" />
         <item
             android:id="@+id/nav_mysessions"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_my_sessions"
             android:title="@string/menu_mySessions" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_profile"
             android:title="@string/menu_profile" />
         <item
             android:id="@+id/nav_friendlist"
-            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:icon="@drawable/ic_menu_friends"
             android:title="@string/menu_friendlist" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_logout"
             android:title="@string/menu_logout" />
     </group>
 
@@ -30,7 +30,7 @@
         <menu>
             <item
                 android:id="@+id/nav_faq"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_menu_help"
                 android:title="@string/menu_faq" />
             <item
                 android:id="@+id/nav_contactAdmin"

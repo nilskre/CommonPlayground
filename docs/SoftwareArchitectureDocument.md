@@ -54,8 +54,9 @@ This document describes the architecture of the CommonPlayground project.
 | [UC1 Posting a session](./use_cases/UC1_Post_Session.md)           | 2018-11-04 | CommonPlayground Team     |
 | [UC2 Joining a session](./use_cases/UC2_Join_Session.md)           | 2018-10-28 | CommonPlayground Team     |
 | [UC3 Getting an overview](./use_cases/UC3_Session_Overview.md)     | 2018-10-28 | CommonPlayground Team     |
-| [UC4 Getting an overview](./use_cases/UC4_Session_Overview.md)     | 2018-11-04 | CommonPlayground Team     |
+| [UC4 Create Account](./use_cases/UC4_Create_Account.md)            | 2018-11-04 | CommonPlayground Team     |
 | [UC5 Logging in](./use_cases/UC5_Login.md)                         | 2018-11-12 | CommonPlayground Team     |
+| [UC6 Logout](./use_cases/UC6_Logout.md)                            | 2018-11-12 | CommonPlayground Team     |
 | [tbd Test Plan](../tbd)                                            | tbd 2018-XX-XX | CommonPlayground Team     |
 | [SRS](./SoftwareRequirementsSpecification.md)                      | tbd 2018-10-14 | CommonPlayground Team     |
 
@@ -77,10 +78,11 @@ As mentioned in chapter two Frontend and Backend are using the MVC Pattern. This
 
 ### Frontend
 The Android App Client is written in Java. In the Frontend no MVC Tool is needed, because the MVC Pattern is integrated into Android development.
-MVC: 
-* Model: domain specific classes
-* View: Layout files
-* Controller: Activities 
+However, since the App only serves as as frontend the MVC it serves as the V component to the overall application formed by frontend and backend together.
+MVC:
+* Model: domain specific classes modeled after backend classes
+* View: activities
+* Controller: no controller available
 
 ### Backend
 The Backend is also written in Java. As MVC Tool we use Spring Boot. For the account system Spring security is used. As a database we use H2. 
@@ -99,17 +101,30 @@ n/a
 ## 5. Logical View
 
 ### 5.1 Overview
+The logical view for our application follows the Spring Boot architecture and looks like:
+![Spring Boot Backend](./SAD_images/spring_boot_logical_view.PNG)  
+In our specific case the view however is not part of spring but provided separately as an android frontend.
+The android application handles all the user interaction and independently handles the view coordnation thus fulfilling the roles of view and dispatcher alike.
+However the frontend does not interact with the model itself. Model classes are duplicated into the fronted for consistency reasons but are only used to populate the corresponding views.
+Any actual manipulation of the model is handled by the backend.
+
 
 ### 5.2 Architecturally Significant Design Packages
-tbd: UML Diagram with marked MVC for Frontend and Backend
+On this section you can find our class diagrams for the frontend and the backend. We have clearly marked which parts fulfill the model, the view and the controller tasks.
+
+Here is the class diagram for the backend. As the backend has no view part we only highlighted the model and the controller parts.
+![MVC Class Diagram Backend](./SAD_images/backend_class_diagram_mvc.png)
+
+Here is the class diagram for the frontend. The Frontend consists of the view, and duplicated domain specific classes from the Backend (model).
+![MVC Class Diagram Frontend](./SAD_images/frontend_class_diagram_mvc.png)
 
 
 ## 6. Process View
 n/a
 
 ## 7. Deployment View
-tbd
-![Deployment View](./tbd)
+Here you can see our Deployement view diagram:
+![Deployement View](./SAD_images/deployment_view.png)
 
 ## 8. Implementation View
 n/a

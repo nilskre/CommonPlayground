@@ -8,6 +8,9 @@ This uses cases allows a user to get an overview about all exisitng sessions. Fr
 ## 1.2 Mockup
 ![Mockup getting an overview](../mockups/Session_Overview.png)
 
+## 1.3 Screenshot
+![Screenshot getting an overview](./Screenshots/UC3_Session_Ovwerview_Screenshot.png)
+
 # 2. Flow of Events
 
 ## 2.1 Basic Flow

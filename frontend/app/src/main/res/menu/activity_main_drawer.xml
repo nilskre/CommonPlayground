@@ -7,18 +7,22 @@
         <item
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_menu_dashboard"
+            android:checked="true"
             android:title="@string/menu_dashboard" />
         <item
             android:id="@+id/nav_mysessions"
             android:icon="@drawable/ic_menu_my_sessions"
+            android:enabled="false"
             android:title="@string/menu_mySessions" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_profile"
+            android:enabled="false"
             android:title="@string/menu_profile" />
         <item
             android:id="@+id/nav_friendlist"
             android:icon="@drawable/ic_menu_friends"
+            android:enabled="false"
             android:title="@string/menu_friendlist" />
         <item
             android:id="@+id/nav_logout"
@@ -31,10 +35,12 @@
             <item
                 android:id="@+id/nav_faq"
                 android:icon="@drawable/ic_menu_help"
+                android:enabled="false"
                 android:title="@string/menu_faq" />
             <item
                 android:id="@+id/nav_contactAdmin"
                 android:icon="@drawable/ic_menu_send"
+                android:enabled="false"
                 android:title="@string/menu_contactAdmin" />
         </menu>
     </item>

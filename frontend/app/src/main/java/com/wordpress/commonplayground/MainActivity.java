@@ -191,9 +191,9 @@ public class MainActivity extends AppCompatActivity
             Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(openLoginActivity);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_faq) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_contactAdmin) {
 
         }
 

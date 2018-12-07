@@ -29,6 +29,7 @@
     <string name="new_error">Something went wrong! Please try it again later.</string>
     <!-- Strings related to login and register -->
     <string name="username_double_error">This username already exists.</string>
+    <string name="username_error">This username does not exist.</string>
     <string name="email_double_error">This email is already registered.</string>
     <string name="registration_succsess">Your account has been registered.</string>
     <string name="login_error">Email or password wrong.</string>

@@ -171,12 +171,20 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (Integer.parseInt(response.toString())!=-1) {
+                String result = new String();
+                boolean success = false;
+                switch (Integer.parseInt(response.toString())){
+                    case -4: result = getString(R.string.username_error); break;
+                    case -5: result = getString(R.string.login_error); break;
+                    case -1: result = getString(R.string.new_error); break;
+                    default: success = true; break;
+                }
+                if (success) {
                     Intent openMain = new Intent(LoginActivity.this, MainActivity.class);
                     openMain.putExtra("userID", response.toString());
                     startActivity(openMain);
                 }else{
-                    Snackbar.make(view, getString(R.string.login_error), 5000)
+                    Snackbar.make(view, result, 5000)
                         .setAction("Action", null).show();
                 }
             }

@@ -173,9 +173,10 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
             public void onResponse(String response) {
                 String result = new String();
                 boolean success = false;
+                Log.d("Response.Login", response.toString());
                 switch (Integer.parseInt(response.toString())){
-                    case -4: result = getString(R.string.username_error); break;
                     case -5: result = getString(R.string.login_error); break;
+                    case -4: result = getString(R.string.username_error); break;
                     case -1: result = getString(R.string.new_error); break;
                     default: success = true; break;
                 }

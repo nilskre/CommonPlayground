@@ -191,14 +191,15 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 String result = new String();
+                Log.d("Response.Register", response.toString());
                 switch (Integer.parseInt(response.toString())){
+                    case -3: result = getString(R.string.email_double_error); break;
                     case -2: result = getString(R.string.username_double_error); break;
-                    case -1: result = getString(R.string.email_double_error); break;
                     case 0: result = getString(R.string.registration_succsess);
                 }
                 Snackbar.make(view, result, 5000)
                         .setAction("Action", null).show();
-                if (result.equals(R.string.registration_succsess)) {
+                if (Integer.parseInt(response.toString())==0) {
                     Intent openLoginActivity = new Intent(RegistrationActivity.this, LoginActivity.class);
                     startActivity(openLoginActivity);
                 }

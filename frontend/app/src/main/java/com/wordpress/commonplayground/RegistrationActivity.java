@@ -190,12 +190,21 @@ public class RegistrationActivity extends AppCompatActivity {
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //This code is executed if the server responds, whether or not the response contains data.
+                String result = new String();
                 Log.d("Response.Register", response.toString());
-                Intent openLoginActivity = new Intent(RegistrationActivity.this, LoginActivity.class);
-                startActivity(openLoginActivity);
+                switch (Integer.parseInt(response.toString())){
+                    case -3: result = getString(R.string.email_double_error); break;
+                    case -2: result = getString(R.string.username_double_error); break;
+                    case 0: result = getString(R.string.registration_succsess);
+                }
+                Snackbar.make(view, result, 5000)
+                        .setAction("Action", null).show();
+                if (Integer.parseInt(response.toString())==0) {
+                    Intent openLoginActivity = new Intent(RegistrationActivity.this, LoginActivity.class);
+                    startActivity(openLoginActivity);
+                }
             }
-        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("Error.Register", String.valueOf(error));

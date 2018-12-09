@@ -85,6 +85,6 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " time=" + time +" numberOfPlayers=" + numberOfPlayers + " idOfHost=" + idOfHost + " users=" + users.toString();
+        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " time=" + time +" numberOfPlayers=" + numberOfPlayers + " idOfHost=" + idOfHost /*+ " users=" + users.toString()*/;
     }
 }

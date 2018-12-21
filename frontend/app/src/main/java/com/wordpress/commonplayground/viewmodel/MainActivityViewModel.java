@@ -2,22 +2,16 @@ package com.wordpress.commonplayground.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-import com.wordpress.commonplayground.MainActivity;
-import com.wordpress.commonplayground.VolleyRequestQueue;
+import com.wordpress.commonplayground.network.VolleyRequestQueue;
 import com.wordpress.commonplayground.model.Session;
 
 import org.json.JSONArray;
@@ -53,7 +47,7 @@ public class MainActivityViewModel extends AndroidViewModel {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 allSessionsTmpList.add(i, Session.parseSession(response.getJSONObject(i)));
-                                Log.d("SESSIONCALL", Session.parseSession(response.getJSONObject(i)).toString());
+                                Log.d("Recieved Sessions", Session.parseSession(response.getJSONObject(i)).toString());
                             } catch (JSONException e) {
                                 Log.d("Parse.Error.Main", e.toString());
                             }

@@ -1,4 +1,4 @@
-package com.wordpress.commonplayground;
+package com.wordpress.commonplayground.view;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -18,6 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.network.VolleyRequestQueue;
 import com.wordpress.commonplayground.model.Session;
 import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
 
@@ -173,12 +175,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_dashboard) {
-            // Handle the camera action
-            // Before dashboard, you could read camera ...
+
         } else if (id == R.id.nav_mysessions) {
 
         } else if (id == R.id.nav_profile) {
@@ -189,7 +189,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             userID = null;
             Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(openLoginActivity);
-
         } else if (id == R.id.nav_faq) {
 
         } else if (id == R.id.nav_contactAdmin) {

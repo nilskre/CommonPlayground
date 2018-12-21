@@ -30,7 +30,6 @@ public class Session {
         this.time = time;
         this.numberOfPlayers = numberOfPlayers;
         this.id = sessionId; /*REMOVE THIS once id can be passed*/
-        // users.size() == numberOfPlayers
     }
 
     public static Session parseSession(JSONObject sessionObject) {

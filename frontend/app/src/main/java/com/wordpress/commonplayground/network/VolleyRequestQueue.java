@@ -1,4 +1,4 @@
-package com.wordpress.commonplayground;
+package com.wordpress.commonplayground.network;
 
 import android.content.Context;
 

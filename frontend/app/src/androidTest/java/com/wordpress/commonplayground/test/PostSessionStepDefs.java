@@ -7,15 +7,13 @@ import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.wordpress.commonplayground.AddSessionActivity;
-import com.wordpress.commonplayground.MainActivity;
+import com.wordpress.commonplayground.view.MainActivity;
 import com.wordpress.commonplayground.R;
 
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 
-import cucumber.api.CucumberOptions;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;

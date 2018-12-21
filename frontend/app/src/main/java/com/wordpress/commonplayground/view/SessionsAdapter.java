@@ -1,6 +1,5 @@
-package com.wordpress.commonplayground;
+package com.wordpress.commonplayground.view;
 
-import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.model.Session;
 
 import java.util.List;

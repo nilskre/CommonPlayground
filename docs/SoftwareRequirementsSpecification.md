@@ -29,7 +29,7 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This Software Requirements Specification (SRS) describes all specifications for the Application "Common Playground". It includes an overview about this project and its vision, detailed information about the planned features and boundary conditions of the development process.
+This Software Requirements Specification (SRS) describes all specifications for the application "Common Playground". It includes an overview about this project and its vision, detailed information about the planned features and boundary conditions of the development process.
 
 
 ### 1.2 Scope
@@ -41,11 +41,11 @@ Planned Subsystems are:
 * Notice Board:  
 The notice board is the essential part of the user interface. Game sessions should be visualized as postings including relevant information about the session. Those should be partly standardized by a form with a free text option for specifics. The data must be stored accordingly.
 * Account System:  
-Users can create Accounts so sessions can be connected to a person as well as join requests. User data must be stored alongside the post data.
+Users can create accounts so sessions can be connected to a person as well as to join requests. User data must be stored alongside the posting data.
 * Friend List and User Rating:  
 Once the account system is created there will be the option to mark users as favorites. Also users or game sessions should get a rating to counter abuse.
 * Connecting People:  
-The host of a game session has to be notified when someone wants to join their game. Both must be able to get in touch to organize the details so messages between the host and the guest have to be connected. This could be done via automated emails or a custom in-app system. For this an account system is needed.
+The host of a game session has to be notified when someone wants to join their game. Both must then be able to get in touch to organize the details, so messages between the host and the guest have to be enabled. This could be done via automated emails or a custom in-app system. For this an account system is needed.
 * Storing Data:  
 User data for accounts and possibly profiles has to be stored. Also the game sessions have to be stored as datasets containing the form contents and possibly contact data. The data storage will form the foundation for the visualization, account system and the search feature.
 * Finding your Game:  
@@ -70,7 +70,7 @@ We need a tag system so everyone looking to join a game can search for the kind 
 
 
 ### 1.5 Overview
-The following chapter provides an overview of this project with vision and overall Use Case Diagram. The third chapter (Requirements Specification) deliveres more details about the specific requirements in terms of functionality, usability and design parameters. Finally there is a chapter with supporting information. 
+The following chapter provides an overview of this project with vision and Overall Use Case Diagram. The third chapter (Requirements Specification) delivers more details about the specific requirements in terms of functionality, usability and design parameters. Finally there is a chapter with supporting information. 
     
 ## 2. Overall Description
 
@@ -85,20 +85,20 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 
 ### 3.1 Functionality
 This section will explain the different use cases, you could see in the Use Case Diagram, and their functionality.  
-Until december we plan to implement:
+Until December we plan to implement:
 - 3.1.1 Posting a session
 - 3.1.2 Getting an overview
-- 3.1.3 Create account
+- 3.1.3 Creating an account
 - 3.1.4 Logging in
 - 3.1.5 Logging out
 
 #### 3.1.1 Posting a session
-This feature is the essential one of our project. The user gets the possibility to post a session. Therefore, he has to select a game and also set the time when he wants to play. Later on, when we also implemented offline games, he has to set a location, too.
+This feature is the essential one of our project. The user gets the possibility to post a session. Therefore, they have to select a game and also set the time when they want to play.For offline games, they have to set a location, too. For online games the location can be a server for example or simply be tagged as 'online'.
 
-[Post a Session](./use_cases/UC1_Post_Session.md)
+[Posting a Session](./use_cases/UC1_Post_Session.md)
 
 #### 3.1.2 Getting an overview
-This feature provides a basic overview over all current sessions. All posted sessions are added here. From this overview you can select a session and join this session.
+This feature provides a basic overview over all current sessions. All posted sessions are added here. From this overview you can select a session and from there join this session.
 
 [Session overview](./use_cases/UC3_Session_Overview.md)
 
@@ -108,12 +108,12 @@ To identify all useres we need an account system. This account system enables us
 [Create an account](./use_cases/UC4_Create_Account.md)
 
 #### 3.1.4 Logging in
-The app will provide the possibility to register and log in. This will also make the usability easier when a user wants to manage his sessions, post or join a session because he doesn't have to enter his mail address every time.
+The app will provide the possibility to register and log in. This will also make the usability easier when a user wants to manage his sessions, post or join a session because they don't have to enter their mail address every time.
 
 [Login](./use_cases/UC5_Login.md)
 
 #### 3.1.5 Logging out
-In case you share your phone, have multiple accounts or just want to be cautius about your privacy you should be able to cancle a session manually by loggin out.
+In case you share your phone, have multiple accounts or just want to be cautius about your privacy you should be able to manually log out.
 
 [Logout](./use_cases/UC6_Logout.md)
 
@@ -123,31 +123,31 @@ There is also the possibility to join an existing game session. Therefore, the u
 [Join a Session](./use_cases/UC2_Join_Session.md)
 
 #### 3.1.7 Keeping track of your sessions
-The app provides the user with a seperate page view where he gets an overview of all sessions he posted or he joined in. Here, the user can see who joined his posted session.
+The app provides the user with a seperate page view where they get an overview of all sessions they posted or joined. Here, the user can see who joined their posted sessions.
 
 #### 3.1.8 Leaving a session
-The user gets also the possibility to delete a session he posted or to leave a session he joined in.
+The user gets also the possibility to delete a session he posted or to leave a session he joined.
 
 #### 3.1.9 Finding a session
-Based on the overview over all sessions this features enables the user to find sessions by specific parameters. Therefore, the user can find a session by tags and then by pressing a button join the session by another player. Later on, finding a session will be provided by geolocalization that the users can search for a session in a specific area.
+Based on the overview over all sessions this features enables the user to find sessions by specific parameters. Therefore, the user can find a session by tags or other parameters like date. Later on, finding a session will be provided by geolocalization that the users can search for a session in a specific area.
 
 #### 3.1.10 Getting in touch
-There must be the possibility that two people who want to play together can communicate with each other. At first, we want to implement that when a user post a session, he has to enter his mail address. The player who joins the session gets than the possibility to contact the first user. Later on, when we will have implemented profiles, then there will be another way to communicate with each other.
+There must be the possibility that two people who want to play together can communicate with each other. The player who joins the session gets the possibility to contact the owner and vice versa. Later on, when we will have implemented profiles, then they will form another way to communicate with each other.
 
 #### 3.1.11 Presenting yourself and checking out others
-With the possibility to log in there comes another functionality, the profile. Every user will have his one profile where he can write some informations about hisself. Because of the privacy policy in Europe, the user has the possibility to only write those information he wants other people to see. Owing to the profile, users can also check out other players and learn e.g. the favorite games about the user.
+With the possibility to log in there comes another functionality, the profile. Every user will have their own profile where they can write some informations about themselves. Because of the privacy policy in Europe, the user has the possibility to only write the information they want other people to see. Using the profile, users can also check out other players and learn e.g. their favorite games.
 
 #### 3.1.12 Reporting users and managing friends
-After a session, the app provides the users with the possibility to report the other participants. This is helpful because we want a community with fair players. Additionally, when they found an interesting person they can also add them to there friend list which also has a seperate page view.
+After a session, the app provides the users with the possibility to report the other participants. This is helpful because we want a community with fair players. Additionally, when they found an interesting person they can also add them to their friend list which also has a seperate page view.
 
 #### 3.1.13 Banning users and deleting posts
-There are also some functionalities for the admin. He will get the possibility to ban users and to delete any posts.
+There are also some functionalities for the admins. They will get the possibility to ban users and to delete any posts.
 
 ### 3.2 Usability
-We plan on designing the user interface as intuitive and self-explanatory as possible to make the user feel as comfortable as possible using the app. Though help documents will be available, it should not be necessary to use them.
+We plan on designing the user interface as intuitive and self-explanatory as possible to make the user feel as comfortable as possible using the app. Though an FAQ document will be available, it should not be necessary to use it.
 
 #### 3.2.1 No training time needed
-Our goal is that a user installs the android application, opens it, get’s a small introduction screen and is able to use all features without any explanation or help.
+Our goal is that a user installs the android application, opens it and is able to use all features without any explanation or help.
 
 #### 3.2.2 Familiar Feeling
 We want to implement an app with familiar designs and functions. This way the user is able to interact in familiar ways with the app without having to get to know new interfaces.
@@ -155,18 +155,18 @@ We want to implement an app with familiar designs and functions. This way the us
 ### 3.3 Reliability
 
 #### 3.3.1 Availability
-The server shall be available 95% of the time. This also means we have to figure out the "rush hours" of our app because the downtime of the server is only tolerable when as less as possible players want to use the app.
+The server shall be available 95% of the time. This also means we have to figure out the "rush hours" of our app because the downtime of the server is only tolerable when as few as possible players want to use the app.
 
 #### 3.3.2 Defect Rate
-Our goal is that we have no lost of any data. This is important that the game sessions can carry on, even after a downtime of the server.
+Our goal is that we have no loss of any data. This is important so that the game sessions can carry on, even after a downtime of the server.
 
 ### 3.4 Perfomance
 
 #### 3.4.1 Capacity
-The system should be able to manga thousands of requests. Also it should be possible to register as many users as necessary.
+The system should be able to manage thousands of requests. Also it should be possible to register as many users as necessary.
 
 #### 3.4.2 Storage 
-Smartphones don't provide much storage. Therefore we are aiming to keep the needed Storage as small as possible.
+Smartphones don't provide much storage. Therefore we are aiming to keep the needed storage as small as possible.
 
 #### 3.4.3 App perfomance / Response time
 To provide the best App perfomance we aim to keep the response time as low as possible. This will make the user experience much better.
@@ -174,15 +174,16 @@ To provide the best App perfomance we aim to keep the response time as low as po
 ### 3.5 Supportability
 
 #### 3.5.1 Coding Standards
-We are going to write the Code by using all of the most common clean code standards. For example we will name our variables and methods by their functionalities. This will keep the Code easy to read by everyone and make further developement much easier.
+We are going to write the code by using all of the most common clean code standards. For example we will name our variables and methods by their functionalities. This will keep the code easy to read by everyone and make further developement much easier.
 
 #### 3.5.2 Testing Strategy
-The Application will have a high test coverage and all important functionalities and edge cases should be tested. Further mistakes in the Implementation will be discovered instant and it will be easy to locate the error. 
+The application will have a high test coverage and all important functionalities and edge cases should be tested. Further mistakes in the implementation will be discovered instantly and it will be easy to locate the error. 
 
 ### 3.6 Design Constraints
-We are trying to provide a modern and easy to handle design for the UI aswell as for the Architecture of our Application. To achieve that the functionalities will be kept as modular as possible.
+We are trying to provide a modern and easy to handle design for the UI aswell as for the architecture of our application. To achieve that the functionalities will be kept as modular as possible.
 
-Because we are progamming an android app we chose Java as our programming Language. Also we are using the common MVC-Architecture to keep the frontend and backend seperated. To make the communication between these two parts easy, we will implement a RESTful-API between them which will provide the data in JSON-Format. 
+Because we are progamming an Android App we chose Java as our programming language. Also we are using the common MVC-architecture to keep the front end and back end seperated. For a clean front end structure we use MVVM.
+To make the communication between the two parts easy, we will implement a RESTful-API between them which will provide the data in JSON-Format. 
 The supported Platforms will be:
 - Android 4.4 and higher
 - Java 8 and higher
@@ -191,20 +192,20 @@ The supported Platforms will be:
 The usage of the app should be as intuitive as possible so it won't need any further documentation. If the user needs some help we will implement a "Help"-Button in the App which includes a FAQ and a formular to contact the developement team.
 
 ### 3.8 Purchased Components
-We don't have any purchased Components yet. If there will be purchased Components in the future we will list them here.
+We don't have any purchased components yet. If there will be purchased components in the future we will list them here.
 
 ### 3.9 Interfaces
 
 #### 3.9.1 User Interfaces
 The User interfaces that will be implented are:
-- Dashboard - lists all session and makes it possible to filter session
-- Session Page - shows detailed information about the session and makes it possible to connect session attendants for example via chat
-- Login - this page is used to log in or to register
-- Overwiew of the sessions - shows all the sessions a user participate in
-- Friend List - friends can be added and joined
-- Profile - makes it possible to post information about yourself
-- User Information - shows additional information about users (for example: Language, Country, Favourite Games, etc.)
-- Settings - shows the Settings
+- Dashboard - lists all session and makes it possible to filter sessions
+- Session Page - shows detailed information about the session and makes it possible to connect session attendants for example via messaging system
+- Login - this page is used to log in 
+- Register - provides a registration form
+- Overwiew of personal sessions - shows all the sessions a user participates in
+- Friend List - friends can be added
+- Profile - makes it possible to post information about yourself, might provide messaging feature, also shows additional information about users (for example: Language, country, favorite games, etc.)
+- Settings - shows the settings
 
 #### 3.9.2 Hardware Interfaces
 (n/a)
@@ -213,15 +214,15 @@ The User interfaces that will be implented are:
 The app will be runnable on Android 4.4 and higher. iOS won't be featured at the moment.
 
 #### 3.9.4 Communication Interfaces
-The Server and Hardware will communicate using the http protocol. 
+The server and hardware will communicate using the http protocol. 
 
 ### 3.10 Licensing Requirements
 
 ### 3.11 Legal, Copyright, and Other Notices
-The Logo is licensed to the Common Playground Team and is only allowed to use for the application. We do not take responsibilty for any incorrect data or errors in the application.
+The logo is licensed to the Common Playground Team and is only allowed to use for the application. We do not take responsibilty for any incorrect data or errors in the application.
 
 ### 3.12 Applicable Standards
-The development will follow the common clean code standards and naming conventions. Also we will create a Definition of Done which will be added here as soon as its complete.
+The development will follow the common clean code standards and naming conventions. Also we will create a definition of d which will be added here as soon as its complete.
 
 ## 4. Supporting Information
 For any further information you can contact the Common Playground Team or check our [Common Playground Blog](http://commonplayground.wordpress.com). 

@@ -1,7 +1,9 @@
 package com.wordpress.commonplayground;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,51 +18,70 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
+import com.wordpress.commonplayground.model.Session;
+import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+import java.util.List;
 
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    ArrayList<Session> activeSessions;
-    SessionsAdapter adapter;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private String userID;
     static final int returnUserID = 1;
+    private MainActivityViewModel mainActivityViewModel;
+    private SessionsAdapter adapter;
+    private RecyclerView rvSessions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setUserID();
+        checkIfLoggedIn();
+        setContentView(R.layout.activity_main);
+        setUpUIElements();
+        VolleyRequestQueue.getInstance(this);
+        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+
+        observeChangesInSessionList();
+    }
+
+    private void setUserID() {
         Bundle extras;
         extras = getIntent().getExtras();
         if (extras != null){
             userID = extras.getString("userID");
         }
+    }
 
+    private void checkIfLoggedIn() {
         if(userID == null) {
             Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(openLoginActivity);
         }
+    }
 
-        setContentView(R.layout.activity_main);
+    private void setUpUIElements() {
+        setUpToolbarAndDrawer();
+        setUpNavigation();
+        setUpFab();
+        setUpRecyclerView();
+    }
 
-        RecyclerView rvSessions = (RecyclerView) findViewById(R.id.rvSessions);
-        getSessions();
-
-        adapter = new SessionsAdapter(activeSessions);
-        rvSessions.setAdapter(adapter);
-        rvSessions.setLayoutManager(new LinearLayoutManager(this));
-
+    private void setUpToolbarAndDrawer() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+    }
+
+    private void setUpNavigation() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void setUpFab() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,23 +91,33 @@ public class MainActivity extends AppCompatActivity
                 startActivityForResult(openAddSessionActivity, returnUserID);
             }
         });
+    }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+    private void setUpRecyclerView() {
+        rvSessions = (RecyclerView) findViewById(R.id.rvSessions);
+    }
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
+    private void observeChangesInSessionList() {
+        mainActivityViewModel.getSessions().observe(this, new android.arch.lifecycle.Observer<List<Session>>() {
+            @Override
+            public void onChanged(@Nullable List<Session> sessions) {
+                Log.d("Observed: ", "SessionList changed");
+                updateAndDisplayListData(sessions);
+            }
+        });
+    }
+
+    private void updateAndDisplayListData(List<Session> sessions) {
+        adapter = new SessionsAdapter(sessions);
+        rvSessions.setAdapter(adapter);
+        rvSessions.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     public void onRestart() {
         super.onRestart();
-        activeSessions.clear();
-        getSessions();
+        mainActivityViewModel.getSessions();
     }
 
     @Override
@@ -105,38 +136,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         }
-    }
-
-    private void getSessions() {
-        if (activeSessions==null){ activeSessions = new ArrayList<Session>();}
-        else {activeSessions.clear();}
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2:8080/getSessionList";
-
-        JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                activeSessions.add(i, Session.parseSession(response.getJSONObject(i)));
-                            } catch (JSONException e) {
-                                Log.d("Parse.Error.Main", e.toString());
-                            }
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("Parse.Response", String.valueOf(error));
-                    }
-                }
-        );
-        queue.add(getRequest);
     }
 
     @Override

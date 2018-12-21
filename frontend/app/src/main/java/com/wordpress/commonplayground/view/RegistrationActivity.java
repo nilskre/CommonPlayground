@@ -32,29 +32,23 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * A login screen that offers login via email/password.
- */
 public class RegistrationActivity extends AppCompatActivity {
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-
-
-    // UI references.
     private EditText mUsernameView, mEmailView, mPasswordView, mPasswordConfirmView;
+    private String username, email, password, passwordConfirm;
     private View mProgressView;
     private View mLoginFormView;
-
+    private boolean cancel = false;
+    private View focusView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        setupActionBar();
-        // Set up the login form.
+        setupRegisteringForm();
+    }
+
+    private void setupRegisteringForm() {
         mUsernameView = (EditText) findViewById(R.id.username);
         mEmailView = (EditText) findViewById(R.id.email);
 
@@ -76,7 +70,6 @@ public class RegistrationActivity extends AppCompatActivity {
         mRegistrationButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Methode einfügen, die an das Backend die Daten sendet.
                 attemptRegister(view);
             }
         });
@@ -85,59 +78,56 @@ public class RegistrationActivity extends AppCompatActivity {
         mProgressView = findViewById(R.id.login_progress);
     }
 
-
-
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setupActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // Show the Up button in the action bar.
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
     private void attemptRegister(View view) {
+        resetErrors();
+        storeRegisteringCredentials();
 
-        // Reset errors.
+        // Check for valid input from the bottom to the top that the focus is at the top if there are several mistakes
+        checkForValidEMailAddress();
+        checkIfPasswordsAreEqual();
+        checkForValidPassword();
+        checkForFilledUsername();
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            requestToBackendRegister(view);
+        }
+    }
+
+    private void resetErrors() {
         mUsernameView.setError(null);
         mEmailView.setError(null);
         mPasswordView.setError(null);
         mPasswordConfirmView.setError(null);
+    }
 
-        // Store values at the time of the login attempt.
-        String username = mUsernameView.getText().toString();
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-        String passwordConfirm = mPasswordConfirmView.getText().toString();
+    private void storeRegisteringCredentials() {
+        username = mUsernameView.getText().toString();
+        email = mEmailView.getText().toString();
+        password = mPasswordView.getText().toString();
+        passwordConfirm = mPasswordConfirmView.getText().toString();
+    }
 
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for valid input from the bottom to the top that the focus is at the top if there are several mistakes
-        //Check for a valid confirm.
+    private void checkForValidPassword() {
         if (TextUtils.isEmpty(passwordConfirm)) {
             mPasswordConfirmView.setError(getString(R.string.error_field_required));
             focusView = mPasswordConfirmView;
             cancel = true;
-        } else if (!isPasswordConfirmed(password, passwordConfirm)) {
-            mPasswordConfirmView.setError(getString(R.string.error_invalid_password_confirm));
-            focusView = mPasswordConfirmView;
-            cancel = true;
         }
-
-        // Check for a valid password.
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
-        } else if (password.length() < 8) {
+        }
+        if (password.length() < 8) {
             mPasswordView.setError(getString(R.string.error_short_password));
             focusView = mPasswordView;
             cancel = true;
@@ -150,8 +140,9 @@ public class RegistrationActivity extends AppCompatActivity {
             focusView = mPasswordView;
             cancel = true;
         }
+    }
 
-        // Check for a valid email address.
+    private void checkForValidEMailAddress() {
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
@@ -161,67 +152,23 @@ public class RegistrationActivity extends AppCompatActivity {
             focusView = mEmailView;
             cancel = true;
         }
+    }
 
-        // Check for a valid email address.
+    private void checkForFilledUsername() {
         if (TextUtils.isEmpty(username)) {
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
             cancel = true;
         }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // REQUEST HERE
-            requestRegister(view);
-        }
     }
 
-    private void requestRegister(View view) {
-        /*get screen content*/
-        final String username = mUsernameView.getText().toString();
-        final String email = mEmailView.getText().toString();
-        final String password = mPasswordView.getText().toString();
-
-        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2:8080/registerNewUser";
-        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                String result = new String();
-                Log.d("Response.Register", response.toString());
-                switch (Integer.parseInt(response.toString())){
-                    case -3: result = getString(R.string.email_double_error); break;
-                    case -2: result = getString(R.string.username_double_error); break;
-                    case 0: result = getString(R.string.registration_succsess);
-                }
-                Snackbar.make(view, result, 5000)
-                        .setAction("Action", null).show();
-                if (Integer.parseInt(response.toString())==0) {
-                    Intent openLoginActivity = new Intent(RegistrationActivity.this, LoginActivity.class);
-                    startActivity(openLoginActivity);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Register", String.valueOf(error));
-                Snackbar.make(view, getString(R.string.new_error), 5000)
-                        .setAction("Action", null).show();
-            }
-        }) {
-            protected Map<String, String> getParams() {
-                Map<String, String> MyData = new HashMap<String, String>();
-                MyData.put("username", username);
-                MyData.put("email", email);
-                MyData.put("password", password);
-                return MyData;
-            }
-        };
-
-        MyRequestQueue.add(MyStringRequest);
+    private void checkIfPasswordsAreEqual() {
+        boolean passwordsEqual = isPasswordConfirmed(password, passwordConfirm);
+        if (!passwordsEqual) {
+            mPasswordConfirmView.setError(getString(R.string.error_invalid_password_confirm));
+            focusView = mPasswordConfirmView;
+            cancel = true;
+        }
     }
 
     private boolean isEmailValid(String email) {
@@ -280,6 +227,48 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
+    private void requestToBackendRegister(View view) {
+        /*get screen content*/
+        final String username = mUsernameView.getText().toString();
+        final String email = mEmailView.getText().toString();
+        final String password = mPasswordView.getText().toString();
 
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+        String url = "http://10.0.2.2:8080/registerNewUser";
+        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                String result = new String();
+                Log.d("Response.Register", response.toString());
+                switch (Integer.parseInt(response.toString())){
+                    case -3: result = getString(R.string.email_double_error); break;
+                    case -2: result = getString(R.string.username_double_error); break;
+                    case 0: result = getString(R.string.registration_succsess);
+                }
+                Snackbar.make(view, result, 5000)
+                        .setAction("Action", null).show();
+                if (Integer.parseInt(response.toString())==0) {
+                    Intent openLoginActivity = new Intent(RegistrationActivity.this, LoginActivity.class);
+                    startActivity(openLoginActivity);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error.Register", String.valueOf(error));
+                Snackbar.make(view, getString(R.string.new_error), 5000)
+                        .setAction("Action", null).show();
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put("username", username);
+                MyData.put("email", email);
+                MyData.put("password", password);
+                return MyData;
+            }
+        };
+
+        MyRequestQueue.add(MyStringRequest);
+    }
 }
-

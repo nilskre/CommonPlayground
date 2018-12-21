@@ -6,7 +6,7 @@
 This use case allows users to post a session onto the session overview page. A session should include all important information that is necessary for other users. If a user wants to post a new session they need to fill in the template, which includes the fields:
 - Name (short name for the session)
 - Game (which game is the session for)
-- Player maximum (Number of playser which can still join this session including host)
+- Player maximum (Number of players which can still join this session including host)
 - Place
 - Time and Date
 - Description

@@ -1,11 +1,8 @@
-package com.wordpress.commonplayground;
+package com.wordpress.commonplayground.model;
 
 public class User {
     private Long id;
     private String name;
-
-    public User() {
-    }
 
     public User(String name) {
         this.name = name;

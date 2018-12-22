@@ -6,6 +6,15 @@
     <string name="nav_header_title">Common Playground</string>
     <string name="nav_header_subtitle">CommonPlaygroundApp@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="menu_dashboard">Dashboard</string>
+    <string name="menu_mySessions">My Sessions</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_friendlist">Friendlist</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_faq">FAQ</string>
+    <string name="menu_contactAdmin">Contact Admin</string>
+    <string name="tooltip_tbi">Coming soon!</string>
     <string name="action_settings">Settings</string>
     <!-- Strings related to AddSession -->
     <string name="new_title">Title</string>
@@ -19,6 +28,10 @@
     <string name="new_response_fine">Your Session is saved!</string>
     <string name="new_error">Something went wrong! Please try it again later.</string>
     <!-- Strings related to login and register -->
+    <string name="username_double_error">This username already exists.</string>
+    <string name="username_error">This email does not exist.</string>
+    <string name="email_double_error">This email is already registered.</string>
+    <string name="registration_succsess">Your account has been registered.</string>
     <string name="login_error">Email or password wrong.</string>
     <string name="title_activity_login">Login</string>
     <string name="prompt_username">Username</string>

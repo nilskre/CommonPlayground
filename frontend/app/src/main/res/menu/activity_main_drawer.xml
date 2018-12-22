@@ -6,36 +6,42 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_dashboard"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Dashboard" />
+            android:icon="@drawable/ic_menu_dashboard"
+            android:checked="true"
+            android:title="@string/menu_dashboard" />
         <item
             android:id="@+id/nav_mysessions"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="My Sessions" />
+            android:icon="@drawable/ic_menu_my_sessions"
+            android:enabled="false"
+            android:title="@string/menu_mySessions" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Profile" />
+            android:icon="@drawable/ic_menu_profile"
+            android:enabled="false"
+            android:title="@string/menu_profile" />
         <item
             android:id="@+id/nav_friendlist"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Friend List" />
+            android:icon="@drawable/ic_menu_friends"
+            android:enabled="false"
+            android:title="@string/menu_friendlist" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Logout" />
+            android:icon="@drawable/ic_menu_logout"
+            android:title="@string/menu_logout" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/menu_help">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_faq"
+                android:icon="@drawable/ic_menu_help"
+                android:enabled="false"
+                android:title="@string/menu_faq" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_contactAdmin"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:enabled="false"
+                android:title="@string/menu_contactAdmin" />
         </menu>
     </item>
 

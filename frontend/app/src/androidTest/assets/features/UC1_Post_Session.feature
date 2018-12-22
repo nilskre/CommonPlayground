@@ -1,4 +1,4 @@
-Feature: Use Case 1 Post a Session
+Feature: Use Case 1 Posting a Session
   As a USER
   I want to open the app and be able to post a new Session at the Session Overview Page
   Therefore I want the fields: title, description, game, place, date and numberOfPlayers able to be filled in

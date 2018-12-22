@@ -1,4 +1,4 @@
-package com.wordpress.commonplayground;
+package com.wordpress.commonplayground.model;
 
 import android.util.Log;
 
@@ -21,10 +21,6 @@ public class Session {
     private Long idOfHost;
     private List<User> users = new ArrayList();
 
-
-    public Session() {
-    }
-
     public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId) {
         this.title = title;
         this.description = description;
@@ -34,7 +30,6 @@ public class Session {
         this.time = time;
         this.numberOfPlayers = numberOfPlayers;
         this.id = sessionId; /*REMOVE THIS once id can be passed*/
-        // users.size() == numberOfPlayers
     }
 
     public static Session parseSession(JSONObject sessionObject) {

@@ -25,7 +25,7 @@ Only commit if a task is completed. Completed also includes successful testing (
 Test before committing.
 
 ### 1.4 Commit Messages
-Commit messages should describe the changes clearly. Furthermore it should be visible to which task a commit belongs to.
+Commit messages should describe the changes clearly. Furthermore it should be visible to which task a commit belongs to. (commit message should contain ticket number)
 
 ### 1.5. Files naming convention
 Each file and directory in our repo should have a self-explanatory name. 
@@ -38,17 +38,18 @@ Each new feature is developed on it´s own branch. For merging this feature bran
 Details about our workflow are described in the next chapter.
 
 ### 2.2. Branches naming convention
-Each branch for the development of features is named with feature_branchname.
-Each branch for the development of other tasks (e.g. project management tasks) is named with task_branchname. 
+Each branch for the development of features is named with a specific self explanatory name.
     
 ## 3. Git Workflow
 ![Git Workflow](https://blog.seibert-media.net/wp-content/uploads/2014/03/Gitflow-Workflow-3.png)  
 Our git workflow can be seen in the picture above.
-There are two branches permanently:
+There are three branches permanently:
 * master:  
 This Branch always represents a working and deployable state of the project.
 * dev:  
 This branch is for development. From this branch all feature and task branches diverge and will be merged into this branch.
+* PM Branch:  
+For project management purposes we have a pm branch. The PM Branch is not locked.
 
 Other branches:
 * Feature Branches:  

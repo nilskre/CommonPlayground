@@ -8,6 +8,9 @@ This use case allows a logged in user to log out again.
 ## 1.2 Mockup
 ![Mockup](../mockups/Logout.png)
 
+## 1.3 Screenshot
+<img src="./Screenshots/UC6_Logout_Screenshot.png" alt="Screenshot: Menu with logout" width="300"/>
+
 # 2. Flow of Events
 
 ## 2.1 Basic Flow

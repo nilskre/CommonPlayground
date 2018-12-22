@@ -88,9 +88,9 @@ public class RegistrationActivity extends AppCompatActivity {
         storeRegisteringCredentials();
 
         // Check for valid input from the bottom to the top that the focus is at the top if there are several mistakes
-        checkForValidEMailAddress();
         checkIfPasswordsAreEqual();
         checkForValidPassword();
+        checkForValidEMailAddress();
         checkForFilledUsername();
 
         if (cancel) {
@@ -107,6 +107,7 @@ public class RegistrationActivity extends AppCompatActivity {
         mEmailView.setError(null);
         mPasswordView.setError(null);
         mPasswordConfirmView.setError(null);
+        cancel = false;
     }
 
     private void storeRegisteringCredentials() {

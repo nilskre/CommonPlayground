@@ -31,7 +31,7 @@ This use case allows users to post a session onto the session overview page. A s
 
 ### .feature File
 
-[.feature File Posting a session](../../frontend/app/src/androidTest/assets/UC1_Post_Session.feature)
+[.feature File Posting a session](../../frontend/app/src/androidTest/assets/features/UC1_Post_Session.feature)
 ```Cucumber
 Feature: Use Case 1 Posting a Session
   As a USER

@@ -81,8 +81,8 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 
 ![OUCD](./UseCaseDiagramCP.png)
 
-Green: Planned till end of december
-Yellow: Planned till end of june
+- Green: Planned till end of december
+- Yellow: Planned till end of june
 
 ## 3. Specific Requirements
 

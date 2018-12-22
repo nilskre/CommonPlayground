@@ -122,12 +122,12 @@ public class RegistrationActivity extends AppCompatActivity {
             focusView = mPasswordConfirmView;
             cancel = true;
         }
+
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
-        }
-        if (password.length() < 8) {
+        } else if (password.length() < 8) {
             mPasswordView.setError(getString(R.string.error_short_password));
             focusView = mPasswordView;
             cancel = true;

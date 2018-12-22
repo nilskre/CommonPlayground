@@ -121,7 +121,7 @@ On this section you can find our class diagrams for the front end and the back e
 Here is the class diagram for the back end. As the backend has no view part we only highlighted the model and the controller parts.
 ![MVC Class Diagram Backend](./SAD_images/backend_class_diagram_mvc.png)
 
-Here is the class diagram for the front end. The Frontend consists of the view, and duplicated domain specific classes from the back end (model).
+Here is the class diagram for the front end. The Frontend consists of the view, the ViewModel, and duplicated domain specific classes from the back end (model).
 ![MVC Class Diagram Frontend](./SAD_images/frontend_class_diagram_mvc.png)
 
 

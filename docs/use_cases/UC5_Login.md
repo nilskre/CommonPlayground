@@ -11,7 +11,7 @@ This use case allows a user with an account to log in which is the basis for pos
 ![Mockup login fail2](../mockups/Login_Fail2.png)
 
 ## 1.3 Screenshots
-<img src="./Screenshots/UC5_Login_Screenshot.png" alt="Screenshot using clock" width="300"/> <img src="./Screenshots/UC5_Login_Screenshot2.png" alt="Screenshot using clock" width="300"/> <img src="./Screenshots/UC5_Login_Screenshot3.png" alt="Screenshot using clock" width="300"/>
+<img src="./Screenshots/UC5_Login_Screenshot.png" alt="Screenshot login" width="300"/> <img src="./Screenshots/UC5_Login_Screenshot2.png" alt="Screenshot login fail 1" width="300"/> <img src="./Screenshots/UC5_Login_Screenshot3.png" alt="Screenshot login fail 2" width="300"/>
 
 There are several more error messages.
 

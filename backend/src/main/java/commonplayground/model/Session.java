@@ -79,8 +79,12 @@ public class Session {
         return id;
     }
 
+    public Long getIdOfHost() {
+        return idOfHost;
+    }
+
     @Override
     public String toString() {
-        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " numberOfPlayers=" + numberOfPlayers + " users="; //+ users;
+        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " time=" + time +" numberOfPlayers=" + numberOfPlayers + " idOfHost=" + idOfHost /*+ " users=" + users.toString()*/;
     }
 }

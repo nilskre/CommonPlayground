@@ -8,9 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SessionTest {
     private static Session testSession;
 
+
+
     @BeforeClass
     public static void setUp() {
-        testSession = new Session("Title", "Description", "Game", "Place", "Date", 42, "drölf", (long)4);
+        testSession = new Session("Title", "Description", "Game", "Place", "12.12.2018", "12:00", 42, (long)4);
     }
 
     @Test
@@ -35,7 +37,12 @@ public class SessionTest {
 
     @Test
     public void testDate(){
-        assertEquals(testSession.getDate(), "Date");
+        assertEquals(testSession.getDate(), "12.12.2018");
+    }
+
+    @Test
+    public void testTime(){
+        assertEquals(testSession.getTime(), "12:00");
     }
 
     @Test
@@ -44,9 +51,14 @@ public class SessionTest {
     }
 
     @Test
-    public void testPlayers(){
-        User assertHost = testSession.getUsers().get(0);
-        String hostName = assertHost.getUsername();
-        assertEquals(hostName, "Host");
+    public void testHostId(){
+        assertEquals(0,Long.compare(testSession.getIdOfHost(), 4));
+    }
+
+    @Test
+    public void addUserToSession(){
+        User assertHost = new User("Host", "1234567890","host@host.de");
+        testSession.addUserToSession(assertHost);
+        assertTrue(testSession.getUsers().contains(assertHost));
     }
 }

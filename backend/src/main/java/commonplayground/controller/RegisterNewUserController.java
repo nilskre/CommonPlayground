@@ -11,18 +11,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterNewUserController {
 
     private final UserRepository userRepository;
+
     @Autowired
     public RegisterNewUserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @RequestMapping("/registerNewUser")
-    public void postNewSession(@RequestParam(value = "username", defaultValue = "not given") String username,
+    public int postNewSession(@RequestParam(value = "username", defaultValue = "not given") String username,
                                @RequestParam(value = "password", defaultValue = "not given") String password,
                                @RequestParam(value = "email", defaultValue = "not given") String email)
                                {
       User user = new User(username, password, email);
-      userRepository.save(user);
+
+      if (userRepository.findByEmail(email) != null){
+          return -3;
+      }
+      if (userRepository.findByUsername(username) != null){
+        return -2;
+      }
+
+      else{
+          userRepository.save(user);
+          return 0;
+      }
     }
 
 }

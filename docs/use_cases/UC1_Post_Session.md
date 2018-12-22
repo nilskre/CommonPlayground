@@ -14,6 +14,11 @@ This use case allows users to post a session onto the session overview page. A s
 ## 1.2 Mockup 
 ![Mockup Post a Session](../mockups/post_a_session_mockup.png)
 
+## 1.3 Screenshots
+<img src="./Screenshots/UC1_Post_Session_Screenshot.png" alt="Screenshot posting a session" width="300"/>
+<img src="./Screenshots/UC1_Post_Session_Screenshot2.png" alt="Screenshot using calendar" width="300"/>
+<img src="./Screenshots/UC1_Post_Session_Screenshot3.png" alt="Screenshot using clock" width="300"/>
+
 # 2. Flow of Events
 
 ## 2.1 Basic Flow

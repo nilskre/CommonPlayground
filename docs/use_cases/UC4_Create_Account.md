@@ -11,6 +11,9 @@ This use case allows anyone to register and create an account. Also the data wil
 ![Registration Fail 2](../mockups/Registration_Fail2.png)
 ![Registration Fail 3](../mockups/Registration_Fail3.png)
 
+## 1.3 Screenshots
+<img src="./Screenshots/UC4_Create_Account_Screenshot.png" alt="Screenshot posting a session" width="300"/> <img src="./Screenshots/UC4_Create_Account_Screenshot2.png" alt="Screenshot using calendar" width="300"/> <img src="./Screenshots/UC4_Create_Account_Screenshot3.png" alt="Screenshot using clock" width="300"/> <img src="./Screenshots/UC4_Create_Account_Screenshot4.png" alt="Screenshot using clock" width="300"/>
+
 # 2. Flow of Events
 
 ## 2.1 Basic Flow

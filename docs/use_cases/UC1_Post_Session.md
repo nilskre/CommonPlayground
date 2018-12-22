@@ -29,7 +29,7 @@ This use case allows users to post a session onto the session overview page. A s
 ### .feature File
 
 [.feature File Posting a session](../../frontend/app/src/androidTest/assets/UC1_Post_Session.feature)
-´´´ Cucumber
+```Cucumber
 Feature: Use Case 1 Posting a Session
   As a USER
   I want to open the app and be able to post a new Session at the Session Overview Page
@@ -63,7 +63,7 @@ Feature: Use Case 1 Posting a Session
     When The user presses the Back button
     Then No Request is sent
     And The posting screen is closed
-´´´
+```
 
 ## 2.2 Alternative Flows
 n/a

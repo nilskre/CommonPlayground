@@ -9,7 +9,7 @@ This use case allows a user to get an overview over all exisitng sessions. From 
 ![Mockup getting an overview](../mockups/Session_Overview.png)
 
 ## 1.3 Screenshot
-![Screenshot getting an overview](./Screenshots/UC3_Session_Overview_Screenshot.png 250x)
+![Screenshot getting an overview](./Screenshots/UC3_Session_Overview_Screenshot.png =250x)
 
 # 2. Flow of Events
 

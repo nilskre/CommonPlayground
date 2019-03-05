@@ -1,20 +1,27 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+        classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.21.0"
     }
 }
+
+group = 'commonplayground'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.palantir.docker'
 
 bootJar {
-    baseName = 'gs-accessing-data-jpa'
+    baseName = 'commonplayground'
     version =  '0.1.0'
 }
 
@@ -60,4 +67,15 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+task unpack(type: Copy) {
+    dependsOn bootJar
+    from(zipTree(tasks.bootJar.outputs.files.singleFile))
+    into("build/dependency")
+}
+docker {
+    name "${project.group}/${bootJar.baseName}"
+    copySpec.from(tasks.unpack.outputs).into("dependency")
+    buildArgs(['DEPENDENCY': "dependency"])
 }

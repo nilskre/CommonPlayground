@@ -1,19 +1,33 @@
 language: java
 
 stages:
-  - build
-  - test
-  - deploy
+  - build-backend
+  - build-frontend
+  - test-backend
+  - test-frontend
+  - deploy-backend
+  - deploy-frontend
 
 jobs:
   include:
-    - stage: build
+    - stage: build-backend
       script:
-	- chmod +x ./gradlew
         - (cd backend/; ./gradlew assemble)
-    - stage: test
+    - stage: build-frontend
       script:
-        - echo "Test"
-    - stage: deploy
+        - (cd frontend/; ./gradlew assembleDebug)
+
+    - stage: test-backend
       script:
-        - echo "Deployment"
+        - echo "Test-Backend"
+    - stage: test-frontend
+      script:
+        - echo "Test-Frontend"
+
+    - stage: deploy-backend
+      script:
+        - echo "Deployment-Backend"
+    - stage: deploy-frontend
+      script:
+        - echo "Deployment-Frontend"
+

@@ -9,6 +9,7 @@ jobs:
   include:
     - stage: build
       script:
+	- chmod +x ./gradlew
         - (cd backend/; ./gradlew assemble)
     - stage: test
       script:

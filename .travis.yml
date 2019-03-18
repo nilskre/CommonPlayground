@@ -12,9 +12,11 @@ jobs:
   include:
     - stage: build-backend
       script:
+        - chmod +x ./gradlew
         - (cd backend/; ./gradlew assemble)
     - stage: build-frontend
       script:
+        - chmod +x ./gradlew
         - (cd frontend/; ./gradlew assembleDebug)
 
     - stage: test-backend

@@ -1,0 +1,18 @@
+language: java
+
+stages:
+  - build
+  - test
+  - deploy
+
+jobs:
+  include:
+    - stage: build
+      script:
+        - (cd backend/; ./gradlew assemble)
+    - stage: test
+      script:
+        - echo "Test"
+    - stage: deploy
+      script:
+        - echo "Deployment"

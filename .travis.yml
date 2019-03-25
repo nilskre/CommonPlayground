@@ -14,9 +14,9 @@ jobs:
         - (cd backend/; ./gradlew assemble)
     - stage: build-frontend
       language: android
-        components:
-          - build-tools-28.0.0
-          - android-28
+      components:
+        - build-tools-28.0.0
+        - android-28
       script:
         - (cd frontend/; ./gradlew assembleDebug)
 
@@ -26,8 +26,9 @@ jobs:
         - (cd backend/; ./gradlew clean test)
     - stage: test-frontend
       language: android
-          - build-tools-28.0.0
-          - android-28
+      components:
+        - build-tools-28.0.0
+        - android-28
       before_script:
         - cd frontend/
         - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a -c 100M
@@ -45,7 +46,8 @@ jobs:
     - stage: deploy-frontend
       if: branch = master
       language: android
-          - build-tools-28.0.0
-          - android-28
+      components:
+        - build-tools-28.0.0
+        - android-28
       script:
         - echo "Deployment-Frontend"

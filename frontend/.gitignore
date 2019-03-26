@@ -1,6 +1,7 @@
 *.iml
 .gradle
 /local.properties
+.idea/*
 volley/
 .DS_Store
 /build

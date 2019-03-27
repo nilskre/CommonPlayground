@@ -38,7 +38,9 @@ public class PostSessionStepDefs {
 
     @Before("@postsession-feature")
     public void setup() {
-        activityTestRule.launchActivity(new Intent());
+        Intent intent = new Intent();
+        intent.putExtra("userID", "1");
+        activityTestRule.launchActivity(intent);
         activity = activityTestRule.getActivity();
         ViewInteraction floatingActionButton = onView(withId(R.id.fab));
         floatingActionButton.perform(click());

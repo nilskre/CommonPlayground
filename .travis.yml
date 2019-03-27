@@ -33,6 +33,7 @@ jobs:
           - android-28
           - add-on
           - extra
+          - sys-img-armeabi-v7a-android-28
       before_script:
         - cd frontend/
         - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a -c 100M

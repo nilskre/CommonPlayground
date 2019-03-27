@@ -21,11 +21,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        androidTest {
-            assets.srcDirs = ['src/androidTest/assets/features']
-        }
-    }
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'

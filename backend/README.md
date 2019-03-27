@@ -1,28 +1,30 @@
 # Readme
 
-### 1.Command-Line
+## 1.Command-Line
 
-Build: ./gradlew build
+Build: ```./gradlew build```
 
-Run: ./gradlew bootRun
+Run: ```./gradlew bootRun```
 
-Run Tests: ./gradlew clean tests
+Run Tests:```./gradlew test clean```
 
-Install Dependencies: ./gradlew clean
+Install Dependencies: ```./gradlew clean```
 
 
-### 2.Docker
+## 2.Docker
 
-Download: docker pull commonplayground/commonplayground
-          
-Images: docker image ls
+### Download and Run Docker container
 
-Run: docker run -p 8080:8080 commonplayground/commonplayground
+Download latest Docker image: ```docker pull commonplayground/commonplayground```
 
-oder
+Overview of all local Docker images: ```docker image ls```
 
-Run: docker run -p 8080:8080<IMAGE_ID>
+Run: ```docker run -p 8080:8080 commonplayground/commonplayground```
+or
+Run: ```docker run -p 8080:8080<IMAGE_ID>```
 
-Build: ./gradlew build docker
+### Build new Docker image and push it to DockerHub
 
-Push: docker push commonplayground/commonplayground
+Build: ```./gradlew build docker```
+
+Push: ```docker push commonplayground/commonplayground```

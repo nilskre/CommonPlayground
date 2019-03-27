@@ -47,12 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
-
-                Snackbar.make(rvSessions, "Refreshed!", 5000)
-                        .setAction("Action", null).show();
+                observeChangesInSessionList();
+                Snackbar.make(rvSessions, R.string.refreshed, 2000).show();
                 swipeContainer.setRefreshing(false);
             }
         });

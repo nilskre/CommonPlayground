@@ -1,6 +1,6 @@
-#Readme
+# Readme
 
-###1.Command-Line
+### 1.Command-Line
 
 Build: ./gradlew build
 
@@ -11,7 +11,7 @@ Run Tests: ./gradlew clean tests
 Install Dependencies: ./gradlew clean
 
 
-###2.Docker
+### 2.Docker
 
 Download: docker pull commonplayground/commonplayground
           

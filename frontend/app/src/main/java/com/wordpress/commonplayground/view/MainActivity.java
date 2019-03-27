@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private MainActivityViewModel mainActivityViewModel;
     private SessionsAdapter adapter;
     private RecyclerView rvSessions;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUserID();
         checkIfLoggedIn();
         setContentView(R.layout.activity_main);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+
+                Snackbar.make(rvSessions, "Refreshed!", 5000)
+                        .setAction("Action", null).show();
+                swipeContainer.setRefreshing(false);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(R.color.colorPrimary,
+                R.color.colorPrimaryDark,
+                R.color.colorPrimaryLight,
+                R.color.colorAccent);
+
         setUpUIElements();
         VolleyRequestQueue.getInstance(this);
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);

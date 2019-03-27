@@ -31,6 +31,8 @@ jobs:
         components:
           - build-tools-28.0.3
           - android-28
+          - add-on
+          - extra
       before_script:
         - cd frontend/
         - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a -c 100M

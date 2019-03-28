@@ -67,9 +67,4 @@ public class SessionOverviewStepDefs {
     public void forEachSessionShouldTheDateDateBeShown(String testDate) {
         //TODO test
     }
-
-    @And("^For each Session should the players count ([^\"]*) be shown$")
-    public void forEachSessionShouldThePlayersCountBeShown(String testPlayersNumber) {
-        //TODO test
-    }
 }

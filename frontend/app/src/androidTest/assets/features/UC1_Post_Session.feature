@@ -22,7 +22,7 @@ Feature: Use Case 1 Posting a Session
 
     Examples: Sessions
       | title | description | game       | place       | date       | time  | numberOfPlayers |
-      | Raid  | online Game | Game       | web         | 01.11.2018 | 12:00 | 10              |
+      | Raid  | online Game | Game       | online      | 01.11.2018 | 12:00 | 10              |
       | Cards | fun         | Doppelkopf | Schlosspark | 29.10.2019 | 06:00 | 4               |
 
   @postsession-feature

@@ -15,10 +15,8 @@ Feature: Use Case 3 Session Overview
     And For each Session should the game <game> be shown
     And For each Session should the place <place> be shown
     And For each Session should the date <date> be shown
-    And For each Session should the players count <numberOfPlayers> be shown
 
     Examples:
-      | title   | game         | place         | date        | numberOfPlayers   |
-      |  Raid   | Wow          |  online       |  01.11.2018 |  10               |
-      |  Mario  | Mario Party  |  online       |  07.07.2018 |  30               |
-      | Fortnite| Battle       |  online       |  25.09.2018 |  40               |
+      | title   | game         | place         | date        |
+      |  Raid   | Game         |  online       |  01.11.2018 |
+      |  Cards  | Doppelkopf   |  Schlosspark  |  29.10.2019 |

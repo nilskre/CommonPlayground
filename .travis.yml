@@ -38,6 +38,8 @@ jobs:
         components:
           - build-tools-$ANDROID_BUILD_TOOLS_VERSION_UI_TESTS
           - android-$ANDROID_API_LEVEL_UI_TESTS
+          - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+          - android-$ANDROID_API_LEVEL
           - add-on
           - extra
           - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL_UI_TESTS

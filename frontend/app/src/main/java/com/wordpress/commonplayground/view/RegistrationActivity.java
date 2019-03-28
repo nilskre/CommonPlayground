@@ -49,10 +49,10 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void setupRegisteringForm() {
-        mUsernameView = (EditText) findViewById(R.id.username);
-        mEmailView = (EditText) findViewById(R.id.email);
+        mUsernameView = findViewById(R.id.username);
+        mEmailView = findViewById(R.id.email);
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -64,9 +64,9 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        mPasswordConfirmView = (EditText) findViewById(R.id.password_confirm);
+        mPasswordConfirmView = findViewById(R.id.password_confirm);
 
-        Button mRegistrationButton = (Button) findViewById(R.id.registration_button);
+        Button mRegistrationButton = findViewById(R.id.registration_button);
         mRegistrationButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -185,11 +185,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private boolean isPasswordConfirmed(String password, String passwordConfirm) {
-        if(password.equals(passwordConfirm)) {
-            return true;
-        } else {
-            return false;
-        }
+        return password.equals(passwordConfirm);
     }
 
     /**
@@ -239,16 +235,16 @@ public class RegistrationActivity extends AppCompatActivity {
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                String result = new String();
-                Log.d("Response.Register", response.toString());
-                switch (Integer.parseInt(response.toString())){
+                String result = "";
+                Log.d("Response.Register", response);
+                switch (Integer.parseInt(response)){
                     case -3: result = getString(R.string.email_double_error); break;
                     case -2: result = getString(R.string.username_double_error); break;
                     case 0: result = getString(R.string.registration_succsess);
                 }
                 Snackbar.make(view, result, 5000)
                         .setAction("Action", null).show();
-                if (Integer.parseInt(response.toString())==0) {
+                if (Integer.parseInt(response)==0) {
                     Intent openLoginActivity = new Intent(RegistrationActivity.this, LoginActivity.class);
                     startActivity(openLoginActivity);
                 }
@@ -262,7 +258,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         }) {
             protected Map<String, String> getParams() {
-                Map<String, String> MyData = new HashMap<String, String>();
+                Map<String, String> MyData = new HashMap<>();
                 MyData.put("username", username);
                 MyData.put("email", email);
                 MyData.put("password", password);

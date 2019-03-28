@@ -45,7 +45,7 @@ jobs:
         - cd frontend/
         - android list targets
         - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL_UI_TESTS --abi default/armeabi-v7a
-        - emulator -avd test -no-audio -no-window &
+        - emulator -avd test -no-window &
         - android-wait-for-emulator
         - adb shell input keyevent 82 &
       script:

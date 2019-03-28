@@ -49,27 +49,27 @@ public class SessionOverviewStepDefs {
     }
 
     @And("^For each Session should the title ([^\"]*) be shown$")
-    public void forEachSessionShouldTheTitleTitleBeShown() {
+    public void forEachSessionShouldTheTitleTitleBeShown(String testTitle) {
         //TODO test
     }
 
     @And("^For each Session should the game ([^\"]*) be shown$")
-    public void forEachSessionShouldTheGameGameBeShown() {
+    public void forEachSessionShouldTheGameGameBeShown(String testGame) {
         //TODO test
     }
 
     @And("^For each Session should the place ([^\"]*) be shown$")
-    public void forEachSessionShouldThePlacePlaceBeShown() {
+    public void forEachSessionShouldThePlacePlaceBeShown(String testPlace) {
         //TODO test
     }
 
     @And("^For each Session should the date ([^\"]*) be shown$")
-    public void forEachSessionShouldTheDateDateBeShown() {
+    public void forEachSessionShouldTheDateDateBeShown(String testDate) {
         //TODO test
     }
 
     @And("^For each Session should the players count ([^\"]*) be shown$")
-    public void forEachSessionShouldThePlayersCountBeShown(String arg0) {
+    public void forEachSessionShouldThePlayersCountBeShown(String testPlayersNumber) {
         //TODO test
     }
 }

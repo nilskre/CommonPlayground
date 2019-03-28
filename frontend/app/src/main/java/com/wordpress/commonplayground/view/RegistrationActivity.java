@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.model.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -132,7 +133,7 @@ public class RegistrationActivity extends AppCompatActivity {
             mPasswordView.setError(getString(R.string.error_long_password));
             focusView = mPasswordView;
             cancel = true;
-        } else if (!isPasswordValid(password)) {
+        } else if (!Validator.isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -144,7 +145,7 @@ public class RegistrationActivity extends AppCompatActivity {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        } else if (!Validator.isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
@@ -160,28 +161,12 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void checkIfPasswordsAreEqual() {
-        boolean passwordsEqual = isPasswordConfirmed(password, passwordConfirm);
+        boolean passwordsEqual = Validator.isPasswordConfirmed(password, passwordConfirm);
         if (!passwordsEqual) {
             mPasswordConfirmView.setError(getString(R.string.error_invalid_password_confirm));
             focusView = mPasswordConfirmView;
             cancel = true;
         }
-    }
-
-    private boolean isEmailValid(String email) {
-        String validEmail = "[a-zA-Z0-9+._%\\-]{1,256}@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+";
-        Matcher matcher = Pattern.compile(validEmail).matcher(email);
-        return matcher.matches();
-    }
-
-    private boolean isPasswordValid(String password) {
-        String validPassword = "^([a-zA-Z0-9@*#!?$&.-_]{8,30})$";
-        Matcher matcher = Pattern.compile(validPassword).matcher(password);
-        return matcher.matches();
-    }
-
-    private boolean isPasswordConfirmed(String password, String passwordConfirm) {
-        return password.equals(passwordConfirm);
     }
 
     private void requestToBackendRegister(View view) {

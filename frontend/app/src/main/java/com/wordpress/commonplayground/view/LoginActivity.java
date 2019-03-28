@@ -32,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.model.Validator;
 
 /**
  * A login screen that offers login via email/password.
@@ -151,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
             mPasswordView.setError(getString(R.string.error_long_password));
             focusView = mPasswordView;
             cancel = true;
-        } else if (!isPasswordValid(password)) {
+        } else if (!Validator.isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -162,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        } else if (!Validator.isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
@@ -222,18 +223,6 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         MyRequestQueue.add(MyStringRequest);
-    }
-
-    private boolean isEmailValid(String email) {
-        String validemail = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+";
-        Matcher matcher = Pattern.compile(validemail).matcher(email);
-        return matcher.matches();
-    }
-
-    private boolean isPasswordValid(String password) {
-        String validpassword = "^([a-zA-Z0-9@*#!?$&.-_]{8,30})$";
-        Matcher matcher = Pattern.compile(validpassword).matcher(password);
-        return matcher.matches();
     }
 
     /**

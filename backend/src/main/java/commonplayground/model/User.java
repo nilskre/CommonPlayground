@@ -6,16 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.Getter;
 
 @Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String username;
-    private String password;
-    private String email;
+    @Getter private Long id;
+    @Getter private String username;
+    @Getter private String password;
+    @Getter private String email;
 
     public User() {
     }
@@ -26,21 +27,5 @@ public class User {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         this.password= encoder.encode(password);
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }

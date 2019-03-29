@@ -128,12 +128,9 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void checkForValidEMailAddress() {
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!Validator.isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
+        String errorEmail = Validator.checkForValidEmail(email, this);
+        if (!errorEmail.isEmpty()) {
+            mEmailView.setError(errorEmail);
             focusView = mEmailView;
             cancel = true;
         }
@@ -176,7 +173,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
                 Snackbar.make(view, result, 5000)
                         .setAction("Action", null).show();
-                if (Integer.parseInt(response)==0) {
+                if (Integer.parseInt(response) == 0) {
                     Intent openLoginActivity = new Intent(RegistrationActivity.this, LoginActivity.class);
                     startActivity(openLoginActivity);
                 }

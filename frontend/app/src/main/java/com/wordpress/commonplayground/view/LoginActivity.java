@@ -138,20 +138,16 @@ public class LoginActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
-        String validPassword = Validator.checkForValidPassword(password, this);
-        if (!validPassword.isEmpty()) {
-            mPasswordView.setError(validPassword);
+        String errorPassword = Validator.checkForValidPassword(password, this);
+        if (!errorPassword.isEmpty()) {
+            mPasswordView.setError(errorPassword);
             focusView = mPasswordView;
             cancel = true;
         }
 
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!Validator.isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
+        String errorEmail = Validator.checkForValidEmail(email, this);
+        if (!errorEmail.isEmpty()) {
+            mEmailView.setError(errorEmail);
             focusView = mEmailView;
             cancel = true;
         }

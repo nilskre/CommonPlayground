@@ -26,8 +26,6 @@ import com.wordpress.commonplayground.model.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -121,20 +119,9 @@ public class RegistrationActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (password.length() < 8) {
-            mPasswordView.setError(getString(R.string.error_short_password));
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (password.length() > 30) {
-            mPasswordView.setError(getString(R.string.error_long_password));
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (!Validator.isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
+        String validPassword = Validator.checkForValidPassword(password, this);
+        if (!validPassword.isEmpty()) {
+            mPasswordView.setError(validPassword);
             focusView = mPasswordView;
             cancel = true;
         }

@@ -171,8 +171,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     case -2: result = getString(R.string.username_double_error); break;
                     case 0: result = getString(R.string.registration_succsess);
                 }
-                Snackbar.make(view, result, 5000)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, result, 5000).show();
+                
                 if (Integer.parseInt(response) == 0) {
                     Intent openLoginActivity = new Intent(RegistrationActivity.this, LoginActivity.class);
                     startActivity(openLoginActivity);

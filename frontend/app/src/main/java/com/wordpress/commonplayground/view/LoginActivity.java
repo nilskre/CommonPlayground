@@ -1,15 +1,10 @@
 package com.wordpress.commonplayground.view;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -57,13 +52,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void displayLogo() {
-        ImageView logo = (ImageView) findViewById(R.id.logoView);
+        ImageView logo = findViewById(R.id.logoView);
         logo.setImageDrawable(getResources().getDrawable(R.drawable.logo));
     }
 
     private void setupLoginForm() {
-        mEmailView = (EditText) findViewById(R.id.email);
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mEmailView = findViewById(R.id.email);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -77,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setupLoginButton() {
-        Button mEmailLoginButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailLoginButton = findViewById(R.id.email_sign_in_button);
         mEmailLoginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setupRegisteringButton() {
-        Button mRegisterButton = (Button) findViewById(R.id.register_button);
+        Button mRegisterButton = findViewById(R.id.register_button);
         mRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,23 +98,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setupActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // Show the Up button in the action bar.
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
-    /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.*/
-
     private void attemptLogin(View view) {
-
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -131,7 +113,6 @@ public class LoginActivity extends AppCompatActivity {
         // Check for valid input from the bottom to the top that the focus is at the top if there are several mistakes
         // Check for a valid password.
         checkIfValidInput(email, password, view);
-
     }
 
     private void checkIfValidInput(String email, String password, View view) {
@@ -171,10 +152,10 @@ public class LoginActivity extends AppCompatActivity {
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                String result = new String();
+                String result = "";
                 boolean success = false;
-                Log.d("Response.Login", response.toString());
-                switch (Integer.parseInt(response.toString())){
+                Log.d("Response.Login", response);
+                switch (Integer.parseInt(response)){
                     case -5: result = getString(R.string.login_error); break;
                     case -4: result = getString(R.string.username_error); break;
                     case -1: result = getString(R.string.new_error); break;
@@ -182,11 +163,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if (success) {
                     Intent openMain = new Intent(LoginActivity.this, MainActivity.class);
-                    openMain.putExtra("userID", response.toString());
+                    openMain.putExtra("userID", response);
                     startActivity(openMain);
                 }else{
-                    Snackbar.make(view, result, 5000)
-                        .setAction("Action", null).show();
+                    Snackbar.make(view, result, 5000).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -198,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }) {
             protected Map<String, String> getParams() {
-                Map<String, String> MyData = new HashMap<String, String>();
+                Map<String, String> MyData = new HashMap<>();
                 MyData.put("email", email);
                 MyData.put("password", password);
                 return MyData;
@@ -206,42 +186,6 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         MyRequestQueue.add(MyStringRequest);
-    }
-
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
     }
 
     @Override

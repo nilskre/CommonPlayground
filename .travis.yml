@@ -10,13 +10,20 @@ env:
  global:
     - ANDROID_API_LEVEL=28
     - ANDROID_BUILD_TOOLS_VERSION=28.0.3
-    - ANDROID_API_LEVEL_UI_TESTS=19
-    - ANDROID_BUILD_TOOLS_VERSION_UI_TESTS=19.0.3
+    - ANDROID_API_LEVEL_UI_TESTS=21
+    - ANDROID_BUILD_TOOLS_VERSION_UI_TESTS=21.0.3
 
 jobs:
   include:
     - stage: build-backend
       language: java
+      before_cache:
+        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        directories:
+          - $HOME/.gradle/caches/
+          - $HOME/.gradle/wrapper/
       script:
         - (cd backend/; ./gradlew assemble)
     - stage: build-frontend
@@ -25,11 +32,26 @@ jobs:
         components:
           - build-tools-$ANDROID_BUILD_TOOLS_VERSION
           - android-$ANDROID_API_LEVEL
+      before_cache:
+        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        directories:
+          - $HOME/.gradle/caches/
+          - $HOME/.gradle/wrapper/
+          - $HOME/.android/build-cache
       script:
         - (cd frontend/; ./gradlew assembleDebug)
 
     - stage: test-backend
       language: java
+      before_cache:
+        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        directories:
+          - $HOME/.gradle/caches/
+          - $HOME/.gradle/wrapper/
       script:
         - (cd backend/; ./gradlew test clean)
     - stage: test-frontend
@@ -43,6 +65,14 @@ jobs:
           - add-on
           - extra
           - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL_UI_TESTS
+      before_cache:
+        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        directories:
+          - $HOME/.gradle/caches/
+          - $HOME/.gradle/wrapper/
+          - $HOME/.android/build-cache
       before_script:
         - cd frontend/
         - android list targets

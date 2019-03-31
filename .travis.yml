@@ -17,13 +17,6 @@ jobs:
   include:
     - stage: build-backend
       language: java
-      before_cache:
-        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-      cache:
-        directories:
-          - $HOME/.gradle/caches/
-          - $HOME/.gradle/wrapper/
       script:
         - (cd backend/; ./gradlew assemble)
     - stage: build-frontend
@@ -32,26 +25,11 @@ jobs:
         components:
           - build-tools-$ANDROID_BUILD_TOOLS_VERSION
           - android-$ANDROID_API_LEVEL
-      before_cache:
-        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-      cache:
-        directories:
-          - $HOME/.gradle/caches/
-          - $HOME/.gradle/wrapper/
-          - $HOME/.android/build-cache
       script:
         - (cd frontend/; ./gradlew assembleDebug)
 
     - stage: test-backend
       language: java
-      before_cache:
-        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-      cache:
-        directories:
-          - $HOME/.gradle/caches/
-          - $HOME/.gradle/wrapper/
       script:
         - (cd backend/; ./gradlew test clean)
     - stage: test-frontend
@@ -65,14 +43,6 @@ jobs:
           - add-on
           - extra
           - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL_UI_TESTS
-      before_cache:
-        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-      cache:
-        directories:
-          - $HOME/.gradle/caches/
-          - $HOME/.gradle/wrapper/
-          - $HOME/.android/build-cache
       before_script:
         - cd frontend/
         - android list targets

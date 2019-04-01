@@ -22,6 +22,7 @@ import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.network.VolleyRequestQueue;
 import com.wordpress.commonplayground.model.Session;
 import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
+import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.List;
 
@@ -31,35 +32,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private MainActivityViewModel mainActivityViewModel;
     private SessionsAdapter adapter;
     private RecyclerView rvSessions;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setUserID();
-        checkIfLoggedIn();
+//        setUserID();
+//        checkIfLoggedIn();
         setContentView(R.layout.activity_main);
         setUpUIElements();
         VolleyRequestQueue.getInstance(this);
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
         observeChangesInSessionList();
+        session = new SessionManager(getApplicationContext());
+        session.checkLogin();
     }
 
-    private void setUserID() {
+/*    private void setUserID() {
         Bundle extras;
         extras = getIntent().getExtras();
         if (extras != null){
             userID = extras.getString("userID");
         }
     }
-
-    private void checkIfLoggedIn() {
+*/
+ /*   private void checkIfLoggedIn() {
         if(userID == null) {
             Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(openLoginActivity);
         }
-    }
+    }*/
 
     private void setUpUIElements() {
         setUpToolbarAndDrawer();
@@ -88,9 +92,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openAddSessionActivity = new Intent(MainActivity.this, AddSessionActivity.class);
+             /*   Intent openAddSessionActivity = new Intent(MainActivity.this, AddSessionActivity.class);
                 openAddSessionActivity.putExtra("userID", userID);
-                startActivityForResult(openAddSessionActivity, returnUserID);
+                startActivityForResult(openAddSessionActivity, returnUserID);*/
+                Intent openRegistrationActivity = new Intent(MainActivity.this, AddSessionActivity.class);
+                startActivity(openRegistrationActivity);
             }
         });
     }
@@ -122,8 +128,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mainActivityViewModel.getSessions();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+ /*   @Override
+   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("IntendResult", String.valueOf(resultCode));
         Log.d("IntendCode", String.valueOf(requestCode));
         // Check which request we're responding to
@@ -139,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
-
+*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -186,9 +192,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_friendlist) {
 
         } else if (id == R.id.nav_logout) {
-            userID = null;
-            Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(openLoginActivity);
+            session.logoutUser();
         } else if (id == R.id.nav_faq) {
 
         } else if (id == R.id.nav_contactAdmin) {

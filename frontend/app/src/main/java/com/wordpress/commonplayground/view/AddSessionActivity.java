@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -33,24 +34,25 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     private ImageButton btnDatePicker, btnTimePicker;
     private TextInputLayout title, game, place, date, time, numberOfPlayers, description;
     private int mYear, mMonth, mDay, mHour, mMinute;
-    private String userID;
+    private SessionManager session;
+//    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
 
-        setUserID();
+ //       setUserID();
         setOnclickListeners();
         accessUIInputFields();
     }
 
-    private void setUserID() {
+ /*   private void setUserID() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userID = extras.getString("userID");
         }
-    }
+    }*/
 
     private void setOnclickListeners() {
         btnPublish = (Button) findViewById(R.id.ButtonPublish);
@@ -75,9 +77,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onBackPressed() {
-        Intent openMain = new Intent();
-        openMain.putExtra("userID", userID);
-        setResult(RESULT_OK, openMain);
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
         finish();
     }
 
@@ -186,7 +187,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 MyData.put("date", sessionDate);
                 MyData.put("time", sessionTime);
                 MyData.put("numberOfPlayers", sessionPlayers);
-                MyData.put("idOfHost", userID);
+                MyData.put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
                 return MyData;
             }
         };

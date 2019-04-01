@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
         mRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openRegistrationActivity = new Intent(LoginActivity.this, RegistrationActivity.class);
+               Intent openRegistrationActivity = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(openRegistrationActivity);
             }
         });
@@ -200,7 +200,7 @@ public class LoginActivity extends AppCompatActivity {
                     default: success = true; break;
                 }
                 if (success) {
-                    session.createLoginSession(email);
+                    session.createLoginSession(response.toString(), email);
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(i);
                     finish();

@@ -19,6 +19,7 @@ public class SessionManager {
         private static final String PREF_NAME = "AndroidPref";
         private static final String IS_LOGIN = "IsLoggedIn";
         public static final String KEY_EMAIL = "email";
+        public static final String KEY_ID = "UserID";
 
         public SessionManager(Context context){
             this._context = context;
@@ -26,9 +27,10 @@ public class SessionManager {
             editor = pref.edit();
         }
 
-    public void createLoginSession(String email){
+    public void createLoginSession(String UID, String email){
 
         editor.putBoolean(IS_LOGIN, true);
+        editor.putString(KEY_ID, UID);
         editor.putString(KEY_EMAIL, email);
         editor.commit();
     }

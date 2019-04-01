@@ -32,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 /**
  * A login screen that offers login via email/password.
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private SessionManager session;
 
     private static final String TAG = "LoginActivity";
 
@@ -55,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         setupLoginButton();
         setupRegisteringButton();
         setupViews();
+        session = new SessionManager(getApplicationContext());
     }
 
     private void displayLogo() {
@@ -197,9 +200,10 @@ public class LoginActivity extends AppCompatActivity {
                     default: success = true; break;
                 }
                 if (success) {
-                    Intent openMain = new Intent(LoginActivity.this, MainActivity.class);
-                    openMain.putExtra("userID", response.toString());
-                    startActivity(openMain);
+                    session.createLoginSession(email);
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                    finish();
                 }else{
                     Snackbar.make(view, result, 5000)
                         .setAction("Action", null).show();
@@ -278,5 +282,7 @@ public class LoginActivity extends AppCompatActivity {
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
     }
+
+
 }
 

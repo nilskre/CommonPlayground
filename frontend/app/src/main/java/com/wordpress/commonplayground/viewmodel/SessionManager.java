@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
+
 import com.wordpress.commonplayground.view.LoginActivity;
 
 public class SessionManager {
@@ -38,11 +40,13 @@ public class SessionManager {
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
+        user.put(KEY_ID, pref.getString(KEY_ID, null));
+        Log.e("SharedMem", pref.getString(KEY_EMAIL, null));
+        Log.e("SharedMem", pref.getString(KEY_ID, null));
         return user;
     }
 
     public void checkLogin(){
-
         if(!this.isLoggedIn()){
             Intent i = new Intent(_context, LoginActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

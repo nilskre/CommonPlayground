@@ -35,24 +35,16 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     private TextInputLayout title, game, place, date, time, numberOfPlayers, description;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private SessionManager session;
-//    private String userID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
-
- //       setUserID();
         setOnclickListeners();
         accessUIInputFields();
+        session = new SessionManager(getApplicationContext());
     }
-
- /*   private void setUserID() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            userID = extras.getString("userID");
-        }
-    }*/
 
     private void setOnclickListeners() {
         btnPublish = (Button) findViewById(R.id.ButtonPublish);
@@ -166,7 +158,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Response", response.toString());
+                Log.d("Response", response);
                 Snackbar.make(view, getString(R.string.new_response_fine), 5000)
                         .setAction("Action", null).show();
             }

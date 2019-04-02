@@ -1,7 +1,10 @@
 package com.wordpress.commonplayground.test;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
@@ -21,6 +24,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -35,11 +39,19 @@ public class PostSessionStepDefs {
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class, true);
 
     private Activity activity = activityTestRule.getActivity();
+    Context context = getInstrumentation().getTargetContext();
+    SharedPreferences pref = context.getSharedPreferences("AndroidPref", 0);
+    SharedPreferences.Editor editor = pref.edit();
 
     @Before("@postsession-feature")
     public void setup() {
+        editor.putBoolean("IsLoggedIn", true);
+        editor.putString("email", "3");
+        editor.putString("UserID", "test@test.de");
+        editor.commit();
+
+
         Intent intent = new Intent();
-        intent.putExtra("userID", "1");
         activityTestRule.launchActivity(intent);
         activity = activityTestRule.getActivity();
         ViewInteraction floatingActionButton = onView(withId(R.id.fab));
@@ -48,6 +60,9 @@ public class PostSessionStepDefs {
 
     @After("@postsession-feature")
     public void tearDown() {
+        editor.clear();
+        editor.commit();
+
         activityTestRule.finishActivity();
     }
 

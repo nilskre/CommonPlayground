@@ -1,28 +1,32 @@
 package commonplayground.model;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 @Entity
 public class Session {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
-    private String title;
-    private String description;
-    private String game;
-    private String place;
-    private String date;
-    private String time;
-    private int numberOfPlayers;
-    private Long idOfHost;
+    @Getter private Long id;
+    @Getter private String title;
+    @Getter private String description;
+    @Getter private String game;
+    @Getter private String place;
+    @Getter private String date;
+    @Getter private String time;
+    @Getter private int numberOfPlayers;
+    @Getter private Long idOfHost;
 
     @ManyToMany(
             cascade = CascadeType.ALL
     )
-    private List<User> users = new ArrayList();
+    @Getter @ToString.Exclude private List<User> users = new ArrayList();
 
     public Session() {}
 
@@ -43,48 +47,4 @@ public class Session {
         this.users.add(user);
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getGame() {
-        return game;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public int getNumberOfPlayers() {
-        return numberOfPlayers;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getIdOfHost() {
-        return idOfHost;
-    }
-
-    @Override
-    public String toString() {
-        return "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " time=" + time +" numberOfPlayers=" + numberOfPlayers + " idOfHost=" + idOfHost /*+ " users=" + users.toString()*/;
-    }
 }

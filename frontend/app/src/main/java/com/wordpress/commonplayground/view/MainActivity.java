@@ -24,23 +24,22 @@ import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.network.VolleyRequestQueue;
 import com.wordpress.commonplayground.model.Session;
 import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
+import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private String userID;
-    static final int returnUserID = 1;
     private MainActivityViewModel mainActivityViewModel;
     private SessionsAdapter adapter;
     private RecyclerView rvSessions;
+    private SessionManager session;
     private SwipeRefreshLayout swipeContainer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setUserID();
-        checkIfLoggedIn();
         setContentView(R.layout.activity_main);
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
@@ -61,23 +60,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUpUIElements();
         VolleyRequestQueue.getInstance(this);
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
-
         observeChangesInSessionList();
-    }
-
-    private void setUserID() {
-        Bundle extras;
-        extras = getIntent().getExtras();
-        if (extras != null){
-            userID = extras.getString("userID");
-        }
-    }
-
-    private void checkIfLoggedIn() {
-        if(userID == null) {
-            Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(openLoginActivity);
-        }
+        session = new SessionManager(getApplicationContext());
+        session.checkLogin();
     }
 
     private void setUpUIElements() {
@@ -107,9 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openAddSessionActivity = new Intent(MainActivity.this, AddSessionActivity.class);
-                openAddSessionActivity.putExtra("userID", userID);
-                startActivityForResult(openAddSessionActivity, returnUserID);
+
+                Intent openRegistrationActivity = new Intent(MainActivity.this, AddSessionActivity.class);
+                startActivity(openRegistrationActivity);
             }
         });
     }
@@ -138,25 +123,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onRestart() {
         super.onRestart();
+        session.checkLogin();
         mainActivityViewModel.getSessions();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("IntendResult", String.valueOf(resultCode));
-        Log.d("IntendCode", String.valueOf(requestCode));
-        // Check which request we're responding to
-        if (requestCode == returnUserID) {
-            // Make sure the request was successful
-            if (resultCode == RESULT_OK) {
-                Bundle extras;
-                extras = data.getExtras();
-                if (extras != null){
-                    userID = extras.getString("userID");
-                    Log.d("IntendResult", extras.getString("userID"));
-                }
-            }
-        }
     }
 
     @Override
@@ -205,9 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_friendlist) {
 
         } else if (id == R.id.nav_logout) {
-            userID = null;
-            Intent openLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(openLoginActivity);
+            session.logoutUser();
         } else if (id == R.id.nav_faq) {
 
         } else if (id == R.id.nav_contactAdmin) {
@@ -218,4 +184,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

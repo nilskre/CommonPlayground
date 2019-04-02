@@ -41,8 +41,6 @@ public class SessionManager {
         HashMap<String, String> user = new HashMap<String, String>();
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
         user.put(KEY_ID, pref.getString(KEY_ID, null));
-        Log.e("SharedMem", pref.getString(KEY_EMAIL, null));
-        Log.e("SharedMem", pref.getString(KEY_ID, null));
         return user;
     }
 

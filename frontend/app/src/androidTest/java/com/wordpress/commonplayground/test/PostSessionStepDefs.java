@@ -10,6 +10,7 @@ import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.wordpress.commonplayground.view.LoginActivity;
 import com.wordpress.commonplayground.view.MainActivity;
 import com.wordpress.commonplayground.R;
 
@@ -46,8 +47,8 @@ public class PostSessionStepDefs {
     @Before("@postsession-feature")
     public void setup() {
         editor.putBoolean("IsLoggedIn", true);
-        editor.putString("email", "3");
-        editor.putString("UserID", "test@test.de");
+        editor.putString("UserID", "3");
+        editor.putString("email", "test@test.de");
         editor.commit();
 
 
@@ -62,7 +63,6 @@ public class PostSessionStepDefs {
     public void tearDown() {
         editor.clear();
         editor.commit();
-
         activityTestRule.finishActivity();
     }
 

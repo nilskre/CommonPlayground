@@ -93,8 +93,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
 
-                Intent openRegistrationActivity = new Intent(MainActivity.this, AddSessionActivity.class);
-                startActivity(openRegistrationActivity);
+                Intent openAddSessionActivity = new Intent(MainActivity.this, AddSessionActivity.class);
+                startActivity(openAddSessionActivity);
             }
         });
     }

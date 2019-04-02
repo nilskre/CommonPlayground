@@ -3,8 +3,6 @@ package com.wordpress.commonplayground.test;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
@@ -13,6 +11,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.wordpress.commonplayground.view.LoginActivity;
 import com.wordpress.commonplayground.view.MainActivity;
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -37,32 +36,30 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 public class PostSessionStepDefs {
 
     @Rule
-    public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class, true);
+    public ActivityTestRule<MainActivity> activityTestRule;
 
-    private Activity activity = activityTestRule.getActivity();
-    Context context = getInstrumentation().getTargetContext();
-    SharedPreferences pref = context.getSharedPreferences("AndroidPref", 0);
-    SharedPreferences.Editor editor = pref.edit();
+    private Activity activity;
 
     @Before("@postsession-feature")
     public void setup() {
-        editor.putBoolean("IsLoggedIn", true);
-        editor.putString("UserID", "3");
-        editor.putString("email", "test@test.de");
-        editor.commit();
+        activityTestRule = new ActivityTestRule<>(MainActivity.class, true);
 
+        Context targetContext = getInstrumentation().getTargetContext();
+        SessionManager sessionManager = new SessionManager(targetContext);
+        sessionManager.logoutUser();
+        sessionManager.createLoginSession("3", "test@test.de");
 
-        Intent intent = new Intent();
-        activityTestRule.launchActivity(intent);
+        Intent openAddSessionActivity = new Intent(getInstrumentation().getTargetContext(), MainActivity.class);
+        activityTestRule.launchActivity(openAddSessionActivity);
+
         activity = activityTestRule.getActivity();
+
         ViewInteraction floatingActionButton = onView(withId(R.id.fab));
         floatingActionButton.perform(click());
     }
 
     @After("@postsession-feature")
     public void tearDown() {
-        editor.clear();
-        editor.commit();
         activityTestRule.finishActivity();
     }
 

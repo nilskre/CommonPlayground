@@ -51,7 +51,7 @@ n/a
 The preconditions for this use case are:
 1. The user has started the App
 2. The user has joined one session
-3. The user has an overview of his joined sessions (![UC7 Kepping track of your sessions](./use_cases/UC7_Keeping_Track.md))
+3. The user has an overview of his joined sessions (![UC7 Kepping track of your sessions](./UC7_Keeping_Track.md))
 
 # 5. Postconditions
 The postconditions for this use case are:

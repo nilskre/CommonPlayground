@@ -6,7 +6,8 @@
 This use case allows a user to keep track of his sessions. The session has the following two categories: The sessions in which the user himself is the host, and the sessions to which he has joined.
 
 ## 1.2 Mockup
-![Mockup keeping track of your sessions](../mockups/Keeping_Track.png)
+![Mockup keeping track hosted](../mockups/Keeping_Track_Hosted.png)
+![Mockup keeping track joined](../mockups/Keeping_Track_Joined.png)
 
 ## 1.3 Screenshot
 tbd

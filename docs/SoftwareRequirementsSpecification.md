@@ -100,7 +100,7 @@ Until June, we want to implement:
 - 3.1.7 Keeping track of your sessions
 - 3.1.8 Leaving a session
 - 3.1.9 Finding a session
-
+- 3.1.10 Getting in touch
 
 #### 3.1.1 Posting a session
 This feature is the essential one of our project. The user gets the possibility to post a session. Therefore, they have to select a game and also set the time when they want to play.For offline games, they have to set a location, too. For online games the location can be a server for example or simply be tagged as 'online'.

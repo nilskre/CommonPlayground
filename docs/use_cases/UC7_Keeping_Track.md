@@ -20,7 +20,7 @@ tbd
 - User gets the possibility to switch the tab, so he gets to see the sessions he has joined.
 
 ### Activity Diagram
-![Activity Diagram](../activity_diagrams/UCD7_Keeping_Track.png)
+![Activity Diagram](../activity_diagrams/UCD7_Keeping_track.png)
 
 ### .feature File
 n/a

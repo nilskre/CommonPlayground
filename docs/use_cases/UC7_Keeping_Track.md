@@ -20,10 +20,10 @@ tbd
 - User gets the possibility to switch the tab, so he gets to see the sessions he has joined.
 
 ### Activity Diagram
-![Activity Diagram](../activity_diagrams/UCD3_Keeping_Track.png)
+![Activity Diagram](../activity_diagrams/UCD7_Keeping_Track.png)
 
 ### .feature File
-[.feature File Keeping Track](../../frontend/app/src/androidTest/assets/features/UC7_Keeping_Track.feature)
+n/a
 
 ## 2.2 Alternative Flows
 n/a

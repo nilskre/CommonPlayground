@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.viewmodel.SessionManager;
 import com.wordpress.commonplayground.model.Validator;
 
 /**
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private SessionManager session;
 
     private static final String TAG = "LoginActivity";
 
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         setupLoginButton();
         setupRegisteringButton();
         setupViews();
+        session = new SessionManager(getApplicationContext());
     }
 
     private void displayLogo() {
@@ -86,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         mRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openRegistrationActivity = new Intent(LoginActivity.this, RegistrationActivity.class);
+               Intent openRegistrationActivity = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(openRegistrationActivity);
             }
         });
@@ -162,9 +165,10 @@ public class LoginActivity extends AppCompatActivity {
                     default: success = true; break;
                 }
                 if (success) {
-                    Intent openMain = new Intent(LoginActivity.this, MainActivity.class);
-                    openMain.putExtra("userID", response);
-                    startActivity(openMain);
+                    session.createLoginSession(response.toString(), email);
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                    finish();
                 }else{
                     Snackbar.make(view, result, 5000).show();
                 }
@@ -194,5 +198,7 @@ public class LoginActivity extends AppCompatActivity {
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
     }
+
+
 }
 

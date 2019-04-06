@@ -20,7 +20,7 @@ This use case allows a logged in user to log out again.
 - App returns to login screen
 
 ### Activity Diagram
-![Activity Diagram](../activity_diagrams/UC6_Logout.png)
+![Activity Diagram](../activity_diagrams/UCD6_Logout.png)
 
 ### .feature File
 [.feature File Login](../../frontend/app/src/androidTest/assets/UC6_Logout.feature)

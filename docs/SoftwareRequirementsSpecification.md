@@ -140,8 +140,12 @@ The app provides the user with a seperate page view where they get an overview o
 #### 3.1.8 Leaving a session
 The user gets also the possibility to delete a session he posted or to leave a session he joined.
 
+[Leaving a session](./use_cases/UC8_Leave_Session.md)
+
 #### 3.1.9 Finding a session
 Based on the overview over all sessions this features enables the user to find sessions by specific parameters. Therefore, the user can find a session by tags or other parameters like date. Later on, finding a session will be provided by geolocalization that the users can search for a session in a specific area.
+
+[Finding a session](./use_cases/UC9_Find_Session.md)
 
 #### 3.1.10 Getting in touch
 There must be the possibility that two people who want to play together can communicate with each other. The player who joins the session gets the possibility to contact the owner and vice versa. Later on, when we will have implemented profiles, then they will form another way to communicate with each other.

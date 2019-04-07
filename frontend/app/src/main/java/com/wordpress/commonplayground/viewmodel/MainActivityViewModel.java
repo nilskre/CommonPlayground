@@ -47,7 +47,7 @@ public class MainActivityViewModel extends AndroidViewModel {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 allSessionsTmpList.add(i, Session.parseSession(response.getJSONObject(i)));
-                                Log.d("Recieved Sessions", Session.parseSession(response.getJSONObject(i)).toString());
+                                Log.d("Received Sessions", Session.parseSession(response.getJSONObject(i)).toString());
                             } catch (JSONException e) {
                                 Log.d("Parse.Error.Main", e.toString());
                             }

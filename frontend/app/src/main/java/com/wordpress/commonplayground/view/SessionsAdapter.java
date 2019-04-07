@@ -1,6 +1,7 @@
 package com.wordpress.commonplayground.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -79,6 +80,8 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
             long currentSession = activeSessions.get(position).getId();
             Log.d("ClickTest", "Id:" + currentSession);
             //Here goes opening the SessionDetails Activity, just pass the ID
+            Intent openSessionDetailActivity = new Intent(context, SessionDetailActivity.class);
+            context.startActivity(openSessionDetailActivity);
         }
     }
 }

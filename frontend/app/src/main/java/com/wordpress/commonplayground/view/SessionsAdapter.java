@@ -2,6 +2,9 @@ package com.wordpress.commonplayground.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.provider.SyncStateContract;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.model.Session;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.SessionViewHolder> {
@@ -81,6 +85,10 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
             Log.d("ClickTest", "Id:" + currentSession);
             //Here goes opening the SessionDetails Activity, just pass the ID
             Intent openSessionDetailActivity = new Intent(context, SessionDetailActivity.class);
+            //Bundle b = new Bundle();
+            //b.putParcelableArrayList("Sessions", (ArrayList<? extends Parcelable>) activeSessions);
+            //openSessionDetailActivity.putExtras(b);
+            openSessionDetailActivity.putExtra("Index", position);
             context.startActivity(openSessionDetailActivity);
         }
     }

@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.model.Session;
+
+import java.util.List;
 
 public class SessionDetailActivity extends AppCompatActivity {
 
@@ -32,6 +35,8 @@ public class SessionDetailActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private List<Session> sessionList;
+    private int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +52,14 @@ public class SessionDetailActivity extends AppCompatActivity {
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+        Bundle extras = getIntent().getExtras();
+        //sessionList = extras.getParcelableArrayList("Sessions");
+        index = extras.getInt("Index");
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setCurrentItem(1);
+        mViewPager.setCurrentItem(index);
     }
 
     /**

@@ -11,8 +11,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.wordpress.commonplayground.network.VolleyRequestQueue;
 import com.wordpress.commonplayground.model.Session;
+import com.wordpress.commonplayground.network.VolleyRequestQueue;
 
 import org.json.JSONArray;
 import org.json.JSONException;

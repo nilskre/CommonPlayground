@@ -53,7 +53,7 @@ public class SessionDetailActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         Bundle extras = getIntent().getExtras();
-        //sessionList = extras.getParcelableArrayList("Sessions");
+        sessionList = extras.getParcelableArrayList("Sessions");
         index = extras.getInt("Index");
 
         // Set up the ViewPager with the sections adapter.

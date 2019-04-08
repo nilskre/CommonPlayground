@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.provider.SyncStateContract;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,9 +84,9 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
             Log.d("ClickTest", "Id:" + currentSession);
             //Here goes opening the SessionDetails Activity, just pass the ID
             Intent openSessionDetailActivity = new Intent(context, SessionDetailActivity.class);
-            //Bundle b = new Bundle();
-            //b.putParcelableArrayList("Sessions", (ArrayList<? extends Parcelable>) activeSessions);
-            //openSessionDetailActivity.putExtras(b);
+            Bundle b = new Bundle();
+            b.putParcelableArrayList("Sessions", (ArrayList<? extends Parcelable>) activeSessions);
+            openSessionDetailActivity.putExtras(b);
             openSessionDetailActivity.putExtra("Index", position);
             context.startActivity(openSessionDetailActivity);
         }

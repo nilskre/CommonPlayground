@@ -1,5 +1,7 @@
 package com.wordpress.commonplayground.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -9,7 +11,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Session {
+public class Session implements Parcelable {
+
     private Long id;
     private String title;
     private String description;
@@ -30,6 +33,47 @@ public class Session {
         this.time = time;
         this.numberOfPlayers = numberOfPlayers;
         this.id = sessionId; /*REMOVE THIS once id can be passed*/
+    }
+
+    public Session(Parcel in) {
+        super();
+        readFromParcel(in);
+    }
+
+    public static final Parcelable.Creator<Session> CREATOR = new Parcelable.Creator<Session>() {
+        public Session createFromParcel(Parcel in) {
+            return new Session(in);
+        }
+
+        public Session[] newArray(int size) {
+            return new Session[size];
+        }
+    };
+
+    public void readFromParcel(Parcel in) {
+        title = in.readString();
+        description = in.readString();
+        game = in.readString();
+        place = in.readString();
+        date = in.readString();
+        time = in.readString();
+        numberOfPlayers = in.readInt();
+        id = in.readLong();
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(game);
+        dest.writeString(place);
+        dest.writeString(date);
+        dest.writeString(time);
+        dest.writeInt(numberOfPlayers);
+        dest.writeLong(id);
     }
 
     public static Session parseSession(JSONObject sessionObject) {

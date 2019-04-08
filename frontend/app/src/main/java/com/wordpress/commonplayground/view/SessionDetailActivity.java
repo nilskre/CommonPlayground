@@ -71,6 +71,9 @@ public class SessionDetailActivity extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SESSION_TITLE = "title";
+        private static final String ARG_SESSION_GAME = "game";
+        private static final String ARG_SESSION_DATE = "date";
+        private static final String ARG_SESSION_PLACE = "place";
 
         public PlaceholderFragment() {
         }
@@ -83,6 +86,9 @@ public class SessionDetailActivity extends AppCompatActivity {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putString(ARG_SESSION_TITLE, session.getTitle());
+            args.putString(ARG_SESSION_GAME, session.getGame());
+            args.putString(ARG_SESSION_DATE, session.getDate());
+            args.putString(ARG_SESSION_PLACE, session.getPlace());
             fragment.setArguments(args);
             return fragment;
         }
@@ -91,8 +97,14 @@ public class SessionDetailActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_session_detail, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getArguments().getString(ARG_SESSION_TITLE));
+            TextView title = (TextView) rootView.findViewById(R.id.session_title);
+            title.setText(getArguments().getString(ARG_SESSION_TITLE));
+            TextView game = (TextView) rootView.findViewById(R.id.session_game);
+            game.setText(getArguments().getString(ARG_SESSION_GAME));
+            TextView date = (TextView) rootView.findViewById(R.id.session_date);
+            date.setText(getArguments().getString(ARG_SESSION_DATE));
+            TextView place = (TextView) rootView.findViewById(R.id.session_place);
+            place.setText(getArguments().getString(ARG_SESSION_PLACE));
             return rootView;
         }
     }

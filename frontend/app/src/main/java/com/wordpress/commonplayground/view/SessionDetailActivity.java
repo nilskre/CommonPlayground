@@ -102,7 +102,13 @@ public class SessionDetailActivity extends AppCompatActivity {
             args.putString(ARG_SESSION_PLACE, session.getPlace());
             args.putString(ARG_SESSION_DATE, session.getDate());
             args.putString(ARG_SESSION_TIME, session.getTime());
-            args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, "Players: 1/" + session.getNumberOfPlayers());        //TODO
+
+            if(!session.getUsers().equals(null)) {                                                                 //TODO
+                args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, session.getUsers().size() + "/" + session.getNumberOfPlayers() + " players");
+            } else {
+                args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, session.getNumberOfPlayers() + " players");
+            }
+
             args.putString(ARG_SESSION_DESCRIPTION, session.getDescription());
             fragment.setArguments(args);
             return fragment;

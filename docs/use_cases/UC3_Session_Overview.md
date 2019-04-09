@@ -21,7 +21,7 @@ This use case allows a user to get an overview over all exisitng sessions. From 
 ![Activity Diagram](../activity_diagrams/UCD3_Session_Overview.png)
 
 ### .feature File
-[.feature File Session Overview](../../frontend/app/src/androidTest/assets/UC3_Session_Overview.feature)
+[.feature File Session Overview](../../frontend/app/src/androidTest/assets/features/UC3_Session_Overview.feature)
 ```Cucumber
 Feature: Use Case 3 Session Overview
     As a USER

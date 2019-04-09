@@ -24,10 +24,10 @@ There are several more error messages.
 - Login is confirmed
 
 ### Activity Diagram
-![Activity Diagram](../activity_diagrams/UC5_Login.png)
+![Activity Diagram](../activity_diagrams/UCD5_Login.png)
 
 ### .feature File
-[.feature File Login](../../frontend/app/src/androidTest/assets/UC5_Login.feature)
+[.feature File Login](../../frontend/app/src/androidTest/assets/features/UC5_Login.feature)
 ```Cucumber
 Feature: Use Case 5 Login
     As a USER

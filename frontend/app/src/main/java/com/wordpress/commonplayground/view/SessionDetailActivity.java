@@ -2,7 +2,6 @@ package com.wordpress.commonplayground.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
 
 import com.wordpress.commonplayground.R;
@@ -43,7 +41,7 @@ public class SessionDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session_detail);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,7 +55,7 @@ public class SessionDetailActivity extends AppCompatActivity {
         index = extras.getInt("Index");
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(index);
     }
@@ -72,8 +70,12 @@ public class SessionDetailActivity extends AppCompatActivity {
          */
         private static final String ARG_SESSION_TITLE = "title";
         private static final String ARG_SESSION_GAME = "game";
-        private static final String ARG_SESSION_DATE = "date";
         private static final String ARG_SESSION_PLACE = "place";
+        private static final String ARG_SESSION_DATE = "date";
+        private static final String ARG_SESSION_TIME = "time";
+        private static final String ARG_SESSION_DESCRIPTION = "description";
+        private static final String ARG_SESSION_NUMBER_OF_PLAYERS = "numberOfPlayers";
+        private static final String ARG_SESSION_ID = "id";
 
         public PlaceholderFragment() {
         }
@@ -87,24 +89,35 @@ public class SessionDetailActivity extends AppCompatActivity {
             Bundle args = new Bundle();
             args.putString(ARG_SESSION_TITLE, session.getTitle());
             args.putString(ARG_SESSION_GAME, session.getGame());
-            args.putString(ARG_SESSION_DATE, session.getDate());
             args.putString(ARG_SESSION_PLACE, session.getPlace());
+            args.putString(ARG_SESSION_DATE, session.getDate());
+            args.putString(ARG_SESSION_TIME, session.getTime());
+            args.putString(ARG_SESSION_DESCRIPTION, session.getDescription());
+            args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, "" + session.getNumberOfPlayers());
+            args.putString(ARG_SESSION_ID, "" + session.getId());
             fragment.setArguments(args);
             return fragment;
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_session_detail, container, false);
-            TextView title = (TextView) rootView.findViewById(R.id.session_title);
+            TextView title = rootView.findViewById(R.id.session_title);
             title.setText(getArguments().getString(ARG_SESSION_TITLE));
-            TextView game = (TextView) rootView.findViewById(R.id.session_game);
+            TextView game = rootView.findViewById(R.id.session_game);
             game.setText(getArguments().getString(ARG_SESSION_GAME));
-            TextView date = (TextView) rootView.findViewById(R.id.session_date);
-            date.setText(getArguments().getString(ARG_SESSION_DATE));
-            TextView place = (TextView) rootView.findViewById(R.id.session_place);
+            TextView place = rootView.findViewById(R.id.session_place);
             place.setText(getArguments().getString(ARG_SESSION_PLACE));
+            TextView date = rootView.findViewById(R.id.session_date);
+            date.setText(getArguments().getString(ARG_SESSION_DATE));
+            TextView time = rootView.findViewById(R.id.session_time);
+            time.setText(getArguments().getString(ARG_SESSION_TIME));
+            TextView description = rootView.findViewById(R.id.session_description);
+            description.setText(getArguments().getString(ARG_SESSION_DESCRIPTION));
+            TextView numberOfPlayers = rootView.findViewById(R.id.session_number_of_players);
+            numberOfPlayers.setText(getArguments().getString(ARG_SESSION_NUMBER_OF_PLAYERS));
+            /*TextView id = rootView.findViewById(R.id.session_id);
+            id.setText(getArguments().getString(ARG_SESSION_ID));*/
             return rootView;
         }
     }
@@ -122,7 +135,7 @@ public class SessionDetailActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
+            // Return a PlaceholderFragment (defined as a static inner class above).
             return PlaceholderFragment.newInstance(sessionList.get(position));
         }
 

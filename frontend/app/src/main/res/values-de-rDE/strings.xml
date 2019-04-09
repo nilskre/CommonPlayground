@@ -50,4 +50,6 @@
     <string name="title_activity_registration">Registrierung</string>
     <string name="app_name">CommonPlayground</string>
     <string name="section_format">Hallo Welt für Sektion: %1$d</string>
+    <string name="detail_join">Teilnehmen</string>
+    <string name="detail_leave">Verlassen</string>
 </resources>

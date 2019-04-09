@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="refreshed">Erfolgreich aktualisiert!</string>
+    <!-- Strings related to navigation -->
+    <string name="navigation_drawer_open">Öffne Menü</string>
+    <string name="navigation_drawer_close">Schließe Menü</string>
+    <string name="nav_header_desc">Menü Überschrift</string>
+    <string name="menu_mySessions">Meine Sessions</string>
+    <string name="menu_profile">Profil</string>
+    <string name="menu_friendlist">Freundesliste</string>
+    <string name="menu_logout">Abmelden</string>
+    <string name="menu_help">Hilfe</string>
+    <string name="menu_faq">Häufigste Fragen</string>
+    <string name="menu_contactAdmin">Administrator kontaktieren</string>
+    <string name="tooltip_tbi">Bald verfügbar!</string>
+    <string name="action_settings">Einstellungen</string>
+    <!-- Strings related to AddSession -->
+    <string name="new_title">Titel</string>
+    <string name="new_game">Spiel</string>
+    <string name="new_place">Ort</string>
+    <string name="new_date">Datum</string>
+    <string name="new_time">Uhrzeit</string>
+    <string name="new_players">Anzahl Spieler</string>
+    <string name="new_description">Beschreibung</string>
+    <string name="new_button">Veröffentlichen</string>
+    <string name="new_response_fine">Ihre Session wurde gespeichert!</string>
+    <string name="new_error">Etwas ist schief gelaufen! Bitte versuchen Sie es später erneut.</string>
+    <!-- Strings related to login and register -->
+    <string name="username_double_error">Dieser Nutzername ist schon vergeben.</string>
+    <string name="username_error">Diese E-Mail existiert nicht.</string>
+    <string name="email_double_error">Diese E-Mail ist bereits registriert.</string>
+    <string name="registration_succsess">Ihr Account wurde angelegt.</string>
+    <string name="login_error">E-Mail oder Passwort ist falsch</string>
+    <string name="title_activity_login">Anmelden</string>
+    <string name="prompt_username">Nutzername</string>
+    <string name="prompt_email">E-Mail</string>
+    <string name="prompt_password">Passwort</string>
+    <string name="prompt_password_confirm">Passwort bestätigen</string>
+    <string name="action_sign_in">Anmelden</string>
+    <string name="action_sign_in_short">Anmelden</string>
+    <string name="action_register">Registrieren</string>
+    <string name="error_invalid_email">Diese E-Mail ist ungültig</string>
+    <string name="error_short_password">Das Passwort ist zu kurz</string>
+    <string name="error_long_password">Das Passwort ist zu lang</string>
+    <string name="error_invalid_password">Das Passwort darf nur aus Buchstaben, Zahlen und folgenden Zeichen bestehen: @ * # ! ? . - _</string>
+    <string name="error_invalid_password_confirm">Das ist nicht dasselbe Passwort</string>
+    <string name="error_incorrect_password">Das Passwort ist falsch</string>
+    <string name="error_field_required">Dies ist ein Pflichtfeld</string>
+    <string name="permission_rationale">Kontakterlaubnis wird benötigt, um sie mit E-Mail[…] zu kontaktieren</string>
+    <string name="title_activity_registration">Registrierung</string>
+</resources>

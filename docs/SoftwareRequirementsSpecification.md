@@ -95,10 +95,17 @@ Until December we plan to implement:
 - 3.1.4 Logging in
 - 3.1.5 Logging out
 
+Until June, we want to implement:
+- 3.1.6 Joining a session
+- 3.1.7 Keeping track of your sessions
+- 3.1.8 Leaving a session
+- 3.1.9 Finding a session
+- 3.1.10 Getting in touch
+
 #### 3.1.1 Posting a session
 This feature is the essential one of our project. The user gets the possibility to post a session. Therefore, they have to select a game and also set the time when they want to play.For offline games, they have to set a location, too. For online games the location can be a server for example or simply be tagged as 'online'.
 
-[Posting a Session](./use_cases/UC1_Post_Session.md)
+[Posting a session](./use_cases/UC1_Post_Session.md)
 
 #### 3.1.2 Getting an overview
 This feature provides a basic overview over all current sessions. All posted sessions are added here. From this overview you can select a session and from there join this session.
@@ -123,16 +130,23 @@ In case you share your phone, have multiple accounts or just want to be cautius 
 #### 3.1.6 Joining a session
 There is also the possibility to join an existing game session. Therefore, the user can select a specific session.
 
-[Join a Session](./use_cases/UC2_Join_Session.md)
+[Join a session](./use_cases/UC2_Join_Session.md)
 
 #### 3.1.7 Keeping track of your sessions
-The app provides the user with a seperate page view where they get an overview of all sessions they posted or joined. Here, the user can see who joined their posted sessions.
+The app provides the user with a seperate page view where they get an overview of all sessions they posted or joined. When the user clicks on a session, he can also see who joined his posted sessions.
+
+[Keeping track of your sessions](./use_cases/UC7_Keeping_Track.md)
 
 #### 3.1.8 Leaving a session
 The user gets also the possibility to delete a session he posted or to leave a session he joined.
+[Leaving a Session](./use_cases/UC8_Leave_Session.md)
+
+[Leaving a session](./use_cases/UC8_Leave_Session.md)
 
 #### 3.1.9 Finding a session
 Based on the overview over all sessions this features enables the user to find sessions by specific parameters. Therefore, the user can find a session by tags or other parameters like date. Later on, finding a session will be provided by geolocalization that the users can search for a session in a specific area.
+
+[Finding a session](./use_cases/UC9_Find_Session.md)
 
 #### 3.1.10 Getting in touch
 There must be the possibility that two people who want to play together can communicate with each other. The player who joins the session gets the possibility to contact the owner and vice versa. Later on, when we will have implemented profiles, then they will form another way to communicate with each other.

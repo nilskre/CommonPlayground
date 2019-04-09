@@ -1,13 +1,9 @@
 package com.wordpress.commonplayground.view;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,11 +22,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.model.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -49,10 +44,10 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void setupRegisteringForm() {
-        mUsernameView = (EditText) findViewById(R.id.username);
-        mEmailView = (EditText) findViewById(R.id.email);
+        mUsernameView = findViewById(R.id.username);
+        mEmailView = findViewById(R.id.email);
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -64,9 +59,9 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        mPasswordConfirmView = (EditText) findViewById(R.id.password_confirm);
+        mPasswordConfirmView = findViewById(R.id.password_confirm);
 
-        Button mRegistrationButton = (Button) findViewById(R.id.registration_button);
+        Button mRegistrationButton = findViewById(R.id.registration_button);
         mRegistrationButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,32 +119,18 @@ public class RegistrationActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (password.length() < 8) {
-            mPasswordView.setError(getString(R.string.error_short_password));
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (password.length() > 30) {
-            mPasswordView.setError(getString(R.string.error_long_password));
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (!isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
+        String validPassword = Validator.checkForValidPassword(password, this);
+        if (!validPassword.isEmpty()) {
+            mPasswordView.setError(validPassword);
             focusView = mPasswordView;
             cancel = true;
         }
     }
 
     private void checkForValidEMailAddress() {
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
+        String errorEmail = Validator.checkForValidEmail(email, this);
+        if (!errorEmail.isEmpty()) {
+            mEmailView.setError(errorEmail);
             focusView = mEmailView;
             cancel = true;
         }
@@ -164,67 +145,11 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void checkIfPasswordsAreEqual() {
-        boolean passwordsEqual = isPasswordConfirmed(password, passwordConfirm);
+        boolean passwordsEqual = Validator.isPasswordConfirmed(password, passwordConfirm);
         if (!passwordsEqual) {
             mPasswordConfirmView.setError(getString(R.string.error_invalid_password_confirm));
             focusView = mPasswordConfirmView;
             cancel = true;
-        }
-    }
-
-    private boolean isEmailValid(String email) {
-        String validemail = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+";
-        Matcher matcher = Pattern.compile(validemail).matcher(email);
-        return matcher.matches();
-    }
-
-    private boolean isPasswordValid(String password) {
-        String validpassword = "^([a-zA-Z0-9@*#!?$&.-_]{8,30})$";
-        Matcher matcher = Pattern.compile(validpassword).matcher(password);
-        return matcher.matches();
-    }
-
-    private boolean isPasswordConfirmed(String password, String passwordConfirm) {
-        if(password.equals(passwordConfirm)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -239,16 +164,16 @@ public class RegistrationActivity extends AppCompatActivity {
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                String result = new String();
-                Log.d("Response.Register", response.toString());
-                switch (Integer.parseInt(response.toString())){
+                String result = "";
+                Log.d("Response.Register", response);
+                switch (Integer.parseInt(response)){
                     case -3: result = getString(R.string.email_double_error); break;
                     case -2: result = getString(R.string.username_double_error); break;
                     case 0: result = getString(R.string.registration_succsess);
                 }
-                Snackbar.make(view, result, 5000)
-                        .setAction("Action", null).show();
-                if (Integer.parseInt(response.toString())==0) {
+                Snackbar.make(view, result, 5000).show();
+                
+                if (Integer.parseInt(response) == 0) {
                     Intent openLoginActivity = new Intent(RegistrationActivity.this, LoginActivity.class);
                     startActivity(openLoginActivity);
                 }
@@ -262,7 +187,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         }) {
             protected Map<String, String> getParams() {
-                Map<String, String> MyData = new HashMap<String, String>();
+                Map<String, String> MyData = new HashMap<>();
                 MyData.put("username", username);
                 MyData.put("email", email);
                 MyData.put("password", password);

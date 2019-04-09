@@ -1,12 +1,13 @@
 <resources>
-    <string name="app_name">CommonPlayground</string>
+    <string name="app_name" translatable="false">CommonPlayground</string>
+    <string name="refreshed">Successfully refreshed!</string>
     <!-- Strings related to navigation -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Common Playground</string>
-    <string name="nav_header_subtitle">CommonPlaygroundApp@gmail.com</string>
+    <string name="nav_header_title" translatable="false">Common Playground</string>
+    <string name="nav_header_subtitle" translatable="false">CommonPlaygroundApp@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="menu_dashboard">Dashboard</string>
+    <string name="menu_dashboard" translatable="false">Dashboard</string>
     <string name="menu_mySessions">My Sessions</string>
     <string name="menu_profile">Profile</string>
     <string name="menu_friendlist">Friendlist</string>
@@ -48,8 +49,6 @@
     <string name="error_invalid_password_confirm">This is not the same password</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="title_activity_registration">Register</string>
+    <string name="permission_rationale">Contacts permissions are needed for providing email completions.</string>
+    <string name="title_activity_registration">Registration</string>
 </resources>

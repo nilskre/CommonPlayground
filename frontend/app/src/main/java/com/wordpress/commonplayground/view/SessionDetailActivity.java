@@ -69,13 +69,15 @@ public class SessionDetailActivity extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SESSION_TITLE = "title";
+        private static final String ARG_SESSION_HOST = "host";
         private static final String ARG_SESSION_GAME = "game";
+        private static final String ARG_SESSION_GENRE = "genre";
+        private static final String ARG_SESSION_TYPE = "type";
         private static final String ARG_SESSION_PLACE = "place";
         private static final String ARG_SESSION_DATE = "date";
         private static final String ARG_SESSION_TIME = "time";
-        private static final String ARG_SESSION_DESCRIPTION = "description";
         private static final String ARG_SESSION_NUMBER_OF_PLAYERS = "numberOfPlayers";
-        private static final String ARG_SESSION_ID = "id";
+        private static final String ARG_SESSION_DESCRIPTION = "description";
 
         public PlaceholderFragment() {
         }
@@ -88,13 +90,20 @@ public class SessionDetailActivity extends AppCompatActivity {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putString(ARG_SESSION_TITLE, session.getTitle());
+
+            try {                                                                                               //TODO
+                args.putString(ARG_SESSION_HOST, session.getUsers().get(0).getName());
+            } catch (Exception e) {
+                args.putString(ARG_SESSION_HOST, "Could not get id of host");
+            }
             args.putString(ARG_SESSION_GAME, session.getGame());
+            args.putString(ARG_SESSION_GENRE, "Genre");                                                         //TODO
+            args.putString(ARG_SESSION_TYPE, "Online/Offline");                                                 //TODO
             args.putString(ARG_SESSION_PLACE, session.getPlace());
             args.putString(ARG_SESSION_DATE, session.getDate());
             args.putString(ARG_SESSION_TIME, session.getTime());
+            args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, "Players: 1/" + session.getNumberOfPlayers());        //TODO
             args.putString(ARG_SESSION_DESCRIPTION, session.getDescription());
-            args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, "" + session.getNumberOfPlayers());
-            args.putString(ARG_SESSION_ID, "" + session.getId());
             fragment.setArguments(args);
             return fragment;
         }
@@ -104,20 +113,24 @@ public class SessionDetailActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_session_detail, container, false);
             TextView title = rootView.findViewById(R.id.session_title);
             title.setText(getArguments().getString(ARG_SESSION_TITLE));
+            TextView host = rootView.findViewById(R.id.session_host);
+            host.setText(getArguments().getString(ARG_SESSION_HOST));
             TextView game = rootView.findViewById(R.id.session_game);
             game.setText(getArguments().getString(ARG_SESSION_GAME));
+            TextView genre = rootView.findViewById(R.id.session_genre);
+            genre.setText(getArguments().getString(ARG_SESSION_GENRE));
+            TextView type = rootView.findViewById(R.id.session_type);
+            type.setText(getArguments().getString(ARG_SESSION_TYPE));
             TextView place = rootView.findViewById(R.id.session_place);
             place.setText(getArguments().getString(ARG_SESSION_PLACE));
             TextView date = rootView.findViewById(R.id.session_date);
             date.setText(getArguments().getString(ARG_SESSION_DATE));
             TextView time = rootView.findViewById(R.id.session_time);
             time.setText(getArguments().getString(ARG_SESSION_TIME));
-            TextView description = rootView.findViewById(R.id.session_description);
-            description.setText(getArguments().getString(ARG_SESSION_DESCRIPTION));
             TextView numberOfPlayers = rootView.findViewById(R.id.session_number_of_players);
             numberOfPlayers.setText(getArguments().getString(ARG_SESSION_NUMBER_OF_PLAYERS));
-            /*TextView id = rootView.findViewById(R.id.session_id);
-            id.setText(getArguments().getString(ARG_SESSION_ID));*/
+            TextView description = rootView.findViewById(R.id.session_description);
+            description.setText(getArguments().getString(ARG_SESSION_DESCRIPTION));
             return rootView;
         }
     }

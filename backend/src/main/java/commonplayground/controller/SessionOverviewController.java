@@ -23,7 +23,7 @@ public class SessionOverviewController {
     @RequestMapping("/getSessionList")
     public List<Session> getSessionList() throws ParseException {
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date currentDate = new Date();
 
         sessions.clear();

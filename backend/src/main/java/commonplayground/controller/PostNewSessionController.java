@@ -31,7 +31,7 @@ public class PostNewSessionController {
                                @RequestParam(value = "numberOfPlayers", defaultValue = "1") int numberOfPlayers,
                                @RequestParam(value = "idOfHost", defaultValue = "-1") String idOfHost,
                                @RequestParam(value = "genre", defaultValue = "not given")String genre,
-                               @RequestParam(value= "isOnline", defaultValue = "not given")Boolean isOnline){
+                               @RequestParam(value= "isOnline", defaultValue = "not given")String isOnline){
         Long idOfHostAsLong = Long.parseLong(idOfHost);
         User sessionHost = userRepository.findAllById(idOfHostAsLong);
         Session addedSession = new Session(title, description, game, place, date, time, numberOfPlayers, idOfHostAsLong, genre, isOnline);

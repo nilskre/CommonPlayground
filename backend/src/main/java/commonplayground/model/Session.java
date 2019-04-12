@@ -32,6 +32,10 @@ public class Session {
     private int numberOfPlayers;
     @Getter
     private Long idOfHost;
+    @Getter
+    private String genre;
+    @Getter
+    private boolean isOnline;
 
     @ManyToMany(
             cascade = CascadeType.ALL
@@ -43,7 +47,7 @@ public class Session {
     public Session() {
     }
 
-    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long idOfHost) {
+    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long idOfHost, String genre, Boolean isOnline) {
         this.title = title;
         this.description = description;
         this.game = game;
@@ -52,6 +56,8 @@ public class Session {
         this.time = time;
         this.numberOfPlayers = numberOfPlayers;
         this.idOfHost = idOfHost;
+        this.genre = genre;
+        this.isOnline = isOnline;
     }
 
     public int addUserToSession(User user) {

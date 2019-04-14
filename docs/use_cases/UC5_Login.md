@@ -10,6 +10,11 @@ This use case allows a user with an account to log in which is the basis for pos
 ![Mockup login fail1](../mockups/Login_Fail1.png)
 ![Mockup login fail2](../mockups/Login_Fail2.png)
 
+## 1.3 Screenshots
+<img src="./Screenshots/UC5_Login_Screenshot.png" alt="Screenshot login" width="300"/> <img src="./Screenshots/UC5_Login_Screenshot2.png" alt="Screenshot login fail 1" width="300"/> <img src="./Screenshots/UC5_Login_Screenshot3.png" alt="Screenshot login fail 2" width="300"/>
+
+There are several more error messages.
+
 # 2. Flow of Events
 
 ## 2.1 Basic Flow
@@ -19,10 +24,10 @@ This use case allows a user with an account to log in which is the basis for pos
 - Login is confirmed
 
 ### Activity Diagram
-![Activity Diagram](../activity_diagrams/UC5_Login.png)
+![Activity Diagram](../activity_diagrams/UCD5_Login.png)
 
 ### .feature File
-[.feature File Login](../../frontend/app/src/androidTest/assets/UC5_Login.feature)
+[.feature File Login](../../frontend/app/src/androidTest/assets/features/UC5_Login.feature)
 ```Cucumber
 Feature: Use Case 5 Login
     As a USER

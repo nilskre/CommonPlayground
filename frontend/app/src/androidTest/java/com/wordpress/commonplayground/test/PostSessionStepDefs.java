@@ -1,14 +1,17 @@
 package com.wordpress.commonplayground.test;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.wordpress.commonplayground.view.LoginActivity;
 import com.wordpress.commonplayground.view.MainActivity;
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -21,6 +24,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -32,14 +36,24 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 public class PostSessionStepDefs {
 
     @Rule
-    public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class, true);
+    public ActivityTestRule<MainActivity> activityTestRule;
 
-    private Activity activity = activityTestRule.getActivity();
+    private Activity activity;
 
     @Before("@postsession-feature")
     public void setup() {
-        activityTestRule.launchActivity(new Intent());
+        activityTestRule = new ActivityTestRule<>(MainActivity.class, true);
+
+        Context targetContext = getInstrumentation().getTargetContext();
+        SessionManager sessionManager = new SessionManager(targetContext);
+        sessionManager.logoutUser();
+        sessionManager.createLoginSession("3", "test@test.de");
+
+        Intent openAddSessionActivity = new Intent(getInstrumentation().getTargetContext(), MainActivity.class);
+        activityTestRule.launchActivity(openAddSessionActivity);
+
         activity = activityTestRule.getActivity();
+
         ViewInteraction floatingActionButton = onView(withId(R.id.fab));
         floatingActionButton.perform(click());
     }

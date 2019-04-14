@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -37,7 +38,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     private TextInputLayout title, game, place, date, time, numberOfPlayers, description;
     private Spinner type_spinner, genre_spinner;
     private int mYear, mMonth, mDay, mHour, mMinute;
-    private String userID;
+    private SessionManager session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +61,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         setUserID();
         setOnclickListeners();
         accessUIInputFields();
-    }
-
-    private void setUserID() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            userID = extras.getString("userID");
-        }
+        session = new SessionManager(getApplicationContext());
     }
 
     private void setOnclickListeners() {
@@ -91,9 +87,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onBackPressed() {
-        Intent openMain = new Intent();
-        openMain.putExtra("userID", userID);
-        setResult(RESULT_OK, openMain);
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
         finish();
     }
 
@@ -181,7 +176,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Response", response.toString());
+                Log.d("Response", response);
                 Snackbar.make(view, getString(R.string.new_response_fine), 5000)
                         .setAction("Action", null).show();
             }
@@ -202,7 +197,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 MyData.put("date", sessionDate);
                 MyData.put("time", sessionTime);
                 MyData.put("numberOfPlayers", sessionPlayers);
-                MyData.put("idOfHost", userID);
+                MyData.put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
                 return MyData;
             }
         };

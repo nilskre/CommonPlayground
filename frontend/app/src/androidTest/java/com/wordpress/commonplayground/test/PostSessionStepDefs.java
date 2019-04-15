@@ -93,8 +93,8 @@ public class PostSessionStepDefs {
 
     @And("^The user types the place ([^\"]*) and the input is correct$")
     public void theUserTypesThePlaceAndTheInputIsCorrect(String testPlace) {
-        ViewInteraction textInputEditText = onView(withId(R.id.PlaceInputField));
-        textInputEditText.perform(typeText(testPlace), closeSoftKeyboard());
+       /* ViewInteraction textInputEditText = onView(withId(R.id.PlaceInputField));
+        textInputEditText.perform(typeText(testPlace), closeSoftKeyboard());*/
     }
 
     @And("^The user types the date ([^\"]*) and the input is correct$")

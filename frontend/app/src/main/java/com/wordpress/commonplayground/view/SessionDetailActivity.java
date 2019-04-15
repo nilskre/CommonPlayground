@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,9 @@ import android.widget.TextView;
 
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.model.Session;
+import com.wordpress.commonplayground.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SessionDetailActivity extends AppCompatActivity {
@@ -91,11 +94,15 @@ public class SessionDetailActivity extends AppCompatActivity {
             Bundle args = new Bundle();
             args.putString(ARG_SESSION_TITLE, session.getTitle());
 
+            ArrayList<User> users = new ArrayList<>();
             try {                                                                                               //TODO
-                args.putString(ARG_SESSION_HOST, session.getUsers().get(0).getName());
+                users.addAll(session.getUsers());
+                args.putString(ARG_SESSION_HOST, users.get(0).getName());
             } catch (Exception e) {
+                Log.v("Host_ID", e.getMessage());
                 args.putString(ARG_SESSION_HOST, "Could not get id of host");
             }
+
             args.putString(ARG_SESSION_GAME, session.getGame());
             args.putString(ARG_SESSION_GENRE, "Genre");                                                         //TODO
             args.putString(ARG_SESSION_TYPE, "Online/Offline");                                                 //TODO

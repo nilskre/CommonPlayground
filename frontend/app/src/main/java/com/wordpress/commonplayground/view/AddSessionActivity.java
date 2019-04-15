@@ -10,9 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.android.volley.Request;
@@ -34,6 +37,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     private Button btnPublish;
     private ImageButton btnDatePicker, btnTimePicker;
     private TextInputLayout title, game, place, date, time, numberOfPlayers, description;
+    private Spinner type_spinner, genre_spinner;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private SessionManager session;
 
@@ -42,6 +46,19 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
+        type_spinner = (Spinner)findViewById(R.id.type_spinner);
+        genre_spinner = (Spinner)findViewById(R.id.genre_spinner);
+
+        type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                updateView(i);
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
+            }
+        });
+
         setOnclickListeners();
         accessUIInputFields();
         session = new SessionManager(getApplicationContext());
@@ -186,5 +203,19 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         };
 
         MyRequestQueue.add(MyStringRequest);
+    }
+
+    protected void updateView(int item){
+        Log.d("Selection", Integer.toString(item));
+        if (item==0){
+           place.setVisibility(View.GONE);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.online_genres, android.R.layout.simple_spinner_item);
+            genre_spinner.setAdapter(adapter);
+        }else{
+            place.setVisibility(View.VISIBLE);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.offline_genres, android.R.layout.simple_spinner_item);
+            genre_spinner.setAdapter(adapter);
+        }
+
     }
 }

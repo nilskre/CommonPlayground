@@ -28,6 +28,22 @@
     <string name="new_button">Publish</string>
     <string name="new_response_fine">Your Session is saved!</string>
     <string name="new_error">Something went wrong! Please try it again later.</string>
+    <string-array name="game_types">
+        <item>Online</item>
+        <item>Offline</item>
+    </string-array>
+    <string-array name="online_genres">
+        <item>MMO RPG</item>
+        <item>Shooter</item>
+        <item>MOBA</item>
+        <item>Strategy</item>
+    </string-array>
+    <string-array name="offline_genres">
+        <item>Board Game</item>
+        <item>Card Game</item>
+        <item>Pen and Paper</item>
+        <item>Outdoors Activity</item>
+    </string-array>
     <!-- Strings related to login and register -->
     <string name="username_double_error">This username already exists.</string>
     <string name="username_error">This email does not exist.</string>
@@ -49,8 +65,7 @@
     <string name="error_invalid_password_confirm">This is not the same password</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">Contacts permissions are needed for providing email completions.</string>
-    <string name="title_activity_registration">Registration</string>
+    <string name="title_activity_registration">Register</string>
     <string name="title_activity_session_detail" translatable="false">Session Detail</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="detail_join">Join</string>

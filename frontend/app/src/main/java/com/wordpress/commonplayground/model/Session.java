@@ -88,9 +88,10 @@ public class Session implements Parcelable {
             JSONArray parsedUsers = sessionObject.getJSONArray("users");
             for (int i = 0; i < parsedUsers.length(); i++) {
                 JSONObject user = parsedUsers.getJSONObject(i);
+                Long id = Long.valueOf(user.getString("id"));
                 String username = user.getString("username");
-                Log.v("USERNAME", username);
-                users.add(new User(username));
+                String email = user.getString("email");
+                users.add(new User(id, username, email));
             }
             Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"), users);
             Log.v("PARSED", String.valueOf("ID: " + parsed.getId()) + parsed.toString());

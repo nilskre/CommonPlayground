@@ -7,9 +7,12 @@ public class User implements Parcelable {
 
     private Long id;
     private String name;
+    private String email;
 
-    public User(String name) {
+    public User(Long id, String name, String email) {
+        this.id = id;
         this.name = name;
+        this.email = email;
     }
 
     public User(Parcel in) {
@@ -28,15 +31,21 @@ public class User implements Parcelable {
     };
 
     public void readFromParcel(Parcel in) {
+        id = in.readLong();
         name = in.readString();
+        email = in.readString();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public Long getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
     @Override
@@ -46,6 +55,8 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
         dest.writeString(name);
+        dest.writeString(email);
     }
 }

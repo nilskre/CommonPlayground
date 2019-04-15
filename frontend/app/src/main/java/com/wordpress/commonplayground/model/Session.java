@@ -2,14 +2,17 @@ package com.wordpress.commonplayground.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.v4.content.Loader;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Session implements Parcelable {
 
@@ -22,9 +25,9 @@ public class Session implements Parcelable {
     private String time;
     private int numberOfPlayers;
     private Long idOfHost;
-    private List<User> users = new ArrayList();
+    private ArrayList<User> users = new ArrayList();
 
-    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId, List<User> users) {
+    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId, ArrayList<User> users) {
         this.title = title;
         this.description = description;
         this.game = game;
@@ -60,6 +63,7 @@ public class Session implements Parcelable {
         time = in.readString();
         numberOfPlayers = in.readInt();
         id = in.readLong();
+        users = in.readArrayList(User.class.getClassLoader());
     }
 
     public int describeContents() {
@@ -75,10 +79,11 @@ public class Session implements Parcelable {
         dest.writeString(time);
         dest.writeInt(numberOfPlayers);
         dest.writeLong(id);
+        dest.writeArray(new List[]{users});
     }
 
     public static Session parseSession(JSONObject sessionObject) {
-        List<User> users = new ArrayList();
+        ArrayList users = new ArrayList();
         try {
             JSONArray parsedUsers = sessionObject.getJSONArray("users");
             for (int i = 0; i < parsedUsers.length(); i++) {

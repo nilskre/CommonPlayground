@@ -94,7 +94,7 @@ public class SessionDetailActivity extends AppCompatActivity {
             Bundle args = new Bundle();
             args.putString(ARG_SESSION_TITLE, session.getTitle());
 
-            List<User> users = new ArrayList<>();
+            ArrayList<User> users = new ArrayList<>();
             try {                                                                                               //TODO
                 users.addAll(session.getUsers());
                 for(User user : users) {
@@ -106,11 +106,6 @@ public class SessionDetailActivity extends AppCompatActivity {
                 Log.v("ALOHA", e.getMessage());
                 args.putString(ARG_SESSION_HOST, "Could not get id of host");
             }
-            String aloha = "";
-            for(User u : users) {
-                aloha += u.getName();
-            }
-            Log.v("ALOHA", aloha + "hello");
 
             args.putString(ARG_SESSION_GAME, session.getGame());
             args.putString(ARG_SESSION_GENRE, "Genre");                                                         //TODO

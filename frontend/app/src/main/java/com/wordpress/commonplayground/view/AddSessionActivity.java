@@ -170,6 +170,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         final String sessionTime = time.getEditText().getText().toString();
         final String sessionPlayers = numberOfPlayers.getEditText().getText().toString();
         final String sessionDesc = description.getEditText().getText().toString();
+        final String sessionGenre = genre_spinner.getSelectedItem().toString();
+        final String sessionType = type_spinner.getSelectedItem().toString();
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         String url = BuildConfig.SERVER_URL + "postNewSession";
@@ -198,6 +200,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 MyData.put("time", sessionTime);
                 MyData.put("numberOfPlayers", sessionPlayers);
                 MyData.put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
+                MyData.put("genre", sessionGenre);
+                MyData.put("isOnline", sessionType);
                 return MyData;
             }
         };

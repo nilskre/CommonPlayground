@@ -104,8 +104,8 @@ public class SessionDetailActivity extends AppCompatActivity {
             }
 
             args.putString(ARG_SESSION_GAME, session.getGame());
-            args.putString(ARG_SESSION_GENRE, "Genre");                                                         //TODO
-            args.putString(ARG_SESSION_TYPE, "Online/Offline");                                                 //TODO
+            args.putString(ARG_SESSION_GENRE, session.getGenre());
+            args.putString(ARG_SESSION_TYPE, session.getType());
             args.putString(ARG_SESSION_PLACE, session.getPlace());
             args.putString(ARG_SESSION_DATE, session.getDate());
             args.putString(ARG_SESSION_TIME, session.getTime());

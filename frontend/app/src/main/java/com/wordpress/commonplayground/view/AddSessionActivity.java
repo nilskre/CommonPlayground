@@ -58,7 +58,6 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-        setUserID();
         setOnclickListeners();
         accessUIInputFields();
         session = new SessionManager(getApplicationContext());

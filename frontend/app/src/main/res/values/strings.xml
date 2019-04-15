@@ -65,19 +65,9 @@
     <string name="error_invalid_password_confirm">This is not the same password</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-<<<<<<< HEAD
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="title_activity_registration">Register</string>
-    <string name="type_online">online</string>
-    <string name="type_offline">offline</string>
-=======
-    <string name="permission_rationale">Contacts permissions are needed for providing email completions.</string>
-    <string name="title_activity_registration">Registration</string>
     <string name="title_activity_session_detail" translatable="false">Session Detail</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="detail_join">Join</string>
     <string name="detail_leave">Leave</string>
->>>>>>> origin
 </resources>

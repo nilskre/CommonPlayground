@@ -97,13 +97,9 @@ public class SessionDetailActivity extends AppCompatActivity {
             ArrayList<User> users = new ArrayList<>();
             try {                                                                                               //TODO
                 users.addAll(session.getUsers());
-                for(User user : users) {
-                    Log.v("Helau", user.toString());
-                }
-                Log.v("Helau", session.toString());
                 args.putString(ARG_SESSION_HOST, users.get(0).getName());
             } catch (Exception e) {
-                Log.v("ALOHA", e.getMessage());
+                Log.v("Host_ID", e.getMessage());
                 args.putString(ARG_SESSION_HOST, "Could not get id of host");
             }
 

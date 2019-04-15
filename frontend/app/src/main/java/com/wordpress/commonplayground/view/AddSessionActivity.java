@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.wordpress.commonplayground.BuildConfig;
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
@@ -154,7 +155,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         final String sessionDesc = description.getEditText().getText().toString();
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2:8080/postNewSession";
+        String url = BuildConfig.SERVER_URL + "postNewSession";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

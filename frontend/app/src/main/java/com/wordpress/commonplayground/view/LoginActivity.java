@@ -24,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.wordpress.commonplayground.BuildConfig;
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 import com.wordpress.commonplayground.model.Validator;
@@ -151,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
         final String password = mPasswordView.getText().toString();
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2:8080/login";
+        String url = BuildConfig.SERVER_URL + "login";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

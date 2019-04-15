@@ -62,8 +62,6 @@ jobs:
       services:
         - docker
       provider: heroku
-      api_key:
-        secure: cc24LtHFrFQDORKxGhVKo2Em2gG+WS/4J9MtE94B2PhtuqyBH90Tjd2xUQXRT2w5EdxlLNcS/spYq4rG0duhFvff0oJf1Zkf7YNSNY2097/b3OFKBH0KoqqFfN/OxoXBQT0eryhRmQD7hsQUDxoRCHcOsERnn0y3y9Zq+eDIVUn8wneREcE0EjG1qYPpvrO0kUzsEAjH6qixW8rCyZET5KHcCV1/78ZddbsYj3Hz+8yqgss4e2rpOy9HAlikQdSh9wuwPgHcW8HbSZVOMo+BFvmnqFcI+pcOLTK6VNduqBkBsD4arftv2oqM0J5uJmrTTaHt0zpuDSQwd03kz2I10MwQgOy6AhZNnB/1tCugd7HNdvT823FeBR76z/tveKfvqH6ErqKnjs7TFR6jBIAo5IROLbOSF714ua3o4tKwU/uqSqn4Ks/C72HA7dsiUThngqu+mcoFmUJIXJhuJfBQ2vYU1o04QDAkJRwhZ7nnfJzp+f6MhvxwICQQzkCQros4ooBofhpgA5CIb8oeYUhinA+2qSxeZx238vJTaWQkGYoFjvTp32H312nl26VwJC7L8JTX0m9gWdH8STHlLuvI6nZHrwTSSHiqW5lpteQd0pbzvNvNSuss3ZeLvpVvyjYWVMXWGAGhpeoBmp3cUc6ZbZz2wm5SqmjC8qNFE+mrSf0=
       script:
         - cd backend/ 
         - ./gradlew build docker
@@ -79,4 +77,6 @@ jobs:
           - build-tools-$ANDROID_BUILD_TOOLS_VERSION
           - android-$ANDROID_API_LEVEL
       script:
+        - cd frontend/
+        - ./gradlew build assembleRelease
         - echo "Deployment-Frontend"

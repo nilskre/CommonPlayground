@@ -25,9 +25,11 @@ public class Session implements Parcelable {
     private String time;
     private int numberOfPlayers;
     private Long idOfHost;
+    private String genre;
+    private String isOnline;
     private ArrayList<User> users = new ArrayList();
 
-    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId, ArrayList<User> users) {
+    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId, String genre, String isOnline, ArrayList<User> users) {
         this.title = title;
         this.description = description;
         this.game = game;
@@ -35,7 +37,9 @@ public class Session implements Parcelable {
         this.date = date;
         this.time = time;
         this.numberOfPlayers = numberOfPlayers;
-        this.id = sessionId; /*REMOVE THIS once id can be passed*/
+        this.id = sessionId;
+        this.genre = genre;
+        this.isOnline = isOnline;
         this.users.addAll(users);
     }
 
@@ -63,6 +67,8 @@ public class Session implements Parcelable {
         time = in.readString();
         numberOfPlayers = in.readInt();
         id = in.readLong();
+        genre = in.readString();
+        isOnline = in.readString();
         users = in.readArrayList(User.class.getClassLoader());
     }
 
@@ -79,6 +85,8 @@ public class Session implements Parcelable {
         dest.writeString(time);
         dest.writeInt(numberOfPlayers);
         dest.writeLong(id);
+        dest.writeString(genre);
+        dest.writeString(isOnline);
         dest.writeList(users);
     }
 
@@ -93,7 +101,7 @@ public class Session implements Parcelable {
                 String email = user.getString("email");
                 users.add(new User(id, username, email));
             }
-            Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"), users);
+            Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"),sessionObject.getString("genre"), sessionObject.getString("isOnline"), users);
             Log.v("PARSED", String.valueOf("ID: " + parsed.getId()) + parsed.toString());
             return parsed;
 
@@ -125,6 +133,10 @@ public class Session implements Parcelable {
 
     public String getTime() { return time; }
 
+    public String getGenre() { return genre; }
+
+    public String getType() { return isOnline; }
+
     public int getNumberOfPlayers() {
         return numberOfPlayers;
     }
@@ -139,7 +151,7 @@ public class Session implements Parcelable {
 
     @Override
     public String toString() {
-        String s = "Session id=" + id + "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " time=" + time + " numberOfPlayers=" + numberOfPlayers + " users=";
+        String s = "Session id=" + id + "Session title=" + title + " description=" + description + " game=" + game + " genre= "+ genre + " type=" + isOnline + " place=" + place + " date=" + date + " time=" + time + " numberOfPlayers=" + numberOfPlayers + " users=";
         for(User user : users) {
             s += user.getName() + " ";
         }

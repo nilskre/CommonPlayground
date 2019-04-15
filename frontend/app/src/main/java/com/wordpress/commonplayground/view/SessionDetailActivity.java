@@ -95,7 +95,7 @@ public class SessionDetailActivity extends AppCompatActivity {
             args.putString(ARG_SESSION_TITLE, session.getTitle());
 
             ArrayList<User> users = new ArrayList<>();
-            try {                                                                                               //TODO
+            try {
                 users.addAll(session.getUsers());
                 args.putString(ARG_SESSION_HOST, users.get(0).getName());
             } catch (Exception e) {
@@ -104,19 +104,14 @@ public class SessionDetailActivity extends AppCompatActivity {
             }
 
             args.putString(ARG_SESSION_GAME, session.getGame());
-            args.putString(ARG_SESSION_GENRE, "Genre");                                                         //TODO
-            args.putString(ARG_SESSION_TYPE, "Online/Offline");                                                 //TODO
+            args.putString(ARG_SESSION_GENRE, session.getGenre());
+            args.putString(ARG_SESSION_TYPE, session.getType());
             args.putString(ARG_SESSION_PLACE, session.getPlace());
             args.putString(ARG_SESSION_DATE, session.getDate());
             args.putString(ARG_SESSION_TIME, session.getTime());
+            args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, users.size() + "/" + session.getNumberOfPlayers() + " players");
+            args.putString(ARG_SESSION_DESCRIPTION, "Further information:\n" + session.getDescription());
 
-            if(!session.getUsers().equals(null)) {                                                                 //TODO
-                args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, session.getUsers().size() + "/" + session.getNumberOfPlayers() + " players");
-            } else {
-                args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, session.getNumberOfPlayers() + " players");
-            }
-
-            args.putString(ARG_SESSION_DESCRIPTION, session.getDescription());
             fragment.setArguments(args);
             return fragment;
         }

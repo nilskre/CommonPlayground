@@ -10,9 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.android.volley.Request;
@@ -21,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.wordpress.commonplayground.BuildConfig;
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
@@ -33,6 +37,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     private Button btnPublish;
     private ImageButton btnDatePicker, btnTimePicker;
     private TextInputLayout title, game, place, date, time, numberOfPlayers, description;
+    private Spinner type_spinner, genre_spinner;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private SessionManager session;
 
@@ -41,6 +46,19 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
+        type_spinner = (Spinner)findViewById(R.id.type_spinner);
+        genre_spinner = (Spinner)findViewById(R.id.genre_spinner);
+
+        type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                updateView(i);
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
+            }
+        });
+
         setOnclickListeners();
         accessUIInputFields();
         session = new SessionManager(getApplicationContext());
@@ -152,9 +170,11 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         final String sessionTime = time.getEditText().getText().toString();
         final String sessionPlayers = numberOfPlayers.getEditText().getText().toString();
         final String sessionDesc = description.getEditText().getText().toString();
+        final String sessionGenre = genre_spinner.getSelectedItem().toString();
+        final String sessionType = type_spinner.getSelectedItem().toString();
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2:8080/postNewSession";
+        String url = BuildConfig.SERVER_URL + "postNewSession";
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -180,10 +200,26 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 MyData.put("time", sessionTime);
                 MyData.put("numberOfPlayers", sessionPlayers);
                 MyData.put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
+                MyData.put("genre", sessionGenre);
+                MyData.put("isOnline", sessionType);
                 return MyData;
             }
         };
 
         MyRequestQueue.add(MyStringRequest);
+    }
+
+    protected void updateView(int item){
+        Log.d("Selection", Integer.toString(item));
+        if (item==0){
+           place.setVisibility(View.GONE);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.online_genres, android.R.layout.simple_spinner_item);
+            genre_spinner.setAdapter(adapter);
+        }else{
+            place.setVisibility(View.VISIBLE);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.offline_genres, android.R.layout.simple_spinner_item);
+            genre_spinner.setAdapter(adapter);
+        }
+
     }
 }

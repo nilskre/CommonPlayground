@@ -1,15 +1,21 @@
 package com.wordpress.commonplayground.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.v4.content.Loader;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class Session {
+public class Session implements Parcelable {
+
     private Long id;
     private String title;
     private String description;
@@ -19,9 +25,11 @@ public class Session {
     private String time;
     private int numberOfPlayers;
     private Long idOfHost;
-    private List<User> users = new ArrayList();
+    private String genre;
+    private String isOnline;
+    private ArrayList<User> users = new ArrayList();
 
-    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId) {
+    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId, String genre, String isOnline, ArrayList<User> users) {
         this.title = title;
         this.description = description;
         this.game = game;
@@ -29,19 +37,72 @@ public class Session {
         this.date = date;
         this.time = time;
         this.numberOfPlayers = numberOfPlayers;
-        this.id = sessionId; /*REMOVE THIS once id can be passed*/
+        this.id = sessionId;
+        this.genre = genre;
+        this.isOnline = isOnline;
+        this.users.addAll(users);
+    }
+
+    public Session(Parcel in) {
+        super();
+        readFromParcel(in);
+    }
+
+    public static final Parcelable.Creator<Session> CREATOR = new Parcelable.Creator<Session>() {
+        public Session createFromParcel(Parcel in) {
+            return new Session(in);
+        }
+
+        public Session[] newArray(int size) {
+            return new Session[size];
+        }
+    };
+
+    public void readFromParcel(Parcel in) {
+        title = in.readString();
+        description = in.readString();
+        game = in.readString();
+        place = in.readString();
+        date = in.readString();
+        time = in.readString();
+        numberOfPlayers = in.readInt();
+        id = in.readLong();
+        genre = in.readString();
+        isOnline = in.readString();
+        users = in.readArrayList(User.class.getClassLoader());
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(game);
+        dest.writeString(place);
+        dest.writeString(date);
+        dest.writeString(time);
+        dest.writeInt(numberOfPlayers);
+        dest.writeLong(id);
+        dest.writeString(genre);
+        dest.writeString(isOnline);
+        dest.writeList(users);
     }
 
     public static Session parseSession(JSONObject sessionObject) {
-        List<User> users = new ArrayList();
+        ArrayList users = new ArrayList();
         try {
             JSONArray parsedUsers = sessionObject.getJSONArray("users");
             for (int i = 0; i < parsedUsers.length(); i++) {
-                users.add(new User(parsedUsers.getJSONObject(i).getString("username")));
+                JSONObject user = parsedUsers.getJSONObject(i);
+                Long id = Long.valueOf(user.getString("id"));
+                String username = user.getString("username");
+                String email = user.getString("email");
+                users.add(new User(id, username, email));
             }
-            Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"));
-            parsed.users = users;
-            Log.v("PARSED", String.valueOf("ID: " + parsed.getId()));
+            Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"),sessionObject.getString("genre"), sessionObject.getString("isOnline"), users);
+            Log.v("PARSED", String.valueOf("ID: " + parsed.getId()) + parsed.toString());
             return parsed;
 
         } catch (JSONException e) {
@@ -72,6 +133,10 @@ public class Session {
 
     public String getTime() { return time; }
 
+    public String getGenre() { return genre; }
+
+    public String getType() { return isOnline; }
+
     public int getNumberOfPlayers() {
         return numberOfPlayers;
     }
@@ -86,6 +151,10 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session id=" + id + "Session title=" + title + " description=" + description + " game=" + game + " place=" + place + " date=" + date + " time=" + time + " numberOfPlayers=" + numberOfPlayers + " users="; //+ users;
+        String s = "Session id=" + id + "Session title=" + title + " description=" + description + " game=" + game + " genre= "+ genre + " type=" + isOnline + " place=" + place + " date=" + date + " time=" + time + " numberOfPlayers=" + numberOfPlayers + " users=";
+        for(User user : users) {
+            s += user.getName() + " ";
+        }
+        return s;
     }
 }

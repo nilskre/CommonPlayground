@@ -21,8 +21,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.wordpress.commonplayground.R;
-import com.wordpress.commonplayground.network.VolleyRequestQueue;
 import com.wordpress.commonplayground.model.Session;
+import com.wordpress.commonplayground.network.VolleyRequestQueue;
 import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 

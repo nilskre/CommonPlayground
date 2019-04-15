@@ -59,8 +59,16 @@ jobs:
     - stage: deploy-backend
       if: branch = master
       language: java
+      services:
+        - docker
+      provider: heroku
       script:
-        - echo "Deployment-Backend"
+        - cd backend/ 
+        - ./gradlew build docker
+        - heroku container:login
+        - docker tag commonplayground/commonplayground:latest registry.heroku.com/commonplayground/web
+        - docker push registry.heroku.com/commonplayground/web
+        - heroku container:release web -a commonplayground
     - stage: deploy-frontend
       if: branch = master
       language: android
@@ -69,4 +77,6 @@ jobs:
           - build-tools-$ANDROID_BUILD_TOOLS_VERSION
           - android-$ANDROID_API_LEVEL
       script:
+        - cd frontend/
+        - ./gradlew build assembleRelease
         - echo "Deployment-Frontend"

@@ -12,7 +12,7 @@ public class SessionTest {
 
     @BeforeClass
     public static void setUp() {
-        testSession = new Session("Title", "Description", "Game", "Place", "12.12.2018", "12:00", 42, (long)4);
+        testSession = new Session("Title", "Description", "Game", "Place", "12.12.2018", "12:00", 42, (long)4, "Genre", "Online");
     }
 
     @Test

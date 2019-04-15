@@ -11,8 +11,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.wordpress.commonplayground.network.VolleyRequestQueue;
+import com.wordpress.commonplayground.BuildConfig;
 import com.wordpress.commonplayground.model.Session;
+import com.wordpress.commonplayground.network.VolleyRequestQueue;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +38,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
 
     private void getSessionsFromServer() {
-        String url = "http://10.0.2.2:8080/getSessionList";
+        String url = BuildConfig.SERVER_URL + "getSessionList";
         JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null,
                 new Response.Listener<JSONArray>() {
@@ -46,8 +47,9 @@ public class MainActivityViewModel extends AndroidViewModel {
                         List<Session> allSessionsTmpList = new ArrayList<>();
                         for (int i = 0; i < response.length(); i++) {
                             try {
-                                allSessionsTmpList.add(i, Session.parseSession(response.getJSONObject(i)));
-                                Log.d("Recieved Sessions", Session.parseSession(response.getJSONObject(i)).toString());
+                                Session session = Session.parseSession(response.getJSONObject(i));
+                                allSessionsTmpList.add(i, session);
+                                Log.d("Received Sessions", session.toString());
                             } catch (JSONException e) {
                                 Log.d("Parse.Error.Main", e.toString());
                             }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -19,10 +21,18 @@ public class SessionOverviewController {
     }
 
     @RequestMapping("/getSessionList")
-    public List<Session> getSessionList() {
+    public List<Session> getSessionList() throws ParseException {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date currentDate = new Date();
+
         sessions.clear();
         for (Session session: sessionRepository.findAll()) {
-            sessions.add(session);
+            Date sessionDate = simpleDateFormat.parse(session.getDate());
+
+            if(currentDate.compareTo(sessionDate) <0){
+                sessions.add(session);
+            }
         }
         return sessions;
     }

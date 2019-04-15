@@ -46,6 +46,9 @@
     <string name="error_invalid_password_confirm">Das ist nicht dasselbe Passwort</string>
     <string name="error_incorrect_password">Das Passwort ist falsch</string>
     <string name="error_field_required">Dies ist ein Pflichtfeld</string>
-    <string name="permission_rationale">Kontakterlaubnis wird benötigt, um sie mit E-Mail[…] zu kontaktieren</string>
     <string name="title_activity_registration">Registrierung</string>
+    <string name="app_name">CommonPlayground</string>
+    <string name="section_format">Hallo Welt für Sektion: %1$d</string>
+    <string name="detail_join">Teilnehmen</string>
+    <string name="detail_leave">Verlassen</string>
 </resources>

@@ -68,7 +68,6 @@ jobs:
         - printf "machine api.heroku.com \n  login $LOGIN_EMAIL \n  password $LOGIN_PWD \nmachine git.heroku.com \n  login $LOGIN_EMAIL \n  password $LOGIN_PWD" > ~/.netrc
         - cd backend/ 
         - ./gradlew build docker
-        - heroku login
         - heroku container:login
         - docker tag commonplayground/commonplayground:latest registry.heroku.com/commonplayground/web
         - docker push registry.heroku.com/commonplayground/web

@@ -79,7 +79,7 @@ public class Session implements Parcelable {
         dest.writeString(time);
         dest.writeInt(numberOfPlayers);
         dest.writeLong(id);
-        dest.writeArray(new List[]{users});
+        dest.writeList(users);
     }
 
     public static Session parseSession(JSONObject sessionObject) {

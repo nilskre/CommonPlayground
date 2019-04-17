@@ -74,4 +74,4 @@ Server needs to validate credentials and provide user information so that other 
 
 # 6. Function Points
 ![Function Points UC5_Login](../function_points/UC5_Login.png)
-![Function Points Blue_Print](../function_points/Blue_print.png)
+<img src="../function_points/Blue_print.png" alt="Function Points Blue_Print" width="500"/>

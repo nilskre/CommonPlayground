@@ -67,4 +67,4 @@ The displayed data should be updated whenever the user enters the dashboard agai
 
 # 6. Function Points
 ![Function Points UC3_Session_Overview](../function_points/UC3_Overview.png)
-![Function Points Blue_Print](../function_points/Blue_print.png)
+<img src="../function_points/Blue_print.png" alt="Function Points Blue_Print" width="500"/>

@@ -65,4 +65,4 @@ If a user leaves a session the change has to be synced with the server to enable
 
 # 6. Function Points
 ![Function Points UC8_Leave_Session](../function_points/UC8_Leave.png)
-![Function Points Blue_Print](../function_points/Blue_print.png)
+<img src="../function_points/Blue_print.png" alt="Function Points Blue_Print" width="500"/>

@@ -48,4 +48,4 @@ The server needs to provide the fronted with a reduce list of sessions available
 
 # 6. Function Points
 ![Function Points UC9_Find_Session](../function_points/UC9_Finding.png)
-![Function Points Blue_Print](../function_points/Blue_print.png)
+<img src="../function_points/Blue_print.png" alt="Function Points Blue_Print" width="500"/>

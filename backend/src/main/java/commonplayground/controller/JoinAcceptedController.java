@@ -50,6 +50,7 @@ public class JoinAcceptedController {
     private void removeMessageFromHostsMessages(User sessionHost, Message relevantMessage) {
         messageRepository.save(relevantMessage);
         sessionHost.removeMessage(relevantMessage);
+        messageRepository.delete(relevantMessage);
     }
 
     private Long joinPlayerToSession(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession) {

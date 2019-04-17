@@ -55,5 +55,6 @@ Session credentials are removed
 The server is not involved in this use case, the app needs to return the same state as before the login
 
 # 6. Function Points
+<img src="../function_points/UC6_Logout.png" alt="Function Points UC6_Logout" width="700"/>
 ![Function Points UC6_Logout](../function_points/UC6_Logout.png)
 ![Function Points Blue_Print](../function_points/Blue_print.png)

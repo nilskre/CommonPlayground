@@ -34,6 +34,7 @@ public class MyJoinedSessions {
             User sessionHost = sessionsUserJoined.get(i).getUsers().get(0);
             if (sessionHost.equals(relevantUser)) {
                 sessionsUserJoined.remove(i);
+                i --;
             }
         }
 

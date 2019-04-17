@@ -24,10 +24,19 @@ public class MyJoinedSessions {
     }
 
     @RequestMapping("/getMyJoinedSessions")
-    public ArrayList<Session> postNewSession(@RequestParam(value = "userID", defaultValue = "not given") String userID) {
+    public ArrayList<Session> getMySessions(@RequestParam(value = "userID", defaultValue = "not given") String userID) {
         Long userIDAsLong = Long.parseLong(userID);
-        User getSessionsUserJoined = userRepository.findAllById(userIDAsLong);
+        User relevantUser = userRepository.findAllById(userIDAsLong);
 
-        return sessionRepository.findAllByUsers(getSessionsUserJoined);
+        ArrayList<Session> sessionsUserJoined = sessionRepository.findAllByUsers(relevantUser);
+
+        for (int i = 0; i < sessionsUserJoined.size(); i++) {
+            User sessionHost = sessionsUserJoined.get(i).getUsers().get(0);
+            if (sessionHost.equals(relevantUser)) {
+                sessionsUserJoined.remove(i);
+            }
+        }
+
+        return sessionsUserJoined;
     }
 }

@@ -20,7 +20,7 @@ public class MyHostedSessions {
     }
 
     @RequestMapping("/getMyHostedSessions")
-    public ArrayList<Session> postNewSession(@RequestParam(value = "userID", defaultValue = "not given") String userID) {
+    public ArrayList<Session> getMyHostedSessions(@RequestParam(value = "userID", defaultValue = "not given") String userID) {
         Long userIDAsLong = Long.parseLong(userID);
 
         return sessionRepository.findAllByIdOfHost(userIDAsLong);

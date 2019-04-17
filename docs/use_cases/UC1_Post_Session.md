@@ -92,3 +92,5 @@ If a session gets posted it needs to get synced with the server, so that every u
 # 6. Function Points
 ![Function Points UC1_Post_Session](../function_points/UC1_Posting.png)
 <img src="../function_points/Blue_print.png" alt="Function Points Blue_Print" width="500"/>
+
+Total number of function points: 13.09

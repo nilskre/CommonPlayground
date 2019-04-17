@@ -47,4 +47,5 @@ The Preconditions for this use case are:
 The server needs to provide the fronted with a reduce list of sessions available without changing the sessions that are actually stored
 
 # 6. Function Points
-tbd
+![Function Points UC9_Find_Session](../function_points/UC9_Finding.png)
+![Function Points Blue_Print](../function_points/Blue_print.png)

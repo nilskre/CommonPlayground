@@ -43,4 +43,5 @@ n/a
 The displayed data should be updated whenever the user enters My Sessions again or when the user refreshes the page manually.
 
 # 6. Function Points
-tbd
+![Function Points UC7_Keeping_Track](../function_points/UC7_Manage.png)
+![Function Points Blue_Print](../function_points/Blue_print.png)

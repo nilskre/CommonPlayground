@@ -52,3 +52,5 @@ Updated session data allows for the correct state of the session to be displayed
 
 
 # 6. Function Points
+![Function Points UC2_Join_Session](../function_points/UC2_Joining.png)
+![Function Points Blue_Print](../function_points/Blue_print.png)

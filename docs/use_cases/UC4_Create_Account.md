@@ -71,4 +71,5 @@ The app opens the login screen
 Data gets encoded and saved in database
 
 # 6. Function Points
-n/a
+![Function Points UC4_Create_Account](../function_points/UC4_Account.png)
+![Function Points Blue_Print](../function_points/Blue_print.png)

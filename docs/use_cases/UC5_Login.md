@@ -73,4 +73,5 @@ n/a
 Server needs to validate credentials and provide user information so that other use cases can be traced to the respective user
 
 # 6. Function Points
-n/a
+![Function Points UC5_Login](../function_points/UC5_Login.png)
+![Function Points Blue_Print](../function_points/Blue_print.png)

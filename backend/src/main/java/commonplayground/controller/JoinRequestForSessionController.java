@@ -21,7 +21,7 @@ public class JoinRequestForSessionController {
     }
 
     @RequestMapping("/joinRequestForSession")
-    public void joinRequestForSession(@RequestParam(value = "userID", defaultValue = "not given") String userID,
+    public Long joinRequestForSession(@RequestParam(value = "userID", defaultValue = "not given") String userID,
                                       @RequestParam(value = "sessionID", defaultValue = "not given") String sessionID) {
         Long userIDAsLong = Long.parseLong(userID);
         Long sessionIDAsLong = Long.parseLong(sessionID);
@@ -29,12 +29,17 @@ public class JoinRequestForSessionController {
         User userWhoWantsToJoinSession = userRepository.findAllById(userIDAsLong);
         Session sessionUserWantsToJoin = sessionRepository.findAllById(sessionIDAsLong);
 
-        //TODO Abfrage ob Join möglich
+        int validityCheck = sessionUserWantsToJoin.joinRequestToSession(userWhoWantsToJoinSession);
 
-        Message requestForJoinMessage = new Message("Join request for " + sessionUserWantsToJoin.getTitle(), userWhoWantsToJoinSession.getUsername() + " wants to join this session", userWhoWantsToJoinSession.getId(), sessionIDAsLong);
+        if (validityCheck != 0) {
+            return (long) validityCheck;
+        } else {
+            Message requestForJoinMessage = new Message("Join request for " + sessionUserWantsToJoin.getTitle(), userWhoWantsToJoinSession.getUsername() + " wants to join this session", userWhoWantsToJoinSession.getId(), sessionIDAsLong);
 
-        User hostOfSession = userRepository.findAllById(sessionUserWantsToJoin.getIdOfHost());
-        hostOfSession.addMessage(requestForJoinMessage);
-        messageRepository.save(requestForJoinMessage);
+            User hostOfSession = userRepository.findAllById(sessionUserWantsToJoin.getIdOfHost());
+            hostOfSession.addMessage(requestForJoinMessage);
+            messageRepository.save(requestForJoinMessage);
+            return (long) validityCheck;
+        }
     }
 }

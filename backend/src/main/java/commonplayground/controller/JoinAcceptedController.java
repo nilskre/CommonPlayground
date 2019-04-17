@@ -35,10 +35,16 @@ public class JoinAcceptedController {
         User userWhoWantsToJoinSession = userRepository.findAllById(userWantsToJoin);
 
         removeMessageFromHostsMessages(sessionHost, relevantMessage);
+        Long returnCodeShouldBeZero = joinPlayerToSession(sessionUserWantsToJoin, userWhoWantsToJoinSession);
+        messageToUserThatJoinWasSuccessful(sessionUserWantsToJoin, userWhoWantsToJoinSession);
 
-        return joinPlayerToSession(sessionUserWantsToJoin, userWhoWantsToJoinSession);
+        return returnCodeShouldBeZero;
+    }
 
-        //TODO message to the player that the join was successfull
+    private void messageToUserThatJoinWasSuccessful(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession) {
+        Message joinSuccessful = new Message("Join successful", "Join to session " + sessionUserWantsToJoin.getTitle() + " was successful");
+        userWhoWantsToJoinSession.addMessage(joinSuccessful);
+        messageRepository.save(joinSuccessful);
     }
 
     private void removeMessageFromHostsMessages(User sessionHost, Message relevantMessage) {
@@ -47,7 +53,6 @@ public class JoinAcceptedController {
     }
 
     private Long joinPlayerToSession(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession) {
-        //TODO handel errors
         int tryToJoinResultCode = sessionUserWantsToJoin.addUserToSession(userWhoWantsToJoinSession);
         sessionRepository.save(sessionUserWantsToJoin);
         return (long) tryToJoinResultCode;

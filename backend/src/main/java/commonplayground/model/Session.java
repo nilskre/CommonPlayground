@@ -60,6 +60,16 @@ public class Session {
         this.isOnline = isOnline;
     }
 
+    public int joinRequestToSession(User user){
+        if (SessionFull()) {
+            return -10;
+        } else if (userAlreadyJoined(user)) {
+            return -11;
+        } else {
+            return 0;
+        }
+    }
+
     public int addUserToSession(User user) {
         if (SessionFull()) {
             return -10;

@@ -55,4 +55,7 @@ Session credentials are removed
 The server is not involved in this use case, the app needs to return the same state as before the login
 
 # 6. Function Points
-n/a
+![Function Points UC6_Logout](../function_points/UC6_Logout.png)
+<img src="../function_points/Blue_print.png" alt="Function Points Blue_Print" width="500"/>
+
+Total number of function points: 3.57

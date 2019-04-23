@@ -1,10 +1,11 @@
 # Test plan
 
 ## Table of Contents
-|-------|----------------|
+|       | Content    |
+|-------|------------|
 | 1.    | Introduction   |     
-| 1.1   | Purpose |
-| 1.2   | Scope |
+| 1.1   | Purpose        |
+| 1.2   | Scope          |
 | 1.3   | References |
 | 1.3   | Intended Audience |
 | 1.4   | Background |

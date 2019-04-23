@@ -76,21 +76,23 @@ This test plan is written primarily for internal documentation reasons. It is me
 
 ### 1.5  References
 
-| Title                                                                | Date       | Publishing organization   |
-| ---------------------------------------------------------------------|:----------:| ------------------------- |
-| [Blog](https://commonplayground.wordpress.com)                       | Oct. 2018  | PinguCrew                 |
-| [GitHub - Server](https://github.com/nilskre/CommonPlayground)       | Oct. 2018  | PinguCrew                 |
-| [UC1 Posting a Session](../use_cases/UC1_Post_Session.md)            | Oct. 2018  | PinguCrew                 |
-| [UC2 Joining a Session](../use_cases/UC2_Join_Session.md)            | Oct. 2018  | PinguCrew                 |
-| [UC3 Session Overview](../use_cases/UC3_Session_Overview.md)         | Oct. 2018  | PinguCrew                 |
-| [UC4 Create an Account](../use_cases/UC4_Create_Account.md)          | Oct. 2018  | PinguCrew                 |
-| [UC5 Login](../use_cases/UC5_Login.md)                               | Oct. 2018  | PinguCrew                 |
-| [UC6 Logout](../use_cases/UC6_Logout.md)                             | Nov. 2018  | PinguCrew                 |
+| Title                                                                   | Date       | Publishing organization   |
+| ------------------------------------------------------------------------|:----------:| ------------------------- |
+| [Blog](https://commonplayground.wordpress.com)                          | Oct. 2018  | PinguCrew                 |
+| [GitHub Repository](https://github.com/nilskre/CommonPlayground)        | Oct. 2018  | PinguCrew                 |
+| [UC1 Posting a Session](../use_cases/UC1_Post_Session.md)               | Oct. 2018  | PinguCrew                 |
+| [UC2 Joining a Session](../use_cases/UC2_Join_Session.md)               | Oct. 2018  | PinguCrew                 |
+| [UC3 Session Overview](../use_cases/UC3_Session_Overview.md)            | Oct. 2018  | PinguCrew                 |
+| [UC4 Create an Account](../use_cases/UC4_Create_Account.md)             | Oct. 2018  | PinguCrew                 |
+| [UC5 Login](../use_cases/UC5_Login.md)                                  | Oct. 2018  | PinguCrew                 |
+| [UC6 Logout](../use_cases/UC6_Logout.md)                                | Nov. 2018  | PinguCrew                 |
 | [UC7 Keeping Track of Your Sessions](../use_cases/UC7_Keeping_Track.md) | Apr. 2019  | PinguCrew                 |
-| [UC8 Leaving a Session](../use_cases/UC8_Leave_Session.md)           | Apr. 2019  | PinguCrew                 |
-| [UC9 Finding a Session](../use_cases/UC9_Leave_Session.md)           | Apr. 2019  | PinguCrew                 |
-| [Test Plan](./TestPlan.md)                                                      | Apr. 2019  | PinguCrew                 |
-| [SRS](../SoftwareRequirementsSpecification.md)                       | Oct. 2018  | PinguCrew                 |
+| [UC8 Leaving a Session](../use_cases/UC8_Leave_Session.md)              | Apr. 2019  | PinguCrew                 |
+| [UC9 Finding a Session](../use_cases/UC9_Leave_Session.md)              | Apr. 2019  | PinguCrew                 |
+| [UC10 Getting in touch](../use_cases/UC10_Getting_In_Touch.md)          | Apr. 2019  | PinguCrew                 |
+| [Test Plan](./TestPlan.md)                                              | Apr. 2019  | PinguCrew                 |
+| [SRS](../SoftwareRequirementsSpecification.md)                          | Oct. 2018  | PinguCrew                 |
+| [SAD](../SoftwareArchitectureDocument.md)                               | Oct. 2018  | PinguCrew                 |
 
 ### 1.6 Document Structure
 n/a
@@ -107,21 +109,20 @@ The tests are done to ensure quality and mitigate risks and fulfill functional r
 
 ## 3. Target Test Items
 
-- Android front end
-- Server back end
-- APIs
+- Android frontend
+- Server backend (and APIs)
 
 ## 4. Outline of Planned Tests
 ### 4.1 Outline of Test Inclusions
 
-*Android Client*:
+*Frontend: Android Client*:
  - UI testing of views/fragments
+ - Unit testing
 
-*Server*:
-
-*APIs*:
-
-GO Nils
+*Backend: Spring Boot Application*:
+ - Unit testing
+ - Integration testing
+ - Api testing
 
 The tests themself will not be tested and will not account into code coverage.
 
@@ -140,46 +141,44 @@ Because of time and resource constraints we will not do:
 ### 5.1 Testing Techniques and Types
 
 #### 5.1.1 Unit Testing
-The primary goal of unit testing is to take the smallest piece of testable code of the application, isolate it from the remainder of the code, and determine whether it behaves exactly as you expect. Each unit is tested separately before integrating them into modules to test the interfaces between modules. Unit testing has proven its value in that a large percentage of defects are identified during its use.  
-Our project uses JUnit for unit testing the server.
+
+Unit testing ensures, that the tested sourcecode works as expected. Therefore small parts of the sourcecode are tested independently.
 
 |                       | Description                                                         |
 |-----------------------|---------------------------------------------------------------------|
-|Technique Objective    | Ensure that the implemented code works properly and independently.  |
-|Technique              | Implement test methods using JUnit Framework and its annotations / using `go test`.     |
-|Oracles                | Console Output, Logs (TravisCI/TeamCity), Calculated Code Coverage by Codecov/TeamCity  |
-|Required Tools         | Test Runner: AndroidStudio with Gradle / GoLand                     |
-|Success Criteria       | All tests pass. Coverage is above 10% (client) / 60% (server)       |
-|                       | Android: [TeamCity](https://teamcity.ameyering.de/viewType.html?buildTypeId=WgPlaner_BuildClient&guest=1), [TravisCI](https://travis-ci.org/WGPlaner/wg_planer) |
-|                       | Server: [TravisCI](https://travis-ci.org/WGPlaner/wg_planer_server) |
+|Technique Objective    | Ensure that the implemented code works as expected                  |
+|Technique              | Implement test methods using JUnit Framework (Frontend & Backend)   |
+|Oracles                | Test execution produces logs results to the command line, Logs in CI/CD Tool (Travis) |
+|Required Tools         | JUnit 4 & 5 Dependencies in Frontend and Backend                    |
+|Success Criteria       | All tests pass. Coverage is above 10% (Frontend) / 60% (Backend)    |
+|                       | CI/CD Pipeline with test stage for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground)|
 |Special Considerations | -                                                                   |
 
 #### 5.1.2 User Interface Testing
-UI testing verifies a user's interaction with the software. The goal of UI testing is to ensure that the UI provides the user with the appropriate access and navigation through the functions of the target-of-test. In addition, UI testing ensures that the objects within the UI work as expected and conform to corporate or industry standards.
 
-For our automated UI tests we use Espresso und Mockito.
-
-|                       | Description                                                          |
-|-----------------------|----------------------------------------------------------------------|
-|Technique Objective    | Exercise UI access (clicking buttons, entering text into fields,...) |
-|Technique              | Writing Gherkin `.feature` files to specify steps and expected outcome. User Interactions (mouse clicks, keyboard inputs, browser navigation) are emulated. After that the tool compares the interface's actual appearance with the expected one. If a discrepancy is detected, the tool will report an error. [Click here for more information](https://wgplanerblog.wordpress.com/2017/11/12/week-6-gherkin-feature-files/) |
-|Oracles                | Test is successful if the graphical user interface has adopted a specific state. This state's occurance can be detected by automated checking for GUI elements like butons, labels, inputs, etc. |
-|Required Tools         | Test Runner: AndroidStudio (Mockito + Espresso)                      |
-|Success Criteria       | All UI tests pass.                                                   |
-|Special Considerations | UI tests require an Android Emulator. This is not available for TravisCI/TeamCity |
-
-#### 5.1.3 API Testing
-The primary goal of integration testing is to ensure that the server handles requests in a proper way.  
-Descripe Tests
+By UI testing the application is tested from the perspective of the user. The goal of UI testing is to ensure that the UI behaves as expected. 
 
 |                       | Description                                                          |
 |-----------------------|----------------------------------------------------------------------|
-|Technique Objective    | Test each server API call (including auth checks, etc.)              |
-|Technique              | Write `go` integration tests that use fixtures and test each API call independently. |
-|Oracles                | Console Output, Logs (TravisCI), Calculated Code Coverage by Codecov |
-|Required Tools         | `go test`, [stretchr](https://github.com/stretchr/testify), [testfixtures](https://github.com/go-testfixtures/testfixtures/tree/v2.4.3) |
+|Technique Objective    | Test application automated from the perspective of the user through UI Test |
+|Technique              | Writing Gherkin `.feature` files with clearly defined steps and the expected result. The test implementation of the steps use the Android Espresso library to serve the emulator. [Further information](https://commonplayground.wordpress.com/week-5-testing-with-cucumber//) |
+|Oracles                | Expect that the steps of the Test are executed successfully and the UI behaves as planned. This state's occurance can be detected by automated checking |
+|Required Tools         | Dependencies of Cucumber and Espresso (official Android UI test library) and an Implementation of a test runner based on JUnit 4 to execute UI tests with Cucumber and Espresso |
+|Success Criteria       | All UI tests pass. 
+|                       | CI/CD Pipeline with test stage for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground)   |
+|Special Considerations | - |
+
+#### 5.1.3 Intgeration Testing (API Testing)
+Api Testing is part of integration testing. Integration tests test multiple modules of an application together. The main goal of Api testing is to ensure, that the provided Apis of the Backend behave as expected. 
+
+|                       | Description                                                          |
+|-----------------------|----------------------------------------------------------------------|
+|Technique Objective    | Test the provided Apis with Cucumber                                 |
+|Technique              | For every meaningful api an Gherkin `.feature` exists and the steps are implemented.  |            |
+|Oracles                | Test execution produces logs results to the command line, Logs in CI/CD Tool (Travis) |
+|Required Tools         | JUnit, Cucumber, Rest assured, Hamcrest                                     |
 |Success Criteria       | All tests pass. Coverage is above 60%                                |
-|                       | Server: [TravisCI](https://travis-ci.org/WGPlaner/wg_planer_server)  |
+|                       | CI/CD Pipeline with test stage for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground) |
 |Special Considerations | -                                                                    |
 
 

@@ -1,41 +1,41 @@
 # Test plan
 
 ## Table of Contents
-
-1. Introduction
-1.1 Purpose
-1.2 Scope
-1.3 References
-1.3 Intended Audience
-1.4 Background
-1.5 Evaluation Mission
-1.6 Test Motivators
-1.7 Target Test Items
-2. Outline of Planned Tests
-2.1 Outline of Test Inclusions
-2.2 Outline of Other Candidates for Potential Inclusion
-3. Test Approach
-3.1 Testing Techniques and Types
-3.1.1 Function Testing
-3.1.2 Unit Testing
-3.1.3 Performance Profiling
-4. Entry and Exit Criteria
-4.1 Test Plan
-4.1.1 Test Plan Entry Criteria
-4.1.2 Test Plan Exit Criteria
-4.2 Deliverables
-4.2.1 Test Evaluation Summaries
-4.2.2 Reporting on Test Coverage
-4.2.3 Perceived Quality Reports
-5. Testing Workflow
-6. Environmental Needs
-6.1 Base System Hardware
-6.2 Base Software Elements in the Test Environment
-6.3 Productivity and Support Tools
-6.4 Test Environment Configurations
-7. Responsibilities, Staffing, and Training Needs
-7.1 People and Roles
-8. Iteration Milestones
+|-------|----------------|
+| 1.    | Introduction   |     
+| 1.1   | Purpose |
+| 1.2   | Scope |
+| 1.3   | References |
+| 1.3   | Intended Audience |
+| 1.4   | Background |
+| 1.5   | Evaluation Mission |
+| 1.6   | Test Motivators |
+| 1.7   | Target Test Items |
+| 2.    | Outline of Planned Tests |
+| 2.1   | Outline of Test Inclusions |
+| 2.2   | Outline of Other Candidates for Potential Inclusion |
+| 3.    | Test Approach |
+| 3.1   | Testing Techniques and Types |
+| 3.1.1 | Function Testing |
+| 3.1.2 | Unit Testing |
+| 3.1.3 | Performance Profiling |
+| 4.    | Entry and Exit Criteria |
+| 4.1   | Test Plan |
+| 4.1.1 | Test Plan Entry Criteria |
+| 4.1.2 | Test Plan Exit Criteria |
+| 4.2   | Deliverables |
+| 4.2.1 | Test Evaluation Summaries |
+| 4.2.2 | Reporting on Test Coverage |
+| 4.2.3 | Perceived Quality Reports |
+| 5.    | Testing Workflow |
+| 6.    | Environmental Needs |
+| 6.1   | Base System Hardware |
+| 6.2   | Base Software Elements in the Test Environment |
+| 6.3   | Productivity and Support Tools |
+| 6.4   | Test Environment Configurations |
+| 7.    | Responsibilities, Staffing, and Training Needs |
+| 7.1   | People and Roles |
+| 8.    | Iteration Milestones |
 
 ## 1. Introduction
 ### 1.1 Purpose

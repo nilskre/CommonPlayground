@@ -2,41 +2,40 @@
 
 ## Table of Contents
 
-    1. Introduction
-        1.1 Purpose
-        1.2 Scope
-        1.3 References
-        1.3 Intended Audience
-        1.4 Background
-        1.5 Evaluation Mission
-        1.6 Test Motivators
-        1.7 Target Test Items
-    2. Outline of Planned Tests
-        2.1 Outline of Test Inclusions
-        2.2 Outline of Other Candidates for Potential Inclusion
-    3. Test Approach
-        3.1 Testing Techniques and Types
-            3.1.1 Function Testing
-            3.1.2 Unit Testing
-            3.1.3 Performance Profiling
-    4. Entry and Exit Criteria
-        4.1 Test Plan
-            4.1.1 Test Plan Entry Criteria
-            4.1.2 Test Plan Exit Criteria
-    4.2 Deliverables
-        4.2.1 Test Evaluation Summaries
-        4.2.2 Reporting on Test Coverage
-        4.2.3 Perceived Quality Reports
-    5. Testing Workflow
-    6. Environmental Needs
-        6.1 Base System Hardware
-        6.2 Base Software Elements in the Test Environment
-        6.3 Productivity and Support Tools
-        6.4 Test Environment Configurations
-    7. Responsibilities, Staffing, and Training Needs
-        7.1 People and Roles
-    8. Iteration Milestones
-
+1. Introduction
+1.1 Purpose
+1.2 Scope
+1.3 References
+1.3 Intended Audience
+1.4 Background
+1.5 Evaluation Mission
+1.6 Test Motivators
+1.7 Target Test Items
+2. Outline of Planned Tests
+2.1 Outline of Test Inclusions
+2.2 Outline of Other Candidates for Potential Inclusion
+3. Test Approach
+3.1 Testing Techniques and Types
+3.1.1 Function Testing
+3.1.2 Unit Testing
+3.1.3 Performance Profiling
+4. Entry and Exit Criteria
+4.1 Test Plan
+4.1.1 Test Plan Entry Criteria
+4.1.2 Test Plan Exit Criteria
+4.2 Deliverables
+4.2.1 Test Evaluation Summaries
+4.2.2 Reporting on Test Coverage
+4.2.3 Perceived Quality Reports
+5. Testing Workflow
+6. Environmental Needs
+6.1 Base System Hardware
+6.2 Base Software Elements in the Test Environment
+6.3 Productivity and Support Tools
+6.4 Test Environment Configurations
+7. Responsibilities, Staffing, and Training Needs
+7.1 People and Roles
+8. Iteration Milestones
 
 ## 1. Introduction
 ### 1.1 Purpose
@@ -82,14 +81,14 @@ This test plan is written primarily for internal documentation reasons. It is me
 | [GitHub - Server](https://github.com/nilskre/CommonPlayground)       | Oct. 2018  | PinguCrew                 |
 | [UC1 Posting a Session](../use_cases/UC1_Post_Session.md)            | Oct. 2018  | PinguCrew                 |
 | [UC2 Joining a Session](../use_cases/UC2_Join_Session.md)            | Oct. 2018  | PinguCrew                 |
-| [UC3 Session Overview](../use_cases/UC3_Session_Overveiw.md)         | Oct. 2018  | PinguCrew                 |
+| [UC3 Session Overview](../use_cases/UC3_Session_Overview.md)         | Oct. 2018  | PinguCrew                 |
 | [UC4 Create an Account](../use_cases/UC4_Create_Account.md)          | Oct. 2018  | PinguCrew                 |
 | [UC5 Login](../use_cases/UC5_Login.md)                               | Oct. 2018  | PinguCrew                 |
 | [UC6 Logout](../use_cases/UC6_Logout.md)                             | Nov. 2018  | PinguCrew                 |
-| [UC7 Keeping Track of Your Sessions](../use_cases/UC7_Keeping_Track) | Apr. 2019  | PinguCrew                 |
+| [UC7 Keeping Track of Your Sessions](../use_cases/UC7_Keeping_Track.md) | Apr. 2019  | PinguCrew                 |
 | [UC8 Leaving a Session](../use_cases/UC8_Leave_Session.md)           | Apr. 2019  | PinguCrew                 |
 | [UC9 Finding a Session](../use_cases/UC9_Leave_Session.md)           | Apr. 2019  | PinguCrew                 |
-| [Test Plan](./)                                                      | Apr. 2019  | PinguCrew                 |
+| [Test Plan](./TestPlan.md)                                                      | Apr. 2019  | PinguCrew                 |
 | [SRS](../SoftwareRequirementsSpecification.md)                       | Oct. 2018  | PinguCrew                 |
 
 ### 1.6 Document Structure

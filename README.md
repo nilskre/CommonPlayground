@@ -11,6 +11,7 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 
 # Build status
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aff81896be354fc48280efd8135fb3ef)](https://app.codacy.com/app/DRiXD/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Grade_Settings)
 dev: [![Build Status](https://travis-ci.com/nilskre/CommonPlayground.svg?branch=dev)](https://travis-ci.com/nilskre/CommonPlayground)
 
 

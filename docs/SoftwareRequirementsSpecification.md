@@ -84,6 +84,35 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 - Green: Planned till end of december
 - Yellow: Planned till end of june
 
+### 2.2 Technology Stack
+The technology we use is:
+
+Backend:
+-Gradle and Springboot
+-H2 Database
+
+Frontend:
+-Android with Java and XML
+
+IDE:
+-IntelliJ and Android Studio
+
+Project Management:
+-YouTrack
+-GitHub
+-Microsoft Teams
+
+Deployment:
+-Travis CI
+-Docker and Heroku
+
+Testing:
+-Cucumber
+-Espresso
+-JUnit
+-Codacy
+-RestAssured
+
 ## 3. Specific Requirements
 
 ### 3.1 Functionality

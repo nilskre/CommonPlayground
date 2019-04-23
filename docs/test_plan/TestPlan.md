@@ -287,15 +287,13 @@ The following tools will be employed to support the test process for this Test P
 ## 10. Responsibilities, Staffing, and Training Needs
 
 ### 10.1 People and Roles
-This table shows the staffing assumptions for the test effort.
+### 10.1 People and Roles
 
-| Role          | Minimum Resources Recommended<br>(number of full-time roles allocated) |  Specific Responsibilities or Comments |
-|---------------|:----------------------------------------------------------------------:|----------------------------------------|
-| Test Manager  | 1 | Provides management oversight. Responsibilities include: <br> - planning and logistics <br> - agree mission <br> - identify motivators<br> - acquire appropriate resources<br> - present management reporting<br> - advocate the interests of test<br> - evaluate effectiveness of test effort |
-| Test Designer | 1 | Defines the technical approach to the implementation of the test effort. Responsibilities include:<br> define test approach<br> define test automation architecture<br> verify test techniques<br> define testability elements<br> structure test implementation |
-| Tester        | 1 |  Implements and executes the tests. Responsibilities include:<br> - implement tests and test suites<br> execute test suites<br> - log results<br> - analyze and recover from test failures<br> - document incidents|
-| Test System Administrator | 1 | Ensures test environment and assets are managed and maintained. Responsibilities include:<br>     administer test management system<br> - install and support access to, and recovery of, test environment configurations and test labs | 
-| Implementer   | 2 | Implements and unit tests the test classes and test packages. Responsibilities include:<br> - creates the test components required to support testability requirements as defined by the designer |
+| Role          | Person Assigned |  Specific Responsibilities or Comments |
+|---------------|:--------------:|----------------------------------------|
+| Test Manager | Denis, Inga | Provides management oversight. |
+| Test Designer | Denis, Celina | Defines the technical approach to the implementation of the test effort. |
+| Test System Administrator | Nils | Ensures test environment and assets are managed and maintained. | 
 
 ### 10.2 Staffing and Training Needs
 n/a
@@ -310,3 +308,6 @@ We want to keep over 20% code coverage.
 |------|---------------------|--------------------------------|
 | Dependency Injection impedes isolated Unit Testing | Abstract into new unit | transfer method into new scope |
 | Unit test cannot be applied because of framework structure | Pay attention to feature and code linkage | Test via Integration test |
+
+## 13. Management Process and Procedures
+n/a

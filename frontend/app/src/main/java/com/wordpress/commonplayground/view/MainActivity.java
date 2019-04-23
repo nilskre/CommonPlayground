@@ -167,7 +167,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_dashboard) {
 
         } else if (id == R.id.nav_mysessions) {
-
+            Intent openMySessionsActivity = new Intent(MainActivity.this, MySessionsActivity.class);
+            startActivity(openMySessionsActivity);
         } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_friendlist) {

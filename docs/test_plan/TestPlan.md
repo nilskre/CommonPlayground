@@ -21,7 +21,7 @@
         - [5.1 Testing Techniques and Types](#51-testing-techniques-and-types)
             - [5.1.1 Unit Testing](#511-unit-testing)
             - [5.1.2 User Interface Testing](#512-user-interface-testing)
-            - [5.1.3 Intgeration Testing (API Testing)](#513-intgeration-testing-api-testing)
+            - [5.1.3 Integration Testing (API Testing)](#513-integration-testing-api-testing)
     - [6. Entry and Exit Criteria](#6-entry-and-exit-criteria)
         - [6.1 Test Plan](#61-test-plan)
             - [6.1.1 Test Plan Entry Criteria](#611-test-plan-entry-criteria)
@@ -185,13 +185,13 @@ By UI testing the application is tested from the perspective of the user. The go
 |Technique              | Writing Gherkin `.feature` files with clearly defined steps and the expected result. The test implementation of the steps use the Android Espresso library to serve the emulator. [Further information](https://commonplayground.wordpress.com/week-5-testing-with-cucumber//) |
 |Oracles                | Expect that the steps of the test are executed successfully and the UI behaves as planned. Test execution produces logs results to the command line, logs in CI/CD Tool (Travis) |
 |Required Tools         | Dependencies of Cucumber and Espresso (official Android UI test library) and an Implementation of a test runner based on JUnit 4 to execute UI tests with Cucumber and Espresso |
-|Success Criteria       | All UI tests pass. 
+|Success Criteria       | All UI tests pass.
 |                       | CI/CD Pipeline with test stages for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground)   |
 |Special Considerations | - |
 
-#### 5.1.3 Intgeration Testing (API Testing)
+#### 5.1.3 Integration Testing (API Testing)
 
-Api Testing is part of integration testing. Integration tests test multiple modules of an application together. The main goal of Api testing is to ensure, that the provided Apis of the Backend behave as expected. 
+Api Testing is part of integration testing. Integration tests test multiple modules of an application together. The main goal of Api testing is to ensure, that the provided Apis of the Backend behave as expected.
 
 |                       | Description                                                          |
 |-----------------------|----------------------------------------------------------------------|
@@ -238,8 +238,6 @@ Backend IDE test execution:
 
 TODO Denis
 
-After a server build on TravisCI was successful, the resulting coverage report by `go test` is uploaded to [codecov.io](https://codecov.io/gh/WGPlaner/wg_planer_server). Following badge shows the current server test coverage:
-
 ![Testcoverage](Link)
 
 ## 7.3 Perceived Quality Reports
@@ -250,20 +248,20 @@ Code Analysis with Codacy: [Codacy](https://app.codacy.com/project/DRiXD/CommonP
 
 ## 7.4 Incident Logs and Change Requests
 
-We integrated the tools mentioned above into our GitHub pull request workflow. If a build fails it is visible directly in the PR, that the build has failed. Furhtermore the team is alerted by an email.
-The screenshot shows the integration of the CI/CD Pipeline (Travis) and the Code Analysis and Test Coverage tool (Codacy) in a PR on github:
+We integrated the tools mentioned above into our GitHub pull request workflow. If a build fails this is directly visible in the PR. Furthermore the team is alerted by an email.
+The screenshot shows the integration:
 
 ![GitHub PR integrated tools](./integrated_tools.png)
 
 ## 7.5 Smoke Test Suite and Supporting Test Scripts
 
-The automated test execution in our CI/CD Pipeline enables regression testing. With this approach it is clearly visible when changes affect the correct behaviour of the application.
+The automated test execution in our CI/CD Pipeline enables regression testing. With this approach it is clearly visible when changes break existing functions and affect the correct behaviour of the application.
 
 ## 8. Testing Workflow
 
 1) Local testing in the IDE
-2) Commit and Push triggers the build and test exection in the CI/CD Pipeline
-3) Each PR triggers the Pipeline (build and test)
+2) Commit and Push triggers build and test exection in the CI/CD Pipeline
+3) Each PR triggers the pipeline (build and test)
 4) Before the automated deployment the build and test stages are executed
 
 ## 9. Environmental Needs

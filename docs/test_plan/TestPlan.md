@@ -54,6 +54,7 @@ This test plan will cover tests assuring the functionality of the application's 
 This document shows the following types of testing:
 
  - Unit Testing
+ - Integration Testing
  - User Interface Testing
  - API Testing
 
@@ -148,10 +149,10 @@ Unit testing ensures, that the tested sourcecode works as expected. Therefore sm
 |-----------------------|---------------------------------------------------------------------|
 |Technique Objective    | Ensure that the implemented code works as expected                  |
 |Technique              | Implement test methods using JUnit Framework (Frontend & Backend)   |
-|Oracles                | Test execution produces logs results to the command line, Logs in CI/CD Tool (Travis) |
+|Oracles                | Test execution produces logs results to the command line, logs in CI/CD Tool (Travis) |
 |Required Tools         | JUnit 4 & 5 Dependencies in Frontend and Backend                    |
 |Success Criteria       | All tests pass. Coverage is above 10% (Frontend) / 60% (Backend)    |
-|                       | CI/CD Pipeline with test stage for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground)|
+|                       | CI/CD Pipeline with test stages for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground)|
 |Special Considerations | -                                                                   |
 
 #### 5.1.2 User Interface Testing
@@ -162,10 +163,10 @@ By UI testing the application is tested from the perspective of the user. The go
 |-----------------------|----------------------------------------------------------------------|
 |Technique Objective    | Test application automated from the perspective of the user through UI Test |
 |Technique              | Writing Gherkin `.feature` files with clearly defined steps and the expected result. The test implementation of the steps use the Android Espresso library to serve the emulator. [Further information](https://commonplayground.wordpress.com/week-5-testing-with-cucumber//) |
-|Oracles                | Expect that the steps of the Test are executed successfully and the UI behaves as planned. This state's occurance can be detected by automated checking |
+|Oracles                | Expect that the steps of the test are executed successfully and the UI behaves as planned. Test execution produces logs results to the command line, logs in CI/CD Tool (Travis) |
 |Required Tools         | Dependencies of Cucumber and Espresso (official Android UI test library) and an Implementation of a test runner based on JUnit 4 to execute UI tests with Cucumber and Espresso |
 |Success Criteria       | All UI tests pass. 
-|                       | CI/CD Pipeline with test stage for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground)   |
+|                       | CI/CD Pipeline with test stages for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground)   |
 |Special Considerations | - |
 
 #### 5.1.3 Intgeration Testing (API Testing)
@@ -174,11 +175,11 @@ Api Testing is part of integration testing. Integration tests test multiple modu
 |                       | Description                                                          |
 |-----------------------|----------------------------------------------------------------------|
 |Technique Objective    | Test the provided Apis with Cucumber                                 |
-|Technique              | For every meaningful api an Gherkin `.feature` exists and the steps are implemented.  |            |
+|Technique              | For every meaningful api a Gherkin `.feature` exists and the steps are implemented.  |            |
 |Oracles                | Test execution produces logs results to the command line, Logs in CI/CD Tool (Travis) |
 |Required Tools         | JUnit, Cucumber, Rest assured, Hamcrest                                     |
 |Success Criteria       | All tests pass. Coverage is above 60%                                |
-|                       | CI/CD Pipeline with test stage for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground) |
+|                       | CI/CD Pipeline with test stages for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground) |
 |Special Considerations | -                                                                    |
 
 
@@ -194,59 +195,50 @@ n/a
 ## 7. Deliverables
 
 ## 7.1 Test Evaluation Summaries
-The project (client + server) has over 100 tests which are passing. We use multiple continuous integration services to build our client and server and to run tests. These are:
+The project owns a certain amount of tests in the Frontend and Backend. Each pushed commit triggers our CI/CD Pipeline, which builds the application and executes the tests. Furthermore a code analysis with Codacy is triggered. We use a monorepo which includes the docs and the sourcecode for our Backend and Frontend. That´s why we have one CI/CD Pipeline for our whole project. 
 
-|            | Continuous Integration Service                              | Badge |
-|------------|-------------------------------------------------------------|:-----:|
-| **Client** | [TeamCity](https://teamcity.ameyering.de/viewType.html?buildTypeId=WgPlaner_BuildClient&guest=1) | [![Build Status TeamCity](https://teamcity.ameyering.de/app/rest/builds/buildType:(id:WgPlaner_BuildClient)/statusIcon)](https://teamcity.ameyering.de/viewType.html?buildTypeId=WgPlaner_BuildClient&guest=1) |
-|            | [TravisCI](https://travis-ci.org/WGPlaner/wg_planer)        | [![Build Status Travis](https://travis-ci.org/WGPlaner/wg_planer.svg?branch=master)](https://travis-ci.org/WGPlaner/wg_planer) |
-| **Server** | [TravisCI](https://travis-ci.org/WGPlaner/wg_planer_server) | [![Build Status Travis](https://travis-ci.org/WGPlaner/wg_planer_server.svg?branch=master)](https://travis-ci.org/WGPlaner/wg_planer_server) |
-|            | [AppVeyor](https://www.appveyor.com/docs/) <br/> (*on hold because a framework does not support windows) | [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/ok5rq84eh6sx8lxd/branch/master?svg=true)](https://ci.appveyor.com/project/archer96/wg-planer-server/branch/master) |
+Continuous Integration/Delivery/Deployment Pipeline based on Travis CI: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground) [![Build Status](https://travis-ci.com/nilskre/CommonPlayground.svg?branch=master)](https://travis-ci.com/nilskre/CommonPlayground)
 
-The first picture shows our server tests running in GoLand. The second shows the build history of the server on TravisCI and the third the build history of our client on TeamCity.
+Code Analysis with Codacy: [Codacy](https://app.codacy.com/project/DRiXD/CommonPlayground/dashboard) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aff81896be354fc48280efd8135fb3ef)](https://app.codacy.com/app/DRiXD/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Grade_Settings)
 
-![GoLand test runner](../Blog/img/codecov/GoLand_TestRunner.png)
-![TravisCI WGPlaner server](../Blog/img/codecov/TravisCI_Server.png)
-![TeamCity Client history](../Blog/img/codecov/TeamCity_History.png)
+
+CI/CD Pipeline stages: Build, Test, Deploy(only on the master branch):  
+![CI/CD Pipeline stages: Build, Test, Deploy(only on the master branch) ](./CICD_stages.png)  
+Integration of CI/CD Pipeline pipeline with github:  
+![Integration of CI/CD Pipeline pipeline with github](./CICD_github_commits.png)  
+Frontend IDE test execution:  
+![Frontend IDE test execution](./frontend_test_execution.png)  
+Backend IDE test execution:  
+![Backend IDE test execution](./backend_test_execution.png)
 
 ## 7.2 Reporting on Test Coverage
+
+TODO Denis
+
 After a server build on TravisCI was successful, the resulting coverage report by `go test` is uploaded to [codecov.io](https://codecov.io/gh/WGPlaner/wg_planer_server). Following badge shows the current server test coverage:
 
-![codecov badge](https://camo.githubusercontent.com/255e5ef101e034a3528267072eb16827a66ede7b/68747470733a2f2f636f6465636f762e696f2f67682f5747506c616e65722f77675f706c616e65725f7365727665722f6272616e63682f6d61737465722f67726170682f62616467652e737667)
-
-For our android client we use jacoco to calculate the test coverage. TeamCity creates a simple code coverage overview for each build. Following link gives a good example: [TeamCity Coverage](https://teamcity.ameyering.de/viewLog.html?buildId=427&tab=buildResultsDiv&buildTypeId=WgPlaner_BuildClient).
+![Testcoverage](Link)
 
 ## 7.3 Perceived Quality Reports
-The tool which is used for quality reports for both server and client is Codacy. It shows the number of errors in the code as well as several other metrics. Furthermore we activated the codacy GitHub bot. It writes reports for each pull request. The developer has to fix these before merging is allowed.
+The code quality tool is Codacy.
 
-Furthermore we use the [Go Report Card](https://goreportcard.com/) to check for common mistakes and formatting issues. This report is better suited for projects written in `go` than codacy.
-
-Following badges show the current report status:
-
-|             | Badge |
-|-------------|:-----:|
-| Server      | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/492b2e1e8ce9415fa826016952baaa15)](https://www.codacy.com/app/archer96/wg_planer_server?utm_source=github.com&utm_medium=referral&utm_content=WGPlaner/wg_planer_server&utm_campaign=badger) |
-|             | [![Go Report Card](https://goreportcard.com/badge/github.com/wgplaner/wg_planer_server)](https://goreportcard.com/report/github.com/wgplaner/wg_planer_server) |
-| Client      | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/566d7b24441a47d1a0b360f1e18d9ae0)](https://www.codacy.com/app/archer96/wg_planer?utm_source=github.com&utm_medium=referral&utm_content=WGPlaner/wg_planer&utm_campaign=badger) |
-
-On Android we use SonarQube as well. It shows the amount of issues in the code as well as several metrics.
-SonarQube reports can be found on  [sonarcloud.io](https://sonarcloud.io/dashboard?id=wg_planer%3Aapp).
+Code Analysis with Codacy: [Codacy](https://app.codacy.com/project/DRiXD/CommonPlayground/dashboard) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aff81896be354fc48280efd8135fb3ef)](https://app.codacy.com/app/DRiXD/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Grade_Settings)
 
 ## 7.4 Incident Logs and Change Requests
-We integrated the tools mentioned above into our GitHub pull request workflow. If a build fails (or a reviewer dismisses the PR), merging the PR is blocked. See the screenshot below:
+We integrated the tools mentioned above into our GitHub pull request workflow. If a build fails it is visible directly in the PR, that the build has failed. Furhtermore the team is alerted by an email. 
+The screenshot shows the integration of the CI/CD Pipeline (Travis) and the Code Analysis and Test Coverage tool (Codacy) in a PR on github:
 
-![GitHub PR blocked](../Blog/img/codecov/GitHub_Blocked_PR.png)
+![GitHub PR integrated tools](./integrated_tools.png)
 
 ## 7.5 Smoke Test Suite and Supporting Test Scripts
-For each pull request on the server project, a codecov report is generated that shows the new test coverage. This allows to check for any regressions.  
-The screenshot below is an example of mentioned reports:
-
-![Codecov Report](../Blog/img/codecov/Codecov_Report_GitHub.png)
+The automated test execution in our CI/CD Pipeline enables regression testing. With this approach it is clearly visible when changes affect the correct behaviour of the application.
 
 ## 8. Testing Workflow
-Every developer can run tests out of his or her IDE manually. To check if the developed code is compatible with the existing code.
 
-At the moment tests are automatically run before deployment on the server (see section 7.1).
+1) Local testing in the IDE
+2) Commit and Push triggers the build and test exection in the CI/CD Pipeline
+3) Each PR triggers the Pipeline (build and test)
+4) Before the automated deployment the build and test stages are executed
 
 ## 9. Environmental Needs
 

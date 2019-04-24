@@ -98,7 +98,7 @@ public class Session {
         }
     }
 
-    private boolean userIsHost(User userToLeaveSession) {
+    boolean userIsHost(User userToLeaveSession) {
         return Objects.equals(userToLeaveSession.getId(), this.idOfHost);
     }
 }

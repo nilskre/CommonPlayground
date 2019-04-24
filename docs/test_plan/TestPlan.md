@@ -27,11 +27,11 @@
             - [6.1.1 Test Plan Entry Criteria](#611-test-plan-entry-criteria)
             - [6.1.2 Test Plan Exit Criteria](#612-test-plan-exit-criteria)
     - [7. Deliverables](#7-deliverables)
-    - [7.1 Test Evaluation Summaries](#71-test-evaluation-summaries)
-    - [7.2 Reporting on Test Coverage](#72-reporting-on-test-coverage)
-    - [7.3 Perceived Quality Reports](#73-perceived-quality-reports)
-    - [7.4 Incident Logs and Change Requests](#74-incident-logs-and-change-requests)
-    - [7.5 Smoke Test Suite and Supporting Test Scripts](#75-smoke-test-suite-and-supporting-test-scripts)
+        - [7.1 Test Evaluation Summaries](#71-test-evaluation-summaries)
+        - [7.2 Reporting on Test Coverage](#72-reporting-on-test-coverage)
+        - [7.3 Perceived Quality Reports](#73-perceived-quality-reports)
+        - [7.4 Incident Logs and Change Requests](#74-incident-logs-and-change-requests)
+        - [7.5 Smoke Test Suite and Supporting Test Scripts](#75-smoke-test-suite-and-supporting-test-scripts)
     - [8. Testing Workflow](#8-testing-workflow)
     - [9. Environmental Needs](#9-environmental-needs)
         - [9.1 Base System Hardware](#91-base-system-hardware)
@@ -78,6 +78,7 @@ This test plan is written primarily for internal documentation reasons. It is me
 |------|-------------------------------------|
 | API  | Application Programmable Interface  |
 | CI   | Continuous Integration              |
+| CD   | Continuous Delivery/Deployment      |
 | n/a  | not applicable                      |
 | SRS  | Software Requirements Specification |
 | tbd  | to be determined                    |
@@ -142,6 +143,8 @@ The tests are done to ensure quality and mitigate risks and fulfill functional r
 - Integration testing
 - Api testing
 
+![Testing overview](./testing_overview.png)  
+
 The tests themself will not be tested and will not account into code coverage.
 
 ### 4.2 Outline of Other Candidates for Potential Inclusion
@@ -169,7 +172,7 @@ Unit testing ensures, that the tested sourcecode works as expected. Therefore sm
 |-----------------------|---------------------------------------------------------------------|
 |Technique Objective    | Ensure that the implemented code works as expected                  |
 |Technique              | Implement test methods using JUnit Framework (Frontend & Backend)   |
-|Oracles                | Test execution produces logs results to the command line, logs in CI/CD Tool (Travis) |
+|Oracles                | Test execution logs results to the command line, logs in CI/CD Tool (Travis) |
 |Required Tools         | JUnit 4 & 5 Dependencies in Frontend and Backend                    |
 |Success Criteria       | All tests pass. Coverage is above 10% (Frontend) / 60% (Backend)    |
 |                       | CI/CD Pipeline with test stages for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground)|
@@ -183,7 +186,7 @@ By UI testing the application is tested from the perspective of the user. The go
 |-----------------------|----------------------------------------------------------------------|
 |Technique Objective    | Test application automated from the perspective of the user through UI Test |
 |Technique              | Writing Gherkin `.feature` files with clearly defined steps and the expected result. The test implementation of the steps use the Android Espresso library to serve the emulator. [Further information](https://commonplayground.wordpress.com/week-5-testing-with-cucumber//) |
-|Oracles                | Expect that the steps of the test are executed successfully and the UI behaves as planned. Test execution produces logs results to the command line, logs in CI/CD Tool (Travis) |
+|Oracles                | Expect that the steps of the test are executed successfully and the UI behaves as planned. Test execution logs results to the command line, logs in CI/CD Tool (Travis) |
 |Required Tools         | Dependencies of Cucumber and Espresso (official Android UI test library) and an Implementation of a test runner based on JUnit 4 to execute UI tests with Cucumber and Espresso |
 |Success Criteria       | All UI tests pass.
 |                       | CI/CD Pipeline with test stages for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground)   |
@@ -197,7 +200,7 @@ Api Testing is part of integration testing. Integration tests test multiple modu
 |-----------------------|----------------------------------------------------------------------|
 |Technique Objective    | Test the provided Apis with Cucumber                                 |
 |Technique              | For every meaningful api a Gherkin `.feature` exists and the steps are implemented.  |            |
-|Oracles                | Test execution produces logs results to the command line, Logs in CI/CD Tool (Travis) |
+|Oracles                | Test execution logs results to the command line, Logs in CI/CD Tool (Travis) |
 |Required Tools         | JUnit, Cucumber, Rest assured, Hamcrest                                     |
 |Success Criteria       | All tests pass. Coverage is above 60%                                |
 |                       | CI/CD Pipeline with test stages for Frontend and Backend: [Travis CI](https://travis-ci.com/nilskre/CommonPlayground) |
@@ -242,9 +245,7 @@ TODO Denis
 
 ## 7.3 Perceived Quality Reports
 
-The code quality tool is Codacy.
-
-Code Analysis with Codacy: [Codacy](https://app.codacy.com/project/DRiXD/CommonPlayground/dashboard) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aff81896be354fc48280efd8135fb3ef)](https://app.codacy.com/app/DRiXD/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Grade_Settings)
+The code quality tool is Codacy. [Codacy](https://app.codacy.com/project/DRiXD/CommonPlayground/dashboard) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aff81896be354fc48280efd8135fb3ef)](https://app.codacy.com/app/DRiXD/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Grade_Settings)
 
 ## 7.4 Incident Logs and Change Requests
 

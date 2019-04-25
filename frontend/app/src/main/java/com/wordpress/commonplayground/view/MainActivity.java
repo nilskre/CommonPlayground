@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void observeChangesInSessionList() {
-        mainActivityViewModel.getSessions().observe(this, new android.arch.lifecycle.Observer<List<Session>>() {
+        mainActivityViewModel.getSessions("getSessionList").observe(this, new android.arch.lifecycle.Observer<List<Session>>() {
             @Override
             public void onChanged(@Nullable List<Session> sessions) {
                 Log.d("Observed: ", "SessionList changed");
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onRestart() {
         super.onRestart();
         session.checkLogin();
-        mainActivityViewModel.getSessions();
+        mainActivityViewModel.getSessions("getSessionList");
     }
 
     @Override

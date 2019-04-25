@@ -1,11 +1,16 @@
 package com.wordpress.commonplayground.view;
 
+import android.arch.lifecycle.ViewModelProviders;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -13,6 +18,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -22,6 +28,13 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.model.Session;
+import com.wordpress.commonplayground.network.VolleyRequestQueue;
+import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
+import com.wordpress.commonplayground.viewmodel.SessionManager;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class MySessionsActivity extends AppCompatActivity {
 
@@ -39,6 +52,11 @@ public class MySessionsActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private MainActivityViewModel mainActivityViewModel;
+    private SessionsAdapter adapter;
+    private RecyclerView rvSessions;
+    private SessionManager session;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +64,22 @@ public class MySessionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_sessions);
         Window window = this.getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                observeChangesInSessionList();
+                Snackbar.make(rvSessions, R.string.refreshed, 2000).show();
+                swipeContainer.setRefreshing(false);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(R.color.colorPrimary,
+                R.color.colorPrimaryDark,
+                R.color.colorPrimaryLight,
+                R.color.colorAccent);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,16 +91,16 @@ public class MySessionsActivity extends AppCompatActivity {
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        //mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        //mViewPager = (ViewPager) findViewById(R.id.container);
+        //mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        //TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        //mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        //tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +111,31 @@ public class MySessionsActivity extends AppCompatActivity {
             }
         });
 
+        rvSessions = findViewById(R.id.rvSessions);
+        VolleyRequestQueue.getInstance(this);
+        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+
+        session = new SessionManager(getApplicationContext());
+        session.checkLogin();
+        observeChangesInSessionList();
+    }
+
+    private void observeChangesInSessionList() {
+        HashMap<String, String> user = session.getUserDetails();
+        String userID = user.get(SessionManager.KEY_ID);
+        mainActivityViewModel.getSessions("getMyHostedSessions?userID=" + userID).observe(this, new android.arch.lifecycle.Observer<List<Session>>() {
+            @Override
+            public void onChanged(@Nullable List<Session> sessions) {
+                Log.d("Observed: ", "SessionList changed");
+                updateAndDisplayListData(sessions);
+            }
+        });
+    }
+
+    private void updateAndDisplayListData(List<Session> sessions) {
+        adapter = new SessionsAdapter(sessions);
+        rvSessions.setAdapter(adapter);
+        rvSessions.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override

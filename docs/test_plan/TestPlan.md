@@ -84,6 +84,7 @@ This test plan is written primarily for internal documentation reasons. It is me
 | tbd  | to be determined                    |
 | UI   | User Interface                      |
 | VC   | Version Control                     |
+| TDD  | Test Driven Development             |
 
 ### 1.5  References
 
@@ -322,7 +323,7 @@ We want to keep over 20% code coverage.
 
 | Risk | Mitigation Strategy | Contingency (Risk is realized) |
 |------|---------------------|--------------------------------|
-| Code has lots of side effects | Refactor code (Clean Code principles) | publish new refacored tests |
+| Code has lots of side effects | Refactor code (Clean Code principles) | publish new refactored tests |
 | Test Runner is not able to execute tests | Use standard libraries which include working Test Runner | fix test execution configuration |
 | UI tests fail | Refactor test | publish refactored test and restart |
 

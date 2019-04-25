@@ -51,4 +51,5 @@
     <string name="section_format">Hallo Welt für Sektion: %1$d</string>
     <string name="detail_join">Teilnehmen</string>
     <string name="detail_leave">Verlassen</string>
+    <string name="menu_messages">Nachrichten</string>
 </resources>

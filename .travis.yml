@@ -54,7 +54,9 @@ jobs:
         - adb shell settings put global animator_duration_scale 0 &
         - adb shell input keyevent 82 &
       script:
-        - (cd frontend/; ./gradlew build connectedCheck)
+        - cd frontend/
+        - ./gradlew test 
+        - ./gradlew build connectedCheck
 
     - stage: deploy-backend
       if: branch = master

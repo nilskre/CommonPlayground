@@ -16,6 +16,7 @@ group = 'commonplayground'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'jacoco'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.palantir.docker'
@@ -25,9 +26,13 @@ bootJar {
     version =  '0.1.0'
 }
 
+configurations { codacy }
+
 repositories {
     mavenCentral()
     maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
+    maven { url "https://jitpack.io" }
+    maven { url "http://dl.bintray.com/typesafe/maven-releases" }
 }
 
 sourceCompatibility = 1.8
@@ -70,6 +75,9 @@ dependencies {
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.6'
     annotationProcessor 'org.projectlombok:lombok:1.18.6'
+
+    // codacy
+    codacy 'com.github.codacy:codacy-coverage-reporter:-SNAPSHOT'
 }
 
 test {
@@ -89,4 +97,29 @@ docker {
     name "${project.group}/${bootJar.baseName}"
     copySpec.from(tasks.unpack.outputs).into("dependency")
     buildArgs(['DEPENDENCY': "dependency"])
+}
+
+jacoco {
+    toolVersion = "0.8.3"
+    reportsDir = file("$buildDir/reports/jacoco")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        xml.destination file("${buildDir}/reports/jacoco/jacocoXml")
+    }
+}
+
+task sendCoverageToCodacy(type: JavaExec, dependsOn: jacocoTestReport) {
+    main = "com.codacy.CodacyCoverageReporter"
+    classpath = configurations.codacy
+    args = [
+            "report",
+            "-l",
+            "Java",
+            "-r",
+            "${buildDir}/reports/jacoco/jacocoXml"
+    ]
 }

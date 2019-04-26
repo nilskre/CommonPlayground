@@ -11,7 +11,8 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 
 # Build status
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aff81896be354fc48280efd8135fb3ef)](https://app.codacy.com/app/DRiXD/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Grade_Settings)
+Codacy Grade: [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aff81896be354fc48280efd8135fb3ef)](https://app.codacy.com/app/DRiXD/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Grade_Settings)
+Code Test Coverage: [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/4dd2223d67834bb39b02f6b028507ea0)](https://www.codacy.com/app/DRiXD/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Coverage)
 dev: [![Build Status](https://travis-ci.com/nilskre/CommonPlayground.svg?branch=dev)](https://travis-ci.com/nilskre/CommonPlayground)
 
 

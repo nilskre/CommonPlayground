@@ -5,7 +5,7 @@ import cucumber.api.java.en.Then;
 import static io.restassured.RestAssured.get;
 
 
-public class sessionOverviewStepDefinitions {
+public class SessionOverviewStepDefinitions {
 
     @Then("^There should be sessions$")
     public void thereShouldBeSessions() {

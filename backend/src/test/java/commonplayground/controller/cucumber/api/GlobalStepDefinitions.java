@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 
 import static io.restassured.RestAssured.get;
 
-public class globalStepDefinitions {
+public class GlobalStepDefinitions {
 
     @Given("The backend is active")
     public void theBackendIsActive() {

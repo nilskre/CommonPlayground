@@ -2,8 +2,7 @@ package commonplayground.model;
 
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SessionRemoveUserTest {
 
@@ -13,7 +12,7 @@ public class SessionRemoveUserTest {
         User testUser = new User("Username", "_pswAPP89.", "test@test.de");
         testSession.addUserToSession(testUser);
         assertEquals(testSession.removeUserFromSession(testUser), 0);
-        assertTrue(!testSession.getUsers().contains(testUser));
+        assertFalse(testSession.getUsers().contains(testUser));
     }
 
     @Test

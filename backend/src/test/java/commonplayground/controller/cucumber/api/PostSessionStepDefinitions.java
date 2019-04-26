@@ -13,7 +13,7 @@ import java.net.URLEncoder;
 import static io.restassured.RestAssured.get;
 
 
-public class postSessionStepDefinitions {
+public class PostSessionStepDefinitions {
 
     @When("^I post a new Session with title ([^\"]*) description ([^\"]*) game ([^\"]*) place ([^\"]*) date ([^\"]*) time ([^\"]*) numberOfPlayers ([^\"]*) idOfHost ([^\"]*) genre ([^\"]*) isOnline ([^\"]*)$")
     public void iPostANewSessionWithTitleTitleDescriptionDescriptionGameGamePlacePlaceDateDateTimeTimeNumberOfPlayersNumberOfPlayersIdOfHostIdOfHostGenreGenreIsOnlineIsOnline(String testTitle, String testDescription, String testGame, String testPlace, String testDate, String testTime, String testNumberOfPlayers, String testIdOfHost, String testGenre, String testIsOnline) {

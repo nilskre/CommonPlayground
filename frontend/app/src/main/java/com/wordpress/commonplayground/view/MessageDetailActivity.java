@@ -1,4 +1,4 @@
-package com.wordpress.commonplayground;
+package com.wordpress.commonplayground.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
+
+import com.wordpress.commonplayground.R;
 
 /**
  * An activity representing a single Message detail screen.

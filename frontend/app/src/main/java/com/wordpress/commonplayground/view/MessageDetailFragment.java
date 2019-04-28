@@ -1,4 +1,4 @@
-package com.wordpress.commonplayground;
+package com.wordpress.commonplayground.view;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.wordpress.commonplayground.dummy.DummyContent;
+import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.view.MessageDetailActivity;
 
 /**
  * A fragment representing a single Message detail screen.
@@ -26,7 +27,7 @@ public class MessageDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+   // private DummyContent.DummyItem mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -43,20 +44,20 @@ public class MessageDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+          //  mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+            //    appBarLayout.setTitle(mItem.content);
             }
         }
     }
 
-    @Override
+/*    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.message_detail, container, false);
+    View rootView = inflater.inflate(R.layout.message_detail, container, false);
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
@@ -64,5 +65,5 @@ public class MessageDetailFragment extends Fragment {
         }
 
         return rootView;
-    }
+    } */
 }

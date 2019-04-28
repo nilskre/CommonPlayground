@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".MessageListActivity"
+    tools:context=".view.MessageListActivity"
     tools:listitem="@layout/message_list_content" />

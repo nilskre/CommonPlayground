@@ -10,7 +10,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".MessageListActivity">
+    tools:context=".view.MessageListActivity">
 
     <!--
     This layout is a two-pane layout for the Messages
@@ -27,7 +27,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.wordpress.commonplayground.MessageListActivity"
+        tools:context="com.wordpress.commonplayground.view.MessageListActivity"
         tools:listitem="@layout/message_list_content" />
 
     <FrameLayout

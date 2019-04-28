@@ -1,25 +1,24 @@
-package com.wordpress.commonplayground;
+package com.wordpress.commonplayground.view;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
-import com.wordpress.commonplayground.dummy.DummyContent;
+import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.model.Message;
-import com.wordpress.commonplayground.view.SessionsAdapter;
+import com.wordpress.commonplayground.view.MessageDetailActivity;
+import com.wordpress.commonplayground.view.MessagesAdapter;
 import com.wordpress.commonplayground.viewmodel.MessagesViewModel;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
@@ -36,6 +35,7 @@ import java.util.List;
 public class MessageListActivity extends AppCompatActivity {
     private SessionManager session;
     private MessagesViewModel messagesViewModel;
+    private RecyclerView rvMessages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +60,9 @@ public class MessageListActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        View recyclerView = findViewById(R.id.message_list);
-        assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+        rvMessages = findViewById(R.id.message_list);
+        assert rvMessages != null;
+        setupRecyclerView();
 
         session = new SessionManager(getApplicationContext());
     }
@@ -84,64 +84,22 @@ public class MessageListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, messagesViewModel.getMessages()));
+    private void setupRecyclerView() {
+        observeChangesInSessionList();
     }
 
-    public static class SimpleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
-
-        private final MessageListActivity mParentActivity;
-        private final List<Message> mValues;
-        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+    private void observeChangesInSessionList() {
+        messagesViewModel.getMessages().observe(this, new android.arch.lifecycle.Observer<List<Message>>() {
             @Override
-            public void onClick(View view) {
-                Message item = (Message) view.getTag();
-                    Context context = view.getContext();
-                    Intent intent = new Intent(context, MessageDetailActivity.class);
-                    intent.putExtra(MessageDetailFragment.ARG_ITEM_ID, item.getDescription());
-
-                    context.startActivity(intent);
-                }
-        };
-
-        SimpleItemRecyclerViewAdapter(MessageListActivity parent,
-                                      List<Message> items) {
-            mValues = items;
-            mParentActivity = parent;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.message_list_content, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mContentView.setText(mValues.get(position).getTitle());
-            holder.itemView.setTag(mValues.get(position));
-            holder.itemView.setOnClickListener(mOnClickListener);
-        }
-
-        @Override
-        public int getItemCount() {
-            return mValues.size();
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView mContentView;
-
-            ViewHolder(View view) {
-                super(view);
-                mContentView = (TextView) view.findViewById(R.id.content);
+            public void onChanged(@Nullable List<Message> messages) {
+                Log.d("Observed: ", "SessionList changed");
+                updateAndDisplayListData(messages);
             }
-        }
+        });
+    }
 
-        public List<Message> getMessages(Long userID){
-
-            return null;
-        }
+    private void updateAndDisplayListData(List<Message> messages) {
+        rvMessages.setAdapter(new MessagesAdapter(messages));
+        rvMessages.setLayoutManager(new LinearLayoutManager(this));
     }
 }

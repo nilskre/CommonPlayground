@@ -240,9 +240,9 @@ Backend IDE test execution:
 
 ## 7.2 Reporting on Test Coverage
 
-TODO Denis
+For reporting our test coverage we use Jacoco and Codacy. 
 
-![Testcoverage](Link)
+Code Test Coverage: [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/4dd2223d67834bb39b02f6b028507ea0)](https://www.codacy.com/app/DRiXD/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Coverage)
 
 ## 7.3 Perceived Quality Reports
 

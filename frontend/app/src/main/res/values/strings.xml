@@ -71,6 +71,6 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="detail_join">Join</string>
     <string name="detail_leave">Leave</string>
-    <string name="title_message_list">Messages</string>
-    <string name="title_message_detail">Message Detail</string>
+    <string name="title_message_list" translatable="false">Messages</string>
+    <string name="title_message_detail" translatable="false">Message Detail</string>
 </resources>

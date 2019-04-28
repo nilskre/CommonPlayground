@@ -22,12 +22,4 @@ public class SessionRemoveUserTest {
         Session testSession = new Session("Title", "Description", "Game", "Place", "12.12.2020", "12:00", 2, hostId, "Genre", "Online");
         assertEquals(testSession.removeUserFromSession(testUser), -20);
     }
-
-    @Test
-    public void testUserIsHost() {
-        User testUser = new User("Username", "_pswAPP89.", "test@test.de");
-        Long hostId = testUser.getId();
-        Session testSession = new Session("Title", "Description", "Game", "Place", "12.12.2020", "12:00", 2, hostId, "Genre", "Online");
-        assertTrue(testSession.userIsHost(testUser));
-    }
 }

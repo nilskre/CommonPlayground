@@ -23,7 +23,7 @@ apply plugin: 'com.palantir.docker'
 
 bootJar {
     baseName = 'commonplayground'
-    version =  '0.1.0'
+    version = '0.1.0'
 }
 
 configurations { codacy }
@@ -54,7 +54,7 @@ dependencies {
     testCompile("junit:junit:4.12")
     testRuntime("org.junit.vintage:junit-vintage-engine:5.4.1")
     // Cucumber
-    testCompile 'io.cucumber:cucumber-java:4.2.0'
+    testCompile 'io.cucumber:cucumber-java:4.2.6'
 
     // rest-assured
     compile 'io.rest-assured:json-path:3.2.0'
@@ -71,7 +71,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
     compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.1.1.RELEASE'
-    
+
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.6'
     annotationProcessor 'org.projectlombok:lombok:1.18.6'
@@ -85,6 +85,23 @@ test {
     testLogging {
         events = ["passed", "failed", "skipped"]
         //showStandardStreams = true
+    }
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'commonplayground.controller.cucumber.api', 'src/test/resources/cucumber']
+        }
     }
 }
 

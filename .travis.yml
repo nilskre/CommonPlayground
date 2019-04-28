@@ -31,7 +31,9 @@ jobs:
     - stage: test-backend
       language: java
       script:
-        - (cd backend/; ./gradlew test clean)
+        - cd backend/ 
+        - ./gradlew test clean
+        - ./gradlew cucumber
     - stage: test-frontend
       language: android
       android:

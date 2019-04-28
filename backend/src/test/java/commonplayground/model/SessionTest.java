@@ -1,9 +1,10 @@
-import commonplayground.model.Session;
-import commonplayground.model.User;
+package commonplayground.model;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SessionTest {
     private static Session testSession;

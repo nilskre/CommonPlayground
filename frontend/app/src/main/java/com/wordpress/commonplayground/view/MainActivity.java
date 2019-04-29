@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setUpUIElements() {
         setUpToolbarAndDrawer();
         setUpNavigation();
-        setUpFab();
     }
 
     private void setUpToolbarAndDrawer() {
@@ -55,18 +54,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_dashboard));
-    }
-
-    private void setUpFab() {
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent openAddSessionActivity = new Intent(MainActivity.this, AddSessionActivity.class);
-                startActivity(openAddSessionActivity);
-            }
-        });
     }
 
     @Override

@@ -1,9 +1,11 @@
 package com.wordpress.commonplayground.view;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -58,6 +60,7 @@ public class DashboardFragment extends Fragment {
                 R.color.colorAccent);
 
         rvSessions = view.findViewById(R.id.rvSessions);
+        setUpFab();
         VolleyRequestQueue.getInstance(getContext());
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         observeChangesInSessionList();
@@ -79,5 +82,17 @@ public class DashboardFragment extends Fragment {
         adapter = new SessionsAdapter(sessions);
         rvSessions.setAdapter(adapter);
         rvSessions.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private void setUpFab() {
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent openAddSessionActivity = new Intent(getContext(), AddSessionActivity.class);
+                startActivity(openAddSessionActivity);
+            }
+        });
     }
 }

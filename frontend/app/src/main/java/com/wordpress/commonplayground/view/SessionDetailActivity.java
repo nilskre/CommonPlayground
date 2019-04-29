@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.wordpress.commonplayground.R;
@@ -43,6 +44,8 @@ public class SessionDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session_detail);
+        Window window = this.getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -110,7 +113,7 @@ public class SessionDetailActivity extends AppCompatActivity {
             args.putString(ARG_SESSION_DATE, session.getDate());
             args.putString(ARG_SESSION_TIME, session.getTime());
             args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, users.size() + "/" + session.getNumberOfPlayers() + " players");
-            args.putString(ARG_SESSION_DESCRIPTION, "Further information:\n" + session.getDescription());
+            args.putString(ARG_SESSION_DESCRIPTION, session.getDescription());
 
             fragment.setArguments(args);
             return fragment;

@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,7 +45,18 @@ public class DashboardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
 
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        setUpSwipeToRefresh();
+        rvSessions = view.findViewById(R.id.rvSessions);
+        setUpFab();
+        VolleyRequestQueue.getInstance(getContext());
+        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        observeChangesInSessionList();
+        session = new SessionManager(getContext());
+        session.checkLogin();
+    }
+
+    private void setUpSwipeToRefresh() {
+        swipeContainer = view.findViewById(R.id.swipeContainer);
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -58,14 +71,6 @@ public class DashboardFragment extends Fragment {
                 R.color.colorPrimaryDark,
                 R.color.colorPrimaryLight,
                 R.color.colorAccent);
-
-        rvSessions = view.findViewById(R.id.rvSessions);
-        setUpFab();
-        VolleyRequestQueue.getInstance(getContext());
-        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
-        observeChangesInSessionList();
-        session = new SessionManager(getContext());
-        session.checkLogin();
     }
 
     private void observeChangesInSessionList() {
@@ -94,5 +99,13 @@ public class DashboardFragment extends Fragment {
                 startActivity(openAddSessionActivity);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.setReorderingAllowed(false);
+        ft.detach(this).attach(this).commit();
     }
 }

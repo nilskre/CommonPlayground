@@ -1,12 +1,9 @@
 package com.wordpress.commonplayground.view;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -60,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onRestart() {
         super.onRestart();
         session.checkLogin();
-        mainActivityViewModel.getSessions();
     }
 
     @Override
@@ -98,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         Fragment fragment = null;
 
         int id = item.getItemId();

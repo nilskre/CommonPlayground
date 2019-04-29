@@ -1,15 +1,17 @@
 package com.wordpress.commonplayground.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Message {
+public class Message implements Parcelable {
 
-    private final String title;
-    private final String description;
-    private final Long id;
+    private String title;
+    private String description;
+    private Long id;
     private Long requesterID;
     private Long requestedSessionID;
     private Boolean read;
@@ -19,7 +21,7 @@ public class Message {
         this.description = description;
         this.id = id;
         this.read = false;
-        this.requestedSessionID = requesterID;
+        this.requestedSessionID = requestedSessionID;
         this.requesterID = requesterID;
     }
 
@@ -28,6 +30,38 @@ public class Message {
         this.description = description;
         this.id = id;
     }
+
+    public Message(Parcel in) {
+        super();
+        readFromParcel(in);
+    }
+
+    public static final Parcelable.Creator<Message> CREATOR = new Parcelable.Creator<Message>() {
+        public Message createFromParcel(Parcel in) {
+            return new Message(in);
+        }
+
+        public Message[] newArray(int size) {
+            return new Message[size];
+        }
+    };
+
+    public void readFromParcel(Parcel in) {
+        title = in.readString();
+        description = in.readString();
+        id = in.readLong();
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeLong(id);
+    }
+
 
     public String getTitle() {
         return title;
@@ -66,12 +100,17 @@ public class Message {
     return null;
     }
 
-    public static Message parseGeneralMesssage(JSONObject messageObject){
+    public static Message parseGeneralMessage(JSONObject messageObject){
         try {
             return new Message(messageObject.getString("title"), messageObject.getString("description"), messageObject.getLong("id"));
         } catch (JSONException e) {
             Log.d("Parse.Session", e.toString());
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return ("Message: " + title);
     }
 }

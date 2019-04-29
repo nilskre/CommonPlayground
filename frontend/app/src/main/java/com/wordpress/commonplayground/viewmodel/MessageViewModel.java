@@ -6,40 +6,36 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.wordpress.commonplayground.BuildConfig;
 import com.wordpress.commonplayground.model.Message;
-import com.wordpress.commonplayground.model.Session;
 import com.wordpress.commonplayground.network.VolleyRequestQueue;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessagesViewModel extends AndroidViewModel {
+public class MessageViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Message>> inbox;
 
-    public MessagesViewModel(@NonNull Application application) {
+    public MessageViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public LiveData<List<Message>> getMessages(){
+    public LiveData<List<Message>> getMessage(String userID){
         if(inbox == null){
             inbox = new MutableLiveData<List<Message>>();
         }
-        getMessagesFromServer();
+        getSessionsFromServer(userID);
         return inbox;
     }
 
-    private void getMessagesFromServer() {
-        String url = BuildConfig.SERVER_URL + "getMyMessages";
+    private void getSessionsFromServer(String userID) {
+        String url = BuildConfig.SERVER_URL + "getSessionList?userID=" + userID;
         JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null,
                 new Response.Listener<JSONArray>() {
@@ -50,6 +46,7 @@ public class MessagesViewModel extends AndroidViewModel {
                             try {
                                 Message message = Message.parseJoinMessage(response.getJSONObject(i));
                                 allMessagesTmpList.add(i, message);
+                                Log.d("Received Sessions", message.toString());
                             } catch (JSONException e) {
                                 Log.d("Parse.Error.Main", e.toString());
                             }
@@ -64,6 +61,6 @@ public class MessagesViewModel extends AndroidViewModel {
                     }
                 }
         );
-        VolleyRequestQueue.getInstance(this.getApplication()).addToQueue(getRequest, "Get user inbox");
+        VolleyRequestQueue.getInstance(this.getApplication()).addToQueue(getRequest, "Get all Messages");
     }
 }

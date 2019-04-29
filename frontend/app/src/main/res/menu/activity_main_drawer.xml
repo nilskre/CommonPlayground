@@ -12,7 +12,7 @@
         <item
             android:id="@+id/nav_mysessions"
             android:icon="@drawable/ic_menu_my_sessions"
-            android:enabled="false"
+            android:enabled="true"
             android:title="@string/menu_mySessions" />
         <item
             android:id="@+id/nav_profile"

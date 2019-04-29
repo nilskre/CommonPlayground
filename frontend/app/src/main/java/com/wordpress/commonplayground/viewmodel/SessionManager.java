@@ -1,14 +1,13 @@
 package com.wordpress.commonplayground.viewmodel;
 
-
-import java.util.HashMap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.util.Log;
 
 import com.wordpress.commonplayground.view.LoginActivity;
+
+import java.util.HashMap;
 
 public class SessionManager {
 
@@ -30,7 +29,6 @@ public class SessionManager {
         }
 
     public void createLoginSession(String UID, String email){
-
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_ID, UID);
         editor.putString(KEY_EMAIL, email);
@@ -51,11 +49,9 @@ public class SessionManager {
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             _context.startActivity(i);
         }
-
     }
 
     public void logoutUser(){
-
         editor.clear();
         editor.commit();
 

@@ -14,12 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.wordpress.commonplayground.R;
-import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private SessionManager session;
-    private MainActivityViewModel mainActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setUpUIElements();
         session = new SessionManager(getApplicationContext());
-        mainActivityViewModel = new MainActivityViewModel(getApplication());
     }
 
     private void setUpUIElements() {

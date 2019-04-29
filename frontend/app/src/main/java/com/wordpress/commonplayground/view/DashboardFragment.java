@@ -29,9 +29,7 @@ import java.util.List;
 public class DashboardFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
     private MainActivityViewModel mainActivityViewModel;
-    private SessionsAdapter adapter;
     private RecyclerView rvSessions;
-    private SessionManager session;
     private View view;
 
     @Nullable
@@ -51,7 +49,7 @@ public class DashboardFragment extends Fragment {
         VolleyRequestQueue.getInstance(getContext());
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         observeChangesInSessionList();
-        session = new SessionManager(getContext());
+        SessionManager session = new SessionManager(getContext());
         session.checkLogin();
     }
 
@@ -84,7 +82,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void updateAndDisplayListData(List<Session> sessions) {
-        adapter = new SessionsAdapter(sessions);
+        SessionsAdapter adapter = new SessionsAdapter(sessions);
         rvSessions.setAdapter(adapter);
         rvSessions.setLayoutManager(new LinearLayoutManager(getContext()));
     }

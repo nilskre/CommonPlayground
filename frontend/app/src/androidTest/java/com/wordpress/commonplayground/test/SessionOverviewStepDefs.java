@@ -2,14 +2,13 @@ package com.wordpress.commonplayground.test;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+
+import androidx.test.rule.ActivityTestRule;
 
 import com.wordpress.commonplayground.view.MainActivity;
 
 import org.junit.Assert;
 import org.junit.Rule;
-import org.junit.runner.RunWith;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -17,7 +16,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-@RunWith(AndroidJUnit4.class)
 public class SessionOverviewStepDefs {
 
     @Rule

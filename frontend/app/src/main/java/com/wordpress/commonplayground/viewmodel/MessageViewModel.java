@@ -30,12 +30,12 @@ public class MessageViewModel extends AndroidViewModel {
         if(inbox == null){
             inbox = new MutableLiveData<List<Message>>();
         }
-        getSessionsFromServer(userID);
+        getMessagesFromServer(userID);
         return inbox;
     }
 
-    private void getSessionsFromServer(String userID) {
-        String url = BuildConfig.SERVER_URL + "getSessionList?userID=" + userID;
+    private void getMessagesFromServer(String userID) {
+        String url = BuildConfig.SERVER_URL + "getMyMessages?userID=" + userID;
         JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null,
                 new Response.Listener<JSONArray>() {
@@ -63,4 +63,6 @@ public class MessageViewModel extends AndroidViewModel {
         );
         VolleyRequestQueue.getInstance(this.getApplication()).addToQueue(getRequest, "Get all Messages");
     }
+
+    //TODO: Delete Message
 }

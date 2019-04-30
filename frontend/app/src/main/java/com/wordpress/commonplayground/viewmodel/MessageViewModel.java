@@ -44,6 +44,7 @@ public class MessageViewModel extends AndroidViewModel {
                         List<Message> allMessagesTmpList = new ArrayList<>();
                         for (int i = 0; i < response.length(); i++) {
                             try {
+                                //TODO: Find out which kind of message and parse correctly
                                 Message message = Message.parseJoinMessage(response.getJSONObject(i));
                                 allMessagesTmpList.add(i, message);
                                 Log.d("Received Sessions", message.toString());

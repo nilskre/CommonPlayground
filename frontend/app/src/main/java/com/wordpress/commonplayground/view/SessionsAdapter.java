@@ -32,7 +32,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View sessionView = inflater.inflate(R.layout.item_session, parent, false);
-        return new SessionViewHolder(context, sessionView);;
+        return new SessionViewHolder(context, sessionView);
     }
 
 

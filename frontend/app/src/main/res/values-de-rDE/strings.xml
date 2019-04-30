@@ -53,6 +53,5 @@
     <string name="detail_leave">Verlassen</string>
     <string name="tab_text_1">Ausrichten</string>
     <string name="tab_text_2">Teilnehmen</string>
-    <string name="tab_text_3">Ausstehend</string>
     <string name="title_activity_my_sessions">Meine Sessions</string>
 </resources>

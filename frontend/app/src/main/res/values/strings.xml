@@ -73,5 +73,4 @@
     <string name="title_activity_my_sessions">My Sessions</string>
     <string name="tab_text_1">Hosted</string>
     <string name="tab_text_2">Joined</string>
-    <string name="tab_text_3">Pending</string>
 </resources>

@@ -33,8 +33,6 @@ public class MySessionsFragment extends Fragment {
     private MainActivityViewModel mainActivityViewModel;
     private SessionManager session;
     private RecyclerView rvSessions;
-    private SessionsAdapter adapter;
-    private String api;
     private TabLayout tabLayout;
     private static int selectedTabPosition = 0;
 
@@ -81,6 +79,7 @@ public class MySessionsFragment extends Fragment {
         String userID = user.get(SessionManager.KEY_ID);
 
         selectedTabPosition = tabLayout.getSelectedTabPosition();
+        String api;
         if (selectedTabPosition == 0) {
             api = "getMyHostedSessions";
         } else {
@@ -97,7 +96,7 @@ public class MySessionsFragment extends Fragment {
     }
 
     private void updateAndDisplayListData(List<Session> sessions) {
-        adapter = new SessionsAdapter(sessions);
+        SessionsAdapter adapter = new SessionsAdapter(sessions);
         rvSessions.setAdapter(adapter);
         rvSessions.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -112,7 +111,7 @@ public class MySessionsFragment extends Fragment {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                //When a tab gets unselected, do nothing
             }
 
             @Override

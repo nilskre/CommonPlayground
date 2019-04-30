@@ -20,9 +20,6 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private SessionManager session;
-    private Fragment fragment;
-    private MenuItem navItem;
-    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +48,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setUpNavigation() {
-        navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         HashMap<String, String> user = session.getUserDetails();
         int idMenuItem = Integer.parseInt(user.get(SessionManager.KEY_MENU_ITEM_MAIN));
+        MenuItem navItem;
         if (idMenuItem == -1) {
             navItem = navigationView.getMenu().findItem(R.id.nav_dashboard);
         } else {
@@ -105,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        fragment = null;
+        Fragment fragment = null;
 
         int id = item.getItemId();
         session.setKeyMenuItemMain("" + id);

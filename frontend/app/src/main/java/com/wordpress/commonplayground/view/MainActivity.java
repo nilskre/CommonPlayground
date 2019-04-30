@@ -18,10 +18,20 @@ import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private SessionManager session;
+    private Fragment fragment;
+    private MenuItem navItem;
+    private int idNavItem;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            idNavItem = savedInstanceState.getInt("NavItem");
+        } else {
+            idNavItem = -1;
+        }
 
         setContentView(R.layout.activity_main);
 
@@ -46,9 +56,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setUpNavigation() {
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
+        if (idNavItem == -1) {
+            navItem = navigationView.getMenu().findItem(R.id.nav_dashboard);
+        } else {
+            navItem = navigationView.getMenu().findItem(idNavItem);
+        }
         navigationView.setNavigationItemSelectedListener(this);
-        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_dashboard));
+        onNavigationItemSelected(navItem);
     }
 
     @Override
@@ -92,9 +107,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Fragment fragment = null;
+        fragment = null;
 
         int id = item.getItemId();
+        idNavItem = id;
 
         if (id == R.id.nav_dashboard) {
             fragment = new DashboardFragment();
@@ -124,6 +140,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("NavItem", idNavItem);
     }
 
 }

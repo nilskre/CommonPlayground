@@ -110,10 +110,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         session.setKeyMenuItemMain("" + id);
 
+        if (id == R.id.nav_mysessions) {
+            fragment = new MySessionsFragment();
+        } else {
+            MySessionsFragment.resetTabPostition();
+        }
+
         if (id == R.id.nav_dashboard) {
             fragment = new DashboardFragment();
-        } else if (id == R.id.nav_mysessions) {
-            fragment = new MySessionsFragment();
         } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_friendlist) {

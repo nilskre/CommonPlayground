@@ -34,10 +34,9 @@ public class MySessionsFragment extends Fragment {
     private SessionManager session;
     private RecyclerView rvSessions;
     private SessionsAdapter adapter;
-    private View hostedTab;
-    private View joinedTab;
     private String api;
     private TabLayout tabLayout;
+    private static int selectedTabPosition = 0;
 
     @Nullable
     @Override
@@ -81,7 +80,7 @@ public class MySessionsFragment extends Fragment {
         HashMap<String, String> user = session.getUserDetails();
         String userID = user.get(SessionManager.KEY_ID);
 
-        int selectedTabPosition = tabLayout.getSelectedTabPosition();
+        selectedTabPosition = tabLayout.getSelectedTabPosition();
         if (selectedTabPosition == 0) {
             api = "getMyHostedSessions";
         } else {
@@ -121,6 +120,8 @@ public class MySessionsFragment extends Fragment {
                 observeChangesInSessionList();
             }
         });
+        TabLayout.Tab tab = tabLayout.getTabAt(selectedTabPosition);
+        tab.select();
     }
 
     @Override
@@ -129,5 +130,9 @@ public class MySessionsFragment extends Fragment {
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.setReorderingAllowed(false);
         ft.detach(this).attach(this).commit();
+    }
+
+    public static void resetTabPostition() {
+        selectedTabPosition = 0;
     }
 }

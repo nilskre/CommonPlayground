@@ -16,28 +16,23 @@ import android.view.MenuItem;
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private SessionManager session;
     private Fragment fragment;
     private MenuItem navItem;
-    private int idNavItem;
     private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null) {
-            idNavItem = savedInstanceState.getInt("NavItem");
-        } else {
-            idNavItem = -1;
-        }
-
         setContentView(R.layout.activity_main);
 
-        setUpUIElements();
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
+        setUpUIElements();
     }
 
     private void setUpUIElements() {
@@ -57,13 +52,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setUpNavigation() {
         navigationView = findViewById(R.id.nav_view);
-        if (idNavItem == -1) {
+        HashMap<String, String> user = session.getUserDetails();
+        int idMenuItem = Integer.parseInt(user.get(SessionManager.KEY_MENU_ITEM_MAIN));
+        if (idMenuItem == -1) {
             navItem = navigationView.getMenu().findItem(R.id.nav_dashboard);
         } else {
-            navItem = navigationView.getMenu().findItem(idNavItem);
+            navItem = navigationView.getMenu().findItem(idMenuItem);
         }
         navigationView.setNavigationItemSelectedListener(this);
         onNavigationItemSelected(navItem);
+        navigationView.setCheckedItem(idMenuItem);
     }
 
     @Override
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragment = null;
 
         int id = item.getItemId();
-        idNavItem = id;
+        session.setKeyMenuItemMain("" + id);
 
         if (id == R.id.nav_dashboard) {
             fragment = new DashboardFragment();
@@ -141,12 +139,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putInt("NavItem", idNavItem);
-    }
-
 }

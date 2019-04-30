@@ -21,6 +21,7 @@ public class SessionManager {
         private static final String IS_LOGIN = "IsLoggedIn";
         public static final String KEY_EMAIL = "email";
         public static final String KEY_ID = "UserID";
+        public static final String KEY_MENU_ITEM_MAIN = "ActiveFragment";
 
         public SessionManager(Context context){
             this._context = context;
@@ -39,6 +40,7 @@ public class SessionManager {
         HashMap<String, String> user = new HashMap<String, String>();
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
         user.put(KEY_ID, pref.getString(KEY_ID, null));
+        user.put(KEY_MENU_ITEM_MAIN, pref.getString(KEY_MENU_ITEM_MAIN,"-1"));
         return user;
     }
 
@@ -64,5 +66,10 @@ public class SessionManager {
 
     public boolean isLoggedIn(){
         return pref.getBoolean(IS_LOGIN, false);
+    }
+
+    public void setKeyMenuItemMain(String s) {
+        editor.putString(KEY_MENU_ITEM_MAIN, s);
+        editor.commit();
     }
 }

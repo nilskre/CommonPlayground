@@ -1,11 +1,15 @@
 package com.wordpress.commonplayground.view;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +34,10 @@ public class MySessionsFragment extends Fragment {
     private SessionManager session;
     private RecyclerView rvSessions;
     private SessionsAdapter adapter;
+    private View hostedTab;
+    private View joinedTab;
+    private String api;
+    private TabLayout tabLayout;
 
     @Nullable
     @Override
@@ -42,17 +50,17 @@ public class MySessionsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
 
-        setUpSwipeToRefresh();
         rvSessions = view.findViewById(R.id.rvSessions);
         VolleyRequestQueue.getInstance(getContext());
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         session = new SessionManager(getContext());
-        session.checkLogin();
+        setUpTabLayout();
+        setUpSwipeToRefresh();
         observeChangesInSessionList();
     }
 
     private void setUpSwipeToRefresh() {
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeContainer = view.findViewById(R.id.swipeContainer);
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -72,7 +80,15 @@ public class MySessionsFragment extends Fragment {
     private void observeChangesInSessionList() {
         HashMap<String, String> user = session.getUserDetails();
         String userID = user.get(SessionManager.KEY_ID);
-        mainActivityViewModel.getSessions("getMyHostedSessions?userID=" + userID).observe(this, new android.arch.lifecycle.Observer<List<Session>>() {
+
+        int selectedTabPosition = tabLayout.getSelectedTabPosition();
+        if (selectedTabPosition == 0) {
+            api = "getMyHostedSessions";
+        } else {
+            api = "getMyJoinedSessions";
+        }
+
+        mainActivityViewModel.getSessions(api + "?userID=" + userID).observe(this, new android.arch.lifecycle.Observer<List<Session>>() {
             @Override
             public void onChanged(@Nullable List<Session> sessions) {
                 Log.d("Observed: ", "SessionList changed");
@@ -85,5 +101,33 @@ public class MySessionsFragment extends Fragment {
         adapter = new SessionsAdapter(sessions);
         rvSessions.setAdapter(adapter);
         rvSessions.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private void setUpTabLayout() {
+        tabLayout = view.findViewById(R.id.tabs);
+        tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                observeChangesInSessionList();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                observeChangesInSessionList();
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.setReorderingAllowed(false);
+        ft.detach(this).attach(this).commit();
     }
 }

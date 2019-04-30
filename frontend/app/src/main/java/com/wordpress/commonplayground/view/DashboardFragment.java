@@ -50,7 +50,6 @@ public class DashboardFragment extends Fragment {
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         observeChangesInSessionList();
         SessionManager session = new SessionManager(getContext());
-        session.checkLogin();
     }
 
     private void setUpSwipeToRefresh() {

@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setUpUIElements();
         session = new SessionManager(getApplicationContext());
+        session.checkLogin();
     }
 
     private void setUpUIElements() {

@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private SessionManager session;
 
@@ -25,8 +27,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setContentView(R.layout.activity_main);
 
-        setUpUIElements();
         session = new SessionManager(getApplicationContext());
+        session.checkLogin();
+        setUpUIElements();
     }
 
     private void setUpUIElements() {
@@ -46,8 +49,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setUpNavigation() {
         NavigationView navigationView = findViewById(R.id.nav_view);
+        HashMap<String, String> user = session.getUserDetails();
+        int idMenuItem = Integer.parseInt(user.get(SessionManager.KEY_MENU_ITEM_MAIN));
+        MenuItem navItem;
+        if (idMenuItem == -1) {
+            navItem = navigationView.getMenu().findItem(R.id.nav_dashboard);
+        } else {
+            navItem = navigationView.getMenu().findItem(idMenuItem);
+        }
         navigationView.setNavigationItemSelectedListener(this);
-        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_dashboard));
+        onNavigationItemSelected(navItem);
+        navigationView.setCheckedItem(idMenuItem);
     }
 
     @Override
@@ -94,11 +106,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = null;
 
         int id = item.getItemId();
+        session.setKeyMenuItemMain("" + id);
+
+        if (id == R.id.nav_mysessions) {
+            fragment = new MySessionsFragment();
+        } else {
+            MySessionsFragment.resetTabPostition();
+        }
 
         if (id == R.id.nav_dashboard) {
             fragment = new DashboardFragment();
-        } else if (id == R.id.nav_mysessions) {
-
         } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_friendlist) {
@@ -124,5 +141,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

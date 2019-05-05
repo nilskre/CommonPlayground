@@ -29,16 +29,16 @@ public class MainActivityViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public LiveData<List<Session>> getSessions(){
+    public LiveData<List<Session>> getSessions(String api){
         if(activeSessions == null){
             activeSessions = new MutableLiveData<List<Session>>();
         }
-        getSessionsFromServer();
+        getSessionsFromServer(api);
         return activeSessions;
     }
 
-    private void getSessionsFromServer() {
-        String url = BuildConfig.SERVER_URL + "getSessionList";
+    private void getSessionsFromServer(String api) {
+        String url = BuildConfig.SERVER_URL + api;
         JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null,
                 new Response.Listener<JSONArray>() {

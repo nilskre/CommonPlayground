@@ -71,6 +71,9 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="detail_join">Join</string>
     <string name="detail_leave">Leave</string>
+    <string name="title_activity_my_sessions">My Sessions</string>
+    <string name="tab_text_1">Hosted</string>
+    <string name="tab_text_2">Joined</string>
     <string name="title_message_list" translatable="false">Messages</string>
     <string name="title_message_detail" translatable="false">Message Detail</string>
     <string name="message_button_delete" translatable="false">Delete</string>

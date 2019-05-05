@@ -9,7 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testApplicationId "com.wordpress.commonplayground.test"
-        testInstrumentationRunner "com.wordpress.commonplayground.test.Instrumentation"
+        testInstrumentationRunner 'cucumber.api.android.CucumberAndroidJUnitRunner'
     }
     buildTypes {
         debug {
@@ -45,12 +45,18 @@ dependencies {
     //JUnit
     testImplementation 'junit:junit:4.12'
 
+    //Android instrumented tests
+    // Core library
+    androidTestImplementation 'androidx.test:core:1.1.0'
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.1.1'
+
     //Espresso UI Tests
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    androidTestImplementation 'com.android.support:support-annotations:28.0.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
     //Cucumber
-    androidTestImplementation 'info.cukes:cucumber-android:1.2.5@jar'
-    androidTestImplementation 'info.cukes:cucumber-picocontainer:1.2.4'
+    androidTestImplementation "io.cucumber:cucumber-android:4.3.0"
 
     //ViewModel
     implementation "android.arch.lifecycle:extensions:1.1.0"

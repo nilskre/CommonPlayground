@@ -15,6 +15,8 @@ public class Message {
     @Getter
     private Long id;
     @Getter
+    private String type;
+    @Getter
     private String title;
     @Getter
     private String description;
@@ -27,6 +29,7 @@ public class Message {
     }
 
     public Message(String title, String description, Long userIDWHoWantsToJoin, Long sessionIdUserWantsToJoin) {
+        this.type = "JoinRequest";
         this.title = title;
         this.description = description;
         this.userIdWhoWantsToJoin = userIDWHoWantsToJoin;
@@ -34,6 +37,7 @@ public class Message {
     }
 
     public Message(String title, String description) {
+        this.type = "Info";
         this.title = title;
         this.description = description;
     }

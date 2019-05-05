@@ -70,7 +70,7 @@ public class MessageFragment extends Fragment {
                 R.color.colorAccent);
     }
 
-    private void observeChangesInMessageList() {
+    public void observeChangesInMessageList() {
         messageViewModel.getMessage(session.getUserDetails().get(SessionManager.KEY_ID)).observe(this, new android.arch.lifecycle.Observer<List<Message>>() {
             @Override
             public void onChanged(@Nullable List<Message> inbox) {
@@ -81,7 +81,7 @@ public class MessageFragment extends Fragment {
     }
 
     private void updateAndDisplayListData(List<Message> inbox) {
-        MessagesAdapter adapter = new MessagesAdapter(inbox, session, messageViewModel);
+        MessagesAdapter adapter = new MessagesAdapter(inbox, session, messageViewModel, rvMessage);
         rvMessage.setAdapter(adapter);
         rvMessage.setLayoutManager(new LinearLayoutManager(getContext()));
     }

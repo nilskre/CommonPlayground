@@ -22,11 +22,13 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     private final ExpansionLayoutCollection expansionsCollection = new ExpansionLayoutCollection();
     private SessionManager session;
     private MessageViewModel viewModel;
+    private RecyclerView parent;
 
-    public MessagesAdapter(List<Message> inbox, SessionManager session, MessageViewModel viewModel) {
+    public MessagesAdapter(List<Message> inbox, SessionManager session, MessageViewModel viewModel, RecyclerView recyclerView) {
         this.inbox = inbox;
         this.session = session;
         this.viewModel = viewModel;
+        parent = recyclerView;
         expansionsCollection.openOnlyOne(true);
     }
 
@@ -41,13 +43,14 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         Message message = inbox.get(position);
         viewHolder.bind(inbox.get(position));
         TextView titleTextView = viewHolder.titleTextView;
+        Button deleteButton = viewHolder.deleteButton;
         titleTextView.setText(message.getTitle());
         TextView authorTextView = viewHolder.authorTextView;
         //authorTextView.setText(message.getTitle());
         TextView descriptionTextView = viewHolder.descriptionTextView;
         descriptionTextView.setText(message.getDescription());
         expansionsCollection.add(viewHolder.getExpansionLayout());
-        Button deleteButton = viewHolder.deleteButton;
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +58,8 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
                 String passMID = Long.toString(inbox.get(pos).getId());
                 String passUID = session.getUserDetails().get(SessionManager.KEY_ID);
                 viewModel.deleteMessage(passUID, passMID);
-
+                inbox.remove(pos);
+                parent.getAdapter().notifyItemRemoved(pos);
             }
         });
     }
@@ -87,7 +91,6 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         }
 
         public void bind(Object object){
-
             expansionLayout.collapse(false);
         }
 

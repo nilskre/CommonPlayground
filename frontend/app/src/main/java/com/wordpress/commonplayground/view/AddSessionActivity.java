@@ -3,11 +3,11 @@ package com.wordpress.commonplayground.view;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,8 +46,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
-        type_spinner = (Spinner)findViewById(R.id.type_spinner);
-        genre_spinner = (Spinner)findViewById(R.id.genre_spinner);
+        type_spinner = findViewById(R.id.type_spinner);
+        genre_spinner = findViewById(R.id.genre_spinner);
 
         type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -55,7 +55,6 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
-                return;
             }
         });
 
@@ -65,24 +64,24 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void setOnclickListeners() {
-        btnPublish = (Button) findViewById(R.id.ButtonPublish);
+        btnPublish = findViewById(R.id.ButtonPublish);
         btnPublish.setOnClickListener(this);
 
-        btnDatePicker = (ImageButton) findViewById(R.id.btn_date);
+        btnDatePicker = findViewById(R.id.btn_date);
         btnDatePicker.setOnClickListener(this);
 
-        btnTimePicker = (ImageButton) findViewById(R.id.btn_time);
+        btnTimePicker = findViewById(R.id.btn_time);
         btnTimePicker.setOnClickListener(this);
     }
 
     private void accessUIInputFields() {
-        title = (TextInputLayout) findViewById(R.id.TitleInput);
-        game = (TextInputLayout) findViewById(R.id.GameInput);
-        place = (TextInputLayout) findViewById(R.id.PlaceInput);
-        date = (TextInputLayout) findViewById(R.id.DateInput);
-        time = (TextInputLayout) findViewById(R.id.TimeInput);
-        numberOfPlayers = (TextInputLayout) findViewById(R.id.PlayersInput);
-        description = (TextInputLayout) findViewById(R.id.DescriptionInput);
+        title = findViewById(R.id.TitleInput);
+        game = findViewById(R.id.GameInput);
+        place = findViewById(R.id.PlaceInput);
+        date = findViewById(R.id.DateInput);
+        time = findViewById(R.id.TimeInput);
+        numberOfPlayers = findViewById(R.id.PlayersInput);
+        description = findViewById(R.id.DescriptionInput);
     }
 
     @Override

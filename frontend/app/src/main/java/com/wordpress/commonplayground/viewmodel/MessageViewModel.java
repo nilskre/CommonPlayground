@@ -6,17 +6,23 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.wordpress.commonplayground.BuildConfig;
 import com.wordpress.commonplayground.model.Message;
 import com.wordpress.commonplayground.network.VolleyRequestQueue;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MessageViewModel extends AndroidViewModel {
 
@@ -65,5 +71,27 @@ public class MessageViewModel extends AndroidViewModel {
         VolleyRequestQueue.getInstance(this.getApplication()).addToQueue(getRequest, "Get all Messages");
     }
 
-    //TODO: Delete Message
+    public void deleteMessage(String userID, String messageID) {
+        String url = BuildConfig.SERVER_URL + "removeMessage";
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error.Response", String.valueOf(error));
+                //Snackbar.make(view, R.string.new_error, 5000)
+                //        .setAction("Action", null).show();
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put("userID", userID);
+                MyData.put("messageID", messageID);
+                return MyData;
+            }
+        };
+        VolleyRequestQueue.getInstance(this.getApplication()).addToQueue(postRequest, "Get all Messages");
+    }
 }

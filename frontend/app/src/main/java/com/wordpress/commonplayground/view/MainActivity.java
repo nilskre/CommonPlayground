@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
         setUpUIElements();
+
     }
 
     private void setUpUIElements() {
@@ -116,6 +117,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_dashboard) {
             fragment = new DashboardFragment();
+
+        } else if (id == R.id.nav_mysessions) {
+
+        } else if (id == R.id.nav_messages) {
+            fragment = new MessageFragment();
+
         } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_friendlist) {

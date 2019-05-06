@@ -42,7 +42,14 @@ public class Session {
     )
     @Getter
     @ToString.Exclude
-    private List<User> users = new ArrayList();
+    private List<User> users = new ArrayList<>();
+
+    @ManyToMany(
+            cascade = CascadeType.ALL
+    )
+    @Getter
+    @ToString.Exclude
+    private List<User> userWantToJoin = new ArrayList<>();
 
     public Session() {
     }
@@ -77,6 +84,7 @@ public class Session {
             return -11;
         } else {
             this.users.add(user);
+            removeUserWantToJoin(user);
             return 0;
         }
     }
@@ -100,5 +108,13 @@ public class Session {
 
     private boolean userIsHost(User userToLeaveSession) {
         return Objects.equals(userToLeaveSession.getId(), this.idOfHost);
+    }
+
+    public void addUserWantToJoin(User user) {
+        this.userWantToJoin.add(user);
+    }
+
+    private void removeUserWantToJoin(User user) {
+        this.userWantToJoin.remove(user);
     }
 }

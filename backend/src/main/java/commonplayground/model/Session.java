@@ -61,7 +61,7 @@ public class Session {
     }
 
     public int joinRequestToSession(User user){
-        if (SessionFull()) {
+        if (sessionFull()) {
             return -10;
         } else if (userAlreadyJoined(user)) {
             return -11;
@@ -71,7 +71,7 @@ public class Session {
     }
 
     public int addUserToSession(User user) {
-        if (SessionFull()) {
+        if (sessionFull()) {
             return -10;
         } else if (userAlreadyJoined(user)) {
             return -11;
@@ -85,7 +85,7 @@ public class Session {
         return users.contains(user);
     }
 
-    private boolean SessionFull() {
+    private boolean sessionFull() {
         return users.size() >= numberOfPlayers;
     }
 

@@ -10,7 +10,12 @@ public class ShortMessageTest {
 
     @BeforeClass
     public static void setUp() {
-        testMessage = new Message("MessageTitle", "MessageDescription");
+        testMessage = new Message("MessageTitle", "MessageDescription", "CommonPlayground");
+    }
+
+    @Test
+    public void testType() {
+        assertEquals(testMessage.getType(), "Info");
     }
 
     @Test
@@ -21,5 +26,10 @@ public class ShortMessageTest {
     @Test
     public void testDescription() {
         assertEquals(testMessage.getDescription(), "MessageDescription");
+    }
+
+    @Test
+    public void testAuthorName() {
+        assertEquals(testMessage.getAuthorName(), "CommonPlayground");
     }
 }

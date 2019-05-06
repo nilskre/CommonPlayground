@@ -10,7 +10,12 @@ public class LongMessageTest {
 
     @BeforeClass
     public static void setUp() {
-        testMessage = new Message("MessageTitle", "MessageDescription", (long) 1, (long) 2);
+        testMessage = new Message("MessageTitle", "MessageDescription", (long) 1, (long) 2, "CommonPlayground");
+    }
+
+    @Test
+    public void testType() {
+        assertEquals(testMessage.getType(), "JoinRequest");
     }
 
     @Test
@@ -31,5 +36,10 @@ public class LongMessageTest {
     @Test
     public void testSessionIdUserWantsToJoin() {
         assertEquals(testMessage.getSessionIdUserWantsToJoin(), (long) 2);
+    }
+
+    @Test
+    public void testAuthorName() {
+        assertEquals(testMessage.getAuthorName(), "CommonPlayground");
     }
 }

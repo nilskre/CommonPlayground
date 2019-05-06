@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,10 +37,13 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     private Button btnPublish;
     private ImageButton btnDatePicker, btnTimePicker;
-    private TextInputLayout title, game, place, date, time, numberOfPlayers, description;
+    private TextInputLayout titleView, gameView, placeView, dateView, timeView, numberOfPlayersView, descriptionView;
+    private String title, game, place, date, time, numberOfPlayers, description;
     private Spinner type_spinner, genre_spinner;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private SessionManager session;
+    private boolean cancel = false;
+    private View focusView = null;
 
 
     @Override
@@ -75,13 +79,13 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void accessUIInputFields() {
-        title = findViewById(R.id.TitleInput);
-        game = findViewById(R.id.GameInput);
-        place = findViewById(R.id.PlaceInput);
-        date = findViewById(R.id.DateInput);
-        time = findViewById(R.id.TimeInput);
-        numberOfPlayers = findViewById(R.id.PlayersInput);
-        description = findViewById(R.id.DescriptionInput);
+        titleView = findViewById(R.id.TitleInput);
+        gameView = findViewById(R.id.GameInput);
+        placeView = findViewById(R.id.PlaceInput);
+        dateView = findViewById(R.id.DateInput);
+        timeView = findViewById(R.id.TimeInput);
+        numberOfPlayersView = findViewById(R.id.PlayersInput);
+        descriptionView = findViewById(R.id.DescriptionInput);
     }
 
     @Override
@@ -101,7 +105,9 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         if (view == btnPublish) {
             sendRequestToBackend(view);
-            returnToMainActivity();
+            if (!cancel) {
+                returnToMainActivity();
+            }
         }
 
         if (view == btnDatePicker) {
@@ -137,7 +143,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        date.getEditText().setText(((dayOfMonth >= 10) ? "" : "0") + dayOfMonth + "-" + ((monthOfYear + 1 >= 10) ? "" : "0") + (monthOfYear + 1) + "-" + year);
+                        dateView.getEditText().setText(((dayOfMonth >= 10) ? "" : "0") + dayOfMonth + "-" + ((monthOfYear + 1 >= 10) ? "" : "0") + (monthOfYear + 1) + "-" + year);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
@@ -155,70 +161,97 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        time.getEditText().setText(((hourOfDay >= 10) ? "" : "0") + hourOfDay + ":" + ((minute >= 10) ? "" : "0") + minute);
+                        timeView.getEditText().setText(((hourOfDay >= 10) ? "" : "0") + hourOfDay + ":" + ((minute >= 10) ? "" : "0") + minute);
                     }
                 }, mHour, mMinute, true);
         timePickerDialog.show();
     }
 
     public void sendRequestToBackend(View view) {
-        final String sessionTitle = title.getEditText().getText().toString();
-        final String sessionGame = game.getEditText().getText().toString();
-        final String sessionPlace = place.getEditText().getText().toString();
-        final String sessionDate = date.getEditText().getText().toString();
-        final String sessionTime = time.getEditText().getText().toString();
-        final String sessionPlayers = numberOfPlayers.getEditText().getText().toString();
-        final String sessionDesc = description.getEditText().getText().toString();
-        final String sessionGenre = genre_spinner.getSelectedItem().toString();
-        final String sessionType = type_spinner.getSelectedItem().toString();
+        resetErrors();
+        if (!validInput()) {
+            final String sessionGame = gameView.getEditText().getText().toString();
+            final String sessionPlace = placeView.getEditText().getText().toString();
+            final String sessionDate = dateView.getEditText().getText().toString();
+            final String sessionTime = timeView.getEditText().getText().toString();
+            final String sessionPlayers = numberOfPlayersView.getEditText().getText().toString();
+            final String sessionDesc = descriptionView.getEditText().getText().toString();
+            final String sessionGenre = genre_spinner.getSelectedItem().toString();
+            final String sessionType = type_spinner.getSelectedItem().toString();
 
-        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String url = BuildConfig.SERVER_URL + "postNewSession";
-        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("Response", response);
-                Snackbar.make(view, getString(R.string.new_response_fine), 5000)
-                        .setAction("Action", null).show();
-            }
-        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Response", String.valueOf(error));
-                Snackbar.make(view, getString(R.string.new_error), 5000)
-                        .setAction("Action", null).show();
-            }
-        }) {
-            protected Map<String, String> getParams() {
-                Map<String, String> MyData = new HashMap<String, String>();
-                MyData.put("title", sessionTitle);
-                MyData.put("description", sessionDesc);
-                MyData.put("game", sessionGame);
-                MyData.put("place", sessionPlace);
-                MyData.put("date", sessionDate);
-                MyData.put("time", sessionTime);
-                MyData.put("numberOfPlayers", sessionPlayers);
-                MyData.put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
-                MyData.put("genre", sessionGenre);
-                MyData.put("isOnline", sessionType);
-                return MyData;
-            }
-        };
+            RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+            String url = BuildConfig.SERVER_URL + "postNewSession";
+            StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d("Response", response);
+                    Snackbar.make(view, getString(R.string.new_response_fine), 5000)
+                            .setAction("Action", null).show();
+                }
+            }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("Error.Response", String.valueOf(error));
+                    Snackbar.make(view, getString(R.string.new_error), 5000)
+                            .setAction("Action", null).show();
+                }
+            }) {
+                protected Map<String, String> getParams() {
+                    Map<String, String> MyData = new HashMap<String, String>();
+                    MyData.put("title", title);
+                    MyData.put("description", sessionDesc);
+                    MyData.put("game", sessionGame);
+                    MyData.put("place", sessionPlace);
+                    MyData.put("date", sessionDate);
+                    MyData.put("time", sessionTime);
+                    MyData.put("numberOfPlayers", sessionPlayers);
+                    MyData.put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
+                    MyData.put("genre", sessionGenre);
+                    MyData.put("isOnline", sessionType);
+                    return MyData;
+                }
+            };
 
-        MyRequestQueue.add(MyStringRequest);
+            MyRequestQueue.add(MyStringRequest);
+        }
+    }
+
+    private void resetErrors() {
+        titleView.setError(null);
+        gameView.setError(null);
+        placeView.setError(null);
+        dateView.setError(null);
+        timeView.setError(null);
+        numberOfPlayersView.setError(null);
+        descriptionView.setError(null);
+        cancel = false;
     }
 
     protected void updateView(int item){
         Log.d("Selection", Integer.toString(item));
         if (item==0){
-           place.setVisibility(View.GONE);
+           placeView.setVisibility(View.GONE);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.online_genres, android.R.layout.simple_spinner_item);
             genre_spinner.setAdapter(adapter);
         }else{
-            place.setVisibility(View.VISIBLE);
+            placeView.setVisibility(View.VISIBLE);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.offline_genres, android.R.layout.simple_spinner_item);
             genre_spinner.setAdapter(adapter);
         }
 
+    }
+
+    private boolean validInput() {
+        checkForValidTitle();
+        return cancel;
+    }
+
+    private void checkForValidTitle() {
+        title = titleView.getEditText().getText().toString();
+        if (TextUtils.isEmpty(title)) {
+            titleView.setError(getString(R.string.error_field_required));
+            focusView = titleView;
+            cancel = true;
+        }
     }
 }

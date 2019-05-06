@@ -24,7 +24,6 @@
                 android:layout_centerVertical="true"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Author"
                 android:textColor="#3E3E3E" />
 
             <TextView
@@ -68,14 +67,46 @@
                 android:layout_height="100dp"
                 android:layout_width="match_parent" />
 
-            <Button
-                android:id="@+id/ButtonDeleteMessage"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:attr="buttonBarStyle"
+                android:id="@+id/button_container"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/message_button_delete" />
+                android:layout_width="match_parent"
+                android:background="#EEE"
+                android:orientation="horizontal">
+
+                <Button
+                    style="android:attr/buttonBarButtonStyle"
+                    android:id="@+id/ButtonDeleteMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/message_button_delete" />
+
+                <Button
+                    style="android:attr/buttonBarButtonStyle"
+                    android:id="@+id/ButtonAcceptJoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/message_button_accept"
+                    android:visibility="gone" />
+
+                <Button
+                    style="android:attr/buttonBarButtonStyle"
+                    android:id="@+id/ButtonRejectJoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/message_button_reject"
+                    android:visibility="gone" />
+            </LinearLayout>
 
         </LinearLayout>
 

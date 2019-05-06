@@ -1,5 +1,6 @@
 package com.wordpress.commonplayground.view;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,35 +34,62 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     }
 
     @Override
+    @NonNull
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return MessageViewHolder.buildFor(parent);
     }
 
 
     @Override
+    @NonNull
     public void onBindViewHolder(MessageViewHolder viewHolder, int position) {
         Message message = inbox.get(position);
-        viewHolder.bind(inbox.get(position));
         TextView titleTextView = viewHolder.titleTextView;
-        Button deleteButton = viewHolder.deleteButton;
-        titleTextView.setText(message.getTitle());
-        TextView authorTextView = viewHolder.authorTextView;
-        //authorTextView.setText(message.getTitle());
         TextView descriptionTextView = viewHolder.descriptionTextView;
-        descriptionTextView.setText(message.getDescription());
-        expansionsCollection.add(viewHolder.getExpansionLayout());
+        TextView authorTextView = viewHolder.authorTextView;
+        Button deleteButton = viewHolder.deleteButton;
+        Button acceptButton = viewHolder.acceptButton;
+        Button rejectButton = viewHolder.rejectButton;
 
+        authorTextView.setText(message.getAuthor());
+        titleTextView.setText(message.getTitle());
+        descriptionTextView.setText(message.getDescription());
+        setUpButtons(viewHolder, position, deleteButton, acceptButton, rejectButton);
+
+        expansionsCollection.add(viewHolder.getExpansionLayout());
+        viewHolder.bind(inbox.get(position));
+    }
+
+    private void setUpButtons(MessageViewHolder viewHolder, int position, Button deleteButton, Button acceptButton, Button rejectButton) {
+        //SetUP Buttons
+        int pos = viewHolder.getAdapterPosition();
+        String passMID = Long.toString(inbox.get(pos).getId());
+        String passUID = session.getUserDetails().get(SessionManager.KEY_ID);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int pos = viewHolder.getAdapterPosition();
-                String passMID = Long.toString(inbox.get(pos).getId());
-                String passUID = session.getUserDetails().get(SessionManager.KEY_ID);
                 viewModel.deleteMessage(passUID, passMID);
                 inbox.remove(pos);
                 parent.getAdapter().notifyItemRemoved(pos);
             }
         });
+
+        if (inbox.get(position).getType().contentEquals("JoinRequest")) {
+            acceptButton.setVisibility(View.VISIBLE);
+            acceptButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewModel.answerRequest(passUID, passMID, "true");
+                }
+            });
+            rejectButton.setVisibility(View.VISIBLE);
+            rejectButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewModel.answerRequest(passUID, passMID, "false");
+                }
+            });
+        }
     }
 
     @Override
@@ -69,11 +97,10 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         return inbox.size();
     }
 
-    //TODO: Fit to Message Detail Views when available
     public final static class MessageViewHolder extends RecyclerView.ViewHolder {
         private static final int LAYOUT = R.layout.expansion_panel_recycler_cell;
         public TextView titleTextView, authorTextView, descriptionTextView;
-        public Button deleteButton;
+        public Button deleteButton, acceptButton, rejectButton;
         ExpansionLayout expansionLayout;
 
 
@@ -88,6 +115,8 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             descriptionTextView = itemView.findViewById(R.id.message_content);
             expansionLayout = itemView.findViewById(R.id.expansionLayout);
             deleteButton = itemView.findViewById(R.id.ButtonDeleteMessage);
+            acceptButton = itemView.findViewById(R.id.ButtonAcceptJoin);
+            rejectButton = itemView.findViewById(R.id.ButtonRejectJoin);
         }
 
         public void bind(Object object){

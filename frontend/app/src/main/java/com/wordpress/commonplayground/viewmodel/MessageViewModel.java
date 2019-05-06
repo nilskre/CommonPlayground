@@ -59,7 +59,7 @@ public class MessageViewModel extends AndroidViewModel {
                                     allMessagesTmpList.add(i, message);
                                 }
                             } catch (JSONException e) {
-                                Log.d("Parse.Error.Main", e.toString());
+                                Log.d("Parse.Error.Message", e.toString());
                             }
                         }
                         inbox.setValue(allMessagesTmpList);

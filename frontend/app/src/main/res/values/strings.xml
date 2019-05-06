@@ -77,4 +77,6 @@
     <string name="title_message_list" translatable="false">Messages</string>
     <string name="title_message_detail" translatable="false">Message Detail</string>
     <string name="message_button_delete" translatable="false">Delete</string>
+    <string name="message_button_accept" translatable="false">Accept</string>
+    <string name="message_button_reject" translatable="false">Reject</string>
 </resources>

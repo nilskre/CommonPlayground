@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 public class SessionOverviewController {
 
-    private List<Session> sessions = new ArrayList();
+    private List<Session> sessions = new ArrayList<>();
     private final SessionRepository sessionRepository;
+
     @Autowired
     public SessionOverviewController(SessionRepository sessionRepository) {
         this.sessionRepository = sessionRepository;
@@ -27,10 +30,10 @@ public class SessionOverviewController {
         Date currentDate = new Date();
 
         sessions.clear();
-        for (Session session: sessionRepository.findAll()) {
+        for (Session session : sessionRepository.findAll()) {
             Date sessionDate = simpleDateFormat.parse(session.getDate());
 
-            if(currentDate.compareTo(sessionDate) <0){
+            if (currentDate.compareTo(sessionDate) < 0) {
                 sessions.add(session);
             }
         }

@@ -38,23 +38,23 @@ public class JoinResponseController {
         if (joinAccepted) {
             removeMessageFromHostsMessages(sessionHost, relevantMessage);
             joinPlayerToSession(sessionUserWantsToJoin, userWhoWantsToJoinSession);
-            messageToUserThatJoinWasSuccessful(sessionUserWantsToJoin, userWhoWantsToJoinSession);
+            messageToUserThatJoinWasSuccessful(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
         } else if (!joinAccepted) {
             removeMessageFromHostsMessages(sessionHost, relevantMessage);
-            messageToUserThatJoinWasRejected(sessionUserWantsToJoin, userWhoWantsToJoinSession);
+            messageToUserThatJoinWasRejected(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
         }
     }
 
-    private void messageToUserThatJoinWasSuccessful(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession) {
-        Message joinSuccessful = new Message("Join successful", "Join to session " + sessionUserWantsToJoin.getTitle() + " was successful");
+    private void messageToUserThatJoinWasSuccessful(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession, User sessionHost) {
+        Message joinSuccessful = new Message("Join successful", "Join to session " + sessionUserWantsToJoin.getTitle() + " was successful", sessionHost.getUsername());
         userWhoWantsToJoinSession.addMessage(joinSuccessful);
         messageRepository.save(joinSuccessful);
     }
 
-    private void messageToUserThatJoinWasRejected(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession) {
-        Message joinSuccessful = new Message("Join rejected", "Join to session " + sessionUserWantsToJoin.getTitle() + " was rejected by session host");
-        userWhoWantsToJoinSession.addMessage(joinSuccessful);
-        messageRepository.save(joinSuccessful);
+    private void messageToUserThatJoinWasRejected(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession, User sessionHost) {
+        Message joinRejected = new Message("Join rejected", "Join to session " + sessionUserWantsToJoin.getTitle() + " was rejected by session host", sessionHost.getUsername());
+        userWhoWantsToJoinSession.addMessage(joinRejected);
+        messageRepository.save(joinRejected);
     }
 
     private void removeMessageFromHostsMessages(User sessionHost, Message relevantMessage) {

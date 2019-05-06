@@ -29,7 +29,7 @@ public class Application{
             sessionRepository.save(new Session("Raid", "Raid together", "CS", "WWW", "12-12-2018", "16:00", 42, Long.parseLong("4"), "genre", "true"));
             sessionRepository.save(new Session("GW2 World Boss Run", "Tequatl->Behemoth->Destroyer", "Guild Wars 2", "Lionsarch", "12-12-2020", "15:00", 50, Long.parseLong("4"), "genre", "true"));
             userRepository.save(new User("iBims", "123456789", "test@test.de"));
-            messageRepository.save(new Message("TESTMASSAGE: Join request for AB","CD wants to join this session", (long)1,(long)2));
+            messageRepository.save(new Message("TESTMASSAGE: Join request for AB","CD wants to join this session", (long)1,(long)2, "CommonPlayground"));
 
             // fetch all sessions
             log.info("Customers found with findAll():");

@@ -9,24 +9,30 @@ import org.json.JSONObject;
 
 public class Message implements Parcelable {
 
+    private String authorName;
     private String title;
     private String description;
     private Long id;
+    private String type;
     private Long requesterID;
     private Long requestedSessionID;
     private Boolean read;
 
-    public Message(String title, String description, Long id, Long requesterID, Long requestedSessionID){
+    public Message(String type, String title, String description, String author, Long id, Long requesterID, Long requestedSessionID) {
+        this.type = type;
         this.title = title;
         this.description = description;
+        this.authorName = author;
         this.id = id;
         this.read = false;
         this.requestedSessionID = requestedSessionID;
         this.requesterID = requesterID;
     }
 
-    public Message(String title, String description, Long id) {
+    public Message(String type, String title, String description, String author, Long id) {
+        this.type = type;
         this.title = title;
+        this.authorName = author;
         this.description = description;
         this.id = id;
     }
@@ -49,7 +55,9 @@ public class Message implements Parcelable {
     public void readFromParcel(Parcel in) {
         title = in.readString();
         description = in.readString();
+        authorName = in.readString();
         id = in.readLong();
+        type = in.readString();
     }
 
     public int describeContents() {
@@ -57,8 +65,10 @@ public class Message implements Parcelable {
     }
 
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(type);
         dest.writeString(title);
         dest.writeString(description);
+        dest.writeString(authorName);
         dest.writeLong(id);
     }
 
@@ -67,8 +77,16 @@ public class Message implements Parcelable {
         return title;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public String getAuthor() {
+        return authorName;
     }
 
     public Long getId() {
@@ -93,7 +111,8 @@ public class Message implements Parcelable {
 
     public static Message parseJoinMessage(JSONObject messageObject){
         try {
-            return   new Message(messageObject.getString("title"), messageObject.getString("description"), messageObject.getLong("id"), messageObject.getLong("id"), messageObject.getLong("id"));
+            return (new Message(messageObject.getString("type"), messageObject.getString("title"), messageObject.getString("authorName"), messageObject.getString("description"),
+                    messageObject.getLong("id"), messageObject.getLong("id"), messageObject.getLong("id")));
         } catch (JSONException e) {
         Log.d("Parse.Session", e.toString());
     }
@@ -102,7 +121,7 @@ public class Message implements Parcelable {
 
     public static Message parseGeneralMessage(JSONObject messageObject){
         try {
-            return new Message(messageObject.getString("title"), messageObject.getString("description"), messageObject.getLong("id"));
+            return new Message(messageObject.getString("type"), messageObject.getString("title"), messageObject.getString("authorName"), messageObject.getString("description"), messageObject.getLong("id"));
         } catch (JSONException e) {
             Log.d("Parse.Session", e.toString());
         }

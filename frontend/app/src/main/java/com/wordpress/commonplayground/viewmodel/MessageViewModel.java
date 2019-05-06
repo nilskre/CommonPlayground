@@ -50,10 +50,14 @@ public class MessageViewModel extends AndroidViewModel {
                         List<Message> allMessagesTmpList = new ArrayList<>();
                         for (int i = 0; i < response.length(); i++) {
                             try {
-                                //TODO: Find out which kind of message and parse correctly
-                                Message message = Message.parseJoinMessage(response.getJSONObject(i));
-                                allMessagesTmpList.add(i, message);
-                                Log.d("Received Sessions", message.toString());
+                                Message message;
+                                if (response.getJSONObject(i).getString("type").contentEquals("JoinRequest")) {
+                                    message = Message.parseJoinMessage(response.getJSONObject(i));
+                                    allMessagesTmpList.add(i, message);
+                                } else if (response.getJSONObject(i).getString("type").contentEquals("Info")) {
+                                    message = Message.parseGeneralMessage(response.getJSONObject(i));
+                                    allMessagesTmpList.add(i, message);
+                                }
                             } catch (JSONException e) {
                                 Log.d("Parse.Error.Main", e.toString());
                             }
@@ -76,6 +80,7 @@ public class MessageViewModel extends AndroidViewModel {
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d("Response", response);
             }
         }, new Response.ErrorListener() {
             @Override

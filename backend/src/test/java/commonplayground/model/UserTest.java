@@ -37,7 +37,7 @@ public class UserTest {
 
     @Test
     public void testMessages() {
-        Message testMessage = new Message("MessageTitle", "MessageDescription", (long) 1, (long) 2);
+        Message testMessage = new Message("MessageTitle", "MessageDescription", (long) 1, (long) 2, "CommonPlayground");
         testUser.addMessage(testMessage);
         List<Message> resultList = new ArrayList<>();
         resultList.add(testMessage);
@@ -48,7 +48,7 @@ public class UserTest {
 
     @Test
     public void testAddMessage() {
-        Message testMessage = new Message("MessageTitle", "MessageDescription", (long) 1, (long) 2);
+        Message testMessage = new Message("MessageTitle", "MessageDescription", (long) 1, (long) 2, "CommonPlayground");
         testUser.addMessage(testMessage);
         List<Message> resultList = new ArrayList<>();
         resultList.add(testMessage);
@@ -59,7 +59,7 @@ public class UserTest {
 
     @Test
     public void testRemoveMessage() {
-        Message testMessage = new Message("MessageTitle", "MessageDescription", (long) 1, (long) 2);
+        Message testMessage = new Message("MessageTitle", "MessageDescription", (long) 1, (long) 2, "CommonPlayground");
         testUser.addMessage(testMessage);
         testUser.removeMessage(testMessage);
         List<Message> resultList = new ArrayList<>();

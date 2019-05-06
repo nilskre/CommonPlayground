@@ -97,6 +97,33 @@ public class MessageViewModel extends AndroidViewModel {
                 return MyData;
             }
         };
-        VolleyRequestQueue.getInstance(this.getApplication()).addToQueue(postRequest, "Get all Messages");
+        VolleyRequestQueue.getInstance(this.getApplication()).addToQueue(postRequest, "Delete Message");
     }
+
+    public void answerRequest(String userID, String messageID, String joinAccepted) {
+        String url = BuildConfig.SERVER_URL + "joinResponse";
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response", response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error.Response", String.valueOf(error));
+                //Snackbar.make(view, R.string.new_error, 5000)
+                //        .setAction("Action", null).show();
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<String, String>();
+                MyData.put("userID", userID);
+                MyData.put("messageID", messageID);
+                MyData.put("joinAccepted", joinAccepted);
+                return MyData;
+            }
+        };
+        VolleyRequestQueue.getInstance(this.getApplication()).addToQueue(postRequest, "Answer join request");
+    }
+
 }

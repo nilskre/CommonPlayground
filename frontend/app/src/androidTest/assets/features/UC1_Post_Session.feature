@@ -19,8 +19,8 @@ Feature: Use Case 1 Posting a Session
     And The user types the number of players <numberOfPlayers> and the input is correct
     And The user types the description <description> and the input is correct
     And The user presses the publish button
-    Then A Request is sent
-    And The posting screen is closed
+    Then The posting screen is closed
+    And The new session with <title> is shown
 
     Examples: Sessions
       | title | game       | type     | genre     | postCode  | date       | time  | numberOfPlayers | description |

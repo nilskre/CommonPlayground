@@ -154,15 +154,14 @@ public class PostSessionStepDefs {
         floatingActionButton.perform(ViewActions.click());
     }
 
-    @Then("^A Request is sent$")
-    public void aRequestIsSent() {
-        //TODO test
-        Assert.assertNotNull(activity);
+    @Then("^The posting screen is closed$")
+    public void thePostingScreenIsClosed() {
+        Espresso.onView(ViewMatchers.withId(R.id.rvSessions));
     }
 
-    @And("^The posting screen is closed$")
-    public void thePostingScreenIsClosed() {
-        //TODO depends on other ticket
+    @And("^The new session with ([^\"]*) is shown$")
+    public void theNewSessionWithTitleIsShown(String title) {
+        Espresso.onView(ViewMatchers.withText(title));
     }
 
     @When("^The user presses the Back button$")
@@ -172,6 +171,6 @@ public class PostSessionStepDefs {
 
     @Then("^No Request is sent$")
     public void noRequestIsSent() {
-        //TODO test
+        Assert.assertNotNull(activity);
     }
 }

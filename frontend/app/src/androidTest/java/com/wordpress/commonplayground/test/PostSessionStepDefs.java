@@ -96,23 +96,21 @@ public class PostSessionStepDefs {
 
     @And("^The user chooses ([^\"]*) as type$")
     public void theUserChoosesTypeAsType(String testType) {
-        /*ViewInteraction spinner = Espresso.onView(ViewMatchers.withId(R.id.type_spinner));
+        ViewInteraction spinner = Espresso.onView(ViewMatchers.withId(R.id.type_spinner));
         spinner.perform(scrollTo(), click());
-        DataInteraction appCompatTextView = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(1);
-        appCompatTextView.perform(click());*/
-        //TODO
+        ViewInteraction textView = Espresso.onView(ViewMatchers.withText(testType));
+        textView.perform(click());
     }
 
     @And("^The user chooses ([^\"]*) as genre$")
     public void theUserChoosesGenreAsGenre(String testGenre) {
-        //TODO
+        ViewInteraction spinner = Espresso.onView(ViewMatchers.withId(R.id.genre_spinner));
+        spinner.perform(scrollTo(), click());
+        ViewInteraction textView = Espresso.onView(ViewMatchers.withText(testGenre));
+        textView.perform(click());
     }
 
-    @And("^The user types the place ([^\"]*) and the input is correct$")
+    @And("^The user types the post code ([^\"]*) and the input is correct$")
     public void theUserTypesThePlaceAndTheInputIsCorrect(String testPlace) {
        /* ViewInteraction textInputEditText = onView(withId(R.id.PlaceInputField));
         textInputEditText.perform(typeText(testPlace), closeSoftKeyboard());*/

@@ -109,7 +109,8 @@
                     android:id="@+id/PlaceInputField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/new_place" />
+                    android:hint="@string/new_place"
+                    android:inputType="numberSigned" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout

@@ -27,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.wordpress.commonplayground.BuildConfig;
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.model.Validator;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.Calendar;
@@ -283,6 +284,10 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         place = placeView.getEditText().getText().toString();
         if (checkForAnyInput(place)) {
             placeView.setError(getString(R.string.error_field_required));
+            focusView = placeView;
+            cancel = true;
+        } else if (!Validator.checkForValidPlace(place, this)) {
+            placeView.setError(getString(R.string.error_wrong_place));
             focusView = placeView;
             cancel = true;
         }

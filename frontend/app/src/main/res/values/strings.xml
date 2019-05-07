@@ -21,7 +21,7 @@
     <!-- Strings related to AddSession -->
     <string name="new_title">Title</string>
     <string name="new_game">Game</string>
-    <string name="new_place">Place</string>
+    <string name="new_place">Post Code</string>
     <string name="new_date">Date</string>
     <string name="new_time">Time</string>
     <string name="new_players">How many Players?</string>
@@ -46,6 +46,7 @@
         <item>Outdoors Activity</item>
     </string-array>
     <string name="error_too_long">This input is too long</string>
+    <string name="error_wrong_place">Please enter a valid post code</string>
     <!-- Strings related to login and register -->
     <string name="username_double_error">This username already exists.</string>
     <string name="username_error">This email does not exist.</string>

@@ -45,6 +45,7 @@
         <item>Pen and Paper</item>
         <item>Outdoors Activity</item>
     </string-array>
+    <string name="error_too_long">This input is too long</string>
     <!-- Strings related to login and register -->
     <string name="username_double_error">This username already exists.</string>
     <string name="username_error">This email does not exist.</string>

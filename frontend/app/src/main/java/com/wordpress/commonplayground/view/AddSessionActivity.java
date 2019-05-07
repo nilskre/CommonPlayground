@@ -200,7 +200,9 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                     MyData.put("title", title);
                     MyData.put("description", description);
                     MyData.put("game", game);
-                    MyData.put("place", place);
+                    if (placeView.getVisibility() != View.GONE) {
+                        MyData.put("place", place);
+                    }
                     MyData.put("date", date);
                     MyData.put("time", time);
                     MyData.put("numberOfPlayers", numberOfPlayers);
@@ -222,7 +224,6 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         dateView.setError(null);
         timeView.setError(null);
         numberOfPlayersView.setError(null);
-        descriptionView.setError(null);
         cancel = false;
     }
 
@@ -244,7 +245,9 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         checkForValidNumberOFPlayers();
         checkForValidTime();
         checkForValidDate();
-        checkForValidPlace();
+        if (placeView.getVisibility() != View.GONE) {
+            checkForValidPlace();
+        }
         checkForValidGame();
         checkForValidTitle();
         return cancel;
@@ -252,8 +255,12 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     private void checkForValidTitle() {
         title = titleView.getEditText().getText().toString();
-        if (TextUtils.isEmpty(title)) {
+        if (checkForAnyInput(title)) {
             titleView.setError(getString(R.string.error_field_required));
+            focusView = titleView;
+            cancel = true;
+        } else if (title.length() > 30) {
+            titleView.setError(getString(R.string.error_too_long));
             focusView = titleView;
             cancel = true;
         }
@@ -261,8 +268,12 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     private void checkForValidGame() {
         game = gameView.getEditText().getText().toString();
-        if (TextUtils.isEmpty(game)) {
+        if (checkForAnyInput(game)) {
             gameView.setError(getString(R.string.error_field_required));
+            focusView = gameView;
+            cancel = true;
+        } else if (game.length() > 30) {
+            gameView.setError(getString(R.string.error_too_long));
             focusView = gameView;
             cancel = true;
         }
@@ -270,7 +281,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     private void checkForValidPlace() {
         place = placeView.getEditText().getText().toString();
-        if (TextUtils.isEmpty(place)) {
+        if (checkForAnyInput(place)) {
             placeView.setError(getString(R.string.error_field_required));
             focusView = placeView;
             cancel = true;
@@ -279,7 +290,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     private void checkForValidDate() {
         date = dateView.getEditText().getText().toString();
-        if (TextUtils.isEmpty(date)) {
+        if (checkForAnyInput(date)) {
             dateView.setError(getString(R.string.error_field_required));
             focusView = dateView;
             cancel = true;
@@ -288,7 +299,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     private void checkForValidTime() {
         time = timeView.getEditText().getText().toString();
-        if (TextUtils.isEmpty(time)) {
+        if (checkForAnyInput(time)) {
             timeView.setError(getString(R.string.error_field_required));
             focusView = timeView;
             cancel = true;
@@ -302,5 +313,9 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             focusView = numberOfPlayersView;
             cancel = true;
         }
+    }
+
+    private boolean checkForAnyInput(String input) {
+        return input.trim().length() <= 0;
     }
 }

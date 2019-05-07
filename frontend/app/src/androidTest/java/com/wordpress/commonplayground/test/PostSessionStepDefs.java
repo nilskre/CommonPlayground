@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.test.espresso.DataInteraction;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
@@ -27,16 +26,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.matcher.ViewMatchers.withChild;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.is;
 
 @CucumberOptions(
         glue = "com.wordpress.commonplayground.test",
@@ -112,8 +105,10 @@ public class PostSessionStepDefs {
 
     @And("^The user types the post code ([^\"]*) and the input is correct$")
     public void theUserTypesThePlaceAndTheInputIsCorrect(String testPlace) {
-       /* ViewInteraction textInputEditText = onView(withId(R.id.PlaceInputField));
-        textInputEditText.perform(typeText(testPlace), closeSoftKeyboard());*/
+        if (!testPlace.equals("-")) {
+            ViewInteraction textInputEditText = onView(withId(R.id.PlaceInputField));
+            textInputEditText.perform(ViewActions.typeText(testPlace), ViewActions.closeSoftKeyboard());
+        }
     }
 
     @And("^The user types the date ([^\"]*) and the input is correct$")

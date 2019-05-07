@@ -62,4 +62,11 @@ public class SessionTest {
         testSession.addUserToSession(assertHost);
         assertTrue(testSession.getUsers().contains(assertHost));
     }
+
+    @Test
+    public void testAddUserWantToJoin(){
+        User userWantsToJoin = new User("Huhu", "1234567890","huhu@hoho.de");
+        testSession.addUserWantToJoin(userWantsToJoin);
+        assertTrue(testSession.getUserWantToJoin().contains(userWantsToJoin));
+    }
 }

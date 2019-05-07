@@ -94,5 +94,5 @@ jobs:
             - cd backend/
             - ./gradlew sendCoverageToCodacy
         after_success:
-            - java -jar ~/codacy-coverage-reporter-assembly.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
+            - java -jar ~/codacy-coverage-reporter-assembly.jar report -l Java -r build/reports/jacoco/jacocoXml.xml
             

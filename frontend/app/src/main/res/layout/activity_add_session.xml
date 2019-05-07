@@ -123,7 +123,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/new_date"
-                    android:inputType="date" />
+                    android:focusable="false"
+                    android:inputType="none" />
             </android.support.design.widget.TextInputLayout>
 
             <ImageButton
@@ -152,7 +153,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/new_time"
-                    android:inputType="time" />
+                    android:focusable="false"
+                    android:inputType="none" />
             </android.support.design.widget.TextInputLayout>
 
             <ImageButton

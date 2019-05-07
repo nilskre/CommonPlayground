@@ -147,6 +147,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
     }
 
     private void getCurrentTime() {

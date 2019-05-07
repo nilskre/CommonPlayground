@@ -18,8 +18,8 @@ env:
 jobs:
   include:
     - stage: send-coverage
-        language: java
-        script:
+      language: java
+      script:
         - cd backend/
     - stage: build-backend
       language: java

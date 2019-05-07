@@ -200,8 +200,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                     Map<String, String> MyData = new HashMap<String, String>();
                     MyData.put("title", title);
                     MyData.put("description", sessionDesc);
-                    MyData.put("game", sessionGame);
-                    MyData.put("place", sessionPlace);
+                    MyData.put("game", game);
+                    MyData.put("place", place);
                     MyData.put("date", sessionDate);
                     MyData.put("time", sessionTime);
                     MyData.put("numberOfPlayers", sessionPlayers);

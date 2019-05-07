@@ -38,7 +38,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     private Button btnPublish;
     private ImageButton btnDatePicker, btnTimePicker;
     private TextInputLayout titleView, gameView, placeView, dateView, timeView, numberOfPlayersView, descriptionView;
-    private String title, game, place, date, time, numberOfPlayers, description;
+    private String title, game, place, date, time, numberOfPlayers, description, genre, type;
     private Spinner type_spinner, genre_spinner;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private SessionManager session;
@@ -173,9 +173,9 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         if (validInput()) {
             focusView.requestFocus();
         } else {
-            final String sessionDesc = descriptionView.getEditText().getText().toString();
-            final String sessionGenre = genre_spinner.getSelectedItem().toString();
-            final String sessionType = type_spinner.getSelectedItem().toString();
+            description = descriptionView.getEditText().getText().toString();
+            genre = genre_spinner.getSelectedItem().toString();
+            type = type_spinner.getSelectedItem().toString();
 
             RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
             String url = BuildConfig.SERVER_URL + "postNewSession";
@@ -197,15 +197,15 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 protected Map<String, String> getParams() {
                     Map<String, String> MyData = new HashMap<String, String>();
                     MyData.put("title", title);
-                    MyData.put("description", sessionDesc);
+                    MyData.put("description", description);
                     MyData.put("game", game);
                     MyData.put("place", place);
                     MyData.put("date", date);
                     MyData.put("time", time);
                     MyData.put("numberOfPlayers", numberOfPlayers);
                     MyData.put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
-                    MyData.put("genre", sessionGenre);
-                    MyData.put("isOnline", sessionType);
+                    MyData.put("genre", genre);
+                    MyData.put("isOnline", type);
                     return MyData;
                 }
             };

@@ -3,7 +3,10 @@ package com.wordpress.commonplayground.test;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
+import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
@@ -15,6 +18,7 @@ import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.view.MainActivity;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Rule;
 
@@ -29,6 +33,7 @@ import cucumber.api.java.en.When;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @CucumberOptions(
@@ -111,18 +116,24 @@ public class PostSessionStepDefs {
         }
     }
 
-    @And("^The user types the date ([^\"]*) and the input is correct$")
+    @And("^The user picks the date ([^\"]*)$")
     public void theUserTypesTheDateAndTheInputIsCorrect(String testDate) {
-        /*ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.DateInputField));
-        textInputEditText.perform(ViewActions.typeText(testDate), ViewActions.closeSoftKeyboard());*/
-        //TODO
+        ViewInteraction buttonDate = Espresso.onView(ViewMatchers.withId(R.id.btn_date));
+        buttonDate.perform(click());
+        String [] date = testDate.split("-");
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0])));
+        ViewInteraction buttonAccept = Espresso.onView(ViewMatchers.withText("OK"));
+        buttonAccept.perform(click());
     }
 
-    @And("^The user types the time ([^\"]*) and the input is correct$")
+    @And("^The user picks the time ([^\"]*)$")
     public void theUserTypesTheTimeAndTheInputIsCorrect(String testTime) {
-        /*ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.TimeInputField));
-        textInputEditText.perform(ViewActions.typeText(testTime), ViewActions.closeSoftKeyboard());*/
-        //TODO
+        ViewInteraction buttonTime = Espresso.onView(ViewMatchers.withId(R.id.btn_time));
+        buttonTime.perform(click());
+        String [] time = testTime.split(":");
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(Integer.parseInt(time[0]), Integer.parseInt(time[1])));
+        ViewInteraction buttonAccept = Espresso.onView(ViewMatchers.withText("OK"));
+        buttonAccept.perform(click());
     }
 
     @And("^The user types the number of players ([^\"]*) and the input is correct$")

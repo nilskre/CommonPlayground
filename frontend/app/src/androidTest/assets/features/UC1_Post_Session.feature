@@ -14,8 +14,8 @@ Feature: Use Case 1 Posting a Session
     And The user chooses <type> as type
     And The user chooses <genre> as genre
     And The user types the post code <postCode> and the input is correct
-    And The user types the date <date> and the input is correct
-    And The user types the time <time> and the input is correct
+    And The user picks the date <date>
+    And The user picks the time <time>
     And The user types the number of players <numberOfPlayers> and the input is correct
     And The user types the description <description> and the input is correct
     And The user presses the publish button

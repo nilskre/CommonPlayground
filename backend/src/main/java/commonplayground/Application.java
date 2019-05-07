@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Application{
 
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
+
     public static void main(String[] args) {
         String ENV_PORT = System.getenv().get("PORT");
         String ENV_DYNO = System.getenv().get("DYNO");
@@ -19,8 +21,6 @@ public class Application{
         }
         SpringApplication.run(Application.class);
     }
-
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     @Bean
     public CommandLineRunner demo(SessionRepository sessionRepository, UserRepository userRepository, MessageRepository messageRepository) {

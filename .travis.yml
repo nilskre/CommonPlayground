@@ -88,4 +88,4 @@ jobs:
     - stage: send-coverage
         language: java
         script:
-        - cd backend
+        - cd backend/

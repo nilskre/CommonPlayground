@@ -7,22 +7,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class JoinAcceptedController {
+public class JoinResponseController {
 
     private final SessionRepository sessionRepository;
     private final UserRepository userRepository;
     private final MessageRepository messageRepository;
 
     @Autowired
-    public JoinAcceptedController(SessionRepository sessionRepository, UserRepository userRepository, MessageRepository messageRepository) {
+    public JoinResponseController(SessionRepository sessionRepository, UserRepository userRepository, MessageRepository messageRepository) {
         this.sessionRepository = sessionRepository;
         this.userRepository = userRepository;
         this.messageRepository = messageRepository;
     }
 
-    @RequestMapping("/joinAccepted")
-    public Long joinRequestForSession(@RequestParam(value = "userID", defaultValue = "not given") String userID,
-                                      @RequestParam(value = "messageID", defaultValue = "not given") String messageID) {
+    @RequestMapping("/joinResponse")
+    public void joinRequestForSession(@RequestParam(value = "userID", defaultValue = "not given") String userID,
+                                      @RequestParam(value = "messageID", defaultValue = "not given") String messageID,
+                                      @RequestParam(value = "joinAccepted", defaultValue = "false") boolean joinAccepted) {
         Long userIDAsLong = Long.parseLong(userID);
         User sessionHost = userRepository.findAllById(userIDAsLong);
         int messageIDAsInt = Integer.parseInt(messageID);
@@ -34,17 +35,26 @@ public class JoinAcceptedController {
         Long userWantsToJoin = relevantMessage.getUserIdWhoWantsToJoin();
         User userWhoWantsToJoinSession = userRepository.findAllById(userWantsToJoin);
 
-        removeMessageFromHostsMessages(sessionHost, relevantMessage);
-        Long returnCodeShouldBeZero = joinPlayerToSession(sessionUserWantsToJoin, userWhoWantsToJoinSession);
-        messageToUserThatJoinWasSuccessful(sessionUserWantsToJoin, userWhoWantsToJoinSession);
-
-        return returnCodeShouldBeZero;
+        if (joinAccepted) {
+            removeMessageFromHostsMessages(sessionHost, relevantMessage);
+            joinPlayerToSession(sessionUserWantsToJoin, userWhoWantsToJoinSession);
+            messageToUserThatJoinWasSuccessful(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
+        } else if (!joinAccepted) {
+            removeMessageFromHostsMessages(sessionHost, relevantMessage);
+            messageToUserThatJoinWasRejected(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
+        }
     }
 
-    private void messageToUserThatJoinWasSuccessful(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession) {
-        Message joinSuccessful = new Message("Join successful", "Join to session " + sessionUserWantsToJoin.getTitle() + " was successful");
+    private void messageToUserThatJoinWasSuccessful(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession, User sessionHost) {
+        Message joinSuccessful = new Message("Join successful", "Join to session " + sessionUserWantsToJoin.getTitle() + " was successful", sessionHost.getUsername());
         userWhoWantsToJoinSession.addMessage(joinSuccessful);
         messageRepository.save(joinSuccessful);
+    }
+
+    private void messageToUserThatJoinWasRejected(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession, User sessionHost) {
+        Message joinRejected = new Message("Join rejected", "Join to session " + sessionUserWantsToJoin.getTitle() + " was rejected by session host", sessionHost.getUsername());
+        userWhoWantsToJoinSession.addMessage(joinRejected);
+        messageRepository.save(joinRejected);
     }
 
     private void removeMessageFromHostsMessages(User sessionHost, Message relevantMessage) {

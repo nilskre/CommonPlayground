@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-public class MyHostedSessions {
+public class MyHostedSessionsController {
 
     private final SessionRepository sessionRepository;
 
     @Autowired
-    public MyHostedSessions(SessionRepository sessionRepository) {
+    public MyHostedSessionsController(SessionRepository sessionRepository) {
         this.sessionRepository = sessionRepository;
     }
 

@@ -12,8 +12,13 @@
         <item
             android:id="@+id/nav_mysessions"
             android:icon="@drawable/ic_menu_my_sessions"
-            android:enabled="false"
+            android:enabled="true"
             android:title="@string/menu_mySessions" />
+        <item
+            android:id="@+id/nav_messages"
+            android:icon="@drawable/ic_menu_message"
+            android:enabled="true"
+            android:title="@string/menu_messages" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_profile"

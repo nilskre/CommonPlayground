@@ -34,8 +34,9 @@ public class JoinRequestForSessionController {
         if (validityCheck != 0) {
             return (long) validityCheck;
         } else {
-            Message requestForJoinMessage = new Message("Join request for " + sessionUserWantsToJoin.getTitle(), userWhoWantsToJoinSession.getUsername() + " wants to join this session", userWhoWantsToJoinSession.getId(), sessionIDAsLong);
+            Message requestForJoinMessage = new Message("Join request for " + sessionUserWantsToJoin.getTitle(), userWhoWantsToJoinSession.getUsername() + " wants to join this session", userWhoWantsToJoinSession.getId(), sessionIDAsLong, userWhoWantsToJoinSession.getUsername());
 
+            sessionUserWantsToJoin.addUserWantToJoin(userWhoWantsToJoinSession);
             User hostOfSession = userRepository.findAllById(sessionUserWantsToJoin.getIdOfHost());
             hostOfSession.addMessage(requestForJoinMessage);
             messageRepository.save(requestForJoinMessage);

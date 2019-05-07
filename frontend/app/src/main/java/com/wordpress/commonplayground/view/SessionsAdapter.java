@@ -31,12 +31,8 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        // Inflate the custom layout
         View sessionView = inflater.inflate(R.layout.item_session, parent, false);
-
-        // Return a new holder instance
-        SessionViewHolder viewHolder = new SessionViewHolder(context, sessionView);
-        return viewHolder;
+        return new SessionViewHolder(context, sessionView);
     }
 
 
@@ -69,10 +65,10 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
         public SessionViewHolder(Context context, View itemView) {
             super(itemView);
-            titleTextView = (TextView) itemView.findViewById(R.id.session_title);
-            gameTextView = (TextView) itemView.findViewById(R.id.session_game);
-            placeTextView = (TextView) itemView.findViewById(R.id.session_place);
-            dateTextView = (TextView) itemView.findViewById(R.id.session_date);
+            titleTextView = itemView.findViewById(R.id.session_title);
+            gameTextView = itemView.findViewById(R.id.session_game);
+            placeTextView = itemView.findViewById(R.id.session_place);
+            dateTextView = itemView.findViewById(R.id.session_date);
             this.context = context;
             itemView.setOnClickListener(this);
         }

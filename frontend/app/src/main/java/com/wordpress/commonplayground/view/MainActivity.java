@@ -1,16 +1,9 @@
 package com.wordpress.commonplayground.view;
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,55 +14,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.wordpress.commonplayground.R;
-import com.wordpress.commonplayground.model.Session;
-import com.wordpress.commonplayground.network.VolleyRequestQueue;
-import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
-import java.util.List;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private MainActivityViewModel mainActivityViewModel;
-    private SessionsAdapter adapter;
-    private RecyclerView rvSessions;
     private SessionManager session;
-    private SwipeRefreshLayout swipeContainer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                observeChangesInSessionList();
-                Snackbar.make(rvSessions, R.string.refreshed, 2000).show();
-                swipeContainer.setRefreshing(false);
-            }
-        });
-        // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(R.color.colorPrimary,
-                R.color.colorPrimaryDark,
-                R.color.colorPrimaryLight,
-                R.color.colorAccent);
-
-        setUpUIElements();
-        VolleyRequestQueue.getInstance(this);
-        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
-        observeChangesInSessionList();
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
+        setUpUIElements();
+
     }
 
     private void setUpUIElements() {
         setUpToolbarAndDrawer();
         setUpNavigation();
-        setUpFab();
-        setUpRecyclerView();
     }
 
     private void setUpToolbarAndDrawer() {
@@ -84,47 +50,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setUpNavigation() {
         NavigationView navigationView = findViewById(R.id.nav_view);
+        HashMap<String, String> user = session.getUserDetails();
+        int idMenuItem = Integer.parseInt(user.get(SessionManager.KEY_MENU_ITEM_MAIN));
+        MenuItem navItem;
+        if (idMenuItem == -1) {
+            navItem = navigationView.getMenu().findItem(R.id.nav_dashboard);
+        } else {
+            navItem = navigationView.getMenu().findItem(idMenuItem);
+        }
         navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    private void setUpFab() {
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent openAddSessionActivity = new Intent(MainActivity.this, AddSessionActivity.class);
-                startActivity(openAddSessionActivity);
-            }
-        });
-    }
-
-    private void setUpRecyclerView() {
-        rvSessions = findViewById(R.id.rvSessions);
-    }
-
-
-    private void observeChangesInSessionList() {
-        mainActivityViewModel.getSessions().observe(this, new android.arch.lifecycle.Observer<List<Session>>() {
-            @Override
-            public void onChanged(@Nullable List<Session> sessions) {
-                Log.d("Observed: ", "SessionList changed");
-                updateAndDisplayListData(sessions);
-            }
-        });
-    }
-
-    private void updateAndDisplayListData(List<Session> sessions) {
-        adapter = new SessionsAdapter(sessions);
-        rvSessions.setAdapter(adapter);
-        rvSessions.setLayoutManager(new LinearLayoutManager(this));
+        onNavigationItemSelected(navItem);
+        navigationView.setCheckedItem(idMenuItem);
     }
 
     @Override
     public void onRestart() {
         super.onRestart();
         session.checkLogin();
-        mainActivityViewModel.getSessions();
     }
 
     @Override
@@ -162,11 +104,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Fragment fragment = null;
+
         int id = item.getItemId();
+        session.setKeyMenuItemMain("" + id);
+
+        if (id == R.id.nav_mysessions) {
+            fragment = new MySessionsFragment();
+        } else {
+            MySessionsFragment.resetTabPostition();
+        }
 
         if (id == R.id.nav_dashboard) {
+            fragment = new DashboardFragment();
 
         } else if (id == R.id.nav_mysessions) {
+
+        } else if (id == R.id.nav_messages) {
+            fragment = new MessageFragment();
 
         } else if (id == R.id.nav_profile) {
 
@@ -180,9 +135,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+
+            ft.replace(R.id.screen_area, fragment);
+
+            ft.commit();
+        }
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

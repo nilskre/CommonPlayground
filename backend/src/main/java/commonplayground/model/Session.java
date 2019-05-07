@@ -42,7 +42,14 @@ public class Session {
     )
     @Getter
     @ToString.Exclude
-    private List<User> users = new ArrayList();
+    private List<User> users = new ArrayList<>();
+
+    @ManyToMany(
+            cascade = CascadeType.ALL
+    )
+    @Getter
+    @ToString.Exclude
+    private List<User> userWantToJoin = new ArrayList<>();
 
     public Session() {
     }
@@ -61,7 +68,7 @@ public class Session {
     }
 
     public int joinRequestToSession(User user){
-        if (SessionFull()) {
+        if (sessionFull()) {
             return -10;
         } else if (userAlreadyJoined(user)) {
             return -11;
@@ -71,12 +78,13 @@ public class Session {
     }
 
     public int addUserToSession(User user) {
-        if (SessionFull()) {
+        if (sessionFull()) {
             return -10;
         } else if (userAlreadyJoined(user)) {
             return -11;
         } else {
             this.users.add(user);
+            removeUserWantToJoin(user);
             return 0;
         }
     }
@@ -85,7 +93,7 @@ public class Session {
         return users.contains(user);
     }
 
-    private boolean SessionFull() {
+    private boolean sessionFull() {
         return users.size() >= numberOfPlayers;
     }
 
@@ -100,5 +108,13 @@ public class Session {
 
     private boolean userIsHost(User userToLeaveSession) {
         return Objects.equals(userToLeaveSession.getId(), this.idOfHost);
+    }
+
+    public void addUserWantToJoin(User user) {
+        this.userWantToJoin.add(user);
+    }
+
+    private void removeUserWantToJoin(User user) {
+        this.userWantToJoin.remove(user);
     }
 }

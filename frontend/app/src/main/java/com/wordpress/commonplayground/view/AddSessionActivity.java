@@ -170,8 +170,6 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     public void sendRequestToBackend(View view) {
         resetErrors();
         if (!validInput()) {
-            final String sessionGame = gameView.getEditText().getText().toString();
-            final String sessionPlace = placeView.getEditText().getText().toString();
             final String sessionDate = dateView.getEditText().getText().toString();
             final String sessionTime = timeView.getEditText().getText().toString();
             final String sessionPlayers = numberOfPlayersView.getEditText().getText().toString();
@@ -242,6 +240,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     }
 
     private boolean validInput() {
+        checkForValidPlace();
+        checkForValidGame();
         checkForValidTitle();
         return cancel;
     }
@@ -251,6 +251,24 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         if (TextUtils.isEmpty(title)) {
             titleView.setError(getString(R.string.error_field_required));
             focusView = titleView;
+            cancel = true;
+        }
+    }
+
+    private void checkForValidGame() {
+        game = gameView.getEditText().getText().toString();
+        if (TextUtils.isEmpty(game)) {
+            gameView.setError(getString(R.string.error_field_required));
+            focusView = gameView;
+            cancel = true;
+        }
+    }
+
+    private void checkForValidPlace() {
+        place = placeView.getEditText().getText().toString();
+        if (TextUtils.isEmpty(place)) {
+            placeView.setError(getString(R.string.error_field_required));
+            focusView = placeView;
             cancel = true;
         }
     }

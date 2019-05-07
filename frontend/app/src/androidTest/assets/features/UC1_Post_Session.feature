@@ -11,6 +11,8 @@ Feature: Use Case 1 Posting a Session
   Scenario Outline: Add a new session
     When The user types the title <title> and the input is correct
     And The user types the game <game> and the input is correct
+    And The user chooses <type> as type
+    And The user chooses <genre> as genre
     And The user types the place <place> and the input is correct
     And The user types the date <date> and the input is correct
     And The user types the time <time> and the input is correct
@@ -21,9 +23,9 @@ Feature: Use Case 1 Posting a Session
     And The posting screen is closed
 
     Examples: Sessions
-      | title | description | game       | place       | date       | time  | numberOfPlayers |
-      | Raid  | online Game | Game       | online      | 01-11-2018 | 12:00 | 10              |
-      | Cards | fun         | Doppelkopf | Schlosspark | 29-10-2019 | 06:00 | 4               |
+      | title | game       | type     | genre     | place  | date       | time  | numberOfPlayers | description |
+      | Raid  | Game       | online   | MMO RPG   | -      | 01-11-2020 | 12:00 | 10              | online Game |
+      | Cards | Doppelkopf | offline  | Card Game | 23456  | 29-10-2019 | 06:00 | 4               | fun         |
 
   @postsession-feature
   Scenario: Leaving the Activity New Session without sending a Request

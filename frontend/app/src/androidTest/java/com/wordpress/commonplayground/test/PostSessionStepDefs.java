@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.test.espresso.DataInteraction;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
@@ -25,6 +26,17 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.matcher.ViewMatchers.withChild;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.is;
 
 @CucumberOptions(
         glue = "com.wordpress.commonplayground.test",
@@ -76,16 +88,28 @@ public class PostSessionStepDefs {
         textInputEditText.perform(ViewActions.typeText(testTitle), ViewActions.closeSoftKeyboard());
     }
 
-    @And("^The user types the description ([^\"]*) and the input is correct$")
-    public void theUserTypesTheDescriptionAndTheInputIsCorrect(String testDescription) {
-        ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.DescriptionInputField));
-        textInputEditText.perform(ViewActions.typeText(testDescription), ViewActions.closeSoftKeyboard());
-    }
-
     @And("^The user types the game ([^\"]*) and the input is correct$")
     public void theUserTypesTheGameAndTheInputIsCorrect(String testGame) {
         ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.GameInputField));
         textInputEditText.perform(ViewActions.typeText(testGame), ViewActions.closeSoftKeyboard());
+    }
+
+    @And("^The user chooses ([^\"]*) as type$")
+    public void theUserChoosesTypeAsType(String testType) {
+        /*ViewInteraction spinner = Espresso.onView(ViewMatchers.withId(R.id.type_spinner));
+        spinner.perform(scrollTo(), click());
+        DataInteraction appCompatTextView = onData(anything())
+                .inAdapterView(childAtPosition(
+                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+                        0))
+                .atPosition(1);
+        appCompatTextView.perform(click());*/
+        //TODO
+    }
+
+    @And("^The user chooses ([^\"]*) as genre$")
+    public void theUserChoosesGenreAsGenre(String testGenre) {
+        //TODO
     }
 
     @And("^The user types the place ([^\"]*) and the input is correct$")
@@ -96,20 +120,28 @@ public class PostSessionStepDefs {
 
     @And("^The user types the date ([^\"]*) and the input is correct$")
     public void theUserTypesTheDateAndTheInputIsCorrect(String testDate) {
-        ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.DateInputField));
-        textInputEditText.perform(ViewActions.typeText(testDate), ViewActions.closeSoftKeyboard());
+        /*ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.DateInputField));
+        textInputEditText.perform(ViewActions.typeText(testDate), ViewActions.closeSoftKeyboard());*/
+        //TODO
     }
 
     @And("^The user types the time ([^\"]*) and the input is correct$")
     public void theUserTypesTheTimeAndTheInputIsCorrect(String testTime) {
-        ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.TimeInputField));
-        textInputEditText.perform(ViewActions.typeText(testTime), ViewActions.closeSoftKeyboard());
+        /*ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.TimeInputField));
+        textInputEditText.perform(ViewActions.typeText(testTime), ViewActions.closeSoftKeyboard());*/
+        //TODO
     }
 
     @And("^The user types the number of players ([^\"]*) and the input is correct$")
     public void theUserTypesTheNumberOfPlayersAndTheInputIsCorrect(String testPlayersNumber) {
         ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.PlayersInputField));
         textInputEditText.perform(ViewActions.typeText(testPlayersNumber), ViewActions.closeSoftKeyboard());
+    }
+
+    @And("^The user types the description ([^\"]*) and the input is correct$")
+    public void theUserTypesTheDescriptionAndTheInputIsCorrect(String testDescription) {
+        ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.DescriptionInputField));
+        textInputEditText.perform(ViewActions.typeText(testDescription), ViewActions.closeSoftKeyboard());
     }
 
     @And("^The user presses the publish button$")

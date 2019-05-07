@@ -1,11 +1,12 @@
 stages:
+  - send-coverage
   - build-backend
   - build-frontend
   - test-backend
   - test-frontend
   - deploy-backend
   - deploy-frontend
-  - send-coverage
+  
 
 env:
  global:
@@ -16,6 +17,10 @@ env:
 
 jobs:
   include:
+    - stage: send-coverage
+        language: java
+        script:
+        - cd backend/
     - stage: build-backend
       language: java
       script:
@@ -85,7 +90,3 @@ jobs:
         - ./gradlew build assembleRelease
         - echo "Deployment-Frontend"
        
-    - stage: send-coverage
-        language: java
-        script:
-        - cd backend/

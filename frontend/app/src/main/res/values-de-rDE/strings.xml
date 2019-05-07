@@ -55,4 +55,8 @@
     <string name="tab_text_2">Teilnehmen</string>
     <string name="title_activity_my_sessions">Meine Sessions</string>
     <string name="menu_messages">Nachrichten</string>
+    <string name="message_button_accept">Bestätigen</string>
+    <string name="message_button_reject">Ablehnen</string>
+    <string name="message_button_delete">Löschen</string>
+    <string name="title_message_list">Nachrichten</string>
 </resources>

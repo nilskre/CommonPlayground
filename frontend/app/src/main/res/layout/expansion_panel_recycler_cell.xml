@@ -26,7 +26,7 @@
                 android:id="@+id/message_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#3E3E3E"
+                android:textColor="@color/colorPrimaryText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/message_title"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="100dp"
                 android:gravity="start|center_vertical"
-                android:textColor="#3E3E3E"
+                android:textColor="@color/colorPrimaryText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/headerIndicator"
                 app:layout_constraintStart_toEndOf="@id/message_author"
@@ -76,7 +76,7 @@
             android:id="@+id/container"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:background="#F4F4F8"
+            android:background="@color/colorPrimaryLight"
             android:orientation="vertical">
 
             <TextView
@@ -94,7 +94,7 @@
                 android:id="@+id/button_container"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:background="#F4F4F8"
+                android:background="@color/colorLightBackground"
                 android:orientation="horizontal">
 
                 <Button

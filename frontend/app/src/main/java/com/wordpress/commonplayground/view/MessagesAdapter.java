@@ -16,6 +16,7 @@ import com.wordpress.commonplayground.viewmodel.MessageViewModel;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessageViewHolder> {
 
@@ -34,6 +35,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     }
 
     @Override
+    @NonNull
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return MessageViewHolder.buildFor(parent);
     }
@@ -52,6 +54,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         authorTextView.setText(message.getAuthor());
         titleTextView.setText(message.getTitle());
         descriptionTextView.setText(message.getDescription());
+
         setUpButtons(viewHolder, position, deleteButton, acceptButton, rejectButton);
 
         expansionsCollection.add(viewHolder.getExpansionLayout());
@@ -67,7 +70,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             public void onClick(View v) {
                 viewModel.deleteMessage(passUID, passMID);
                 inbox.remove(pos);
-                parent.getAdapter().notifyItemRemoved(pos);
+                Objects.requireNonNull(parent.getAdapter()).notifyItemRemoved(pos);
             }
         });
 

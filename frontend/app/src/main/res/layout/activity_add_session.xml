@@ -48,11 +48,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/TitleInput">
+                app:layout_constraintTop_toBottomOf="@+id/TitleInput">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/GameInputField"
@@ -112,11 +112,11 @@
                 android:id="@+id/DateInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/btn_date"
                 app:layout_constraintStart_toStartOf="@+id/PlaceInput"
-                app:layout_constraintTop_toTopOf="@+id/PlaceInput">
+                app:layout_constraintTop_toBottomOf="@+id/PlaceInput">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/DateInputField"
@@ -141,11 +141,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/btn_time"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/DateInput">
+                app:layout_constraintTop_toBottomOf="@+id/DateInput">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/TimeInputField"
@@ -170,11 +170,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/TimeInput">
+                app:layout_constraintTop_toBottomOf="@+id/TimeInput">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/PlayersInputField"
@@ -189,11 +189,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/PlayersInput">
+                app:layout_constraintTop_toBottomOf="@+id/PlayersInput">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/DescriptionInputField"

@@ -169,10 +169,10 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     public void sendRequestToBackend(View view) {
         resetErrors();
-        if (!validInput()) {
-            final String sessionDate = dateView.getEditText().getText().toString();
-            final String sessionTime = timeView.getEditText().getText().toString();
-            final String sessionPlayers = numberOfPlayersView.getEditText().getText().toString();
+
+        if (validInput()) {
+            focusView.requestFocus();
+        } else {
             final String sessionDesc = descriptionView.getEditText().getText().toString();
             final String sessionGenre = genre_spinner.getSelectedItem().toString();
             final String sessionType = type_spinner.getSelectedItem().toString();
@@ -200,9 +200,9 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                     MyData.put("description", sessionDesc);
                     MyData.put("game", game);
                     MyData.put("place", place);
-                    MyData.put("date", sessionDate);
-                    MyData.put("time", sessionTime);
-                    MyData.put("numberOfPlayers", sessionPlayers);
+                    MyData.put("date", date);
+                    MyData.put("time", time);
+                    MyData.put("numberOfPlayers", numberOfPlayers);
                     MyData.put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
                     MyData.put("genre", sessionGenre);
                     MyData.put("isOnline", sessionType);
@@ -240,6 +240,9 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     }
 
     private boolean validInput() {
+        checkForValidNumberOFPlayers();
+        checkForValidTime();
+        checkForValidDate();
         checkForValidPlace();
         checkForValidGame();
         checkForValidTitle();
@@ -269,6 +272,33 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         if (TextUtils.isEmpty(place)) {
             placeView.setError(getString(R.string.error_field_required));
             focusView = placeView;
+            cancel = true;
+        }
+    }
+
+    private void checkForValidDate() {
+        date = dateView.getEditText().getText().toString();
+        if (TextUtils.isEmpty(date)) {
+            dateView.setError(getString(R.string.error_field_required));
+            focusView = dateView;
+            cancel = true;
+        }
+    }
+
+    private void checkForValidTime() {
+        time = timeView.getEditText().getText().toString();
+        if (TextUtils.isEmpty(time)) {
+            timeView.setError(getString(R.string.error_field_required));
+            focusView = timeView;
+            cancel = true;
+        }
+    }
+
+    private void checkForValidNumberOFPlayers() {
+        numberOfPlayers = numberOfPlayersView.getEditText().getText().toString();
+        if (TextUtils.isEmpty(numberOfPlayers)) {
+            numberOfPlayersView.setError(getString(R.string.error_field_required));
+            focusView = numberOfPlayersView;
             cancel = true;
         }
     }

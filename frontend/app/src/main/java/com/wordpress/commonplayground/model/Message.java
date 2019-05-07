@@ -111,8 +111,8 @@ public class Message implements Parcelable {
 
     public static Message parseJoinMessage(JSONObject messageObject){
         try {
-            return (new Message(messageObject.getString("type"), messageObject.getString("title"), messageObject.getString("authorName"), messageObject.getString("description"),
-                    messageObject.getLong("id"), messageObject.getLong("id"), messageObject.getLong("id")));
+            return (new Message(messageObject.getString("type"), messageObject.getString("title"), messageObject.getString("description"), messageObject.getString("authorName"),
+                    messageObject.getLong("id"), messageObject.getLong("sessionIdUserWantsToJoin"), messageObject.getLong("userIdWhoWantsToJoin")));
         } catch (JSONException e) {
         Log.d("Parse.Session", e.toString());
     }
@@ -121,7 +121,8 @@ public class Message implements Parcelable {
 
     public static Message parseGeneralMessage(JSONObject messageObject){
         try {
-            return new Message(messageObject.getString("type"), messageObject.getString("title"), messageObject.getString("authorName"), messageObject.getString("description"), messageObject.getLong("id"));
+            return new Message(messageObject.getString("type"), messageObject.getString("title"), messageObject.getString("description"), messageObject.getString("authorName"),
+                    messageObject.getLong("id"));
         } catch (JSONException e) {
             Log.d("Parse.Session", e.toString());
         }

@@ -34,15 +34,13 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     }
 
     @Override
-    @NonNull
-    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return MessageViewHolder.buildFor(parent);
     }
 
 
     @Override
-    @NonNull
-    public void onBindViewHolder(MessageViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull MessageViewHolder viewHolder, int position) {
         Message message = inbox.get(position);
         TextView titleTextView = viewHolder.titleTextView;
         TextView descriptionTextView = viewHolder.descriptionTextView;
@@ -61,7 +59,6 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     }
 
     private void setUpButtons(MessageViewHolder viewHolder, int position, Button deleteButton, Button acceptButton, Button rejectButton) {
-        //SetUP Buttons
         int pos = viewHolder.getAdapterPosition();
         String passMID = Long.toString(inbox.get(pos).getId());
         String passUID = session.getUserDetails().get(SessionManager.KEY_ID);

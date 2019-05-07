@@ -68,7 +68,7 @@ public class MessageViewModel extends AndroidViewModel {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("Parse.Response", String.valueOf(error));
+                        Log.d("GetMessage.Response", String.valueOf(error));
                     }
                 }
         );

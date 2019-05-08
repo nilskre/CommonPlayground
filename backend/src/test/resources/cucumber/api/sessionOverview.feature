@@ -9,4 +9,3 @@ Feature: Use Case 3 Session Overview
     And  I look for the session list "http://localhost:8080/getSessionList"
     Then There should be sessions
     And  There should be my PostedSession with correct Data
-    

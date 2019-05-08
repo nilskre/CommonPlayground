@@ -29,8 +29,8 @@ public class Application{
             sessionRepository.save(testData.getTestSessions().get(0));
             sessionRepository.save(testData.getTestSessions().get(1));
             sessionRepository.save(testData.getTestSessions().get(2));
-            userRepository.save(new User("iBims", "123456789", "test@test.de"));
-            messageRepository.save(new Message("TESTMASSAGE: Join request for AB","CD wants to join this session", (long)1,(long)2, "CommonPlayground"));
+            userRepository.save(testData.getTestUser());
+            messageRepository.save(testData.getTestMessage());
 
             // fetch all sessions
             log.info("Customers found with findAll():");

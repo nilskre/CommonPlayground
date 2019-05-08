@@ -18,7 +18,7 @@ import static io.restassured.RestAssured.get;
 
 public class PostSessionStepDefinitions {
 
-    TestData testData = new TestData();
+    private TestData testData = new TestData();
 
     @When("^I post a new Session with correct Data$")
     public void iPostANewSessionWithCorrectData(){

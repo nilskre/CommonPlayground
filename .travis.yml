@@ -89,5 +89,6 @@ jobs:
       language: java
       script:
         - cd backend/
+        - ./gradlew jacocoTestReport
         - ./gradlew sendCoverageToCodacy
        

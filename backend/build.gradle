@@ -94,17 +94,6 @@ configurations {
     }
 }
 
-task cucumber() {
-    dependsOn assemble, compileTestJava
-    doLast {
-        javaexec {
-            main = "cucumber.api.cli.Main"
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--glue', 'commonplayground.controller.cucumber.api', 'src/test/resources/cucumber']
-        }
-    }
-}
-
 task unpack(type: Copy) {
     dependsOn bootJar
     from(zipTree(tasks.bootJar.outputs.files.singleFile))
@@ -114,19 +103,6 @@ docker {
     name "${project.group}/${bootJar.baseName}"
     copySpec.from(tasks.unpack.outputs).into("dependency")
     buildArgs(['DEPENDENCY': "dependency"])
-}
-
-jacoco {
-    toolVersion = "0.8.3"
-    reportsDir = file("$buildDir/reports/jacoco")
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled true
-        csv.enabled false
-        xml.destination file("${buildDir}/reports/jacoco/jacocoXml")
-    }
 }
 
 task sendCoverageToCodacy(type: JavaExec, dependsOn: jacocoTestReport) {
@@ -139,4 +115,41 @@ task sendCoverageToCodacy(type: JavaExec, dependsOn: jacocoTestReport) {
             "-r",
             "${buildDir}/reports/jacoco/jacocoXml"
     ]
+}
+
+def jacocoAgent = zipTree(configurations.jacocoAgent.singleFile).filter { it.name == "jacocoagent.jar" }.singleFile
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = 'cucumber.api.cli.Main'
+            jvmArgs = ["-javaagent:$jacocoAgent=destfile=$buildDir/jacoco/cucumber.exec,append=false"]
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', "html:build/reports/cucumber",
+                    //'--plugin', "junit:${project.buildDir}/test-results/cucumber-report.xml",
+                    //'--plugin', "json:${project.buildDir}/test-results/cucumber-report.json",
+                    '--glue', 'commonplayground.controller.cucumber.api',
+                    'src/test/resources/cucumber']
+        }
+    }
+}
+
+jacocoTestReport() {
+    dependsOn test, cucumber
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def debugTree = fileTree(dir: "$project.buildDir/classes/", excludes: fileFilter)
+    def mainSrc = "$project.projectDir/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: project.buildDir, includes: [
+            'jacoco/test.exec', 'jacoco/cucumber.exec'
+    ])
 }

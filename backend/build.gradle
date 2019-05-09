@@ -143,7 +143,7 @@ jacocoTestReport() {
         html.enabled = true
     }
 
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*', '**/commonplayground/controller/cucumber/api/*']
     def debugTree = fileTree(dir: "$project.buildDir/classes/", excludes: fileFilter)
     def mainSrc = "$project.projectDir/src/main/java"
 

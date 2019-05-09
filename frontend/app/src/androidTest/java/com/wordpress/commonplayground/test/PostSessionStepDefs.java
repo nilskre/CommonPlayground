@@ -141,8 +141,9 @@ public class PostSessionStepDefs {
 
     @And("^The user types the number of players ([^\"]*) and the input is correct$")
     public void theUserTypesTheNumberOfPlayersAndTheInputIsCorrect(String testPlayersNumber) {
+        //onView(withId(R.id.PlayersInputField)).perform(scrollTo(), click());
         ViewInteraction textInputEditText = onView(withId(R.id.PlayersInputField));
-        textInputEditText.perform(ViewActions.typeText(testPlayersNumber), ViewActions.closeSoftKeyboard());
+        textInputEditText.perform(scrollTo(), ViewActions.typeText(testPlayersNumber), ViewActions.closeSoftKeyboard());
     }
 
     @And("^The user types the description ([^\"]*) and the input is correct$")

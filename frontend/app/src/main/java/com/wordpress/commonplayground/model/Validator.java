@@ -48,4 +48,10 @@ public class Validator {
         }
         return response;
     }
+
+    public static boolean checkForValidPlace(String place, Context c) {
+        String validPlace = "^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$";
+        Matcher matcher = Pattern.compile(validPlace).matcher(place);
+        return matcher.matches();
+    }
 }

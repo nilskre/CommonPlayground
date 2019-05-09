@@ -17,7 +17,7 @@
     <!-- Strings related to AddSession -->
     <string name="new_title">Titel</string>
     <string name="new_game">Spiel</string>
-    <string name="new_place">Ort</string>
+    <string name="new_place">Postleitzahl</string>
     <string name="new_date">Datum</string>
     <string name="new_time">Uhrzeit</string>
     <string name="new_players">Anzahl Spieler</string>
@@ -55,6 +55,8 @@
     <string name="tab_text_2">Teilnehmen</string>
     <string name="title_activity_my_sessions">Meine Sessions</string>
     <string name="menu_messages">Nachrichten</string>
+    <string name="error_too_long">Diese Eingabe ist zu lang</string>
+    <string name="error_wrong_place">Bitte geben sie eine korrekte Postleitzahl ein</string>
     <string name="message_button_accept">Bestätigen</string>
     <string name="message_button_reject">Ablehnen</string>
     <string name="message_button_delete">Löschen</string>

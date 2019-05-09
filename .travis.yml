@@ -60,14 +60,20 @@ jobs:
         - ./gradlew build connectedCheck
 
     - stage: deploy-backend
-      if: branch = master
+      #if: branch = master
       language: java
       services:
         - docker
       provider: heroku
       script:
         - cd backend/ 
+        # Build Docker image
         - ./gradlew build docker
+        # Push Docker image to DockerHub 
+        - docker login -u $DOCKER_USERNAME -p $DOCKER_PW
+        - docker push commonplayground/commonplayground
+        - docker logout
+        # Push and deploy image to Heroku
         - heroku container:login
         - docker tag commonplayground/commonplayground:latest registry.heroku.com/commonplayground/web
         - docker push registry.heroku.com/commonplayground/web

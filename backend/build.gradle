@@ -125,7 +125,6 @@ jacocoTestReport {
     reports {
         xml.enabled true
         csv.enabled false
-        xml.destination file("${buildDir}/reports/jacoco/jacocoXml")
     }
 }
 
@@ -137,6 +136,6 @@ task sendCoverageToCodacy(type: JavaExec, dependsOn: jacocoTestReport) {
             "-l",
             "Java",
             "-r",
-            "${buildDir}/reports/jacoco/jacocoXml"
+            "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
     ]
 }

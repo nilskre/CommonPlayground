@@ -25,7 +25,7 @@ Feature: Use Case 1 Posting a Session
     Examples: Sessions
       | title | game       | type     | genre     | postCode  | date       | time  | numberOfPlayers | description |
       | Cards | Doppelkopf | Offline  | Card Game | 23456     | 29-10-2019 | 06:00 | 4               | fun         |
-      | Raid  | Game       | Online   | MMO RPG   | -         | 01-11-2020 | 12:00 | 9               | online Game |
+      | Raid  | Game       | Online   | MMO RPG   | -         | 01-11-2020 | 12:00 | 4               | online Game |
 
   @postsession-feature
   Scenario: Leaving the Activity New Session without sending a Request

@@ -24,7 +24,7 @@ Feature: Use Case 1 Posting a Session
 
     Examples: Sessions
       | title | game       | type     | genre     | postCode  | date       | time  | numberOfPlayers | description |
-      | Raid  | Game       | Online   | MMO RPG   | -         | 01-11-2020 | 12:00 | 10              | online Game |
+      | Raid  | Game       | Online   | MMO RPG   | -         | 01-11-2020 | 12:00 | 9               | online Game |
       | Cards | Doppelkopf | Offline  | Card Game | 23456     | 29-10-2019 | 06:00 | 4               | fun         |
 
   @postsession-feature

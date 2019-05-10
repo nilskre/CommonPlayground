@@ -11,7 +11,7 @@ import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.view.LoginActivity;
 
 public class PostRegistrationRequest extends VolleyStringTemplate {
-    Activity activity;
+    private Activity activity;
 
     public PostRegistrationRequest(Resources r, Activity activity) {
         super();
@@ -21,7 +21,7 @@ public class PostRegistrationRequest extends VolleyStringTemplate {
 
     @Override
     protected void handleString(String response, View view) {
-        String result = "";
+        String result;
         Log.d("Response.Register", response);
         switch (Integer.parseInt(response)) {
             case -3:
@@ -32,6 +32,9 @@ public class PostRegistrationRequest extends VolleyStringTemplate {
                 break;
             case 0:
                 result = r.getString(R.string.registration_succsess);
+                break;
+            default:
+                result = r.getString(R.string.new_error);
         }
         Snackbar.make(view, result, 5000).show();
 

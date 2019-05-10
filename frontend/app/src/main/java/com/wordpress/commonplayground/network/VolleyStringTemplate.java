@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class VolleyStringTemplate {
-    Resources r;
+    protected Resources r;
 
     public void stringRequest(String api, String tag, Context context, HashMap<String, String> parameters, View view) {
         String url = BuildConfig.SERVER_URL + api;

@@ -12,9 +12,9 @@ import com.wordpress.commonplayground.view.MainActivity;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 public class PostLoginRequest extends VolleyStringTemplate {
-    SessionManager session;
-    String email;
-    Activity activity;
+    private SessionManager session;
+    private String email;
+    private Activity activity;
 
     public PostLoginRequest(Resources r, SessionManager session, String email, Activity activity) {
         super();
@@ -44,7 +44,7 @@ public class PostLoginRequest extends VolleyStringTemplate {
                 break;
         }
         if (success) {
-            session.createLoginSession(response.toString(), email);
+            session.createLoginSession(response, email);
             Intent i = new Intent(activity.getApplicationContext(), MainActivity.class);
             activity.startActivity(i);
             activity.finish();

@@ -1,10 +1,9 @@
 package com.wordpress.commonplayground.view;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -159,6 +158,11 @@ public class RegistrationActivity extends AppCompatActivity {
         final String username = mUsernameView.getText().toString();
         final String email = mEmailView.getText().toString();
         final String password = mPasswordView.getText().toString();
+
+        HashMap<String, String> MyData = new HashMap<>();
+        MyData.put("username", username);
+        MyData.put("email", email);
+        MyData.put("password", password);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         String url = BuildConfig.SERVER_URL + "registerNewUser";

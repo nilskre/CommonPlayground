@@ -1,10 +1,8 @@
 package com.wordpress.commonplayground.view;
 
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,19 +13,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.wordpress.commonplayground.BuildConfig;
 import com.wordpress.commonplayground.R;
-import com.wordpress.commonplayground.viewmodel.SessionManager;
 import com.wordpress.commonplayground.model.Validator;
+import com.wordpress.commonplayground.network.PostLoginRequest;
+import com.wordpress.commonplayground.viewmodel.SessionManager;
+
+import java.util.HashMap;
 
 /**
  * A login screen that offers login via email/password.
@@ -151,46 +142,12 @@ public class LoginActivity extends AppCompatActivity {
         final String email = mEmailView.getText().toString();
         final String password = mPasswordView.getText().toString();
 
-        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String url = BuildConfig.SERVER_URL + "login";
-        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                String result = "";
-                boolean success = false;
-                Log.d("Response.Login", response);
-                switch (Integer.parseInt(response)){
-                    case -5: result = getString(R.string.login_error); break;
-                    case -4: result = getString(R.string.username_error); break;
-                    case -1: result = getString(R.string.new_error); break;
-                    default: success = true; break;
-                }
-                if (success) {
-                    session.createLoginSession(response.toString(), email);
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(i);
-                    finish();
-                }else{
-                    Snackbar.make(view, result, 5000).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Login", String.valueOf(error));
-                Snackbar.make(view, getString(R.string.new_error), 5000)
-                        .setAction("Action", null).show();
-            }
-        }) {
-            protected Map<String, String> getParams() {
-                Map<String, String> MyData = new HashMap<>();
-                MyData.put("email", email);
-                MyData.put("password", password);
-                return MyData;
-            }
-        };
+        HashMap<String, String> parameters = new HashMap<>();
+        parameters.put("email", email);
+        parameters.put("password", password);
 
-        MyRequestQueue.add(MyStringRequest);
+        PostLoginRequest request = new PostLoginRequest(this.getResources(), session, email, this);
+        request.stringRequest("login", "Login", getApplicationContext(), parameters, view);
     }
 
     @Override

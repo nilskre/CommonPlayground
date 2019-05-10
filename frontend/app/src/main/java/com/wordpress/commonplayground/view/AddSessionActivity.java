@@ -20,7 +20,7 @@ import android.widget.TimePicker;
 
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.model.Validator;
-import com.wordpress.commonplayground.network.VolleyStringNoResponse;
+import com.wordpress.commonplayground.network.PostSessionRequest;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.Calendar;
@@ -170,7 +170,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             description = descriptionView.getEditText().getText().toString();
             genre = genre_spinner.getSelectedItem().toString();
             type = type_spinner.getSelectedItem().toString();
-            VolleyStringNoResponse request = new VolleyStringNoResponse();
+            PostSessionRequest request = new PostSessionRequest(this.getResources());
 
             HashMap<String, String> parameters = new HashMap<String, String>();
             parameters.put("title", title);
@@ -186,7 +186,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             parameters.put("genre", genre);
             parameters.put("isOnline", type);
 
-            request.stringRequest("postNewSession", "PostSession", this.getApplication(), parameters);
+            request.stringRequest("postNewSession", "PostSession", this.getApplication(), parameters, view);
         }
     }
 

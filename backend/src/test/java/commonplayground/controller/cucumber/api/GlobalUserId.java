@@ -1,15 +1,15 @@
 package commonplayground.controller.cucumber.api;
 
 public class GlobalUserId {
-    private static String hostUserID;
+    private static String sessionHostUserID;
     private static String normalUserID;
 
-    public static String getHostUserID() {
-        return hostUserID;
+    public static String getSessionHostUserID() {
+        return sessionHostUserID;
     }
 
-    public static void setHostUserID(String hostUserID) {
-        GlobalUserId.hostUserID = hostUserID;
+    public static void setSessionHostUserID(String sessionHostUserID) {
+        GlobalUserId.sessionHostUserID = sessionHostUserID;
     }
 
     public static String getNormalUserID() {

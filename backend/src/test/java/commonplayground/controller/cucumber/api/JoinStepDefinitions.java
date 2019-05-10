@@ -1,8 +1,11 @@
 package commonplayground.controller.cucumber.api;
 
+import commonplayground.Application;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -12,6 +15,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class JoinStepDefinitions {
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private StringBuilder myJoinedSessions;
 
     @When("I send a join request for one session")
     public void iSendAJoinRequestForOneSession() {
@@ -52,7 +57,7 @@ public class JoinStepDefinitions {
     public void theSessionHostApprovesTheRequest(String joinAccepted) {
         try {
             String body =
-                    "userID=" + URLEncoder.encode(GlobalUserId.getHostUserID(), "UTF-8") + "&" +
+                    "userID=" + URLEncoder.encode(GlobalUserId.getSessionHostUserID(), "UTF-8") + "&" +
                             "messageID=" + URLEncoder.encode(GlobalMessageId.getMessageID(), "UTF-8") + "&" +
                             "joinAccepted=" + URLEncoder.encode(joinAccepted, "UTF-8");
 
@@ -120,14 +125,13 @@ public class JoinStepDefinitions {
         }
     }
 
-    @When("I send a leave request for one session")
-    public void iSendALeaveRequestForOneSession() {
+    @Then("I have left the session")
+    public void iHaveLeftTheSession() {
         try {
             String body =
-                    "userID=" + URLEncoder.encode(GlobalUserId.getNormalUserID(), "UTF-8") + "&" +
-                            "sessionID=" + URLEncoder.encode(GlobalSessionId.getSessionID(), "UTF-8");
+                    "userID=" + URLEncoder.encode(GlobalUserId.getNormalUserID(), "UTF-8");
 
-            URL url = new URL("http://localhost:8080/leaveSession");
+            URL url = new URL("http://localhost:8080/getMyJoinedSessions");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoInput(true);
@@ -142,46 +146,11 @@ public class JoinStepDefinitions {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            String returnCodeShouldBeZero = "-42";
+            myJoinedSessions = new StringBuilder();
             for (String line; (line = reader.readLine()) != null; ) {
-                returnCodeShouldBeZero = line;
+                myJoinedSessions.append(line);
             }
-            assert Integer.parseInt(returnCodeShouldBeZero) == 0;
-
-            writer.close();
-            reader.close();
-        } catch (Exception e) {
-            assert false;
-        }
-    }
-
-    @When("Host send a leave request for one session")
-    public void hostSendALeaveRequestForOneSession() {
-        try {
-            String body =
-                    "userID=" + URLEncoder.encode(GlobalUserId.getHostUserID(), "UTF-8") + "&" +
-                            "sessionID=" + URLEncoder.encode(GlobalSessionId.getSessionID(), "UTF-8");
-
-            URL url = new URL("http://localhost:8080/leaveSession");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-            connection.setUseCaches(false);
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Content-Length", String.valueOf(body.length()));
-
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-            writer.write(body);
-            writer.flush();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-            String returnCodeShouldBeZero = "-42";
-            for (String line; (line = reader.readLine()) != null; ) {
-                returnCodeShouldBeZero = line;
-            }
-            assert Integer.parseInt(returnCodeShouldBeZero) == -20;
+            log.info("Response of getMyJoinedSessions: " + myJoinedSessions);
 
             writer.close();
             reader.close();

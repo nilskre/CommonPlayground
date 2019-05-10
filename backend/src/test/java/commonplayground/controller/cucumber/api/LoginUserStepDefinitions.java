@@ -1,7 +1,10 @@
 package commonplayground.controller.cucumber.api;
 
+import commonplayground.Application;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,10 +14,11 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class LoginUserStepDefinitions {
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
     private String responseUserIdOrErrorCode = "";
 
-    @When("I login with {string}{string}")
-    public void iLoginWith(String email, String password) {
+    @When("I login with {string}{string} as test user type {string}")
+    public void iLoginWith(String email, String password, String testUserType) {
         try {
             String body =
                     "email=" + URLEncoder.encode(email, "UTF-8") + "&" +
@@ -38,11 +42,16 @@ public class LoginUserStepDefinitions {
             for (String line; (line = reader.readLine()) != null; ) {
                 responseUserIdOrErrorCode = line;
             }
-            System.out.println("responseUserIdOrErrorCode " + responseUserIdOrErrorCode);
-            if (GlobalUserId.getHostUserID() == null) {
-                GlobalUserId.setHostUserID(responseUserIdOrErrorCode);
-            } else {
+
+            log.info("Response of Register Controller: " + responseUserIdOrErrorCode);
+
+            if (testUserType.equals("sessionHost")) {
+                GlobalUserId.setSessionHostUserID(responseUserIdOrErrorCode);
+            } else if (testUserType.equals("normalUser")){
                 GlobalUserId.setNormalUserID(responseUserIdOrErrorCode);
+            } else {
+                //TODO another user
+                //GlobalUserId.setNormalUserID(responseUserIdOrErrorCode);
             }
 
             writer.close();

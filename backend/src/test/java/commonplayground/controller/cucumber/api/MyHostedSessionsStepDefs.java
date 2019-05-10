@@ -22,7 +22,7 @@ public class MyHostedSessionsStepDefs {
     public void iRequestMyHostedSessions() {
         try {
             String body =
-                    "userID=" + URLEncoder.encode(GlobalUserId.getHostUserID(), "UTF-8");
+                    "userID=" + URLEncoder.encode(GlobalUserId.getSessionHostUserID(), "UTF-8");
 
             URL url = new URL("http://localhost:8080/getMyHostedSessions");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

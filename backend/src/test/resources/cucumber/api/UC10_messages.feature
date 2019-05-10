@@ -4,8 +4,8 @@ Feature: Part of UC2 Join
   Background:
     Given The backend is active
     And I register a new account "User""123456789""a@b.c"
-    And I login with "a@b.c""123456789"
+    And I login with "a@b.c""123456789" as test user type "sessionHost"
 
   Scenario: get my messages
-    When I request my messages
+    When "sessionHost" requests his messages
     Then  There should be my messages

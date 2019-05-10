@@ -1,9 +1,12 @@
 package commonplayground.controller.cucumber.api;
 
+import commonplayground.Application;
 import commonplayground.model.Session;
 import commonplayground.model.TestData;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,14 +19,19 @@ import static io.restassured.RestAssured.get;
 
 
 public class PostSessionStepDefinitions {
-
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
     private TestData testData = new TestData();
 
-    @When("^I post a new Session with correct Data$")
-    public void iPostANewSessionWithCorrectData() {
+    @When("I post a new Session with correct Data as test user type {string}")
+    public void iPostANewSessionWithCorrectData(String testUserType) {
         String hostID = "-20";
-        if (GlobalUserId.getHostUserID() != null) {
-            hostID = GlobalUserId.getHostUserID();
+        if (testUserType.equals("sessionHost") && GlobalUserId.getSessionHostUserID() != null) {
+            hostID = GlobalUserId.getSessionHostUserID();
+        } else if (testUserType.equals("normalUser") && GlobalUserId.getSessionHostUserID() != null){
+            hostID = GlobalUserId.getNormalUserID();
+        } else {
+            //TODO another user
+            //GlobalUserId.setNormalUserID(responseUserIdOrErrorCode);
         }
         for (Session testSession : testData.getTestSessions()) {
             try {
@@ -60,6 +68,7 @@ public class PostSessionStepDefinitions {
                 }
                 if (GlobalSessionId.getSessionID() == null) {
                     GlobalSessionId.setSessionID(sessionID);
+                    log.info("Posted session and set sessionID");
                 }
 
                 writer.close();
@@ -73,8 +82,8 @@ public class PostSessionStepDefinitions {
     /*@When("^I post one new Session with correct Data$")
     public void iPostOneNewSessionWithCorrectData() {
         String hostID = "-20";
-        if (GlobalUserId.getHostUserID() != null) {
-            hostID = GlobalUserId.getHostUserID();
+        if (GlobalUserId.getSessionHostUserID() != null) {
+            hostID = GlobalUserId.getSessionHostUserID();
         }
         Session testSession = testData.getTestSessions().get(0);
         try {

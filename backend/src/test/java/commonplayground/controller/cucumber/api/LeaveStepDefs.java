@@ -1,8 +1,8 @@
 package commonplayground.controller.cucumber.api;
 
 import commonplayground.Application;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,25 +13,27 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-
-public class RegisterNewUserStepDefinitions {
+public class LeaveStepDefs {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
-    private StringBuilder response;
+    private StringBuilder leaveSessionResponse;
 
-    @Then("The response should be {string}")
-    public void theResponseShouldBe(String expectedResponse) {
-        assert (response.toString().equals(expectedResponse));
-    }
-
-    @Given("I register a new account {string}{string}{string}")
-    public void iRegisterANewAccount(String username, String password, String email) {
+    @When("{string} sends a leave request for one session")
+    public void iSendALeaveRequestForOneSession(String testUserType) {
+        String hostID = "-20";
+        if (testUserType.equals("sessionHost") && GlobalUserId.getSessionHostUserID() != null) {
+            hostID = GlobalUserId.getSessionHostUserID();
+        } else if (testUserType.equals("normalUser") && GlobalUserId.getSessionHostUserID() != null){
+            hostID = GlobalUserId.getNormalUserID();
+        } else {
+            //TODO another user
+            //GlobalUserId.setNormalUserID(responseUserIdOrErrorCode);
+        }
         try {
             String body =
-                    "username=" + URLEncoder.encode(username, "UTF-8") + "&" +
-                            "password=" + URLEncoder.encode(password, "UTF-8") + "&" +
-                            "email=" + URLEncoder.encode(email, "UTF-8");
+                    "userID=" + URLEncoder.encode(hostID, "UTF-8") + "&" +
+                            "sessionID=" + URLEncoder.encode(GlobalSessionId.getSessionID(), "UTF-8");
 
-            URL url = new URL("http://localhost:8080/registerNewUser");
+            URL url = new URL("http://localhost:8080/leaveSession");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoInput(true);
@@ -46,16 +48,21 @@ public class RegisterNewUserStepDefinitions {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            response = new StringBuilder();
+            leaveSessionResponse = new StringBuilder();
             for (String line; (line = reader.readLine()) != null; ) {
-                response.append(line);
+                leaveSessionResponse.append(line);
             }
-            log.info("Response of Register Controller: " + response);
+            log.info("Response of Leaving Controller: " + leaveSessionResponse);
 
             writer.close();
             reader.close();
         } catch (Exception e) {
             assert false;
         }
+    }
+
+    @Then("The return code should be {int}")
+    public void theReturnCodeShouldBe(int expectedResult){
+        assert expectedResult == Integer.parseInt(leaveSessionResponse.toString());
     }
 }

@@ -16,11 +16,17 @@ import static io.restassured.RestAssured.get;
 public class MessagesStepDefs {
     private String myMessages = "";
 
-    @When("I request my messages")
-    public void iRequestMyMessages() {
+    @When("{string} requests his messages")
+    public void requestMessages(String user) {
+        String userID;
+        if (user.equals("sessionHost")) {
+            userID = GlobalUserId.getSessionHostUserID();
+        } else {
+            userID = GlobalUserId.getNormalUserID();
+        }
         try {
             String body =
-                    "userID=" + URLEncoder.encode(GlobalUserId.getHostUserID(), "UTF-8");
+                    "userID=" + URLEncoder.encode(userID, "UTF-8");
 
             URL url = new URL("http://localhost:8080/getMyMessages");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -38,7 +44,7 @@ public class MessagesStepDefs {
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             for (String line; (line = reader.readLine()) != null; ) {
-                myMessages = line;
+                myMessages += line;
             }
             System.out.println("myMessages " + myMessages);
 
@@ -49,6 +55,8 @@ public class MessagesStepDefs {
             }
             System.out.println("FINAL ID: " + test2[0]);
             String messageId = test2[0];
+
+            //TODO read as list/object for tests at the bottom
 
 
             //Gson gson = new Gson();
@@ -69,7 +77,19 @@ public class MessagesStepDefs {
     @Then("There should be my messages")
     public void thereShouldBeMyMessages() {
         TestData testData = new TestData();
-
+        //TODO Work with data from method above
         assert get("/getMyMessages").jsonPath().getList("title").contains(testData.getTestMessage().getTitle());
+    }
+
+    @Then("There should be a leave message")
+    public void thereShouldBeALeaveMessage() {
+        //TODO Work with data from method above
+        assert get("/getMyMessages").jsonPath().getList("title").contains("Left successful");
+    }
+
+    @Then("There should be a reject message")
+    public void thereShouldBeARejectMessage() {
+        //TODO Work with data from method above
+        assert get("/getMyMessages").jsonPath().getList("title").contains("Join rejected");
     }
 }

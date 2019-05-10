@@ -1,10 +1,8 @@
 package commonplayground.controller.cucumber.api;
 
-import commonplayground.model.Message;
 import commonplayground.model.TestData;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.deps.com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -44,11 +42,20 @@ public class MessagesStepDefs {
             }
             System.out.println("myMessages " + myMessages);
 
-            Gson gson = new Gson();
-            Message resultMessage = gson.fromJson(myMessages, Message.class);
-            System.out.println("RESULT: " + resultMessage);
-            String messageId = String.valueOf(resultMessage.getId()); //get("/getMyMessages").jsonPath().getList("message.id").toArray()[0].toString();//.jsonPath().getList("id");
-            System.out.println("Message ID: " + resultMessage.toString());
+            String[] test = myMessages.split("[:]");
+            String[] test2 = test[1].split("[,]");
+            for (String s:test2) {
+                System.out.println("TEST: " + s);
+            }
+            System.out.println("FINAL ID: " + test2[0]);
+            String messageId = test2[0];
+
+
+            //Gson gson = new Gson();
+            //Message resultMessage = gson.fromJson(myMessages, Message.class);
+            //System.out.println("RESULT: " + resultMessage);
+            //String messageId = String.valueOf(resultMessage.getId()); //get("/getMyMessages").jsonPath().getList("message.id").toArray()[0].toString();//.jsonPath().getList("id");
+            //System.out.println("Message ID: " + resultMessage.toString());
             //String messageId = (String) get("/getMyMessages").jsonPath().getList("id").get(0);
             GlobalMessageId.setMessageID(messageId);
 

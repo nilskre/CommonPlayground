@@ -35,6 +35,7 @@ public abstract class VolleyStringTemplate {
         VolleyRequestQueue.getInstance(context).addToQueue(stringRequest, tag);
     }
 
-    public abstract void handleString(String response);
+    protected abstract void handleString(String response);
+
 
 }

@@ -24,7 +24,7 @@ public class Session implements Parcelable {
     private Long idOfHost;
     private String genre;
     private String isOnline;
-    private ArrayList<User> users = new ArrayList();
+    private ArrayList<User> users = new ArrayList<>();
 
     public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId, String genre, String isOnline, ArrayList<User> users) {
         this.title = title;
@@ -55,7 +55,7 @@ public class Session implements Parcelable {
         }
     };
 
-    public void readFromParcel(Parcel in) {
+    private void readFromParcel(Parcel in) {
         title = in.readString();
         description = in.readString();
         game = in.readString();
@@ -99,7 +99,7 @@ public class Session implements Parcelable {
                 users.add(new User(id, username, email));
             }
             Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"),sessionObject.getString("genre"), sessionObject.getString("isOnline"), users);
-            Log.v("PARSED", String.valueOf("ID: " + parsed.getId()) + parsed.toString());
+            Log.v("PARSED", "ID: " + parsed.getId() + " " + parsed.toString());
             return parsed;
 
         } catch (JSONException e) {

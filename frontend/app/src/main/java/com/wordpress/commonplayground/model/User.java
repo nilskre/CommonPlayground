@@ -9,13 +9,13 @@ public class User implements Parcelable {
     private String name;
     private String email;
 
-    public User(Long id, String name, String email) {
+    User(Long id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
     }
 
-    public User(Parcel in) {
+    private User(Parcel in) {
         super();
         readFromParcel(in);
     }
@@ -30,7 +30,7 @@ public class User implements Parcelable {
         }
     };
 
-    public void readFromParcel(Parcel in) {
+    private void readFromParcel(Parcel in) {
         id = in.readLong();
         name = in.readString();
         email = in.readString();

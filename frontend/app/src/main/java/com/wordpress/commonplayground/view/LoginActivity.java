@@ -26,8 +26,6 @@ import java.util.HashMap;
 public class LoginActivity extends AppCompatActivity {
     private EditText mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
     private SessionManager session;
 
     private static final String TAG = "LoginActivity";
@@ -42,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         setupLoginForm();
         setupLoginButton();
         setupRegisteringButton();
-        setupViews();
         session = new SessionManager(getApplicationContext());
     }
 
@@ -85,11 +82,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(openRegistrationActivity);
             }
         });
-    }
-
-    private void setupViews() {
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
     }
 
     /**

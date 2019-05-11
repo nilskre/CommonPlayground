@@ -35,6 +35,7 @@ public class PostRegistrationRequest extends VolleyStringTemplate {
                 break;
             default:
                 result = r.getString(R.string.new_error);
+                break;
         }
         Snackbar.make(view, result, 5000).show();
 

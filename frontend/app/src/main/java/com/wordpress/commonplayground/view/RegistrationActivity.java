@@ -1,12 +1,8 @@
 package com.wordpress.commonplayground.view;
 
-import android.content.Intent;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,18 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.wordpress.commonplayground.BuildConfig;
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.model.Validator;
+import com.wordpress.commonplayground.network.PostRegistrationRequest;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -160,42 +149,12 @@ public class RegistrationActivity extends AppCompatActivity {
         final String email = mEmailView.getText().toString();
         final String password = mPasswordView.getText().toString();
 
-        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        String url = BuildConfig.SERVER_URL + "registerNewUser";
-        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                String result = "";
-                Log.d("Response.Register", response);
-                switch (Integer.parseInt(response)){
-                    case -3: result = getString(R.string.email_double_error); break;
-                    case -2: result = getString(R.string.username_double_error); break;
-                    case 0: result = getString(R.string.registration_succsess);
-                }
-                Snackbar.make(view, result, 5000).show();
-                
-                if (Integer.parseInt(response) == 0) {
-                    Intent openLoginActivity = new Intent(RegistrationActivity.this, LoginActivity.class);
-                    startActivity(openLoginActivity);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error.Register", String.valueOf(error));
-                Snackbar.make(view, getString(R.string.new_error), 5000)
-                        .setAction("Action", null).show();
-            }
-        }) {
-            protected Map<String, String> getParams() {
-                Map<String, String> MyData = new HashMap<>();
-                MyData.put("username", username);
-                MyData.put("email", email);
-                MyData.put("password", password);
-                return MyData;
-            }
-        };
+        HashMap<String, String> parameters = new HashMap<>();
+        parameters.put("username", username);
+        parameters.put("email", email);
+        parameters.put("password", password);
 
-        MyRequestQueue.add(MyStringRequest);
+        PostRegistrationRequest request = new PostRegistrationRequest(this.getResources(), this);
+        request.stringRequest("registerNewUser", "Registration", getApplicationContext(), parameters, view);
     }
 }

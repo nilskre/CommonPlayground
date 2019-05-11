@@ -52,6 +52,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
             }
         });
 
@@ -96,18 +97,18 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        if (view == btnPublish) {
+        if (view.equals(btnPublish)) {
             sendRequestToBackend(view);
             if (!cancel) {
                 returnToMainActivity();
             }
         }
 
-        if (view == btnDatePicker) {
+        if (view.equals(btnDatePicker)) {
             getCurrentDate();
         }
 
-        if (view == btnTimePicker) {
+        if (view.equals(btnTimePicker)) {
             getCurrentTime();
         }
 

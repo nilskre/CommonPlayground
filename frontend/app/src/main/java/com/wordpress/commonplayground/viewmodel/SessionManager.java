@@ -11,23 +11,23 @@ import java.util.HashMap;
 
 public class SessionManager {
 
-        SharedPreferences pref;
-        Editor editor;
-        Context _context;
-        int PRIVATE_MODE = 0;
+    private SharedPreferences pref;
+    private Editor editor;
+    private Context _context;
+    private int PRIVATE_MODE = 0;
 
+    private static final String PREF_NAME = "AndroidPref";
+    private static final String IS_LOGIN = "IsLoggedIn";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_ID = "UserID";
+    public static final String KEY_MENU_ITEM_MAIN = "ActiveFragment";
 
-        private static final String PREF_NAME = "AndroidPref";
-        private static final String IS_LOGIN = "IsLoggedIn";
-        public static final String KEY_EMAIL = "email";
-        public static final String KEY_ID = "UserID";
-        public static final String KEY_MENU_ITEM_MAIN = "ActiveFragment";
-
-        public SessionManager(Context context){
-            this._context = context;
-            pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
-            editor = pref.edit();
-        }
+    public SessionManager(Context context){
+        this._context = context;
+        pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        editor = pref.edit();
+        editor.apply();
+    }
 
     public void createLoginSession(String UID, String email){
         editor.putBoolean(IS_LOGIN, true);
@@ -64,7 +64,7 @@ public class SessionManager {
         _context.startActivity(i);
     }
 
-    public boolean isLoggedIn(){
+    private boolean isLoggedIn(){
         return pref.getBoolean(IS_LOGIN, false);
     }
 

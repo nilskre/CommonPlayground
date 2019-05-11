@@ -1,12 +1,12 @@
 package com.wordpress.commonplayground.view;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,14 +31,11 @@ public class SessionDetailActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private ViewPager mViewPager;
     private List<Session> sessionList;
-    private int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +51,14 @@ public class SessionDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         Bundle extras = getIntent().getExtras();
         sessionList = extras.getParcelableArrayList("Sessions");
-        index = extras.getInt("Index");
+        int index = extras.getInt("Index");
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = findViewById(R.id.container);
+        ViewPager mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(index);
     }
@@ -84,9 +81,6 @@ public class SessionDetailActivity extends AppCompatActivity {
         private static final String ARG_SESSION_TIME = "time";
         private static final String ARG_SESSION_NUMBER_OF_PLAYERS = "numberOfPlayers";
         private static final String ARG_SESSION_DESCRIPTION = "description";
-
-        public PlaceholderFragment() {
-        }
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -152,7 +146,7 @@ public class SessionDetailActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        private SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

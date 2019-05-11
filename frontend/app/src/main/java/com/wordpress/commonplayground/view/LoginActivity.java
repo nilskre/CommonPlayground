@@ -145,10 +145,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //Man könnte wohl auch einfach nichts tun... vllt?
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
+        //android.os.Process.killProcess(android.os.Process.myPid());
+        //System.exit(1);
+
+        //Ich würde einfach nichts tun. Dann wird die App zwar nur über Home geschlossen,
+        //was bei der anderen Variante auch nur geht und man hat durch das Überschreiben und nichts tun
+        //keine hässliches Neustarten der App. Sie passiert einfach nichts.
     }
-
-
 }
-

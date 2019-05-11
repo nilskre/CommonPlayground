@@ -1,10 +1,10 @@
 package com.wordpress.commonplayground.view;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -118,20 +118,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_dashboard) {
             fragment = new DashboardFragment();
 
-        } else if (id == R.id.nav_mysessions) {
-
         } else if (id == R.id.nav_messages) {
             fragment = new MessageFragment();
 
-        } else if (id == R.id.nav_profile) {
+        //} else if (id == R.id.nav_profile) {
 
-        } else if (id == R.id.nav_friendlist) {
+        //} else if (id == R.id.nav_friendlist) {
 
         } else if (id == R.id.nav_logout) {
             session.logoutUser();
-        } else if (id == R.id.nav_faq) {
+        //} else if (id == R.id.nav_faq) {
 
-        } else if (id == R.id.nav_contactAdmin) {
+        //} else if (id == R.id.nav_contactAdmin) {
 
         }
 

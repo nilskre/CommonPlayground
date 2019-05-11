@@ -32,7 +32,9 @@ jobs:
       language: java
       script:
         - cd backend/ 
+        # Run unit tests
         - ./gradlew test clean
+        # run cucumber api tests
         - ./gradlew cucumber
     - stage: test-frontend
       language: android
@@ -46,6 +48,7 @@ jobs:
           - extra
           - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL_UI_TESTS
       before_script:
+        # start Android Emulator
         - cd frontend/
         - android list targets
         - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL_UI_TESTS --abi default/armeabi-v7a
@@ -56,7 +59,9 @@ jobs:
         - adb shell settings put global animator_duration_scale 0 &
         - adb shell input keyevent 82 &
       script:
+        # Run unit tests
         - ./gradlew test 
+        # Run UI tests
         - ./gradlew build connectedCheck
 
     - stage: deploy-backend
@@ -67,7 +72,13 @@ jobs:
       provider: heroku
       script:
         - cd backend/ 
+        # Build Docker image
         - ./gradlew build docker
+        # Push Docker image to DockerHub 
+        - docker login -u $DOCKER_USERNAME -p $DOCKER_PW
+        - docker push commonplayground/commonplayground
+        - docker logout
+        # Push and deploy image to Heroku
         - heroku container:login
         - docker tag commonplayground/commonplayground:latest registry.heroku.com/commonplayground/web
         - docker push registry.heroku.com/commonplayground/web

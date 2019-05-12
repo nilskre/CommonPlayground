@@ -3,8 +3,8 @@ Feature: Part of UC10 Message Join
 
   Background:
     And I register a new account "MessagesUser""123456789""m@m.m"
-    And I login with "m@m.m""123456789" as test user type "sessionHost"
+    And I login with "m@m.m""123456789" as test user type "anotherUser"
 
   Scenario: get my messages
-    When "sessionHost" requests his messages
+    When "anotherUser" requests his messages
     Then  There should be my messages

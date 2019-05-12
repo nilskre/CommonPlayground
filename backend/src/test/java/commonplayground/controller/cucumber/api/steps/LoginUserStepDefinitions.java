@@ -20,6 +20,9 @@ public class LoginUserStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private String responseUserIdOrErrorCode = "";
 
+    public LoginUserStepDefinitions() {
+    }
+
     @When("I login with {string}{string} as test user type {string}")
     public void iLoginWith(String email, String password, String testUserType) {
         try {

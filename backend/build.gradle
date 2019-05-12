@@ -84,6 +84,9 @@ dependencies {
 
     // codacy
     codacy 'com.github.codacy:codacy-coverage-reporter:-SNAPSHOT'
+
+    // Jacoco Agent
+    compile group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.8.3'
 }
 
 test {
@@ -125,24 +128,26 @@ task sendCoverageToCodacy(type: JavaExec, dependsOn: jacocoTestReport) {
 
 def jacocoAgent = zipTree(configurations.jacocoAgent.singleFile).filter { it.name == "jacocoagent.jar" }.singleFile
 
+// Task is deprecated
+// Cucumber tests are running because of RunCucumberTests class as part of gradle test task (with coverage)
 task cucumber() {
     dependsOn assemble, compileTestJava
     doLast {
         javaexec {
             main = 'cucumber.api.cli.Main'
-            jvmArgs = ["-javaagent:$jacocoAgent=destfile=$buildDir/jacoco/cucumber.exec,append=false"]
+            //jvmArgs = ["-javaagent:$jacocoAgent=destfile=$buildDir/jacoco/cucumber.exec,append=false"]
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = ['--plugin', "html:build/reports/cucumber",
-                    //'--plugin', "junit:${project.buildDir}/test-results/cucumber-report.xml",
+                    //'--plugin', "j unit:${project.buildDir}/test-results/cucumber-report.xml",
                     //'--plugin', "json:${project.buildDir}/test-results/cucumber-report.json",
-                    '--glue', 'commonplayground.controller.cucumber.api',
-                    'src/test/resources/cucumber']
+                    '--glue', 'commonplayground.controller.cucumber.api.steps'/*, 'cucumber.api.spring'*/,
+                    'src/test/resources/cucumber/api']
         }
     }
 }
 
 jacocoTestReport() {
-    dependsOn test, cucumber
+    dependsOn test//, cucumber
 
     reports {
         xml.enabled = true

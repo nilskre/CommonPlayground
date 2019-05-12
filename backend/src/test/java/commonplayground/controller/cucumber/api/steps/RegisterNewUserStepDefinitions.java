@@ -19,6 +19,9 @@ public class RegisterNewUserStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private StringBuilder response;
 
+    public RegisterNewUserStepDefinitions() {
+    }
+
     @Given("I register a new account {string}{string}{string}")
     public void iRegisterANewAccount(String username, String password, String email) {
         try {

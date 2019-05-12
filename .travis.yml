@@ -33,7 +33,7 @@ jobs:
       script:
         - cd backend/ 
         - ./gradlew test clean
-        - ./gradlew cucumber
+        #- ./gradlew cucumber
     - stage: test-frontend
       language: android
       android:

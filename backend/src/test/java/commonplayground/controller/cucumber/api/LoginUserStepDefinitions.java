@@ -13,6 +13,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import static org.junit.Assert.assertEquals;
+
 public class LoginUserStepDefinitions /*extends CucumberRuntime */{
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private String responseUserIdOrErrorCode = "";
@@ -86,5 +88,11 @@ public class LoginUserStepDefinitions /*extends CucumberRuntime */{
         } catch (NumberFormatException e) {
             assert false;
         }
+    }
+
+    @Then("The login response should be {string}")
+    public void theResponseShouldBe(String expectedResponse) {
+        System.out.println(" >>> Response: " + responseUserIdOrErrorCode + " expected: " + expectedResponse + " <<<");
+        assertEquals(expectedResponse, responseUserIdOrErrorCode.toString());
     }
 }

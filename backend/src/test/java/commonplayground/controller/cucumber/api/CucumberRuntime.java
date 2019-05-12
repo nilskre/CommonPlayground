@@ -18,18 +18,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ContextConfiguration
-public abstract class CucumberRuntime {
+public class CucumberRuntime {
 
     @Before
     public void testSetUpCu() {
-        System.out.println("EXECUTE CU");
+        System.out.println("\nEXECUTE CUCUMBER CONTEXT CLASS\n");
         //super.gedings();
         //test();
     }
 
     @After
     public void tearDown() {
-        System.out.println("EXIT");
+        System.out.println("\nEXIT CUCUMBER CONTEXT CLASS\n");
     }
 
     /*@Test

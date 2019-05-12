@@ -28,13 +28,18 @@ public class LoginController {
             userTriedToLogin = userRepository.findAllByEmail(email);
         }
         userExists = userExists(email);
-        passwordCorrect = passwordCorrect(triedPassword);
+        boolean tmp = userExists == false;
+        System.out.println("USER EXISTS: " + userExists + " COND: " + tmp);
+        if (userExists) {
+            passwordCorrect = passwordCorrect(triedPassword);
+        }
 
         return generateResponse();
     }
 
     private Long generateResponse() {
-        if (!userExists){
+        if (userExists == false){
+            System.out.println("RELEVANT BRANCH");
             return (long) -4;
         } else if(userExists && !passwordCorrect){
             return (long) -5;

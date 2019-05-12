@@ -1,5 +1,6 @@
-package commonplayground.controller.cucumber.api;
+package commonplayground.controller.cucumber.api.steps;
 
+import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
 import commonplayground.model.Session;
 import commonplayground.model.TestData;
 import cucumber.api.java.en.Then;

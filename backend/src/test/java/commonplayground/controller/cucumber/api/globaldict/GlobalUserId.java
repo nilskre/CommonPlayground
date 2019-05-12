@@ -1,4 +1,4 @@
-package commonplayground.controller.cucumber.api;
+package commonplayground.controller.cucumber.api.globaldict;
 
 public class GlobalUserId {
     private static String sessionHostUserID;

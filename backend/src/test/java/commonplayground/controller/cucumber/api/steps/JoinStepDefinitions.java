@@ -1,6 +1,9 @@
-package commonplayground.controller.cucumber.api;
+package commonplayground.controller.cucumber.api.steps;
 
 import commonplayground.Application;
+import commonplayground.controller.cucumber.api.globaldict.GlobalMessageId;
+import commonplayground.controller.cucumber.api.globaldict.GlobalSessionId;
+import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -14,7 +17,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class JoinStepDefinitions /*extends CucumberRuntime*/{
+import static org.junit.Assert.assertEquals;
+
+public class JoinStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private StringBuilder myJoinedSessions;
 
@@ -117,8 +122,9 @@ public class JoinStepDefinitions /*extends CucumberRuntime*/{
             }
 
             System.out.println("JOINED SESSIONS: " + liner);
+            String joinedId = liner.split(",")[0];
 
-            assert liner.contentEquals("[{\"id\":7,\"title\":\"Card Game\",\"description\":\"Card fun\",\"game\":\"Doppelkopf\",\"place\":\"Schlosspark\",\"date\":\"22-11-2024\",\"time\":\"12:00\",\"numberOfPlayers\":4,\"idOfHost\":6,\"genre\":\"genre\",\"isOnline\":\"false\",\"users\":[{\"id\":6,\"username\":\"User\",\"password\":\"$2a$10$sxlRSBsfop1JBhk2rwFRWuz4yKClO22wZzZM6Y.68dfVz6pbIq2gq\",\"email\":\"a@b.c\",\"messages\":[]},{\"id\":10,\"username\":\"Hello\",\"password\":\"$2a$10$9tIA6v.DqR8NYWLZ4tz16.l5McD5MOT62kbQqw5ja06Kag3IlcF2S\",\"email\":\"d@e.f\",\"messages\":[{\"id\":12,\"type\":\"Info\",\"authorName\":\"User\",\"title\":\"Join successful\",\"description\":\"Join to session Card Game was successful\",\"userIdWhoWantsToJoin\":null,\"sessionIdUserWantsToJoin\":null}]}],\"userWantToJoin\":[]}]");
+            assertEquals("[{\"id\":8", joinedId);
 
             writer.close();
             reader.close();

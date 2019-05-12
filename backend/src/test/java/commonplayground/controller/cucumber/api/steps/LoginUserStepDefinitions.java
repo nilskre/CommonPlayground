@@ -1,6 +1,7 @@
-package commonplayground.controller.cucumber.api;
+package commonplayground.controller.cucumber.api.steps;
 
 import commonplayground.Application;
+import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.slf4j.Logger;

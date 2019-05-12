@@ -1,10 +1,6 @@
 Feature: UC5 Login
   Validates the correct behaviour of the backend api for logging in
 
-  #Background:
-    #Given The backend is active
-    #And I register a new account "User""123456789""a@b.c"
-
   Scenario: successfully logged in
     When I register a new account "User""123456789""a@b.c"
     And I login with "a@b.c""123456789" as test user type "sessionHost"

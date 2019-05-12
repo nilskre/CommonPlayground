@@ -15,53 +15,9 @@ import java.net.URLEncoder;
 
 import static org.junit.Assert.assertEquals;
 
-
-//@RunWith(SpringRunner.class)
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@Ignore
-/*@WebAppConfiguration
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@ContextConfiguration(classes = Application.class)
-*/
-//@RunWith(SpringRunner.class)
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-//@ContextConfiguration(classes = Application.class)
-public class RegisterNewUserStepDefinitions /*extends CucumberRuntime */{
+public class RegisterNewUserStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
-    //private String url = DEFAULT_URL + "/registerNewUser";
     private StringBuilder response;
-
-    public RegisterNewUserStepDefinitions() {
-        super();
-    }
-
-    /*@Before
-    public void testSetUpCu() {
-        super.testSetUpCu();
-        System.out.println("EXECUTE CU");
-        //super.gedings();
-        //test();
-    }
-
-    @After
-    public void tearDown() {
-        super.tearDown();
-        System.out.println("EXIT");
-    }
-
-    @Test
-    public void testMethod(){
-        System.out.println("RAN");
-        //SpringApplication.run(Application.class);
-        assert true;
-    }*/
-
-    @Then("The response should be {string}")
-    public void theResponseShouldBe(String expectedResponse) {
-        System.out.println(" >>> Response: " + response + " expected: " + expectedResponse + " <<<");
-        assertEquals(expectedResponse, response.toString());
-    }
-
 
     @Given("I register a new account {string}{string}{string}")
     public void iRegisterANewAccount(String username, String password, String email) {
@@ -98,5 +54,11 @@ public class RegisterNewUserStepDefinitions /*extends CucumberRuntime */{
         } catch (Exception e) {
             assert false;
         }
+    }
+
+    @Then("The response should be {string}")
+    public void theResponseShouldBe(String expectedResponse) {
+        log.info(" >>> Response: " + response + " expected: " + expectedResponse + " <<<");
+        assertEquals(expectedResponse, response.toString());
     }
 }

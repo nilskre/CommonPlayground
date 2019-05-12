@@ -24,26 +24,21 @@ public class LoginController {
     @RequestMapping("/login")
     public Long login(@RequestParam(value = "email", defaultValue = "not given") String email,
                       @RequestParam(value = "password", defaultValue = "not given") String triedPassword) {
-        if (userRepository.findAllByEmail(email) != null){
+        if (userRepository.findAllByEmail(email) != null) {
             userTriedToLogin = userRepository.findAllByEmail(email);
         }
         userExists = userExists(email);
-        boolean tmp = userExists == false;
-        System.out.println("USER EXISTS: " + userExists + " COND: " + tmp);
-        if (userExists) {
-            passwordCorrect = passwordCorrect(triedPassword);
-        }
+        passwordCorrect = passwordCorrect(triedPassword);
 
         return generateResponse();
     }
 
     private Long generateResponse() {
-        if (userExists == false){
-            System.out.println("RELEVANT BRANCH");
+        if (!userExists) {
             return (long) -4;
-        } else if(userExists && !passwordCorrect){
+        } else if (userExists && !passwordCorrect) {
             return (long) -5;
-        } else if (userExists && passwordCorrect){
+        } else if (userExists && passwordCorrect) {
             return userTriedToLogin.getId();
         } else {
             return (long) -1;

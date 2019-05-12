@@ -15,27 +15,9 @@ import java.net.URLEncoder;
 
 import static org.junit.Assert.assertEquals;
 
-public class LoginUserStepDefinitions /*extends CucumberRuntime */{
+public class LoginUserStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private String responseUserIdOrErrorCode = "";
-
-    /*public LoginUserStepDefinitions() {
-        super();
-    }
-
-    @Before
-    public void testSetUpCu() {
-        super.testSetUpCu();
-        System.out.println("EXECUTE CU");
-        //super.gedings();
-        //test();
-    }
-
-    @After
-    public void tearDown() {
-        super.tearDown();
-        System.out.println("EXIT");
-    }*/
 
     @When("I login with {string}{string} as test user type {string}")
     public void iLoginWith(String email, String password, String testUserType) {
@@ -70,8 +52,7 @@ public class LoginUserStepDefinitions /*extends CucumberRuntime */{
             } else if (testUserType.equals("normalUser")) {
                 GlobalUserId.setNormalUserID(responseUserIdOrErrorCode);
             } else {
-                //TODO another user
-                //GlobalUserId.setNormalUserID(responseUserIdOrErrorCode);
+                GlobalUserId.setAnotherUserID(responseUserIdOrErrorCode);
             }
 
             writer.close();

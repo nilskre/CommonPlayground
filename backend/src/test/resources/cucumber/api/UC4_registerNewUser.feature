@@ -1,9 +1,6 @@
 Feature: UC4 Create Account (Register new user)
   Validates the correct behaviour of the backend api for creating an account
 
-  #Background:
-    #Given The backend is active
-
   Scenario: successfully register new User
     When I register a new account "Hello""123456789""a@b.c"
     Then  The response should be "0"

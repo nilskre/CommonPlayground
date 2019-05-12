@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.network.VolleyRequestQueue;
 import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
-import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.List;
 
@@ -48,7 +47,6 @@ public class DashboardFragment extends Fragment {
         VolleyRequestQueue.getInstance(getContext());
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         observeChangesInSessionList();
-        SessionManager session = new SessionManager(getContext());
     }
 
     private void setUpSwipeToRefresh() {

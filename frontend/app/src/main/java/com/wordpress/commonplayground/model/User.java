@@ -15,7 +15,7 @@ public class User implements Parcelable {
         this.email = email;
     }
 
-    public User(Parcel in) {
+    private User(Parcel in) {
         super();
         readFromParcel(in);
     }
@@ -30,7 +30,7 @@ public class User implements Parcelable {
         }
     };
 
-    public void readFromParcel(Parcel in) {
+    private void readFromParcel(Parcel in) {
         id = in.readLong();
         name = in.readString();
         email = in.readString();

@@ -52,6 +52,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
             }
         });
 
@@ -96,18 +97,18 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        if (view == btnPublish) {
+        if (view.equals(btnPublish)) {
             sendRequestToBackend(view);
             if (!cancel) {
                 returnToMainActivity();
             }
         }
 
-        if (view == btnDatePicker) {
+        if (view.equals(btnDatePicker)) {
             getCurrentDate();
         }
 
-        if (view == btnTimePicker) {
+        if (view.equals(btnTimePicker)) {
             getCurrentTime();
         }
 
@@ -136,7 +137,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        dateView.getEditText().setText(((dayOfMonth >= 10) ? "" : "0") + dayOfMonth + "-" + ((monthOfYear + 1 >= 10) ? "" : "0") + (monthOfYear + 1) + "-" + year);
+                        String setDateTo = ((dayOfMonth >= 10) ? "" : "0") + dayOfMonth + "-" + ((monthOfYear + 1 >= 10) ? "" : "0") + (monthOfYear + 1) + "-" + year;
+                        dateView.getEditText().setText(setDateTo);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
@@ -155,7 +157,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        timeView.getEditText().setText(((hourOfDay >= 10) ? "" : "0") + hourOfDay + ":" + ((minute >= 10) ? "" : "0") + minute);
+                        String setTimeTo = ((hourOfDay >= 10) ? "" : "0") + hourOfDay + ":" + ((minute >= 10) ? "" : "0") + minute;
+                        timeView.getEditText().setText(setTimeTo);
                     }
                 }, mHour, mMinute, true);
         timePickerDialog.show();
@@ -258,7 +261,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             placeView.setError(getString(R.string.error_field_required));
             focusView = placeView;
             cancel = true;
-        } else if (!Validator.checkForValidPlace(place, this)) {
+        } else if (!Validator.checkForValidPlace(place)) {
             placeView.setError(getString(R.string.error_wrong_place));
             focusView = placeView;
             cancel = true;

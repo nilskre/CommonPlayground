@@ -2,17 +2,14 @@ package com.wordpress.commonplayground.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.content.Loader;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Session implements Parcelable {
 
@@ -27,7 +24,7 @@ public class Session implements Parcelable {
     private Long idOfHost;
     private String genre;
     private String isOnline;
-    private ArrayList<User> users = new ArrayList();
+    private ArrayList<User> users = new ArrayList<>();
 
     public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId, String genre, String isOnline, ArrayList<User> users) {
         this.title = title;
@@ -58,7 +55,7 @@ public class Session implements Parcelable {
         }
     };
 
-    public void readFromParcel(Parcel in) {
+    private void readFromParcel(Parcel in) {
         title = in.readString();
         description = in.readString();
         game = in.readString();
@@ -102,7 +99,7 @@ public class Session implements Parcelable {
                 users.add(new User(id, username, email));
             }
             Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"),sessionObject.getString("genre"), sessionObject.getString("isOnline"), users);
-            Log.v("PARSED", String.valueOf("ID: " + parsed.getId()) + parsed.toString());
+            Log.v("PARSED", "ID: " + parsed.getId() + " " + parsed.toString());
             return parsed;
 
         } catch (JSONException e) {

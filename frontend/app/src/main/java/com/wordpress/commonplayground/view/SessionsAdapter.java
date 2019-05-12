@@ -29,7 +29,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
     @Override
     @NonNull
-    public SessionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SessionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -39,7 +39,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
 
     @Override
-    public void onBindViewHolder(SessionViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull SessionViewHolder viewHolder, int position) {
         // Get the data model based on position
         Session session = (Session) activeSessions.get(position);
 

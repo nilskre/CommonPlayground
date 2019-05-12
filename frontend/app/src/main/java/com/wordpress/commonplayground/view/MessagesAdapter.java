@@ -101,7 +101,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         private static final int LAYOUT = R.layout.expansion_panel_recycler_cell;
         public TextView titleTextView, authorTextView, descriptionTextView;
         public Button deleteButton, acceptButton, rejectButton;
-        ExpansionLayout expansionLayout;
+        private ExpansionLayout expansionLayout;
 
 
         public static MessageViewHolder buildFor(ViewGroup viewGroup){

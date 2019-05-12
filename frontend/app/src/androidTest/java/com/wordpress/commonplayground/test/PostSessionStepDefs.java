@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
-import androidx.test.espresso.contrib.PickerActions;
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import com.wordpress.commonplayground.R;
@@ -154,7 +154,7 @@ public class PostSessionStepDefs {
     @And("^The user presses the publish button$")
     public void theUserPressesThePublishButton() {
         ViewInteraction floatingActionButton = onView(withId(R.id.ButtonPublish));
-        floatingActionButton.perform(ViewActions.click());
+        floatingActionButton.perform(click());
     }
 
     @Then("^The posting screen is closed$")

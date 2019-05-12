@@ -21,8 +21,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private EditText mUsernameView, mEmailView, mPasswordView, mPasswordConfirmView;
     private String username, email, password, passwordConfirm;
-    private View mProgressView;
-    private View mLoginFormView;
     private boolean cancel = false;
     private View focusView = null;
 
@@ -58,9 +56,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 attemptRegister(view);
             }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
     }
 
     /**

@@ -32,6 +32,7 @@ public class PostSessionStepDefinitions {
         } else {
             hostID = GlobalUserId.getAnotherUserID();
         }
+        System.out.println("HOSTID2: " + hostID);
         for (Session testSession : testData.getTestSessions()) {
             try {
                 String body =
@@ -67,7 +68,7 @@ public class PostSessionStepDefinitions {
                 }
                 if (GlobalSessionId.getSessionID() == null) {
                     GlobalSessionId.setSessionID(sessionID);
-                    log.info("Posted session and set sessionID");
+                    log.info("Posted session and set sessionID " + sessionID);
                 }
 
                 writer.close();
@@ -93,5 +94,7 @@ public class PostSessionStepDefinitions {
             //assertTrue(get("/getSessionList").jsonPath().getList("isOnline").contains(testSession.getIsOnline()));
         }
         assert true;
+        //TODO handling of session ID
+        GlobalSessionId.setSessionID(null);
     }
 }

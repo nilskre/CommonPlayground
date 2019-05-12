@@ -27,8 +27,7 @@ public class LeaveStepDefs /*extends CucumberRuntime*/ {
         } else if (testUserType.equals("normalUser") && GlobalUserId.getSessionHostUserID() != null) {
             hostID = GlobalUserId.getNormalUserID();
         } else {
-            //TODO another user
-            //GlobalUserId.setNormalUserID(responseUserIdOrErrorCode);
+            hostID = GlobalUserId.getAnotherUserID();
         }
         System.out.println("HOSTID " + GlobalUserId.getSessionHostUserID());
         try {

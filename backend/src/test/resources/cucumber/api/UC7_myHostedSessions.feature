@@ -3,7 +3,7 @@ Feature: UC7 Keeping Track (My hosted Sessions)
 
   Background:
     And I register a new account "MyHostedSessions""123456789""w@w.w"
-    And I login with "a@b.c""123456789" as test user type "sessionHost"
+    And I login with "w@w.w""123456789" as test user type "sessionHost"
     And I post a new Session with correct Data as test user type "sessionHost"
 
   Scenario: get my hosted sessions

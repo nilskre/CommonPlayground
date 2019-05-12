@@ -9,6 +9,5 @@ import org.junit.runner.RunWith;
         glue = {"cucumber.api.spring", "commonplayground.controller.cucumber.api.steps"},
         features = {"src/test/resources/cucumber/api"}
 )
-//@Ignore
 public class RunCucumberTests {
 }

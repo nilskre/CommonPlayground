@@ -124,7 +124,7 @@ public class JoinStepDefinitions {
             System.out.println("JOINED SESSIONS: " + liner);
             String joinedId = liner.split(",")[0];
 
-            assertEquals("[{\"id\":8", joinedId);
+            assertEquals("[{\"id\":11"/* + GlobalSessionId.getSessionID()*/, joinedId);
 
             writer.close();
             reader.close();

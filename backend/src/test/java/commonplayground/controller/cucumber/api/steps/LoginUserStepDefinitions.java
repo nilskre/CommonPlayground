@@ -49,7 +49,7 @@ public class LoginUserStepDefinitions {
                 responseUserIdOrErrorCode = line;
             }
 
-            log.info("Response of Register Controller: " + responseUserIdOrErrorCode);
+            log.info("Response of Login Controller: " + responseUserIdOrErrorCode);
 
             if (testUserType.equals("sessionHost")) {
                 GlobalUserId.setSessionHostUserID(responseUserIdOrErrorCode);

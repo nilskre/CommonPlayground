@@ -1,6 +1,7 @@
 package commonplayground.controller.cucumber.api.steps;
 
 import commonplayground.controller.cucumber.api.globaldict.GlobalMessageId;
+import commonplayground.controller.cucumber.api.globaldict.GlobalSessionId;
 import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
 import commonplayground.model.Message;
 import commonplayground.model.TestData;
@@ -115,6 +116,7 @@ public class MessagesStepDefs /*extends CucumberRuntime*/ {
 
     @Then("There should be a leave message")
     public void thereShouldBeALeaveMessage() {
+        System.out.println("TITLES: " + messageListTitles);
         //assert messageList.get(0).getTitle().equals("Left successful");
         assert messageListTitles.contains("Left successful");
 
@@ -124,6 +126,8 @@ public class MessagesStepDefs /*extends CucumberRuntime*/ {
     public void thereShouldBeARejectMessage() {
         //assert messageList.get(0).getTitle().equals("Join rejected");
         assert messageListTitles.contains("Join rejected");
+        //TODO handling of session ID
+        GlobalSessionId.setSessionID(null);
     }
 
     @Then("There should be a user has left message")

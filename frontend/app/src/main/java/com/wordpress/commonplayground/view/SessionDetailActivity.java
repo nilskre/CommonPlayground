@@ -1,6 +1,7 @@
 package com.wordpress.commonplayground.view;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -114,7 +115,7 @@ public class SessionDetailActivity extends AppCompatActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_session_detail, container, false);
             TextView title = rootView.findViewById(R.id.session_title);
             title.setText(getArguments().getString(ARG_SESSION_TITLE));

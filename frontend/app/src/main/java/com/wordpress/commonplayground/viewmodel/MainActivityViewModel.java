@@ -21,7 +21,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     public LiveData<List<?>> getSessions(String api) {
         GetSessionRequest request = new GetSessionRequest();
         if(activeSessions == null){
-            activeSessions = new MutableLiveData<List<?>>();
+            activeSessions = new MutableLiveData<>();
         }
         request.getJSONRequest(api, "Sessions", this.getApplication(), activeSessions);
         return activeSessions;

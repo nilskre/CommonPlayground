@@ -14,7 +14,6 @@ public class SessionManager {
     private SharedPreferences pref;
     private Editor editor;
     private Context _context;
-    private int PRIVATE_MODE = 0;
 
     private static final String PREF_NAME = "AndroidPref";
     private static final String IS_LOGIN = "IsLoggedIn";
@@ -24,6 +23,7 @@ public class SessionManager {
 
     public SessionManager(Context context){
         this._context = context;
+        int PRIVATE_MODE = 0;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
         editor.apply();
@@ -37,7 +37,7 @@ public class SessionManager {
     }
 
     public HashMap<String, String> getUserDetails(){
-        HashMap<String, String> user = new HashMap<String, String>();
+        HashMap<String, String> user = new HashMap<>();
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
         user.put(KEY_ID, pref.getString(KEY_ID, null));
         user.put(KEY_MENU_ITEM_MAIN, pref.getString(KEY_MENU_ITEM_MAIN,"-1"));

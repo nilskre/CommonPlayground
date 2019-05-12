@@ -1,6 +1,7 @@
 package com.wordpress.commonplayground.view;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -51,11 +52,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setUpNavigation() {
         NavigationView navigationView = findViewById(R.id.nav_view);
         HashMap<String, String> user = session.getUserDetails();
-        int idMenuItem = Integer.parseInt(user.get(SessionManager.KEY_MENU_ITEM_MAIN));
+        String menuItem = user.get(SessionManager.KEY_MENU_ITEM_MAIN);
+        int idMenuItem;
         MenuItem navItem;
-        if (idMenuItem == -1) {
+        if ("-1".equals(menuItem) || menuItem == null) {
             navItem = navigationView.getMenu().findItem(R.id.nav_dashboard);
+            idMenuItem = -1;
         } else {
+            idMenuItem = Integer.parseInt(menuItem);
             navItem = navigationView.getMenu().findItem(idMenuItem);
         }
         navigationView.setNavigationItemSelectedListener(this);
@@ -101,9 +105,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
 
         int id = item.getItemId();

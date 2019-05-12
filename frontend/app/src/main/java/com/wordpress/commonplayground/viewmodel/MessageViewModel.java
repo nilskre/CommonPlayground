@@ -25,7 +25,7 @@ public class MessageViewModel extends AndroidViewModel {
         GetMessagesRequest request = new GetMessagesRequest();
 
         if(inbox == null){
-            inbox = new MutableLiveData<List<?>>();
+            inbox = new MutableLiveData<>();
         }
         request.getJSONRequest(url, "Messages", this.getApplication(), inbox);
         return inbox;
@@ -33,7 +33,7 @@ public class MessageViewModel extends AndroidViewModel {
 
 
     public void deleteMessage(String userID, String messageID) {
-        HashMap<String, String> parameters = new HashMap<String, String>();
+        HashMap<String, String> parameters = new HashMap<>();
         parameters.put("userID", userID);
         parameters.put("messageID", messageID);
 
@@ -42,7 +42,7 @@ public class MessageViewModel extends AndroidViewModel {
     }
 
     public void answerRequest(String userID, String messageID, String joinAccepted) {
-        HashMap<String, String> parameters = new HashMap<String, String>();
+        HashMap<String, String> parameters = new HashMap<>();
         parameters.put("userID", userID);
         parameters.put("messageID", messageID);
         parameters.put("joinAccepted", joinAccepted);

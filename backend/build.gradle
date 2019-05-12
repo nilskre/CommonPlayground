@@ -39,8 +39,12 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
+    // Spring Boot
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile("org.springframework.boot:spring-boot-starter-web")
+    
+    // Spring Boot Test
+    implementation 'org.springframework.boot:spring-boot-starter-test:2.1.4.RELEASE'
 
     // Database
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -55,6 +59,8 @@ dependencies {
     testRuntime("org.junit.vintage:junit-vintage-engine:5.4.1")
     // Cucumber
     testCompile 'io.cucumber:cucumber-java:4.2.6'
+    implementation 'io.cucumber:cucumber-junit:4.3.1'
+    implementation 'io.cucumber:cucumber-spring:4.3.1'
 
     // rest-assured
     compile 'io.rest-assured:json-path:3.2.0'
@@ -113,7 +119,7 @@ task sendCoverageToCodacy(type: JavaExec, dependsOn: jacocoTestReport) {
             "-l",
             "Java",
             "-r",
-            "${buildDir}/reports/jacoco/jacocoXml"
+            "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
     ]
 }
 

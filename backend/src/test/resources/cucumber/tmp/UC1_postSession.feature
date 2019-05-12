@@ -2,7 +2,7 @@ Feature: UC1 Posting a Session
   Validates the correct behaviour of the backend api for posting a session
 
   Background:
-    Given The backend is active
+    #Given The backend is active
 
   Scenario: post a new Session
     When I post a new Session with correct Data as test user type "normalUser"

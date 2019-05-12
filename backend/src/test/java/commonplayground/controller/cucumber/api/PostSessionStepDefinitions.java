@@ -18,7 +18,7 @@ import java.net.URLEncoder;
 import static io.restassured.RestAssured.get;
 
 
-public class PostSessionStepDefinitions {
+public class PostSessionStepDefinitions /*extends CucumberRuntime*/{
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private TestData testData = new TestData();
 

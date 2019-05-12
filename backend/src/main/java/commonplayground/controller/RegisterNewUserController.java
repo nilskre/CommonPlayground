@@ -22,6 +22,7 @@ public class RegisterNewUserController {
                                @RequestParam(value = "password", defaultValue = "not given") String password,
                                @RequestParam(value = "email", defaultValue = "not given") String email) {
         User user = new User(username, password, email);
+        //System.out.println("REGISTERED");
 
         if (userRepository.findByEmail(email) != null) {
             return -3;

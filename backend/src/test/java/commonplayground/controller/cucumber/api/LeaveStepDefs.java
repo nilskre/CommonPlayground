@@ -13,7 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class LeaveStepDefs {
+public class LeaveStepDefs /*extends CucumberRuntime*/ {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private StringBuilder leaveSessionResponse;
 
@@ -22,12 +22,13 @@ public class LeaveStepDefs {
         String hostID = "-20";
         if (testUserType.equals("sessionHost") && GlobalUserId.getSessionHostUserID() != null) {
             hostID = GlobalUserId.getSessionHostUserID();
-        } else if (testUserType.equals("normalUser") && GlobalUserId.getSessionHostUserID() != null){
+        } else if (testUserType.equals("normalUser") && GlobalUserId.getSessionHostUserID() != null) {
             hostID = GlobalUserId.getNormalUserID();
         } else {
             //TODO another user
             //GlobalUserId.setNormalUserID(responseUserIdOrErrorCode);
         }
+        System.out.println("HOSTID " + GlobalUserId.getSessionHostUserID());
         try {
             String body =
                     "userID=" + URLEncoder.encode(hostID, "UTF-8") + "&" +
@@ -53,6 +54,7 @@ public class LeaveStepDefs {
                 leaveSessionResponse.append(line);
             }
             log.info("Response of Leaving Controller: " + leaveSessionResponse);
+            System.out.println("Response of Leaving Controller: " + leaveSessionResponse);
 
             writer.close();
             reader.close();
@@ -62,7 +64,8 @@ public class LeaveStepDefs {
     }
 
     @Then("The return code should be {int}")
-    public void theReturnCodeShouldBe(int expectedResult){
+    public void theReturnCodeShouldBe(int expectedResult) {
+//        System.out.println("DAS IST erwartet" + expectedResult + " real: " + leaveSessionResponse.toString());
         assert expectedResult == Integer.parseInt(leaveSessionResponse.toString());
     }
 }

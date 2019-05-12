@@ -1,9 +1,11 @@
 package commonplayground.controller;
 
 import commonplayground.Application;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.boot.SpringApplication;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -12,12 +14,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = Application.class)
+@ContextConfiguration
 public class PostNewSessionControllerTest {
 
-    @BeforeClass
+    /*@BeforeClass
     public static void startSpringBoot(){
         SpringApplication.run(Application.class);
-    }
+    }*/
 
     @Test
     public void testPostNewSessionController(){

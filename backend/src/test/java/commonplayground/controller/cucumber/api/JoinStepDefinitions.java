@@ -14,7 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class JoinStepDefinitions {
+public class JoinStepDefinitions /*extends CucumberRuntime*/{
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private StringBuilder myJoinedSessions;
 
@@ -55,6 +55,7 @@ public class JoinStepDefinitions {
 
     @And("The Session Host approves the request {string}")
     public void theSessionHostApprovesTheRequest(String joinAccepted) {
+        System.out.println("EXEC");
         try {
             String body =
                     "userID=" + URLEncoder.encode(GlobalUserId.getSessionHostUserID(), "UTF-8") + "&" +
@@ -78,8 +79,9 @@ public class JoinStepDefinitions {
 
             String liner = "-42";
             for (String line; (line = reader.readLine()) != null; ) {
-                liner = line;
+                liner += line;
             }
+            System.out.println("LINER: " + liner);
 
             writer.close();
             reader.close();

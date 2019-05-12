@@ -14,7 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class MyPendingSessionsStepDefinitions {
+public class MyPendingSessionsStepDefinitions /*extends CucumberRuntime*/{
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private StringBuilder myPendingSessions;
 

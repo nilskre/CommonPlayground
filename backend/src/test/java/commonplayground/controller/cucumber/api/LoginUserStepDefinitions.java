@@ -13,9 +13,27 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class LoginUserStepDefinitions {
+public class LoginUserStepDefinitions /*extends CucumberRuntime */{
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private String responseUserIdOrErrorCode = "";
+
+    /*public LoginUserStepDefinitions() {
+        super();
+    }
+
+    @Before
+    public void testSetUpCu() {
+        super.testSetUpCu();
+        System.out.println("EXECUTE CU");
+        //super.gedings();
+        //test();
+    }
+
+    @After
+    public void tearDown() {
+        super.tearDown();
+        System.out.println("EXIT");
+    }*/
 
     @When("I login with {string}{string} as test user type {string}")
     public void iLoginWith(String email, String password, String testUserType) {
@@ -47,7 +65,7 @@ public class LoginUserStepDefinitions {
 
             if (testUserType.equals("sessionHost")) {
                 GlobalUserId.setSessionHostUserID(responseUserIdOrErrorCode);
-            } else if (testUserType.equals("normalUser")){
+            } else if (testUserType.equals("normalUser")) {
                 GlobalUserId.setNormalUserID(responseUserIdOrErrorCode);
             } else {
                 //TODO another user
@@ -63,7 +81,7 @@ public class LoginUserStepDefinitions {
 
     @Then("The response is my user ID")
     public void theResponseIsMyUserID() {
-        try{
+        try {
             Integer.parseInt(responseUserIdOrErrorCode);
         } catch (NumberFormatException e) {
             assert false;

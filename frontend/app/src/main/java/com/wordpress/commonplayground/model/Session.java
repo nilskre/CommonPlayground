@@ -25,8 +25,10 @@ public class Session implements Parcelable {
     private String genre;
     private String isOnline;
     private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<User> usersPending = new ArrayList<>();
 
-    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId, String genre, String isOnline, ArrayList<User> users) {
+
+    public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long sessionId, String genre, String isOnline, ArrayList<User> users, ArrayList<User> usersPending) {
         this.title = title;
         this.description = description;
         this.game = game;
@@ -38,6 +40,7 @@ public class Session implements Parcelable {
         this.genre = genre;
         this.isOnline = isOnline;
         this.users.addAll(users);
+        this.usersPending.addAll(usersPending);
     }
 
     public Session(Parcel in) {
@@ -98,7 +101,17 @@ public class Session implements Parcelable {
                 String email = user.getString("email");
                 users.add(new User(id, username, email));
             }
-            Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"),sessionObject.getString("genre"), sessionObject.getString("isOnline"), users);
+            ArrayList usersPending = new ArrayList();
+            JSONArray parsedPenders = sessionObject.getJSONArray("usersPending");
+            for (int i = 0; i < parsedPenders.length(); i++) {
+                JSONObject user = parsedPenders.getJSONObject(i);
+                Long id = Long.valueOf(user.getString("id"));
+                String username = user.getString("username");
+                String email = user.getString("email");
+                usersPending.add(new User(id, username, email));
+            }
+
+            Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"),sessionObject.getString("genre"), sessionObject.getString("isOnline"), users, usersPending);
             Log.v("PARSED", "ID: " + parsed.getId() + " " + parsed.toString());
             return parsed;
 

@@ -13,14 +13,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.model.Message;
 import com.wordpress.commonplayground.model.Session;
 import com.wordpress.commonplayground.model.User;
+import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SessionDetailActivity extends AppCompatActivity {
 
@@ -37,10 +41,14 @@ public class SessionDetailActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private List<Session> sessionList;
+    private SessionManager credentials;
+    private Session session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        credentials = new SessionManager(getApplicationContext());
         setContentView(R.layout.activity_session_detail);
         Window window = this.getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -72,6 +80,7 @@ public class SessionDetailActivity extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
+        //private static final String ARG_SESSION_ID = "id";
         private static final String ARG_SESSION_TITLE = "title";
         private static final String ARG_SESSION_HOST = "host";
         private static final String ARG_SESSION_GAME = "game";
@@ -101,6 +110,7 @@ public class SessionDetailActivity extends AppCompatActivity {
                 args.putString(ARG_SESSION_HOST, "Could not get id of host");
             }
 
+            //args.putString(ARG_SESSION_ID, Long.toString(session.getId()));
             args.putString(ARG_SESSION_GAME, session.getGame());
             args.putString(ARG_SESSION_GENRE, session.getGenre());
             args.putString(ARG_SESSION_TYPE, session.getType());
@@ -137,14 +147,58 @@ public class SessionDetailActivity extends AppCompatActivity {
             numberOfPlayers.setText(getArguments().getString(ARG_SESSION_NUMBER_OF_PLAYERS));
             TextView description = rootView.findViewById(R.id.session_description);
             description.setText(getArguments().getString(ARG_SESSION_DESCRIPTION));
+            //String passSessionID = getArguments().getString(ARG_SESSION_ID);
             return rootView;
         }
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
+    private void setUpButtons(Button joinButton, Button leaveButton) {
+
+        String passUID = credentials.getUserDetails().get(SessionManager.KEY_ID);
+        String passSessionID = Long.toString(session.getId());
+
+        if(!isHost(passUID)) {
+            leaveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Leave Request
+                }
+            });
+            joinButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Join Request
+                }
+            });
+        }
+    }
+
+    private boolean isHost(String uID){
+        if (session.getUsers().get(0).equals(uID)){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean hasJoined(String uID){
+        boolean found = false;
+        List<User> users = session.getUsers();
+        for (User user:users) {
+            if (user.getId().equals(uID))
+                found=true;
+            break;
+        }
+        return found;
+    }
+
+    private boolean isPending(String uID){
+        return false;
+    }
+
+        /**
+         * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+         * one of the sections/tabs/pages.
+         */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         private SectionsPagerAdapter(FragmentManager fm) {
@@ -155,6 +209,7 @@ public class SessionDetailActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class above).
+            session = sessionList.get(position);
             return PlaceholderFragment.newInstance(sessionList.get(position));
         }
 

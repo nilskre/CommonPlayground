@@ -11,45 +11,36 @@ import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.view.MainActivity;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
-public class PostLoginRequest extends VolleyStringTemplate {
+public class PostJoinRequest extends VolleyStringTemplate {
     private SessionManager session;
     private String email;
     private Activity activity;
 
-    public PostLoginRequest(Resources r, SessionManager session, String email, Activity activity) {
+    public PostJoinRequest(Resources r, SessionManager session, String email, Activity activity) {
         super();
         this.r = r;
         this.session = session;
-        this.email = email;
         this.activity = activity;
     }
 
     @Override
     protected void handleString(String response, View view) {
         String result = "";
-        boolean success = false;
-        Log.d("Response.Login", response);
+        Log.d("Response.Join", response);
         switch (Integer.parseInt(response)) {
-            case -5:
-                result = r.getString(R.string.login_error);
+            case -11:
+                result = r.getString(R.string.join_error_joined);
                 break;
-            case -4:
-                result = r.getString(R.string.username_error);
+            case -10:
+                result = r.getString(R.string.join_error_full);
                 break;
-            case -1:
-                result = r.getString(R.string.new_error);
+            case 0:
+                result = r.getString(R.string.join_success);
                 break;
             default:
-                success = true;
+                result = r.getString(R.string.new_error);
                 break;
         }
-        if (success) {
-            session.createLoginSession(response, email);
-            Intent i = new Intent(activity.getApplicationContext(), MainActivity.class);
-            activity.startActivity(i);
-            activity.finish();
-        } else {
             Snackbar.make(view, result, 5000).show();
         }
-    }
 }

@@ -11,9 +11,9 @@ import java.util.HashMap;
 
 public class SessionManager {
 
-    private SharedPreferences pref;
-    private Editor editor;
-    private Context _context;
+    private final SharedPreferences pref;
+    private final Editor editor;
+    private final Context _context;
 
     private static final String PREF_NAME = "AndroidPref";
     private static final String IS_LOGIN = "IsLoggedIn";

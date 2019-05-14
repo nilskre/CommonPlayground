@@ -11,7 +11,7 @@ import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.view.LoginActivity;
 
 public class PostRegistrationRequest extends VolleyStringTemplate {
-    private Activity activity;
+    private final Activity activity;
 
     public PostRegistrationRequest(Resources r, Activity activity) {
         super();

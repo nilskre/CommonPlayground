@@ -207,10 +207,7 @@ public class SessionDetailActivity extends AppCompatActivity {
     }
 
     private static boolean isHost(String uID, Session session) {
-        if (uID.equals(Long.toString(session.getIdOfHost()))) {
-            return true;
-        }
-        return false;
+        return uID.equals(Long.toString(session.getIdOfHost()));
     }
 
     private static boolean hasJoined(String uID, Session session) {
@@ -218,9 +215,10 @@ public class SessionDetailActivity extends AppCompatActivity {
         boolean found = false;
         List<User> users = session.getUsers();
         for (User user : users) {
-            if (Long.toString(user.getId()).equals(uID))
+            if (Long.toString(user.getId()).equals(uID)) {
                 found = true;
-            break;
+                break;
+            }
         }
         return found;
     }
@@ -230,9 +228,10 @@ public class SessionDetailActivity extends AppCompatActivity {
         boolean found = false;
         List<User> users = session.getUsersPending();
         for (User user:users) {
-            if (Long.toString(user.getId()).equals(uID))
-                found=true;
-            break;
+            if (Long.toString(user.getId()).equals(uID)) {
+                found = true;
+                break;
+            }
         }
         return found;
     }

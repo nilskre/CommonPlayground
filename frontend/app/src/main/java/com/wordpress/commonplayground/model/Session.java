@@ -101,25 +101,30 @@ public class Session implements Parcelable {
 
         try {
             JSONArray parsedUsers = sessionObject.getJSONArray("users");
-            for (int i = 0; i < parsedUsers.length(); i++) {
-                JSONObject user = parsedUsers.getJSONObject(i);
-                Long id = Long.valueOf(user.getString("id"));
-                String username = user.getString("username");
-                String email = user.getString("email");
-                users.add(new User(id, username, email));
+            if (parsedUsers.length() > 0) {
+                for (int i = 0; i < parsedUsers.length(); i++) {
+                    JSONObject user = parsedUsers.getJSONObject(i);
+                    Long id = Long.valueOf(user.getString("id"));
+                    String username = user.getString("username");
+                    String email = user.getString("email");
+                    users.add(new User(id, username, email));
+                }
             }
+
             if (users.size() > 0) {
                 idOfHost = users.get(0).getId();
             }
 
             ArrayList usersPending = new ArrayList();
             JSONArray parsedPenders = sessionObject.getJSONArray("userWantToJoin");
-            for (int i = 0; i < parsedPenders.length(); i++) {
-                JSONObject user = parsedPenders.getJSONObject(i);
-                Long id = Long.valueOf(user.getString("id"));
-                String username = user.getString("username");
-                String email = user.getString("email");
-                usersPending.add(new User(id, username, email));
+            if (parsedPenders.length() > 0) {
+                for (int i = 0; i < parsedPenders.length(); i++) {
+                    JSONObject user = parsedPenders.getJSONObject(i);
+                    Long id = Long.valueOf(user.getString("id"));
+                    String username = user.getString("username");
+                    String email = user.getString("email");
+                    usersPending.add(new User(id, username, email));
+                }
             }
 
             Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"), sessionObject.getString("genre"), sessionObject.getString("isOnline"), users, idOfHost, usersPending);

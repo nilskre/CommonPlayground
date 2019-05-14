@@ -8,7 +8,7 @@ import android.view.View;
 import com.wordpress.commonplayground.R;
 
 public class PostLeaveRequest extends VolleyStringTemplate {
-    private Resources r;
+    private final Resources r;
 
     public PostLeaveRequest(Resources r) {
         super();

@@ -89,7 +89,7 @@ jobs:
       language: java
       script:
         - cd backend/
-	- ./gradlew assemble
+        - ./gradlew assemble
         - ./gradlew jacocoTestReport
-	- ./gradlew sendCoverageToCodacy
+        - ./gradlew sendCoverageToCodacy
       

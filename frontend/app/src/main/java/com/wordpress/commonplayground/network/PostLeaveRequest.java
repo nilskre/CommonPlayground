@@ -7,10 +7,10 @@ import android.view.View;
 
 import com.wordpress.commonplayground.R;
 
-public class PostJoinRequest extends VolleyStringTemplate {
+public class PostLeaveRequest extends VolleyStringTemplate {
     private Resources r;
 
-    public PostJoinRequest(Resources r) {
+    public PostLeaveRequest(Resources r) {
         super();
         this.r = r;
     }
@@ -20,19 +20,16 @@ public class PostJoinRequest extends VolleyStringTemplate {
         String result = "";
         Log.d("joinRequest", response);
         switch (Integer.parseInt(response)) {
-            case -11:
-                result = r.getString(R.string.join_error_joined);
-                break;
-            case -10:
-                result = r.getString(R.string.join_error_full);
+            case -20:
+                result = r.getString(R.string.leave_error);
                 break;
             case 0:
-                result = r.getString(R.string.join_success);
+                result = r.getString(R.string.leave_success);
                 break;
             default:
                 result = r.getString(R.string.new_error);
                 break;
         }
-            Snackbar.make(view, result, 5000).show();
-        }
+        Snackbar.make(view, result, 5000).show();
+    }
 }

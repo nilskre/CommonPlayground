@@ -70,6 +70,7 @@ public class Session implements Parcelable {
         genre = in.readString();
         isOnline = in.readString();
         users = in.readArrayList(User.class.getClassLoader());
+        usersPending = in.readArrayList(User.class.getClassLoader());
     }
 
     public int describeContents() {
@@ -88,6 +89,7 @@ public class Session implements Parcelable {
         dest.writeString(genre);
         dest.writeString(isOnline);
         dest.writeList(users);
+        dest.writeList(usersPending);
     }
 
     public static Session parseSession(JSONObject sessionObject) {
@@ -153,6 +155,10 @@ public class Session implements Parcelable {
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public List<User> getUsersPending() {
+        return usersPending;
     }
 
     public String getDescription() {

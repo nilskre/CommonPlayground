@@ -1,5 +1,7 @@
 package com.wordpress.commonplayground.view;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -17,14 +19,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.wordpress.commonplayground.R;
-import com.wordpress.commonplayground.model.Message;
 import com.wordpress.commonplayground.model.Session;
 import com.wordpress.commonplayground.model.User;
+import com.wordpress.commonplayground.network.PostJoinRequest;
+import com.wordpress.commonplayground.network.PostLeaveRequest;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+
+import static android.view.View.GONE;
 
 public class SessionDetailActivity extends AppCompatActivity {
 
@@ -42,7 +47,6 @@ public class SessionDetailActivity extends AppCompatActivity {
      */
     private List<Session> sessionList;
     private SessionManager credentials;
-    private Session session;
 
 
     @Override
@@ -80,7 +84,10 @@ public class SessionDetailActivity extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
-        //private static final String ARG_SESSION_ID = "id";
+        private static final String ARG_SESSION_isHOST = "isHost";
+        private static final String ARG_SESSION_canLeave = "canLeave";
+        private static final String ARG_SESSION_UID = "uID";
+        private static final String ARG_SESSION_SID = "sID";
         private static final String ARG_SESSION_TITLE = "title";
         private static final String ARG_SESSION_HOST = "host";
         private static final String ARG_SESSION_GAME = "game";
@@ -96,10 +103,14 @@ public class SessionDetailActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(Session session) {
+        public static PlaceholderFragment newInstance(Session session, String uID) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putString(ARG_SESSION_TITLE, session.getTitle());
+            boolean isHost = isHost(uID, session);
+            boolean canLeave = (isPending(uID, session) || hasJoined(uID, session));
+            args.putBoolean(ARG_SESSION_isHOST, isHost);
+            args.putBoolean(ARG_SESSION_canLeave, canLeave);
 
             ArrayList<User> users = new ArrayList<>();
             try {
@@ -110,7 +121,8 @@ public class SessionDetailActivity extends AppCompatActivity {
                 args.putString(ARG_SESSION_HOST, "Could not get id of host");
             }
 
-            //args.putString(ARG_SESSION_ID, Long.toString(session.getId()));
+            args.putString(ARG_SESSION_UID, uID);
+            args.putString(ARG_SESSION_SID, Long.toString(session.getId()));
             args.putString(ARG_SESSION_GAME, session.getGame());
             args.putString(ARG_SESSION_GENRE, session.getGenre());
             args.putString(ARG_SESSION_TYPE, session.getType());
@@ -120,67 +132,91 @@ public class SessionDetailActivity extends AppCompatActivity {
             args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, users.size() + "/" + session.getNumberOfPlayers() + " players");
             args.putString(ARG_SESSION_DESCRIPTION, session.getDescription());
 
+
             fragment.setArguments(args);
             return fragment;
         }
 
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            Bundle args = getArguments();
             View rootView = inflater.inflate(R.layout.fragment_session_detail, container, false);
             TextView title = rootView.findViewById(R.id.session_title);
-            title.setText(getArguments().getString(ARG_SESSION_TITLE));
+            title.setText(args.getString(ARG_SESSION_TITLE));
             TextView host = rootView.findViewById(R.id.session_host);
-            host.setText(getArguments().getString(ARG_SESSION_HOST));
+            host.setText(args.getString(ARG_SESSION_HOST));
             TextView game = rootView.findViewById(R.id.session_game);
-            game.setText(getArguments().getString(ARG_SESSION_GAME));
+            game.setText(args.getString(ARG_SESSION_GAME));
             TextView genre = rootView.findViewById(R.id.session_genre);
-            genre.setText(getArguments().getString(ARG_SESSION_GENRE));
+            genre.setText(args.getString(ARG_SESSION_GENRE));
             TextView type = rootView.findViewById(R.id.session_type);
-            type.setText(getArguments().getString(ARG_SESSION_TYPE));
+            type.setText(args.getString(ARG_SESSION_TYPE));
             TextView place = rootView.findViewById(R.id.session_place);
-            place.setText(getArguments().getString(ARG_SESSION_PLACE));
+            place.setText(args.getString(ARG_SESSION_PLACE));
             TextView date = rootView.findViewById(R.id.session_date);
-            date.setText(getArguments().getString(ARG_SESSION_DATE));
+            date.setText(args.getString(ARG_SESSION_DATE));
             TextView time = rootView.findViewById(R.id.session_time);
-            time.setText(getArguments().getString(ARG_SESSION_TIME));
+            time.setText(args.getString(ARG_SESSION_TIME));
             TextView numberOfPlayers = rootView.findViewById(R.id.session_number_of_players);
-            numberOfPlayers.setText(getArguments().getString(ARG_SESSION_NUMBER_OF_PLAYERS));
+            numberOfPlayers.setText(args.getString(ARG_SESSION_NUMBER_OF_PLAYERS));
             TextView description = rootView.findViewById(R.id.session_description);
-            description.setText(getArguments().getString(ARG_SESSION_DESCRIPTION));
-            //String passSessionID = getArguments().getString(ARG_SESSION_ID);
+            description.setText(args.getString(ARG_SESSION_DESCRIPTION));
+            Button joinButton = rootView.findViewById(R.id.ButtonJoinSession);
+            Button leaveButton = rootView.findViewById(R.id.ButtonLeaveSession);
+            setUpButtons(joinButton, leaveButton, args.getBoolean("isHost"), args.getBoolean("canLeave"), args.getString("uID"), args.getString("sID"), rootView, getActivity());
             return rootView;
         }
     }
 
-    private void setUpButtons(Button joinButton, Button leaveButton) {
+    private static void setUpButtons(Button joinButton, Button leaveButton, boolean isHost, boolean canLeave, String uID, String sID, View view, Context context) {
+        HashMap<String, String> parameters = new HashMap<>();
+        parameters.put("userID", uID);
+        parameters.put("sessionID", sID);
 
-        String passUID = credentials.getUserDetails().get(SessionManager.KEY_ID);
-        String passSessionID = Long.toString(session.getId());
 
-        if(!isHost(passUID)) {
+        if (isHost) {
+            leaveButton.setVisibility(GONE);
+            joinButton.setVisibility(GONE);
+
+        } else if (canLeave) {
+            joinButton.setVisibility(GONE);
             leaveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Leave Request
+                    PostJoinRequest request = new PostJoinRequest(Resources.getSystem());
+                    request.stringRequest("joinRequestForSession", "JoinRequest", context, parameters, view);
                 }
             });
+        } else {
             joinButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Join Request
+                    PostLeaveRequest request = new PostLeaveRequest(Resources.getSystem());
+                    request.stringRequest("leaveSession", "LeaveRequest", context, parameters, view);
                 }
             });
         }
     }
 
-    private boolean isHost(String uID){
+    private static boolean isHost(String uID, Session session) {
         if (session.getUsers().get(0).equals(uID)){
             return true;
         }
         return false;
     }
 
-    private boolean hasJoined(String uID){
+    private static boolean hasJoined(String uID, Session session) {
+        boolean found = false;
+        List<User> users = session.getUsers();
+        for (User user : users) {
+            if (user.getId().equals(uID))
+                found = true;
+            break;
+        }
+        return found;
+    }
+
+    private static boolean isPending(String uID, Session session) {
         boolean found = false;
         List<User> users = session.getUsers();
         for (User user:users) {
@@ -189,10 +225,6 @@ public class SessionDetailActivity extends AppCompatActivity {
             break;
         }
         return found;
-    }
-
-    private boolean isPending(String uID){
-        return false;
     }
 
         /**
@@ -209,8 +241,7 @@ public class SessionDetailActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class above).
-            session = sessionList.get(position);
-            return PlaceholderFragment.newInstance(sessionList.get(position));
+            return PlaceholderFragment.newInstance(sessionList.get(position), credentials.getUserDetails().get(SessionManager.KEY_ID));
         }
 
         @Override

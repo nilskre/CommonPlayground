@@ -80,13 +80,20 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
                 @Override
                 public void onClick(View v) {
                     viewModel.answerRequest(passUID, passMID, "true");
+                    viewModel.deleteMessage(passUID, passMID);
+                    inbox.remove(pos);
+                    Objects.requireNonNull(parent.getAdapter()).notifyItemRemoved(pos);
                 }
             });
+
             rejectButton.setVisibility(View.VISIBLE);
             rejectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     viewModel.answerRequest(passUID, passMID, "false");
+                    viewModel.deleteMessage(passUID, passMID);
+                    inbox.remove(pos);
+                    Objects.requireNonNull(parent.getAdapter()).notifyItemRemoved(pos);
                 }
             });
         }

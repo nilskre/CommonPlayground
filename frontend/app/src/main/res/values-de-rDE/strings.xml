@@ -49,8 +49,6 @@
     <string name="title_activity_registration">Registrierung</string>
     <string name="app_name">CommonPlayground</string>
     <string name="section_format">Hallo Welt für Sektion: %1$d</string>
-    <string name="detail_join">Teilnehmen</string>
-    <string name="detail_leave">Verlassen</string>
     <string name="tab_text_1">Ausrichten</string>
     <string name="tab_text_2">Teilnehmen</string>
     <string name="title_activity_my_sessions">Meine Sessions</string>
@@ -61,4 +59,9 @@
     <string name="message_button_reject">Ablehnen</string>
     <string name="message_button_delete">Löschen</string>
     <string name="title_message_list">Nachrichten</string>
+    <string name="join_error_full">Diese Spielerunde ist bereits voll.</string>
+    <string name="join_error_joined">Du bist dieser Spielerunde schon beigetreten.</string>
+    <string name="join_success">Deine Anfrage mitzuspielen wurde übermittelt.</string>
+    <string name="join_button_join">Mitspielen</string>
+    <string name="join_button_leave">Verlassen</string>
 </resources>

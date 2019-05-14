@@ -5,6 +5,8 @@ stages:
   - test-frontend
   - deploy-backend
   - deploy-frontend
+  - send-coverage
+  
 
 env:
  global:
@@ -94,3 +96,11 @@ jobs:
         - cd frontend/
         - ./gradlew build assembleRelease
         - echo "Deployment-Frontend"
+    - stage: send-coverage
+      language: java
+      script:
+        - cd backend/
+        - ./gradlew build
+        - ./gradlew jacocoTestReport
+        - ./gradlew sendCoverageToCodacy
+      

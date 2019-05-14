@@ -52,7 +52,6 @@ public class SessionDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        credentials = new SessionManager(getApplicationContext());
         setContentView(R.layout.activity_session_detail);
         Window window = this.getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -65,6 +64,8 @@ public class SessionDetailActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        credentials = new SessionManager(this);
 
         Bundle extras = getIntent().getExtras();
         sessionList = extras.getParcelableArrayList("Sessions");
@@ -107,10 +108,6 @@ public class SessionDetailActivity extends AppCompatActivity {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putString(ARG_SESSION_TITLE, session.getTitle());
-            boolean isHost = isHost(uID, session);
-            boolean canLeave = (isPending(uID, session) || hasJoined(uID, session));
-            args.putBoolean(ARG_SESSION_isHOST, isHost);
-            args.putBoolean(ARG_SESSION_canLeave, canLeave);
 
             ArrayList<User> users = new ArrayList<>();
             try {
@@ -132,6 +129,10 @@ public class SessionDetailActivity extends AppCompatActivity {
             args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, users.size() + "/" + session.getNumberOfPlayers() + " players");
             args.putString(ARG_SESSION_DESCRIPTION, session.getDescription());
 
+            boolean canLeave = (isPending(uID, session) || hasJoined(uID, session));
+            boolean isHost = isHost(uID, session);
+            args.putBoolean(ARG_SESSION_isHOST, isHost);
+            args.putBoolean(ARG_SESSION_canLeave, canLeave);
 
             fragment.setArguments(args);
             return fragment;
@@ -188,6 +189,7 @@ public class SessionDetailActivity extends AppCompatActivity {
                 }
             });
         } else {
+            leaveButton.setVisibility(GONE);
             joinButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -199,17 +201,18 @@ public class SessionDetailActivity extends AppCompatActivity {
     }
 
     private static boolean isHost(String uID, Session session) {
-        if (session.getUsers().get(0).equals(uID)){
+        if (uID.equals(Long.toString(session.getIdOfHost()))) {
             return true;
         }
         return false;
     }
 
     private static boolean hasJoined(String uID, Session session) {
+        if (session.getUsers().size() < 1) return false;
         boolean found = false;
         List<User> users = session.getUsers();
         for (User user : users) {
-            if (user.getId().equals(uID))
+            if (Long.toString(user.getId()).equals(uID))
                 found = true;
             break;
         }
@@ -217,10 +220,11 @@ public class SessionDetailActivity extends AppCompatActivity {
     }
 
     private static boolean isPending(String uID, Session session) {
+        if (session.getUsersPending().size() < 1) return false;
         boolean found = false;
-        List<User> users = session.getUsers();
+        List<User> users = session.getUsersPending();
         for (User user:users) {
-            if (user.getId().equals(uID))
+            if (Long.toString(user.getId()).equals(uID))
                 found=true;
             break;
         }

@@ -76,7 +76,7 @@
             android:id="@+id/container"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:background="@color/colorPrimaryLight"
+            android:background="@color/colorLightBackground"
             android:orientation="vertical">
 
             <TextView

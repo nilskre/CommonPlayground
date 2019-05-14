@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wordpress.commonplayground.R;
-import com.wordpress.commonplayground.model.Session;
 import com.wordpress.commonplayground.network.VolleyRequestQueue;
 import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
@@ -86,16 +85,16 @@ public class MySessionsFragment extends Fragment {
             api = "getMyJoinedSessions";
         }
 
-        mainActivityViewModel.getSessions(api + "?userID=" + userID).observe(this, new android.arch.lifecycle.Observer<List<Session>>() {
+        mainActivityViewModel.getSessions(api + "?userID=" + userID).observe(this, new android.arch.lifecycle.Observer<List<?>>() {
             @Override
-            public void onChanged(@Nullable List<Session> sessions) {
+            public void onChanged(@Nullable List<?> sessions) {
                 Log.d("Observed: ", "SessionList changed");
                 updateAndDisplayListData(sessions);
             }
         });
     }
 
-    private void updateAndDisplayListData(List<Session> sessions) {
+    private void updateAndDisplayListData(List<?> sessions) {
         SessionsAdapter adapter = new SessionsAdapter(sessions);
         rvSessions.setAdapter(adapter);
         rvSessions.setLayoutManager(new LinearLayoutManager(getContext()));

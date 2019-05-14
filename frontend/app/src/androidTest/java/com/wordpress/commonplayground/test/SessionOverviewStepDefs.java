@@ -9,13 +9,21 @@ import com.wordpress.commonplayground.view.MainActivity;
 
 import org.junit.Assert;
 import org.junit.Rule;
+import org.junit.runner.RunWith;
 
+import cucumber.api.CucumberOptions;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.junit.Cucumber;
 
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        glue = "com.wordpress.commonplayground.test",
+        features = "features"
+)
 public class SessionOverviewStepDefs {
 
     @Rule

@@ -1,10 +1,11 @@
 package com.wordpress.commonplayground.view;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -51,11 +52,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setUpNavigation() {
         NavigationView navigationView = findViewById(R.id.nav_view);
         HashMap<String, String> user = session.getUserDetails();
-        int idMenuItem = Integer.parseInt(user.get(SessionManager.KEY_MENU_ITEM_MAIN));
+        String menuItem = user.get(SessionManager.KEY_MENU_ITEM_MAIN);
+        int idMenuItem;
         MenuItem navItem;
-        if (idMenuItem == -1) {
+        if ("-1".equals(menuItem) || menuItem == null) {
             navItem = navigationView.getMenu().findItem(R.id.nav_dashboard);
+            idMenuItem = -1;
         } else {
+            idMenuItem = Integer.parseInt(menuItem);
             navItem = navigationView.getMenu().findItem(idMenuItem);
         }
         navigationView.setNavigationItemSelectedListener(this);
@@ -101,9 +105,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
 
         int id = item.getItemId();
@@ -118,20 +121,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_dashboard) {
             fragment = new DashboardFragment();
 
-        } else if (id == R.id.nav_mysessions) {
-
         } else if (id == R.id.nav_messages) {
             fragment = new MessageFragment();
 
-        } else if (id == R.id.nav_profile) {
+        //} else if (id == R.id.nav_profile) {
 
-        } else if (id == R.id.nav_friendlist) {
+        //} else if (id == R.id.nav_friendlist) {
 
         } else if (id == R.id.nav_logout) {
             session.logoutUser();
-        } else if (id == R.id.nav_faq) {
+        //} else if (id == R.id.nav_faq) {
 
-        } else if (id == R.id.nav_contactAdmin) {
+        //} else if (id == R.id.nav_contactAdmin) {
 
         }
 

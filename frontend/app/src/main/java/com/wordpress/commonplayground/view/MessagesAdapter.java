@@ -20,13 +20,13 @@ import java.util.Objects;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessageViewHolder> {
 
-    private List<Message> inbox;
+    private List<?> inbox;
     private final ExpansionLayoutCollection expansionsCollection = new ExpansionLayoutCollection();
     private SessionManager session;
     private MessageViewModel viewModel;
     private RecyclerView parent;
 
-    public MessagesAdapter(List<Message> inbox, SessionManager session, MessageViewModel viewModel, RecyclerView recyclerView) {
+    public MessagesAdapter(List<?> inbox, SessionManager session, MessageViewModel viewModel, RecyclerView recyclerView) {
         this.inbox = inbox;
         this.session = session;
         this.viewModel = viewModel;
@@ -43,7 +43,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder viewHolder, int position) {
-        Message message = inbox.get(position);
+        Message message = (Message) inbox.get(position);
         TextView titleTextView = viewHolder.titleTextView;
         TextView descriptionTextView = viewHolder.descriptionTextView;
         TextView authorTextView = viewHolder.authorTextView;
@@ -63,7 +63,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
     private void setUpButtons(MessageViewHolder viewHolder, int position, Button deleteButton, Button acceptButton, Button rejectButton) {
         int pos = viewHolder.getAdapterPosition();
-        String passMID = Long.toString(inbox.get(pos).getId());
+        String passMID = Long.toString(((Message) inbox.get(pos)).getId());
         String passUID = session.getUserDetails().get(SessionManager.KEY_ID);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +74,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             }
         });
 
-        if (inbox.get(position).getType().contentEquals("JoinRequest")) {
+        if (((Message) inbox.get(position)).getType().contentEquals("JoinRequest")) {
             acceptButton.setVisibility(View.VISIBLE);
             acceptButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -101,7 +101,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         private static final int LAYOUT = R.layout.expansion_panel_recycler_cell;
         public TextView titleTextView, authorTextView, descriptionTextView;
         public Button deleteButton, acceptButton, rejectButton;
-        ExpansionLayout expansionLayout;
+        private ExpansionLayout expansionLayout;
 
 
         public static MessageViewHolder buildFor(ViewGroup viewGroup){

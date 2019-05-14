@@ -3,20 +3,24 @@ package com.wordpress.commonplayground.test;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
-import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.view.MainActivity;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Rule;
+import org.junit.runner.RunWith;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.java.After;
@@ -25,7 +29,16 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.junit.Cucumber;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+@RunWith(Cucumber.class)
 @CucumberOptions(
         glue = "com.wordpress.commonplayground.test",
         features = "features"
@@ -51,7 +64,7 @@ public class PostSessionStepDefs {
 
         activity = activityTestRule.getActivity();
 
-        ViewInteraction floatingActionButton = Espresso.onView(ViewMatchers.withId(R.id.fab));
+        ViewInteraction floatingActionButton = onView(withId(R.id.fab));
         floatingActionButton.perform(ViewActions.click());
     }
 
@@ -72,70 +85,95 @@ public class PostSessionStepDefs {
 
     @When("^The user types the title ([^\"]*) and the input is correct$")
     public void theUserTypesTheTitleAndTheInputIsCorrect(String testTitle) {
-        ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.TitleInputField));
+        ViewInteraction textInputEditText = onView(withId(R.id.TitleInputField));
         textInputEditText.perform(ViewActions.typeText(testTitle), ViewActions.closeSoftKeyboard());
-    }
-
-    @And("^The user types the description ([^\"]*) and the input is correct$")
-    public void theUserTypesTheDescriptionAndTheInputIsCorrect(String testDescription) {
-        ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.DescriptionInputField));
-        textInputEditText.perform(ViewActions.typeText(testDescription), ViewActions.closeSoftKeyboard());
     }
 
     @And("^The user types the game ([^\"]*) and the input is correct$")
     public void theUserTypesTheGameAndTheInputIsCorrect(String testGame) {
-        ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.GameInputField));
+        ViewInteraction textInputEditText = onView(withId(R.id.GameInputField));
         textInputEditText.perform(ViewActions.typeText(testGame), ViewActions.closeSoftKeyboard());
     }
 
-    @And("^The user types the place ([^\"]*) and the input is correct$")
+    @And("^The user chooses ([^\"]*) as type$")
+    public void theUserChoosesTypeAsType(String testType) {
+        ViewInteraction spinner = onView(withId(R.id.type_spinner));
+        spinner.perform(scrollTo(), click());
+        ViewInteraction textView = onView(withText(testType));
+        textView.perform(click());
+    }
+
+    @And("^The user chooses ([^\"]*) as genre$")
+    public void theUserChoosesGenreAsGenre(String testGenre) {
+        ViewInteraction spinner = onView(withId(R.id.genre_spinner));
+        spinner.perform(scrollTo(), click());
+        ViewInteraction textView = onView(withText(testGenre));
+        textView.perform(click());
+    }
+
+    @And("^The user types the post code ([^\"]*) and the input is correct$")
     public void theUserTypesThePlaceAndTheInputIsCorrect(String testPlace) {
-       /* ViewInteraction textInputEditText = onView(withId(R.id.PlaceInputField));
-        textInputEditText.perform(typeText(testPlace), closeSoftKeyboard());*/
+        if (!"-".equals(testPlace)) {
+            ViewInteraction textInputEditText = onView(withId(R.id.PlaceInputField));
+            textInputEditText.perform(ViewActions.typeText(testPlace), ViewActions.closeSoftKeyboard());
+        }
     }
 
-    @And("^The user types the date ([^\"]*) and the input is correct$")
+    @And("^The user picks the date ([^\"]*)$")
     public void theUserTypesTheDateAndTheInputIsCorrect(String testDate) {
-        ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.DateInputField));
-        textInputEditText.perform(ViewActions.typeText(testDate), ViewActions.closeSoftKeyboard());
+        ViewInteraction buttonDate = onView(withId(R.id.btn_date));
+        buttonDate.perform(click());
+        String [] date = testDate.split("-");
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0])));
+        ViewInteraction buttonAccept = onView(withText("OK"));
+        buttonAccept.perform(click());
     }
 
-    @And("^The user types the time ([^\"]*) and the input is correct$")
+    @And("^The user picks the time ([^\"]*)$")
     public void theUserTypesTheTimeAndTheInputIsCorrect(String testTime) {
-        ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.TimeInputField));
-        textInputEditText.perform(ViewActions.typeText(testTime), ViewActions.closeSoftKeyboard());
+        ViewInteraction buttonTime = onView(withId(R.id.btn_time));
+        buttonTime.perform(click());
+        String [] time = testTime.split(":");
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(Integer.parseInt(time[0]), Integer.parseInt(time[1])));
+        ViewInteraction buttonAccept = onView(withText("OK"));
+        buttonAccept.perform(click());
     }
 
     @And("^The user types the number of players ([^\"]*) and the input is correct$")
     public void theUserTypesTheNumberOfPlayersAndTheInputIsCorrect(String testPlayersNumber) {
-        ViewInteraction textInputEditText = Espresso.onView(ViewMatchers.withId(R.id.PlayersInputField));
-        textInputEditText.perform(ViewActions.typeText(testPlayersNumber), ViewActions.closeSoftKeyboard());
+        ViewInteraction textInputEditText = onView(withId(R.id.PlayersInputField));
+        textInputEditText.perform(scrollTo(), ViewActions.typeText(testPlayersNumber), ViewActions.closeSoftKeyboard());
+    }
+
+    @And("^The user types the description ([^\"]*) and the input is correct$")
+    public void theUserTypesTheDescriptionAndTheInputIsCorrect(String testDescription) {
+        ViewInteraction textInputEditText = onView(withId(R.id.DescriptionInputField));
+        textInputEditText.perform(ViewActions.typeText(testDescription), ViewActions.closeSoftKeyboard());
     }
 
     @And("^The user presses the publish button$")
     public void theUserPressesThePublishButton() {
-        ViewInteraction floatingActionButton = Espresso.onView(ViewMatchers.withId(R.id.ButtonPublish));
-        floatingActionButton.perform(ViewActions.click());
+        ViewInteraction floatingActionButton = onView(withId(R.id.ButtonPublish));
+        floatingActionButton.perform(click());
     }
 
-    @Then("^A Request is sent$")
-    public void aRequestIsSent() {
-        //TODO test
-        Assert.assertNotNull(activity);
-    }
-
-    @And("^The posting screen is closed$")
+    @Then("^The posting screen is closed$")
     public void thePostingScreenIsClosed() {
-        //TODO depends on other ticket
+        onView(withId(R.id.rvSessions));
+    }
+
+    @And("^The new session with ([^\"]*) is shown$")
+    public void theNewSessionWithTitleIsShown(String title) {
+        onView(withText(title));
     }
 
     @When("^The user presses the Back button$")
     public void theUserPressesTheBackButton() {
-        Espresso.onView(ViewMatchers.isRoot()).perform(ViewActions.pressBack());
+        onView(ViewMatchers.isRoot()).perform(ViewActions.pressBack());
     }
 
     @Then("^No Request is sent$")
     public void noRequestIsSent() {
-        //TODO test
+        Assert.assertNotNull(activity);
     }
 }

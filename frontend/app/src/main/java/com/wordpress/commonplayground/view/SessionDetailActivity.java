@@ -47,6 +47,7 @@ public class SessionDetailActivity extends AppCompatActivity {
      */
     private List<Session> sessionList;
     private SessionManager credentials;
+    private Resources r;
 
 
     @Override
@@ -164,16 +165,35 @@ public class SessionDetailActivity extends AppCompatActivity {
             description.setText(args.getString(ARG_SESSION_DESCRIPTION));
             Button joinButton = rootView.findViewById(R.id.ButtonJoinSession);
             Button leaveButton = rootView.findViewById(R.id.ButtonLeaveSession);
-            setUpButtons(joinButton, leaveButton, args.getBoolean("isHost"), args.getBoolean("canLeave"), args.getString("uID"), args.getString("sID"), rootView, getActivity());
+            setUpButtons(joinButton, leaveButton, args.getBoolean("isHost"), args.getBoolean("canLeave"), args.getString("uID"), args.getString("sID"), rootView, getActivity(), getActivity().getResources());
             return rootView;
         }
     }
 
-    private static void setUpButtons(Button joinButton, Button leaveButton, boolean isHost, boolean canLeave, String uID, String sID, View view, Context context) {
+    private static void setUpButtons(Button joinButton, Button leaveButton, boolean isHost, boolean canLeave, String uID, String sID, View view, Context context, Resources r) {
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("userID", uID);
         parameters.put("sessionID", sID);
 
+        leaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PostLeaveRequest request = new PostLeaveRequest(r);
+                request.stringRequest("leaveSession", "LeaveRequest", context, parameters, view);
+                leaveButton.setVisibility(GONE);
+                joinButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        joinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PostJoinRequest request = new PostJoinRequest(r);
+                request.stringRequest("joinRequestForSession", "JoinRequest", context, parameters, view);
+                joinButton.setVisibility(GONE);
+                leaveButton.setVisibility(View.VISIBLE);
+            }
+        });
 
         if (isHost) {
             leaveButton.setVisibility(GONE);
@@ -181,22 +201,8 @@ public class SessionDetailActivity extends AppCompatActivity {
 
         } else if (canLeave) {
             joinButton.setVisibility(GONE);
-            leaveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    PostJoinRequest request = new PostJoinRequest(Resources.getSystem());
-                    request.stringRequest("joinRequestForSession", "JoinRequest", context, parameters, view);
-                }
-            });
         } else {
             leaveButton.setVisibility(GONE);
-            joinButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    PostLeaveRequest request = new PostLeaveRequest(Resources.getSystem());
-                    request.stringRequest("leaveSession", "LeaveRequest", context, parameters, view);
-                }
-            });
         }
     }
 

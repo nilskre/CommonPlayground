@@ -87,7 +87,7 @@ jobs:
         - echo "Deployment-Frontend"
     - stage: send-coverage
       language: java
-       script:
+      script:
         - cd backend/
 	- ./gradlew assemble
         - ./gradlew jacocoTestReport

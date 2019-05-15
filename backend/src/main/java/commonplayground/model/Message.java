@@ -26,6 +26,8 @@ public class Message {
     private Long userIdWhoWantsToJoin;
     @Getter
     private Long sessionIdUserWantsToJoin;
+    @Getter
+    private boolean seen;
 
     public Message() {
     }
@@ -37,6 +39,7 @@ public class Message {
         this.description = description;
         this.userIdWhoWantsToJoin = userIDWHoWantsToJoin;
         this.sessionIdUserWantsToJoin = sessionIdUserWantsToJoin;
+        this.seen = false;
     }
 
     public Message(String title, String description, String authorName) {
@@ -44,5 +47,10 @@ public class Message {
         this.title = title;
         this.description = description;
         this.authorName = authorName;
+        this.seen = false;
+    }
+
+    public void messageSeen() {
+        this.seen = true;
     }
 }

@@ -1,27 +1,35 @@
 package commonplayground.controller.cucumber.api.steps;
 
-import commonplayground.controller.cucumber.api.globaldict.GlobalMessageId;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import commonplayground.Application;
 import commonplayground.controller.cucumber.api.globaldict.GlobalSessionId;
 import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
 import commonplayground.model.Message;
 import commonplayground.model.TestData;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.deps.com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
+
+
 public class MessagesStepDefs {
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
+
     private String myMessages = "";
-    private List<Message> messageList;
-    private List<String> messageListTitles;
+    private List<Message> myMessageList;
 
     @When("{string} requests his messages")
     public void requestMessages(String user) {
@@ -33,7 +41,75 @@ public class MessagesStepDefs {
         } else {
             userID = GlobalUserId.getAnotherUserID();
         }
-        System.out.println("User ID " + userID);
+        System.out.println("User ID (Message) " + userID);
+
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("userID", GlobalUserId.getNormalUserID());
+        body.add("sessionID", GlobalSessionId.getSessionID());
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> tmp = testRestTemplate.postForEntity("http://localhost:8080/getMyMessages", request, String.class);
+        myMessages = tmp.getBody();
+
+        log.info("Response of MyMessages Controller: " + myMessages);
+
+        myMessageList = new ArrayList<>();
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            // JSON string to Java object
+            Message[] myMessageArray = mapper.readValue(myMessages, Message[].class);
+
+            myMessageList = Arrays.asList(myMessageArray);
+            String prettyPrint = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(myMessageArray);
+            System.out.println("JSON MyMessages \n" + prettyPrint);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("SCHIEF GEGANGEN !!!!!!!!!!!!!!!!!!");
+        }
+
+        System.out.println("THIS IS  MY LIST " + myMessageList);
+
+
+        //try {
+        //    TimeUnit.SECONDS.sleep(100);
+        //} catch (InterruptedException e) {
+        //    e.printStackTrace();
+        //}
+
+        //GlobalMessageId.setMessageID(String.valueOf(myMessageList.get(0).getId()));
+
+        //Gson gson = new Gson();
+        //List<Message> resultMessage = gson.fromJson(myMessagesNoList, Message.class);
+        //myMessageList.add(resultMessage);
+        //System.out.println("RESULT: " + resultMessage.toString());
+//
+        //messageListTitles = new ArrayList<>();
+        //for (Message message : myMessageList) {
+        //    messageListTitles.add(message.getTitle());
+        //}
+        //System.out.println("MESSAGE TITLE: " + messageListTitles);
+
+        //String messageId = String.valueOf(resultMessage.getId()); //get("/getMyMessages").jsonPath().getList("message.id").toArray()[0].toString();//.jsonPath().getList("id");
+        //System.out.println("Message ID: " + resultMessage.toString());
+        //String messageId = (String) get("/getMyMessages").jsonPath().getList("id").get(0);
+        //;
+
+
+        // -----------------------------------------------
+        /*Gson gson = new Gson();
+        for (String s : response) {
+            Message resultMessage = gson.fromJson(s, Message.class);
+            myMessageList.add(resultMessage);
+            System.out.println("RESULT: " + resultMessage.toString());
+        }
+
         try {
             String body =
                     "userID=" + URLEncoder.encode(userID, "UTF-8");
@@ -79,17 +155,17 @@ public class MessagesStepDefs {
             //String tmp2 = response.get(0).substring(1, response.get(0).length()-1);
             //System.out.println(tmp2);
 
-            messageList = new ArrayList<>();
+            myMessageList = new ArrayList<>();
 
             Gson gson = new Gson();
             for (String s : response) {
                 Message resultMessage = gson.fromJson(s, Message.class);
-                messageList.add(resultMessage);
+                myMessageList.add(resultMessage);
                 System.out.println("RESULT: " + resultMessage.toString());
             }
 
             messageListTitles = new ArrayList<>();
-            for (Message message : messageList) {
+            for (Message message : myMessageList) {
                 messageListTitles.add(message.getTitle());
             }
             System.out.println("MESSAGE TITLE: " + messageListTitles);
@@ -104,7 +180,7 @@ public class MessagesStepDefs {
         } catch (Exception e) {
             System.out.println("TROLO");
             //assert false;
-        }
+        }*/
     }
 
     @Then("There should be my messages")
@@ -116,24 +192,36 @@ public class MessagesStepDefs {
 
     @Then("There should be a leave message")
     public void thereShouldBeALeaveMessage() {
-        System.out.println("TITLES: " + messageListTitles);
-        //assert messageList.get(0).getTitle().equals("Left successful");
-        assert messageListTitles.contains("Left successful");
-
+        boolean leaveMessageExists = false;
+        for (Message message:myMessageList) {
+            if (message.getTitle().equals("Left successful")){
+                leaveMessageExists = true;
+            }
+        }
+        assertTrue(leaveMessageExists);
     }
 
     @Then("There should be a reject message")
     public void thereShouldBeARejectMessage() {
-        //assert messageList.get(0).getTitle().equals("Join rejected");
-        assert messageListTitles.contains("Join rejected");
+        boolean joinRejectedMessageExists = false;
+        for (Message message:myMessageList) {
+            if (message.getTitle().equals("Join rejected")){
+                joinRejectedMessageExists = true;
+            }
+        }
+        assertTrue(joinRejectedMessageExists);
         //TODO handling of session ID
         GlobalSessionId.setSessionID(null);
     }
 
     @Then("There should be a user has left message")
     public void thereShouldBeAUserHasLeftMessage() {
-        assert messageListTitles.contains("User left session");
+        boolean userHasLeftMessageExists = false;
+        for (Message message:myMessageList) {
+            if (message.getTitle().equals("User left session")){
+                userHasLeftMessageExists = true;
+            }
+        }
+        assertTrue(userHasLeftMessageExists);
     }
-
-
 }

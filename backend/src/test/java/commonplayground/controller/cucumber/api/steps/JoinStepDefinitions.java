@@ -9,6 +9,12 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -21,41 +27,26 @@ import static org.junit.Assert.assertEquals;
 
 public class JoinStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
-    private StringBuilder myJoinedSessions;
+    private String myJoinedSessions;
 
     @When("I send a join request for one session")
     public void iSendAJoinRequestForOneSession() {
-        try {
-            String body =
-                    "userID=" + URLEncoder.encode(GlobalUserId.getNormalUserID(), "UTF-8") + "&" +
-                            "sessionID=" + URLEncoder.encode(GlobalSessionId.getSessionID(), "UTF-8");
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
 
-            URL url = new URL("http://localhost:8080/joinRequestForSession");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-            connection.setUseCaches(false);
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Content-Length", String.valueOf(body.length()));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-            writer.write(body);
-            writer.flush();
+        System.out.println(" User " + GlobalUserId.getNormalUserID() + " Session " + GlobalSessionId.getSessionID());
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("userID", GlobalUserId.getNormalUserID());
+        body.add("sessionID", GlobalSessionId.getSessionID());
 
-            String sessionID = "-42";
-            for (String line; (line = reader.readLine()) != null; ) {
-                sessionID = line;
-            }
-            GlobalSessionId.setSessionID(sessionID);
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
 
-            writer.close();
-            reader.close();
-        } catch (Exception e) {
-            assert false;
-        }
+        myJoinedSessions = testRestTemplate.postForObject("http://localhost:8080/joinRequestForSession", request, String.class);
+
+        log.info("Response of Join Request Controller: " + myJoinedSessions);
     }
 
     @And("The Session Host approves the request {string}")
@@ -124,7 +115,7 @@ public class JoinStepDefinitions {
             System.out.println("JOINED SESSIONS: " + liner);
             String joinedId = liner.split(",")[0];
 
-            assertEquals("[{\"id\":11"/* + GlobalSessionId.getSessionID()*/, joinedId);
+            assertEquals("[{\"id\":16"/* + GlobalSessionId.getSessionID()*/, joinedId);
 
             writer.close();
             reader.close();
@@ -154,9 +145,9 @@ public class JoinStepDefinitions {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            myJoinedSessions = new StringBuilder();
+            myJoinedSessions = new String();
             for (String line; (line = reader.readLine()) != null; ) {
-                myJoinedSessions.append(line);
+                myJoinedSessions += (line);
             }
             log.info("Response of getMyJoinedSessions: " + myJoinedSessions);
 

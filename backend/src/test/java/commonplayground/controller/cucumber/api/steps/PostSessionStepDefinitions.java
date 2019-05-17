@@ -52,7 +52,7 @@ public class PostSessionStepDefinitions {
             body.add("date", testSession.getDate());
             body.add("time", testSession.getTime());
             body.add("numberOfPlayers", testSession.getNumberOfPlayers());
-            body.add("idOfHost", testSession.getIdOfHost());
+            body.add("idOfHost", hostID);
             body.add("genre", testSession.getGenre());
             body.add("isOnline", testSession.getIsOnline());
 

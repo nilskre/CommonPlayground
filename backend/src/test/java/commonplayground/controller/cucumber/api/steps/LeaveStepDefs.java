@@ -21,18 +21,18 @@ public class LeaveStepDefs /*extends CucumberRuntime*/ {
 
     @When("{string} sends a leave request for one session")
     public void iSendALeaveRequestForOneSession(String testUserType) {
-        String hostID = "-20";
+        String userID = "-20";
         if (testUserType.equals("sessionHost") && GlobalUserId.getSessionHostUserID() != null) {
-            hostID = GlobalUserId.getSessionHostUserID();
+            userID = GlobalUserId.getSessionHostUserID();
         } else if (testUserType.equals("normalUser") && GlobalUserId.getSessionHostUserID() != null) {
-            hostID = GlobalUserId.getNormalUserID();
+            userID = GlobalUserId.getNormalUserID();
         } else {
-            hostID = GlobalUserId.getAnotherUserID();
+            userID = GlobalUserId.getAnotherUserID();
         }
-        System.out.println("HOSTID " + GlobalUserId.getSessionHostUserID());
+        System.out.println("User ID (Leave) " + GlobalUserId.getSessionHostUserID());
         try {
             String body =
-                    "userID=" + URLEncoder.encode(hostID, "UTF-8") + "&" +
+                    "userID=" + URLEncoder.encode(userID, "UTF-8") + "&" +
                             "sessionID=" + URLEncoder.encode(GlobalSessionId.getSessionID(), "UTF-8");
 
             URL url = new URL("http://localhost:8080/leaveSession");
@@ -55,7 +55,6 @@ public class LeaveStepDefs /*extends CucumberRuntime*/ {
                 leaveSessionResponse.append(line);
             }
             log.info("Response of Leaving Controller: " + leaveSessionResponse);
-            System.out.println("Response of Leaving Controller: " + leaveSessionResponse);
 
             writer.close();
             reader.close();

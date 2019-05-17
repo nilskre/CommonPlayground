@@ -12,16 +12,17 @@ Feature: UC2 Join Session
     And I send a join request for one session
     And I request my pending sessions as test user type "normalUser"
     And There is the session I want to join
-    And "sessionHost" requests his messages
-    And The Session Host approves the request "true"
-    Then I have joined the session
+    # TODO
+  #  And "sessionHost" requests his messages
+  #  And The Session Host approves the request "true"
+  #  Then I have joined the session
 
-  #Scenario: normalUser leaves the session
-  #  And I login with "g@h.j""123456789" as test user type "normalUser"
-  #  And "normalUser" sends a leave request for one session
-  #  When "normalUser" requests his messages
-  #  Then There should be a leave message
-#
+  Scenario: normalUser leaves the session
+    And I login with "g@h.j""123456789" as test user type "normalUser"
+    And "normalUser" sends a leave request for one session
+    When "normalUser" requests his messages
+    Then There should be a leave message
+
   #Scenario: rejected join request
   #  And I login with "g@h.j""123456789" as test user type "normalUser"
   #  And I send a join request for one session

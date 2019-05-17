@@ -18,7 +18,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessagesStepDefs /*extends CucumberRuntime*/ {
+public class MessagesStepDefs {
     private String myMessages = "";
     private List<Message> messageList;
     private List<String> messageListTitles;

@@ -9,14 +9,15 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-
+import static io.restassured.RestAssured.get;
+import static org.junit.Assert.assertTrue;
 
 public class PostSessionStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
@@ -32,68 +33,60 @@ public class PostSessionStepDefinitions {
         } else {
             hostID = GlobalUserId.getAnotherUserID();
         }
-        System.out.println("HOSTID2: " + hostID);
+        System.out.println("Posting HOSTID: " + hostID);
+
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        String responsePostingApi = "Error";
         for (Session testSession : testData.getTestSessions()) {
-            try {
-                String body =
-                        "title=" + URLEncoder.encode(testSession.getTitle(), "UTF-8") + "&" +
-                                "description=" + URLEncoder.encode(testSession.getDescription(), "UTF-8") + "&" +
-                                "game=" + URLEncoder.encode(testSession.getGame(), "UTF-8") + "&" +
-                                "place=" + URLEncoder.encode(testSession.getPlace(), "UTF-8") + "&" +
-                                "date=" + URLEncoder.encode(testSession.getDate(), "UTF-8") + "&" +
-                                "time=" + URLEncoder.encode(testSession.getTime(), "UTF-8") + "&" +
-                                "numberOfPlayers=" + URLEncoder.encode(String.valueOf(testSession.getNumberOfPlayers()), "UTF-8") + "&" +
-                                "idOfHost=" + URLEncoder.encode(hostID, "UTF-8") + "&" +
-                                "genre=" + URLEncoder.encode(testSession.getGenre(), "UTF-8") + "&" +
-                                "isOnline=" + URLEncoder.encode(testSession.getIsOnline(), "UTF-8");
+            MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 
-                URL url = new URL("http://localhost:8080/postNewSession");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                connection.setDoInput(true);
-                connection.setDoOutput(true);
-                connection.setUseCaches(false);
-                connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                connection.setRequestProperty("Content-Length", String.valueOf(body.length()));
+            body.add("title", testSession.getTitle());
+            System.out.println("TITLE " + testSession.getTitle());
+            body.add("description", testSession.getDescription());
+            body.add("game", testSession.getGame());
+            body.add("place", testSession.getPlace());
+            body.add("date", testSession.getDate());
+            body.add("time", testSession.getTime());
+            body.add("numberOfPlayers", testSession.getNumberOfPlayers());
+            body.add("idOfHost", testSession.getIdOfHost());
+            body.add("genre", testSession.getGenre());
+            body.add("isOnline", testSession.getIsOnline());
 
-                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-                writer.write(body);
-                writer.flush();
+            HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            responsePostingApi = testRestTemplate.postForObject("http://localhost:8080/postNewSession", request, String.class);
+            log.info("Response of Posting Controller (SessionID): " + responsePostingApi);
+        }
 
-                String sessionID = "-42";
-                for (String line; (line = reader.readLine()) != null; ) {
-                    sessionID = line;
-                }
-                if (GlobalSessionId.getSessionID() == null) {
-                    GlobalSessionId.setSessionID(sessionID);
-                    log.info("Posted session and set sessionID " + sessionID);
-                }
-
-                writer.close();
-                reader.close();
-            } catch (Exception e) {
-                assert false;
+        try {
+            Integer.parseInt(responsePostingApi);
+            if (GlobalSessionId.getSessionID() == null) {
+                GlobalSessionId.setSessionID(responsePostingApi);
+                log.info("Posted sessions and set sessionID " + responsePostingApi);
             }
+        } catch (Exception e) {
+            assert false;
         }
     }
 
     @Then("^There should be my PostedSession with correct Data$")
     public void thereShouldBeMyPostedSessionWithCorrectData() {
         for (Session testSession : testData.getTestSessions()) {
-            //assertTrue(get("/getSessionList").jsonPath().getList("title").contains(testSession.getTitle()));
-            //assertTrue(get("/getSessionList").jsonPath().getList("description").contains(testSession.getDescription()));
-            //assertTrue(get("/getSessionList").jsonPath().getList("game").contains(testSession.getGame()));
-            //assertTrue(get("/getSessionList").jsonPath().getList("place").contains(testSession.getPlace()));
-            //assertTrue(get("/getSessionList").jsonPath().getList("date").contains(testSession.getDate()));
-            //assertTrue(get("/getSessionList").jsonPath().getList("time").contains(testSession.getTime()));
-            //assertTrue(get("/getSessionList").jsonPath().getList("numberOfPlayers").contains(testSession.getNumberOfPlayers()));
-            //assertTrue(get("/getSessionList").jsonPath().getList("idOfHost").contains(testSession.getIdOfHost()));
-            //assertTrue(get("/getSessionList").jsonPath().getList("genre").contains(testSession.getGenre()));
-            //assertTrue(get("/getSessionList").jsonPath().getList("isOnline").contains(testSession.getIsOnline()));
+            assertTrue(get("/getSessionList").jsonPath().getList("title").contains(testSession.getTitle()));
+            assertTrue(get("/getSessionList").jsonPath().getList("description").contains(testSession.getDescription()));
+            assertTrue(get("/getSessionList").jsonPath().getList("game").contains(testSession.getGame()));
+            assertTrue(get("/getSessionList").jsonPath().getList("place").contains(testSession.getPlace()));
+            assertTrue(get("/getSessionList").jsonPath().getList("date").contains(testSession.getDate()));
+            assertTrue(get("/getSessionList").jsonPath().getList("time").contains(testSession.getTime()));
+            assertTrue(get("/getSessionList").jsonPath().getList("numberOfPlayers").contains(testSession.getNumberOfPlayers()));
+            assertTrue(get("/getSessionList").jsonPath().getList("idOfHost").contains(testSession.getIdOfHost().intValue()));
+            assertTrue(get("/getSessionList").jsonPath().getList("genre").contains(testSession.getGenre()));
+            assertTrue(get("/getSessionList").jsonPath().getList("isOnline").contains(testSession.getIsOnline()));
         }
-        assert true;
         //TODO handling of session ID
         GlobalSessionId.setSessionID(null);
     }

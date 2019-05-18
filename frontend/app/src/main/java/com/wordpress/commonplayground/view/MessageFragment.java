@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wordpress.commonplayground.R;
-import com.wordpress.commonplayground.model.Message;
 import com.wordpress.commonplayground.network.VolleyRequestQueue;
 import com.wordpress.commonplayground.viewmodel.MessageViewModel;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
@@ -71,16 +70,16 @@ public class MessageFragment extends Fragment {
     }
 
     public void observeChangesInMessageList() {
-        messageViewModel.getMessage(session.getUserDetails().get(SessionManager.KEY_ID)).observe(this, new android.arch.lifecycle.Observer<List<Message>>() {
+        messageViewModel.getMessage(session.getUserDetails().get(SessionManager.KEY_ID)).observe(this, new android.arch.lifecycle.Observer<List<?>>() {
             @Override
-            public void onChanged(@Nullable List<Message> inbox) {
+            public void onChanged(@Nullable List<?> inbox) {
                 Log.d("Observed: ", "Inbox changed");
                 updateAndDisplayListData(inbox);
             }
         });
     }
 
-    private void updateAndDisplayListData(List<Message> inbox) {
+    private void updateAndDisplayListData(List<?> inbox) {
         MessagesAdapter adapter = new MessagesAdapter(inbox, session, messageViewModel, rvMessage);
         rvMessage.setAdapter(adapter);
         rvMessage.setLayoutManager(new LinearLayoutManager(getContext()));

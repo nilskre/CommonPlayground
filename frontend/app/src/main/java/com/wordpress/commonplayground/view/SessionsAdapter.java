@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,15 +20,16 @@ import java.util.List;
 
 public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.SessionViewHolder> {
 
-    private List<Session> activeSessions;
+    private List<?> activeSessions;
 
     // Pass in the sessions array into the constructor
-    public SessionsAdapter(List<Session> sessions) {
+    public SessionsAdapter(List<?> sessions) {
         this.activeSessions = sessions;
     }
 
     @Override
-    public SessionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public SessionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -37,9 +39,9 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
 
     @Override
-    public void onBindViewHolder(SessionViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull SessionViewHolder viewHolder, int position) {
         // Get the data model based on position
-        Session session = activeSessions.get(position);
+        Session session = (Session) activeSessions.get(position);
 
         // Set item views based on your views and data model
         TextView titleTextView = viewHolder.titleTextView;
@@ -76,7 +78,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition(); // gets item position
-            long currentSession = activeSessions.get(position).getId();
+            long currentSession = ((Session) activeSessions.get(position)).getId();
             Log.d("ClickTest", "Id:" + currentSession);
             //Here goes opening the SessionDetails Activity, just pass the ID
             Intent openSessionDetailActivity = new Intent(context, SessionDetailActivity.class);

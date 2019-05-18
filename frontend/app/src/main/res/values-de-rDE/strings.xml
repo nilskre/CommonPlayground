@@ -17,7 +17,7 @@
     <!-- Strings related to AddSession -->
     <string name="new_title">Titel</string>
     <string name="new_game">Spiel</string>
-    <string name="new_place">Ort</string>
+    <string name="new_place">Postleitzahl</string>
     <string name="new_date">Datum</string>
     <string name="new_time">Uhrzeit</string>
     <string name="new_players">Anzahl Spieler</string>
@@ -49,14 +49,21 @@
     <string name="title_activity_registration">Registrierung</string>
     <string name="app_name">CommonPlayground</string>
     <string name="section_format">Hallo Welt für Sektion: %1$d</string>
-    <string name="detail_join">Teilnehmen</string>
-    <string name="detail_leave">Verlassen</string>
     <string name="tab_text_1">Ausrichten</string>
     <string name="tab_text_2">Teilnehmen</string>
     <string name="title_activity_my_sessions">Meine Sessions</string>
     <string name="menu_messages">Nachrichten</string>
+    <string name="error_too_long">Diese Eingabe ist zu lang</string>
+    <string name="error_wrong_place">Bitte geben sie eine korrekte Postleitzahl ein</string>
     <string name="message_button_accept">Bestätigen</string>
     <string name="message_button_reject">Ablehnen</string>
     <string name="message_button_delete">Löschen</string>
     <string name="title_message_list">Nachrichten</string>
+    <string name="join_error_full">Diese Spielerunde ist bereits voll.</string>
+    <string name="join_error_joined">Du bist dieser Spielerunde schon beigetreten.</string>
+    <string name="join_success">Deine Anfrage mitzuspielen wurde übermittelt.</string>
+    <string name="join_button_join">Mitspielen</string>
+    <string name="join_button_leave">Verlassen</string>
+    <string name="leave_error">Du kannst deine eigenen Spielerunden nicht verlassen.</string>
+    <string name="leave_success">Du wurdest aus der Spielerunde entfernt.</string>
 </resources>

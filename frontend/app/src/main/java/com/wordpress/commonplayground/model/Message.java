@@ -2,6 +2,7 @@ package com.wordpress.commonplayground.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -18,7 +19,7 @@ public class Message implements Parcelable {
     private Long requestedSessionID;
     private Boolean read;
 
-    public Message(String type, String title, String description, String author, Long id, Long requesterID, Long requestedSessionID) {
+    private Message(String type, String title, String description, String author, Long id, Long requesterID, Long requestedSessionID) {
         this.type = type;
         this.title = title;
         this.description = description;
@@ -29,7 +30,7 @@ public class Message implements Parcelable {
         this.requesterID = requesterID;
     }
 
-    public Message(String type, String title, String description, String author, Long id) {
+    private Message(String type, String title, String description, String author, Long id) {
         this.type = type;
         this.title = title;
         this.authorName = author;
@@ -37,7 +38,7 @@ public class Message implements Parcelable {
         this.id = id;
     }
 
-    public Message(Parcel in) {
+    private Message(Parcel in) {
         super();
         readFromParcel(in);
     }
@@ -52,7 +53,7 @@ public class Message implements Parcelable {
         }
     };
 
-    public void readFromParcel(Parcel in) {
+    private void readFromParcel(Parcel in) {
         title = in.readString();
         description = in.readString();
         authorName = in.readString();
@@ -129,6 +130,7 @@ public class Message implements Parcelable {
         return null;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return ("Message: " + title);

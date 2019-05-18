@@ -124,7 +124,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         }, 100);
     }
 
-    public void getCurrentDate() {
+    private void getCurrentDate() {
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
@@ -164,7 +164,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         timePickerDialog.show();
     }
 
-    public void sendRequestToBackend(View view) {
+    private void sendRequestToBackend(View view) {
         resetErrors();
 
         if (validInput()) {
@@ -203,7 +203,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         cancel = false;
     }
 
-    protected void updateView(int item){
+    private void updateView(int item) {
         Log.d("Selection", Integer.toString(item));
         if (item==0){
            placeView.setVisibility(View.GONE);

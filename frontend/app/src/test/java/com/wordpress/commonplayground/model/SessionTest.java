@@ -1,13 +1,11 @@
 package com.wordpress.commonplayground.model;
 
-import com.wordpress.commonplayground.model.Session;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SessionTest {
     private static Session testSession;
@@ -15,7 +13,7 @@ public class SessionTest {
 
     @BeforeClass
     public static void setUp() {
-        testSession = new Session("Title", "Description", "Game", "Place", "12.12.2100", "12:00", 42, (long) 4, "Genre", "Online", new ArrayList<>());
+        testSession = new Session("Title", "Description", "Game", "Place", "12.12.2100", "12:00", 42, (long) 4, "Genre", "Online", new ArrayList<>(), (long) 4, new ArrayList<>());
     }
 
     @Test

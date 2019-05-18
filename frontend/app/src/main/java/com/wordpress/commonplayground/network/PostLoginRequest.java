@@ -12,9 +12,9 @@ import com.wordpress.commonplayground.view.MainActivity;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 public class PostLoginRequest extends VolleyStringTemplate {
-    private SessionManager session;
-    private String email;
-    private Activity activity;
+    private final SessionManager session;
+    private final String email;
+    private final Activity activity;
 
     public PostLoginRequest(Resources r, SessionManager session, String email, Activity activity) {
         super();

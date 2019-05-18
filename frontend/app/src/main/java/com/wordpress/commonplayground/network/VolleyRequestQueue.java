@@ -8,7 +8,7 @@ import com.android.volley.toolbox.Volley;
 
 public class VolleyRequestQueue {
     private static VolleyRequestQueue volleyNetworkRequestQueue;
-    private RequestQueue volleyRequestQueue;
+    private final RequestQueue volleyRequestQueue;
 
     private VolleyRequestQueue(Context context) {
         volleyRequestQueue = Volley.newRequestQueue(context.getApplicationContext());

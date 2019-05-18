@@ -97,7 +97,7 @@ public class Session implements Parcelable {
 
     public static Session parseSession(JSONObject sessionObject) {
         ArrayList<User> users = new ArrayList();
-        Long idOfHost = 0L;
+        Long idOfHost;
 
         try {
             JSONArray parsedUsers = sessionObject.getJSONArray("users");
@@ -111,9 +111,7 @@ public class Session implements Parcelable {
                 }
             }
 
-            if (users.size() > 0) {
-                idOfHost = users.get(0).getId();
-            }
+            idOfHost = Long.parseLong(sessionObject.getString("idOfHost"));
 
             ArrayList usersPending = new ArrayList();
             JSONArray parsedPenders = sessionObject.getJSONArray("userWantToJoin");

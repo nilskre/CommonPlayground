@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class MessagesController {
+public class GetMessagesController {
 
     private final UserRepository userRepository;
 
     @Autowired
-    public MessagesController(UserRepository userRepository) {
+    public GetMessagesController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -25,7 +25,7 @@ public class MessagesController {
         Long userIDAsLong = Long.parseLong(userID);
 
         User userWhoWantsToGetMessages = userRepository.findAllById(userIDAsLong);
-        
+
         return userWhoWantsToGetMessages.getMessages();
     }
 }

@@ -75,6 +75,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         });
 
         if (((Message) inbox.get(position)).getType().contentEquals("JoinRequest")) {
+            deleteButton.setVisibility(View.GONE);
             acceptButton.setVisibility(View.VISIBLE);
             acceptButton.setOnClickListener(new View.OnClickListener() {
                 @Override

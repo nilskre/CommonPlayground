@@ -67,4 +67,5 @@
     <string name="leave_error">Du kannst deine eigenen Spielerunden nicht verlassen.</string>
     <string name="leave_success">Du wurdest aus der Spielerunde entfernt.</string>
     <string name="tab_text_3">Angefragt</string>
+    <string name="new_message">Du hast neue Nachrichten.</string>
 </resources>

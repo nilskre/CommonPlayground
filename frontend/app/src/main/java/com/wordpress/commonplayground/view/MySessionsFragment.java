@@ -81,8 +81,10 @@ public class MySessionsFragment extends Fragment {
         String api;
         if (selectedTabPosition == 0) {
             api = "getMyHostedSessions";
-        } else {
+        } else if (selectedTabPosition == 1) {
             api = "getMyJoinedSessions";
+        } else {
+            api = "getMyPendingSessions";
         }
 
         mainActivityViewModel.getSessions(api + "?userID=" + userID).observe(this, new android.arch.lifecycle.Observer<List<?>>() {

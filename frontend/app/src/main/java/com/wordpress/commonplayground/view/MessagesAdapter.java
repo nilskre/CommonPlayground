@@ -1,5 +1,6 @@
 package com.wordpress.commonplayground.view;
 
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,12 +26,14 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     private SessionManager session;
     private MessageViewModel viewModel;
     private RecyclerView parent;
+    private Resources r;
 
     public MessagesAdapter(List<?> inbox, SessionManager session, MessageViewModel viewModel, RecyclerView recyclerView) {
         this.inbox = inbox;
         this.session = session;
         this.viewModel = viewModel;
         parent = recyclerView;
+        r = parent.getResources();
         expansionsCollection.openOnlyOne(true);
     }
 
@@ -54,6 +57,9 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         authorTextView.setText(message.getAuthor());
         titleTextView.setText(message.getTitle());
         descriptionTextView.setText(message.getDescription());
+        if (!message.isSeen()) {
+            titleTextView.setTextColor(r.getColor(R.color.colorPrimaryDark));
+        }
 
         setUpButtons(viewHolder, position, deleteButton, acceptButton, rejectButton);
 

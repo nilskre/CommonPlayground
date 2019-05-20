@@ -31,7 +31,7 @@ public abstract class VolleyStringTemplate {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("Error." + tag, String.valueOf(error));
-                Snackbar.make(view, r.getString(R.string.new_error), 5000)
+                Snackbar.make(view, context.getResources().getString(R.string.new_error), 5000)
                         .setAction("Action", null).show();
             }
         }) {

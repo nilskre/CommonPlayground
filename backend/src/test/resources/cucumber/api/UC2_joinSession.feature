@@ -12,21 +12,25 @@ Feature: UC2 Join Session
     And I send a join request for one session
     And I request my pending sessions as test user type "normalUser"
     And There is the session I want to join
-    # TODO
-  #  And "sessionHost" requests his messages
-  #  And The Session Host approves the request "true"
-  #  Then I have joined the session
+    And "sessionHost" requests his messages
+    And The Session Host approves the request "true"
+    Then I have joined the session
 
   Scenario: normalUser leaves the session
     And I login with "g@h.j""123456789" as test user type "normalUser"
     And "normalUser" sends a leave request for one session
     When "normalUser" requests his messages
     Then There should be a leave message
+    And Delete leave message
 
-  #Scenario: rejected join request
-  #  And I login with "g@h.j""123456789" as test user type "normalUser"
-  #  And I send a join request for one session
-  #  When "sessionHost" requests his messages
-  #  And The Session Host approves the request "false"
-  #  And "normalUser" requests his messages
-  #  Then There should be a reject message
+  Scenario: rejected join request
+    When "sessionHost" requests his messages
+    When The session host deletes his messages
+    When "sessionHost" requests his messages
+    When I register a new account "RejectUser""123456789""t@t.t"
+    And I login with "t@t.t""123456789" as test user type "normalUser"
+    And I send a join request for one session
+    When "sessionHost" requests his messages
+    And The Session Host approves the request "false"
+    And "normalUser" requests his messages
+    Then There should be a reject message

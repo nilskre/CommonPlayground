@@ -1,9 +1,11 @@
 package commonplayground.controller.cucumber.api.steps;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import commonplayground.Application;
 import commonplayground.controller.cucumber.api.globaldict.GlobalMessageId;
 import commonplayground.controller.cucumber.api.globaldict.GlobalSessionId;
 import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
+import commonplayground.model.Session;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -13,6 +15,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -22,12 +25,15 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class JoinStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
-    private String myJoinedSessions;
+    private String response;
 
     @When("I send a join request for one session")
     public void iSendAJoinRequestForOneSession() {
@@ -44,84 +50,71 @@ public class JoinStepDefinitions {
 
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
 
-        myJoinedSessions = testRestTemplate.postForObject("http://localhost:8080/joinRequestForSession", request, String.class);
+        response = testRestTemplate.postForObject("http://localhost:8080/joinRequestForSession", request, String.class);
 
-        log.info("Response of Join Request Controller: " + myJoinedSessions);
+        log.info("Response of Join Request Controller: " + response);
     }
 
     @And("The Session Host approves the request {string}")
     public void theSessionHostApprovesTheRequest(String joinAccepted) {
+
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        System.out.println("___________________");
+        System.out.println(GlobalUserId.getSessionHostUserID());
+        System.out.println(GlobalMessageId.getMessageID());
+        System.out.println(joinAccepted);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("userID", GlobalUserId.getSessionHostUserID());
+        body.add("messageID", GlobalMessageId.getMessageID());
+        body.add("joinAccepted", joinAccepted);
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
+
+        response = testRestTemplate.postForObject("http://localhost:8080/joinResponse", request, String.class);
+
+        log.info("Response of Host approves Join Request Controller: (should be void)" + response);
+
         System.out.println("EXEC");
-        try {
-            String body =
-                    "userID=" + URLEncoder.encode(GlobalUserId.getSessionHostUserID(), "UTF-8") + "&" +
-                            "messageID=" + URLEncoder.encode(GlobalMessageId.getMessageID(), "UTF-8") + "&" +
-                            "joinAccepted=" + URLEncoder.encode(joinAccepted, "UTF-8");
-
-            URL url = new URL("http://localhost:8080/joinResponse");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-            connection.setUseCaches(false);
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Content-Length", String.valueOf(body.length()));
-
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-            writer.write(body);
-            writer.flush();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-            String liner = "-42";
-            for (String line; (line = reader.readLine()) != null; ) {
-                liner += line;
-            }
-            System.out.println("LINER: " + liner);
-
-            writer.close();
-            reader.close();
-        } catch (Exception e) {
-            assert false;
-        }
     }
 
     @Then("I have joined the session")
     public void iHaveJoinedTheSession() {
+
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("userID", GlobalUserId.getNormalUserID());
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> tmp = testRestTemplate.postForEntity("http://localhost:8080/getMyJoinedSessions", request, String.class);
+
+        String myJoinedSessionsString = tmp.getBody();
+        log.info("My joined sessions as String: " + myJoinedSessionsString);
+
+        List<Session> myJoinedSessionsList = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            String body =
-                    "userID=" + URLEncoder.encode(GlobalUserId.getNormalUserID(), "UTF-8");
+            // JSON string to Java object
+            Session[] myMessageArray = mapper.readValue(myJoinedSessionsString, Session[].class);
 
-            URL url = new URL("http://localhost:8080/getMyJoinedSessions");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-            connection.setUseCaches(false);
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Content-Length", String.valueOf(body.length()));
-
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-            writer.write(body);
-            writer.flush();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-            String liner = "-42";
-            for (String line; (line = reader.readLine()) != null; ) {
-                liner = line;
-            }
-
-            System.out.println("JOINED SESSIONS: " + liner);
-            String joinedId = liner.split(",")[0];
-
-            assertEquals("[{\"id\":16"/* + GlobalSessionId.getSessionID()*/, joinedId);
-
-            writer.close();
-            reader.close();
+            myJoinedSessionsList = Arrays.asList(myMessageArray);
+            String prettyPrint = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(myMessageArray);
+            System.out.println("JSON MyJoinedSessions \n" + prettyPrint);
         } catch (Exception e) {
-            assert false;
+            e.printStackTrace();
         }
+        System.out.println(myJoinedSessionsList);
+        String joinedId = String.valueOf(myJoinedSessionsList.get(0).getId());
+        assertTrue(GlobalSessionId.getSessionID().equals(joinedId));
     }
 
     @Then("I have left the session")
@@ -145,11 +138,11 @@ public class JoinStepDefinitions {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            myJoinedSessions = new String();
+            response = new String();
             for (String line; (line = reader.readLine()) != null; ) {
-                myJoinedSessions += (line);
+                response += (line);
             }
-            log.info("Response of getMyJoinedSessions: " + myJoinedSessions);
+            log.info("Response of getMyJoinedSessions: " + response);
 
             writer.close();
             reader.close();

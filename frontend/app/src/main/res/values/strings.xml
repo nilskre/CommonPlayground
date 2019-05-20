@@ -74,6 +74,7 @@
     <string name="title_activity_my_sessions">My Sessions</string>
     <string name="tab_text_1">Hosted</string>
     <string name="tab_text_2">Joined</string>
+    <string name="tab_text_3">Pending</string>
     <string name="title_message_list">Messages</string>
     <string name="title_message_detail" translatable="false">Message Detail</string>
     <string name="message_button_delete">Delete</string>

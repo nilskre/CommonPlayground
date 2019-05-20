@@ -30,8 +30,6 @@ public class JoinResponseController {
 
         Message relevantMessage = getRelevantMessage(sessionHost, messageIDAsInt);
 
-        System.out.println("RESPONSE CONTR " + userID + " " + messageID + " " +  joinAccepted + " " + relevantMessage.toString() );
-
         Long sessionIdUserWantsToJoin = relevantMessage.getSessionIdUserWantsToJoin();
         Session sessionUserWantsToJoin = sessionRepository.findAllById(sessionIdUserWantsToJoin);
         Long userWantsToJoin = relevantMessage.getUserIdWhoWantsToJoin();

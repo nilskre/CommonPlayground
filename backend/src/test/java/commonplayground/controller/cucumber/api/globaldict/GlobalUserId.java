@@ -3,7 +3,7 @@ package commonplayground.controller.cucumber.api.globaldict;
 public class GlobalUserId {
     private static String sessionHostUserID;
     private static String normalUserID;
-    private static String anotherUserID;
+    private static String anotherUserID = "-20";
 
     public static String getSessionHostUserID() {
         return sessionHostUserID;

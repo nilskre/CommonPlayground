@@ -107,7 +107,6 @@ public class MessagesStepDefs {
             }
         }
         assertTrue(joinRejectedMessageExists);
-        //TODO handling of session ID
         GlobalSessionId.setSessionID(null);
     }
 
@@ -126,8 +125,6 @@ public class MessagesStepDefs {
     public void deleteLeaveMessage() {
         TestRestTemplate testRestTemplate = new TestRestTemplate();
 
-        //for (Message message:myMessageList) {
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
@@ -143,7 +140,6 @@ public class MessagesStepDefs {
         String response = tmp.getBody();
 
         log.info("Response of Remove Messages Controller: " + response);
-        // }
     }
 
     @When("The session host deletes his messages")

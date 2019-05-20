@@ -15,13 +15,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class LeaveStepDefs /*extends CucumberRuntime*/ {
+import static org.junit.Assert.assertEquals;
+
+public class LeaveStepDefs {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private StringBuilder leaveSessionResponse;
 
     @When("{string} sends a leave request for one session")
     public void iSendALeaveRequestForOneSession(String testUserType) {
-        String userID = "-20";
+        String userID;
         if (testUserType.equals("sessionHost") && GlobalUserId.getSessionHostUserID() != null) {
             userID = GlobalUserId.getSessionHostUserID();
         } else if (testUserType.equals("normalUser") && GlobalUserId.getSessionHostUserID() != null) {
@@ -65,7 +67,12 @@ public class LeaveStepDefs /*extends CucumberRuntime*/ {
 
     @Then("The return code should be {int}")
     public void theReturnCodeShouldBe(int expectedResult) {
-//        System.out.println("DAS IST erwartet" + expectedResult + " real: " + leaveSessionResponse.toString());
-        assert expectedResult == Integer.parseInt(leaveSessionResponse.toString());
+        System.out.println("DAS IST erwartet" + expectedResult + " real: " + leaveSessionResponse.toString());
+        assertEquals(expectedResult, Integer.parseInt(leaveSessionResponse.toString()));
+    }
+
+    @When("I unset global session id var")
+    public void iUnsetGlobalSessionIdVar() {
+        GlobalSessionId.setSessionID(null);
     }
 }

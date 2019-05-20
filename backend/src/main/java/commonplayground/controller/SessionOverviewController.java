@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -27,16 +28,24 @@ public class SessionOverviewController {
     public List<Session> getSessionList() throws ParseException {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        Date currentDate = new Date();
+        Date yesterday = getYesterday();
+        simpleDateFormat.format(yesterday);
 
         sessions.clear();
         for (Session session : sessionRepository.findAll()) {
             Date sessionDate = simpleDateFormat.parse(session.getDate());
 
-            if (currentDate.compareTo(sessionDate) < 0) {
+            if (yesterday.compareTo(sessionDate) < 0 ) {
                 sessions.add(session);
             }
         }
         return sessions;
     }
+
+    private Date getYesterday(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -1);
+        return calendar.getTime();
+    }
+
 }

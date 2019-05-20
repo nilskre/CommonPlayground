@@ -6,7 +6,6 @@ import commonplayground.controller.cucumber.api.globaldict.GlobalMessageId;
 import commonplayground.controller.cucumber.api.globaldict.GlobalSessionId;
 import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
 import commonplayground.model.Message;
-import commonplayground.model.TestData;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -82,9 +81,7 @@ public class MessagesStepDefs {
 
     @Then("There should be my messages")
     public void thereShouldBeMyMessages() {
-        TestData testData = new TestData();
-        // TODO Test with real message
-        assert true; //messageListTitles.isEmpty();
+        // tbd test with real message
     }
 
     @Then("There should be a leave message")

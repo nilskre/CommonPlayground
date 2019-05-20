@@ -3,7 +3,6 @@ package commonplayground.controller.cucumber.api.steps;
 import commonplayground.Application;
 import commonplayground.controller.cucumber.api.globaldict.GlobalSessionId;
 import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
-import commonplayground.model.TestData;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.slf4j.Logger;
@@ -16,7 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class MyPendingSessionsStepDefinitions /*extends CucumberRuntime*/{
+public class MyPendingSessionsStepDefinitions /*extends CucumberRuntime*/ {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private StringBuilder myPendingSessions;
 
@@ -25,11 +24,10 @@ public class MyPendingSessionsStepDefinitions /*extends CucumberRuntime*/{
         String hostID = "-20";
         if (testUserType.equals("sessionHost") && GlobalUserId.getSessionHostUserID() != null) {
             hostID = GlobalUserId.getSessionHostUserID();
-        } else if (testUserType.equals("normalUser") && GlobalUserId.getSessionHostUserID() != null){
+        } else if (testUserType.equals("normalUser") && GlobalUserId.getSessionHostUserID() != null) {
             hostID = GlobalUserId.getNormalUserID();
         } else {
-            //TODO another user
-            //GlobalUserId.setNormalUserID(responseUserIdOrErrorCode);
+            hostID = GlobalUserId.getAnotherUserID();
         }
         try {
             String body =
@@ -66,7 +64,6 @@ public class MyPendingSessionsStepDefinitions /*extends CucumberRuntime*/{
 
     @And("There is the session I want to join")
     public void thereIsTheSessionIWantToJoin() {
-        TestData testData = new TestData();
-        //TODO assert that myPendingSessions den ersten titel der testdaten enthält
+        //tbd
     }
 }

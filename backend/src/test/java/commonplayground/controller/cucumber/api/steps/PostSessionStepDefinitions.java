@@ -87,7 +87,6 @@ public class PostSessionStepDefinitions {
             assertTrue(get("/getSessionList").jsonPath().getList("genre").contains(testSession.getGenre()));
             assertTrue(get("/getSessionList").jsonPath().getList("isOnline").contains(testSession.getIsOnline()));
         }
-        //TODO handling of session ID
         GlobalSessionId.setSessionID(null);
     }
 }

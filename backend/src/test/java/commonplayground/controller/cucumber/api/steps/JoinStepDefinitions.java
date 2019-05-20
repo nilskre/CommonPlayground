@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class JoinStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
@@ -42,7 +42,7 @@ public class JoinStepDefinitions {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        System.out.println(" User " + GlobalUserId.getNormalUserID() + " Session " + GlobalSessionId.getSessionID());
+        System.out.println(" User (join request " + GlobalUserId.getNormalUserID() + " Session " + GlobalSessionId.getSessionID());
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("userID", GlobalUserId.getNormalUserID());
@@ -57,16 +57,10 @@ public class JoinStepDefinitions {
 
     @And("The Session Host approves the request {string}")
     public void theSessionHostApprovesTheRequest(String joinAccepted) {
-
         TestRestTemplate testRestTemplate = new TestRestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-        System.out.println("___________________");
-        System.out.println(GlobalUserId.getSessionHostUserID());
-        System.out.println(GlobalMessageId.getMessageID());
-        System.out.println(joinAccepted);
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("userID", GlobalUserId.getSessionHostUserID());
@@ -114,7 +108,7 @@ public class JoinStepDefinitions {
         }
         System.out.println(myJoinedSessionsList);
         String joinedId = String.valueOf(myJoinedSessionsList.get(0).getId());
-        assertTrue(GlobalSessionId.getSessionID().equals(joinedId));
+        assertEquals(GlobalSessionId.getSessionID(), joinedId);
     }
 
     @Then("I have left the session")
@@ -138,7 +132,7 @@ public class JoinStepDefinitions {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            response = new String();
+            response = "";
             for (String line; (line = reader.readLine()) != null; ) {
                 response += (line);
             }

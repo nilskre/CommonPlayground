@@ -54,19 +54,6 @@ public class MyHostedSessionsStepDefs {
 
     @Then("^There should be my hosted sessions$")
     public void thereShouldBeMyPostedSessionWithCorrectData() {
-        //TODO fix it
-        assert true;
-        /*for (Session testSession : testData.getTestSessions()) {
-            assert get("/getMyHostedSessions").jsonPath().getList("title").contains(testSession.getTitle());
-            assert get("/getMyHostedSessions").jsonPath().getList("description").contains(testSession.getDescription());
-            assert get("/getMyHostedSessions").jsonPath().getList("game").contains(testSession.getGame());
-            assert get("/getMyHostedSessions").jsonPath().getList("place").contains(testSession.getPlace());
-            assert get("/getMyHostedSessions").jsonPath().getList("date").contains(testSession.getDate());
-            assert get("/getMyHostedSessions").jsonPath().getList("time").contains(testSession.getTime());
-            assert get("/getMyHostedSessions").jsonPath().getList("numberOfPlayers").contains(testSession.getNumberOfPlayers());
-            assert get("/getMyHostedSessions").jsonPath().getList("idOfHost").contains(testSession.getIdOfHost());
-            assert get("/getMyHostedSessions").jsonPath().getList("genre").contains(testSession.getGenre());
-            assert get("/getMyHostedSessions").jsonPath().getList("isOnline").contains(testSession.getIsOnline());
-        }*/
+        //tbd
     }
 }

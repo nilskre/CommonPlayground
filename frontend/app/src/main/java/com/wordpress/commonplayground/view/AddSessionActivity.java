@@ -5,7 +5,6 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -19,20 +18,13 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.wordpress.commonplayground.BuildConfig;
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.model.Validator;
+import com.wordpress.commonplayground.network.PostSessionRequest;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Map;
 
 public class AddSessionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -60,6 +52,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
             }
         });
 
@@ -104,18 +97,18 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        if (view == btnPublish) {
+        if (view.equals(btnPublish)) {
             sendRequestToBackend(view);
             if (!cancel) {
                 returnToMainActivity();
             }
         }
 
-        if (view == btnDatePicker) {
+        if (view.equals(btnDatePicker)) {
             getCurrentDate();
         }
 
-        if (view == btnTimePicker) {
+        if (view.equals(btnTimePicker)) {
             getCurrentTime();
         }
 
@@ -131,7 +124,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         }, 100);
     }
 
-    public void getCurrentDate() {
+    private void getCurrentDate() {
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
@@ -144,7 +137,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        dateView.getEditText().setText(((dayOfMonth >= 10) ? "" : "0") + dayOfMonth + "-" + ((monthOfYear + 1 >= 10) ? "" : "0") + (monthOfYear + 1) + "-" + year);
+                        String setDateTo = ((dayOfMonth >= 10) ? "" : "0") + dayOfMonth + "-" + ((monthOfYear + 1 >= 10) ? "" : "0") + (monthOfYear + 1) + "-" + year;
+                        dateView.getEditText().setText(setDateTo);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
@@ -163,13 +157,14 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        timeView.getEditText().setText(((hourOfDay >= 10) ? "" : "0") + hourOfDay + ":" + ((minute >= 10) ? "" : "0") + minute);
+                        String setTimeTo = ((hourOfDay >= 10) ? "" : "0") + hourOfDay + ":" + ((minute >= 10) ? "" : "0") + minute;
+                        timeView.getEditText().setText(setTimeTo);
                     }
                 }, mHour, mMinute, true);
         timePickerDialog.show();
     }
 
-    public void sendRequestToBackend(View view) {
+    private void sendRequestToBackend(View view) {
         resetErrors();
 
         if (validInput()) {
@@ -178,43 +173,23 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             description = descriptionView.getEditText().getText().toString();
             genre = genre_spinner.getSelectedItem().toString();
             type = type_spinner.getSelectedItem().toString();
+            PostSessionRequest request = new PostSessionRequest(this.getResources());
 
-            RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-            String url = BuildConfig.SERVER_URL + "postNewSession";
-            StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Log.d("Response", response);
-                    Snackbar.make(view, getString(R.string.new_response_fine), 5000)
-                            .setAction("Action", null).show();
-                }
-            }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d("Error.Response", String.valueOf(error));
-                    Snackbar.make(view, getString(R.string.new_error), 5000)
-                            .setAction("Action", null).show();
-                }
-            }) {
-                protected Map<String, String> getParams() {
-                    Map<String, String> MyData = new HashMap<String, String>();
-                    MyData.put("title", title);
-                    MyData.put("description", description);
-                    MyData.put("game", game);
+            HashMap<String, String> parameters = new HashMap<String, String>();
+            parameters.put("title", title);
+            parameters.put("description", description);
+            parameters.put("game", game);
                     if (placeView.getVisibility() != View.GONE) {
-                        MyData.put("place", place);
+                        parameters.put("place", place);
                     }
-                    MyData.put("date", date);
-                    MyData.put("time", time);
-                    MyData.put("numberOfPlayers", numberOfPlayers);
-                    MyData.put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
-                    MyData.put("genre", genre);
-                    MyData.put("isOnline", type);
-                    return MyData;
-                }
-            };
+            parameters.put("date", date);
+            parameters.put("time", time);
+            parameters.put("numberOfPlayers", numberOfPlayers);
+            parameters.put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
+            parameters.put("genre", genre);
+            parameters.put("isOnline", type);
 
-            MyRequestQueue.add(MyStringRequest);
+            request.stringRequest("postNewSession", "PostSession", this.getApplication(), parameters, view);
         }
     }
 
@@ -228,7 +203,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         cancel = false;
     }
 
-    protected void updateView(int item){
+    private void updateView(int item) {
         Log.d("Selection", Integer.toString(item));
         if (item==0){
            placeView.setVisibility(View.GONE);
@@ -286,7 +261,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             placeView.setError(getString(R.string.error_field_required));
             focusView = placeView;
             cancel = true;
-        } else if (!Validator.checkForValidPlace(place, this)) {
+        } else if (!Validator.checkForValidPlace(place)) {
             placeView.setError(getString(R.string.error_wrong_place));
             focusView = placeView;
             cancel = true;

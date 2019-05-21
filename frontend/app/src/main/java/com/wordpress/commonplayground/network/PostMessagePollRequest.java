@@ -22,7 +22,7 @@ public class PostMessagePollRequest extends VolleyStringTemplate {
     @Override
     protected void handleString(String response, View view) {
         Log.d("joinRequest", response);
-        if (response.equals("true")) {
+        if ("true".equals(response)) {
             AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
             alertDialog.setMessage(r.getString(R.string.new_message));
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, r.getString(R.string.confirm),

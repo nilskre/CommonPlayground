@@ -16,7 +16,7 @@ public class TestData {
     private void fillSessionData(){
 
         Session testSession1 = new Session("Card Game", "Card fun", "Doppelkopf", "Schlosspark", "22-11-2024", "12:00", 4, Long.parseLong("4"), "genre", "false");
-        Session testSession2 = new Session("Raid", "Raid together", "CS", "WWW", todaysDate, "16:00", 42, Long.parseLong("4"), "genre", "true");
+        Session testSession2 = new Session("Raid", "Raid together", "CS", "WWW", todaysDate, "22:20", 42, Long.parseLong("4"), "genre", "true");
         Session testSession3 = new Session("GW2 World Boss Run", "Tequatl->Behemoth->Destroyer", "Guild Wars 2", "Lionsarch", "12-12-2020", "15:00", 50, Long.parseLong("4"), "genre", "true");
         testSessions.add(testSession1);
         testSessions.add(testSession2);

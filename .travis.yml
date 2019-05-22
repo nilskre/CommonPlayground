@@ -128,3 +128,5 @@ jobs:
 #    skip_cleanup: true
     #on:
     #    branch: master
+after_success:
+- sh set_tags.sh

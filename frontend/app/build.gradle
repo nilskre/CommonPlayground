@@ -16,6 +16,9 @@ android {
         testApplicationId "com.wordpress.commonplayground.test"
         testInstrumentationRunner 'cucumber.api.android.CucumberAndroidJUnitRunner'
     }
+    signingConfigs {
+        release
+    }
     buildTypes {
         debug {
             testCoverageEnabled true
@@ -26,13 +29,20 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "SERVER_URL", '"https://commonplayground.herokuapp.com/"'
-            // workaround for signing. Has to be changed later:
-            signingConfig debug.signingConfig
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
+    }
+    // Travis build env vars
+    def isRunningOnTravis = System.getenv("CI") == "true"
+    if (isRunningOnTravis) {
+        signingConfigs.release.storeFile = file("../key.jks")
+        signingConfigs.release.storePassword = System.getenv("keystore_password")
+        signingConfigs.release.keyAlias = System.getenv("keystore_alias")
+        signingConfigs.release.keyPassword = System.getenv("keystore_alias_password")
     }
 }
 

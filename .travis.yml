@@ -82,8 +82,8 @@ jobs:
       - android-$ANDROID_API_LEVEL
     script:
     - cd frontend/
-    - "./gradlew build assembleRelease"
-    - echo "Deployment-Frontend"
+    - "./gradlew assembleRelease"
+    
   - stage: send-coverage
     language: java
     script:

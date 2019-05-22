@@ -17,25 +17,26 @@ public class Message implements Parcelable {
     private String type;
     private Long requesterID;
     private Long requestedSessionID;
-    private Boolean read;
+    private Boolean seen;
 
-    private Message(String type, String title, String description, String author, Long id, Long requesterID, Long requestedSessionID) {
+    private Message(String type, String title, String description, String author, Long id, Long requesterID, Long requestedSessionID, boolean seen) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.authorName = author;
         this.id = id;
-        this.read = false;
+        this.seen = seen;
         this.requestedSessionID = requestedSessionID;
         this.requesterID = requesterID;
     }
 
-    private Message(String type, String title, String description, String author, Long id) {
+    private Message(String type, String title, String description, String author, Long id, boolean seen) {
         this.type = type;
         this.title = title;
         this.authorName = author;
         this.description = description;
         this.id = id;
+        this.seen = seen;
     }
 
     private Message(Parcel in) {
@@ -102,18 +103,18 @@ public class Message implements Parcelable {
         return requestedSessionID;
     }
 
-    public Boolean getRead() {
-        return read;
+    public Boolean isSeen() {
+        return seen;
     }
 
-    public void setRead(Boolean read) {
-        this.read = read;
+    public void setSeen(Boolean seen) {
+        this.seen = seen;
     }
 
     public static Message parseJoinMessage(JSONObject messageObject){
         try {
             return (new Message(messageObject.getString("type"), messageObject.getString("title"), messageObject.getString("description"), messageObject.getString("authorName"),
-                    messageObject.getLong("id"), messageObject.getLong("sessionIdUserWantsToJoin"), messageObject.getLong("userIdWhoWantsToJoin")));
+                    messageObject.getLong("id"), messageObject.getLong("sessionIdUserWantsToJoin"), messageObject.getLong("userIdWhoWantsToJoin"), messageObject.getBoolean("seen")));
         } catch (JSONException e) {
         Log.d("Parse.Session", e.toString());
     }
@@ -123,7 +124,7 @@ public class Message implements Parcelable {
     public static Message parseGeneralMessage(JSONObject messageObject){
         try {
             return new Message(messageObject.getString("type"), messageObject.getString("title"), messageObject.getString("description"), messageObject.getString("authorName"),
-                    messageObject.getLong("id"));
+                    messageObject.getLong("id"), messageObject.getBoolean("seen"));
         } catch (JSONException e) {
             Log.d("Parse.Session", e.toString());
         }

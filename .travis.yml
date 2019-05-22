@@ -1,106 +1,97 @@
 stages:
-  - build-backend
-  - build-frontend
-  - test-backend
-  - test-frontend
-  - deploy-backend
-  - deploy-frontend
-  - send-coverage
-  
-
+- build-backend
+- build-frontend
+- test-backend
+- test-frontend
+- deploy-backend
+- deploy-frontend
+- send-coverage
 env:
- global:
-    - ANDROID_API_LEVEL=28
-    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
-    - ANDROID_API_LEVEL_UI_TESTS=21
-    - ANDROID_BUILD_TOOLS_VERSION_UI_TESTS=21.0.3
-
+  global:
+  - ANDROID_API_LEVEL=28
+  - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+  - ANDROID_API_LEVEL_UI_TESTS=21
+  - ANDROID_BUILD_TOOLS_VERSION_UI_TESTS=21.0.3
 jobs:
   include:
-    - stage: build-backend
-      language: java
-      script:
-        - (cd backend/; ./gradlew assemble)
-    - stage: build-frontend
-      language: android
-      android:
-        components:
-          - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-          - android-$ANDROID_API_LEVEL
-      script:
-        - (cd frontend/; ./gradlew assembleDebug)
-
-    - stage: test-backend
-      language: java
-      script:
-        - cd backend/ 
-        # Run unit tests
-        - ./gradlew test clean
-        # run cucumber api tests
-        - ./gradlew cucumber
-    - stage: test-frontend
-      language: android
-      android:
-        components:
-          - build-tools-$ANDROID_BUILD_TOOLS_VERSION_UI_TESTS
-          - android-$ANDROID_API_LEVEL_UI_TESTS
-          - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-          - android-$ANDROID_API_LEVEL
-          - add-on
-          - extra
-          - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL_UI_TESTS
-      before_script:
-        # start Android Emulator
-        - cd frontend/
-        - android list targets
-        - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL_UI_TESTS --abi default/armeabi-v7a
-        - emulator -avd test -no-window &
-        - android-wait-for-emulator
-        - adb shell settings put global window_animation_scale 0 &
-        - adb shell settings put global transition_animation_scale 0 &
-        - adb shell settings put global animator_duration_scale 0 &
-        - adb shell input keyevent 82 &
-      script:
-        # Run unit tests
-        - ./gradlew test 
-        # Run UI tests
-        - ./gradlew build connectedCheck
-
-    - stage: deploy-backend
-      if: branch = master
-      language: java
-      services:
-        - docker
-      provider: heroku
-      script:
-        - cd backend/ 
-        # Build Docker image
-        - ./gradlew build docker
-        # Push Docker image to DockerHub 
-        - docker login -u $DOCKER_USERNAME -p $DOCKER_PW
-        - docker push commonplayground/commonplayground
-        - docker logout
-        # Push and deploy image to Heroku
-        - heroku container:login
-        - docker tag commonplayground/commonplayground:latest registry.heroku.com/commonplayground/web
-        - docker push registry.heroku.com/commonplayground/web
-        - heroku container:release web -a commonplayground
-    - stage: deploy-frontend
-      if: branch = master
-      language: android
-      android:
-        components:
-          - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-          - android-$ANDROID_API_LEVEL
-      script:
-        - cd frontend/
-        - ./gradlew build assembleRelease
-        - echo "Deployment-Frontend"
-    - stage: send-coverage
-      language: java
-      script:
-        - cd backend/
-        - ./gradlew build
-        - ./gradlew jacocoTestReport
-        - ./gradlew sendCoverageToCodacy
-      
+  - stage: build-backend
+    language: java
+    script:
+    - "(cd backend/; ./gradlew assemble)"
+  - stage: build-frontend
+    language: android
+    android:
+      components:
+      - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+      - android-$ANDROID_API_LEVEL
+    script:
+    - "(cd frontend/; ./gradlew assembleDebug)"
+  - stage: test-backend
+    language: java
+    script:
+    - cd backend/
+    - "./gradlew test clean"
+    - "./gradlew cucumber"
+  - stage: test-frontend
+    language: android
+    android:
+      components:
+      - build-tools-$ANDROID_BUILD_TOOLS_VERSION_UI_TESTS
+      - android-$ANDROID_API_LEVEL_UI_TESTS
+      - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+      - android-$ANDROID_API_LEVEL
+      - add-on
+      - extra
+      - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL_UI_TESTS
+    before_script:
+    - cd frontend/
+    - android list targets
+    - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL_UI_TESTS
+      --abi default/armeabi-v7a
+    - emulator -avd test -no-window &
+    - android-wait-for-emulator
+    - adb shell settings put global window_animation_scale 0 &
+    - adb shell settings put global transition_animation_scale 0 &
+    - adb shell settings put global animator_duration_scale 0 &
+    - adb shell input keyevent 82 &
+    script:
+    - "./gradlew test"
+    - "./gradlew build connectedCheck"
+  - stage: deploy-backend
+    if: branch = master
+    language: java
+    services:
+    - docker
+    provider: heroku
+    script:
+    - cd backend/
+    - "./gradlew build docker"
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PW
+    - docker push commonplayground/commonplayground
+    - docker logout
+    - heroku container:login
+    - docker tag commonplayground/commonplayground:latest registry.heroku.com/commonplayground/web
+    - docker push registry.heroku.com/commonplayground/web
+    - heroku container:release web -a commonplayground
+  - stage: deploy-frontend
+    if: branch = master
+    language: android
+    android:
+      components:
+      - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+      - android-$ANDROID_API_LEVEL
+    script:
+    - cd frontend/
+    - "./gradlew build assembleRelease"
+    - echo "Deployment-Frontend"
+  - stage: send-coverage
+    language: java
+    script:
+    - cd backend/
+    - "./gradlew build"
+    - "./gradlew jacocoTestReport"
+    - "./gradlew sendCoverageToCodacy"
+before_install:
+- openssl aes-256-cbc -K $encrypted_ba187bd0e4a1_key -iv $encrypted_ba187bd0e4a1_iv
+  -in keystore.jks.enc -out keystore.jks
+  -d

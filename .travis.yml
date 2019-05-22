@@ -84,6 +84,8 @@ jobs:
     #  -in keystore.jks.enc -out ~/home/travis/build/nilskre/CommonPlayground/keystore.jks
     #  -d
     - cd frontend/
+    - pwd
+    - ls -la
     - openssl aes-256-cbc -K $encrypted_ba187bd0e4a1_key -iv $encrypted_ba187bd0e4a1_iv -in keystore.jks.enc -out keystore.jks -d
     - "./gradlew assembleRelease"
   - stage: send-coverage

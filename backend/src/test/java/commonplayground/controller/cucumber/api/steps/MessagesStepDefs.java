@@ -29,15 +29,14 @@ import static org.junit.Assert.assertTrue;
 public class MessagesStepDefs {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
-    private String myMessages = "";
     private List<Message> myMessageList;
 
     @When("{string} requests his messages")
     public void requestMessages(String user) {
         String userID;
-        if (user.equals("sessionHost")) {
+        if ("sessionHost".equals(user)) {
             userID = GlobalUserId.getSessionHostUserID();
-        } else if (user.equals("normalUser")) {
+        } else if ("normalUser".equals(user)) {
             userID = GlobalUserId.getNormalUserID();
         } else {
             userID = GlobalUserId.getAnotherUserID();
@@ -56,7 +55,7 @@ public class MessagesStepDefs {
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
 
         ResponseEntity<String> tmp = testRestTemplate.postForEntity("http://localhost:8080/getMyMessages", request, String.class);
-        myMessages = tmp.getBody();
+        String myMessages = tmp.getBody();
 
         log.info("Response of MyMessages Controller: " + myMessages);
 

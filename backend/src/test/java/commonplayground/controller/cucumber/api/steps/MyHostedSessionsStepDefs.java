@@ -1,7 +1,6 @@
 package commonplayground.controller.cucumber.api.steps;
 
 import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
-import commonplayground.model.TestData;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -13,8 +12,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class MyHostedSessionsStepDefs {
-    private TestData testData = new TestData();
-    private String response = "";
+    private StringBuilder response;
 
     @When("I request my hosted sessions")
     public void iRequestMyHostedSessions() {
@@ -38,9 +36,11 @@ public class MyHostedSessionsStepDefs {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
+            response = new StringBuilder();
+
             for (String line; (line = reader.readLine()) != null; ) {
                 System.out.println(line);
-                response += line;
+                response.append(line);
             }
             System.out.println("\n RESPONSE");
             System.out.println(response);

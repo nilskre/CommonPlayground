@@ -15,13 +15,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class MyPendingSessionsStepDefinitions /*extends CucumberRuntime*/ {
+public class MyPendingSessionsStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
-    private StringBuilder myPendingSessions;
 
     @When("I request my pending sessions as test user type {string}")
     public void iSendAJoinRequestForOneSession(String testUserType) {
-        String hostID = "-20";
+        String hostID;
         if (testUserType.equals("sessionHost") && GlobalUserId.getSessionHostUserID() != null) {
             hostID = GlobalUserId.getSessionHostUserID();
         } else if (testUserType.equals("normalUser") && GlobalUserId.getSessionHostUserID() != null) {
@@ -49,7 +48,7 @@ public class MyPendingSessionsStepDefinitions /*extends CucumberRuntime*/ {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            myPendingSessions = new StringBuilder();
+            StringBuilder myPendingSessions = new StringBuilder();
             for (String line; (line = reader.readLine()) != null; ) {
                 myPendingSessions.append(line);
             }

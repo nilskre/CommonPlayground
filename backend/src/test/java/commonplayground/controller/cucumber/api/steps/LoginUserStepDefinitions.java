@@ -19,9 +19,6 @@ public class LoginUserStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private String responseUserIdOrErrorCode = "";
 
-    public LoginUserStepDefinitions() {
-    }
-
     @When("I login with {string}{string} as test user type {string}")
     public void iLoginWith(String email, String password, String testUserType) {
         TestRestTemplate testRestTemplate = new TestRestTemplate();
@@ -39,9 +36,9 @@ public class LoginUserStepDefinitions {
 
         log.info("Response of Login Controller: " + responseUserIdOrErrorCode);
 
-        if (testUserType.equals("sessionHost")) {
+        if ("sessionHost".equals(testUserType)) {
             GlobalUserId.setSessionHostUserID(responseUserIdOrErrorCode);
-        } else if (testUserType.equals("normalUser")) {
+        } else if ("normalUser".equals(testUserType)) {
             GlobalUserId.setNormalUserID(responseUserIdOrErrorCode);
         } else {
             GlobalUserId.setAnotherUserID(responseUserIdOrErrorCode);

@@ -55,5 +55,6 @@ public class MyHostedSessionsStepDefs {
     @Then("^There should be my hosted sessions$")
     public void thereShouldBeMyPostedSessionWithCorrectData() {
         //tbd
+        System.out.println("My hosted sessions " + response);
     }
 }

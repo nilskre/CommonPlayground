@@ -129,4 +129,5 @@ jobs:
     #on:
     #    branch: master
 after_success:
-- sh set_tags.sh
+- echo "EXEC Script"
+- ./set_tags.sh

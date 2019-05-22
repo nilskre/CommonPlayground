@@ -81,17 +81,8 @@ jobs:
       - build-tools-$ANDROID_BUILD_TOOLS_VERSION
       - android-$ANDROID_API_LEVEL
     script:
-    #- openssl aes-256-cbc -K $encrypted_ba187bd0e4a1_key -iv $encrypted_ba187bd0e4a1_iv
-    #  -in keystore.jks.enc -out ~/home/travis/build/nilskre/CommonPlayground/keystore.jks
-    #  -d
-    - pwd
-    - ls -la
     - cd frontend/
-    - pwd
-    - ls -la
     - openssl aes-256-cbc -K $encrypted_ba187bd0e4a1_key -iv $encrypted_ba187bd0e4a1_iv -in ../keystore.jks.enc -out keystore.jks -d
-    - pwd
-    - ls -la
     - "./gradlew assembleRelease"
     deploy:
     - provider: releases
@@ -101,15 +92,15 @@ jobs:
       skip_cleanup: true
       on:
         branch: CPG-215_cd_frontedn OR master
+    after_success:
+      - echo "EXEC Script"
+      - ./set_tags.sh
       #on:
       #    tags: true
       #branches:
       #  only:
       #    - CPG-215_cd_frontedn
       #    - master
-
-
-
 
   - stage: send-coverage
     language: java
@@ -118,16 +109,3 @@ jobs:
     - "./gradlew build"
     - "./gradlew jacocoTestReport"
     - "./gradlew sendCoverageToCodacy"
-#before_install:
-
-#deploy:
-#  - provider: releases
-#    api_key: $GITHUB_TOKEN
-#    file: app/build/outputs/apk/release/app-release.apk
-#    file_glob: true
-#    skip_cleanup: true
-    #on:
-    #    branch: master
-travis_run_after_success:
-- echo "EXEC Script"
-- ./set_tags.sh

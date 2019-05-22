@@ -99,8 +99,10 @@ jobs:
       file: app/build/outputs/apk/release/app-release.apk
       file_glob: true
       skip_cleanup: true
-      #on:
-      #    branch: master
+      branches:
+        only:
+          - CPG-215_cd_frontedn
+          - master
 
 
 

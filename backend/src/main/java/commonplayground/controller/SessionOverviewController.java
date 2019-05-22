@@ -34,12 +34,12 @@ public class SessionOverviewController {
 
         for (Session session : sessionRepository.findAll()) {
             Date sessionDate = simpleDateFormat.parse(session.getDate());
-            String sesssionTime = session.getTime();
+            String sessionTime = session.getTime();
 
             if (today.compareTo(sessionDate) < 0 ) {
                 sessions.add(session);
             }
-            else if (today.compareTo(sessionDate) > 0 && yesterday.compareTo(sessionDate) < 0  && isSessionTimeBeforeNow(sesssionTime) ){
+            else if (today.compareTo(sessionDate) > 0 && yesterday.compareTo(sessionDate) < 0  && isSessionTimeBeforeNow(sessionTime) ){
                 sessions.add(session);
             }
         }

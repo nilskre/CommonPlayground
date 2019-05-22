@@ -74,7 +74,7 @@ jobs:
     - docker push registry.heroku.com/commonplayground/web
     - heroku container:release web -a commonplayground
   - stage: deploy-frontend
-    if: branch = master
+    #if: branch = master
     language: android
     android:
       components:
@@ -83,7 +83,7 @@ jobs:
     script:
     - cd frontend/
     - "./gradlew assembleRelease"
-    
+
   - stage: send-coverage
     language: java
     script:

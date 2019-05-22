@@ -88,7 +88,9 @@ jobs:
     - cd frontend/
     - pwd
     - ls -la
-    - openssl aes-256-cbc -K $encrypted_ba187bd0e4a1_key -iv $encrypted_ba187bd0e4a1_iv -in ../keystore.jks.enc -out ../keystore.jks -d
+    - openssl aes-256-cbc -K $encrypted_ba187bd0e4a1_key -iv $encrypted_ba187bd0e4a1_iv -in ../keystore.jks.enc -out keystore.jks -d
+    - pwd
+    - ls -la
     - "./gradlew assembleRelease"
   - stage: send-coverage
     language: java

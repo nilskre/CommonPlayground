@@ -100,7 +100,9 @@ jobs:
       file_glob: true
       skip_cleanup: true
       on:
-          tags: true
+        branch: CPG-215_cd_frontedn OR master
+      #on:
+      #    tags: true
       #branches:
       #  only:
       #    - CPG-215_cd_frontedn

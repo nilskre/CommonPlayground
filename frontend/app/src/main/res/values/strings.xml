@@ -33,13 +33,27 @@
         <item>Online</item>
         <item>Offline</item>
     </string-array>
-    <string-array name="online_genres">
+    <string-array name="add_online_genres">
         <item>MMO RPG</item>
         <item>Shooter</item>
         <item>MOBA</item>
         <item>Strategy</item>
     </string-array>
-    <string-array name="offline_genres">
+    <string-array name="add_offline_genres">
+        <item>Board Game</item>
+        <item>Card Game</item>
+        <item>Pen and Paper</item>
+        <item>Outdoors Activity</item>
+    </string-array>
+    <string-array name="search_online_genres">
+        <item>No selection for genre</item>
+        <item>MMO RPG</item>
+        <item>Shooter</item>
+        <item>MOBA</item>
+        <item>Strategy</item>
+    </string-array>
+    <string-array name="search_offline_genres">
+        <item>No selection for genre</item>
         <item>Board Game</item>
         <item>Card Game</item>
         <item>Pen and Paper</item>

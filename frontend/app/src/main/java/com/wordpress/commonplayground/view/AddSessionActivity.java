@@ -207,11 +207,11 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         Log.d("Selection", Integer.toString(item));
         if (item==0){
            placeView.setVisibility(View.GONE);
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.online_genres, android.R.layout.simple_spinner_item);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.add_online_genres, android.R.layout.simple_spinner_dropdown_item);
             genre_spinner.setAdapter(adapter);
         }else{
             placeView.setVisibility(View.VISIBLE);
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.offline_genres, android.R.layout.simple_spinner_item);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.add_offline_genres, android.R.layout.simple_spinner_dropdown_item);
             genre_spinner.setAdapter(adapter);
         }
 

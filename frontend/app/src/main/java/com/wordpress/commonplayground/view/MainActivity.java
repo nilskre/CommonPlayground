@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_search) {
             Intent openSearchActivity = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(openSearchActivity);
-            return true;
         }
 
         return super.onOptionsItemSelected(item);

@@ -13,7 +13,6 @@
     <string name="menu_faq">Häufigste Fragen</string>
     <string name="menu_contactAdmin">Administrator kontaktieren</string>
     <string name="tooltip_tbi">Bald verfügbar!</string>
-    <string name="action_settings">Einstellungen</string>
     <!-- Strings related to AddSession -->
     <string name="new_title">Titel</string>
     <string name="new_game">Spiel</string>
@@ -68,4 +67,5 @@
     <string name="leave_success">Du wurdest aus der Spielerunde entfernt.</string>
     <string name="tab_text_3">Angefragt</string>
     <string name="new_message">Du hast neue Nachrichten.</string>
+    <string name="action_search">Suchen</string>
 </resources>

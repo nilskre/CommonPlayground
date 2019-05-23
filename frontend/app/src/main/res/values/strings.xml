@@ -89,4 +89,6 @@
     <string name="leave_success">You are no longer part of this session.</string>
     <string name="new_message">There are new messages in your inbox.</string>
     <string name="confirm" translatable="false">OK</string>
+    <string name="title_activity_search">Search</string>
+    <string name="title_activity_add_session">New Session</string>
 </resources>

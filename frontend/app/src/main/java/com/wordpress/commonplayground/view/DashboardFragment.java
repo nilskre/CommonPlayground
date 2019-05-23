@@ -88,7 +88,6 @@ public class DashboardFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent openAddSessionActivity = new Intent(getContext(), AddSessionActivity.class);
                 startActivity(openAddSessionActivity);
             }

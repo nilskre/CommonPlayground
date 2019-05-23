@@ -68,4 +68,6 @@
     <string name="tab_text_3">Angefragt</string>
     <string name="new_message">Du hast neue Nachrichten.</string>
     <string name="action_search">Suchen</string>
+    <string name="title_activity_search">Suche</string>
+    <string name="title_activity_add_session">Session erstellen</string>
 </resources>

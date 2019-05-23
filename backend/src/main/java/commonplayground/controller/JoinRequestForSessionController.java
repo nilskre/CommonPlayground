@@ -31,6 +31,8 @@ public class JoinRequestForSessionController {
 
         int validityCheck = sessionUserWantsToJoin.joinRequestToSession(userWhoWantsToJoinSession);
 
+        System.out.println("IN JOIN RESPONSE: UserID " + userID + " sessionID " + sessionID + " Host: " + userRepository.findAllById(sessionUserWantsToJoin.getIdOfHost()).toString());
+
         if (validityCheck != 0) {
             return (long) validityCheck;
         } else {

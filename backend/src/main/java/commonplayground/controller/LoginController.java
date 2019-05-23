@@ -24,7 +24,7 @@ public class LoginController {
     @RequestMapping("/login")
     public Long login(@RequestParam(value = "email", defaultValue = "not given") String email,
                       @RequestParam(value = "password", defaultValue = "not given") String triedPassword) {
-        if (userRepository.findAllByEmail(email) != null){
+        if (userRepository.findAllByEmail(email) != null) {
             userTriedToLogin = userRepository.findAllByEmail(email);
         }
         userExists = userExists(email);
@@ -34,11 +34,11 @@ public class LoginController {
     }
 
     private Long generateResponse() {
-        if (!userExists){
+        if (!userExists) {
             return (long) -4;
-        } else if(userExists && !passwordCorrect){
+        } else if (userExists && !passwordCorrect) {
             return (long) -5;
-        } else if (userExists && passwordCorrect){
+        } else if (userExists && passwordCorrect) {
             return userTriedToLogin.getId();
         } else {
             return (long) -1;

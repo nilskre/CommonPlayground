@@ -18,23 +18,19 @@ public class RegisterNewUserController {
     }
 
     @RequestMapping("/registerNewUser")
-    public int postNewSession(@RequestParam(value = "username", defaultValue = "not given") String username,
+    public int registerNewUser(@RequestParam(value = "username", defaultValue = "not given") String username,
                                @RequestParam(value = "password", defaultValue = "not given") String password,
-                               @RequestParam(value = "email", defaultValue = "not given") String email)
-                               {
-      User user = new User(username, password, email);
-
-      if (userRepository.findByEmail(email) != null){
-          return -3;
-      }
-      if (userRepository.findByUsername(username) != null){
-        return -2;
-      }
-
-      else{
-          userRepository.save(user);
-          return 0;
-      }
+                               @RequestParam(value = "email", defaultValue = "not given") String email) {
+        User user = new User(username, password, email);
+        
+        if (userRepository.findByEmail(email) != null) {
+            return -3;
+        }
+        if (userRepository.findByUsername(username) != null) {
+            return -2;
+        } else {
+            userRepository.save(user);
+            return 0;
+        }
     }
-
 }

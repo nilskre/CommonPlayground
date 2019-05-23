@@ -36,8 +36,6 @@ jobs:
         - cd backend/ 
         # Run unit tests
         - ./gradlew test clean
-        # run cucumber api tests
-        - ./gradlew cucumber
     - stage: test-frontend
       language: android
       android:

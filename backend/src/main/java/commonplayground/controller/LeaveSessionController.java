@@ -21,7 +21,7 @@ public class LeaveSessionController {
     }
 
     @RequestMapping("/leaveSession")
-    public Long postNewSession(@RequestParam(value = "userID", defaultValue = "not given") String userID,
+    public Long leaveSession(@RequestParam(value = "userID", defaultValue = "not given") String userID,
                                @RequestParam(value = "sessionID", defaultValue = "not given") String sessionID) {
         Long userIDAsLong = Long.parseLong(userID);
         Long sessionIDAsLong = Long.parseLong(sessionID);

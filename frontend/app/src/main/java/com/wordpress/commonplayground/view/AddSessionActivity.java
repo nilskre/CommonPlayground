@@ -231,7 +231,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     private void checkForValidTitle() {
         title = titleView.getEditText().getText().toString();
-        if (checkForAnyInput(title)) {
+        if (Validator.checkForAnyInput(title)) {
             titleView.setError(getString(R.string.error_field_required));
             focusView = titleView;
             cancel = true;
@@ -244,7 +244,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     private void checkForValidGame() {
         game = gameView.getEditText().getText().toString();
-        if (checkForAnyInput(game)) {
+        if (Validator.checkForAnyInput(game)) {
             gameView.setError(getString(R.string.error_field_required));
             focusView = gameView;
             cancel = true;
@@ -257,7 +257,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     private void checkForValidPlace() {
         place = placeView.getEditText().getText().toString();
-        if (checkForAnyInput(place)) {
+        if (Validator.checkForAnyInput(place)) {
             placeView.setError(getString(R.string.error_field_required));
             focusView = placeView;
             cancel = true;
@@ -270,7 +270,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     private void checkForValidDate() {
         date = dateView.getEditText().getText().toString();
-        if (checkForAnyInput(date)) {
+        if (Validator.checkForAnyInput(date)) {
             dateView.setError(getString(R.string.error_field_required));
             focusView = dateView;
             cancel = true;
@@ -279,7 +279,7 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
 
     private void checkForValidTime() {
         time = timeView.getEditText().getText().toString();
-        if (checkForAnyInput(time)) {
+        if (Validator.checkForAnyInput(time)) {
             timeView.setError(getString(R.string.error_field_required));
             focusView = timeView;
             cancel = true;
@@ -293,9 +293,5 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
             focusView = numberOfPlayersView;
             cancel = true;
         }
-    }
-
-    private boolean checkForAnyInput(String input) {
-        return input.trim().length() <= 0;
     }
 }

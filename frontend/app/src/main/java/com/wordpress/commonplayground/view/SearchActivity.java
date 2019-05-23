@@ -12,12 +12,16 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.model.Validator;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnSearch;
     private Spinner type_spinner, genre_spinner;
     private TextInputLayout placeView;
+    private String place;
+    private boolean cancel = false;
+    private View focusView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +63,32 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if (view.equals(btnSearch)) {
-            Intent openSearchResultActivity = new Intent(getApplicationContext(), SearchResultActivity.class);
-            startActivity(openSearchResultActivity);
+            resetErrors();
+            if (placeView.getVisibility() != View.GONE) {
+                checkForValidPlace();
+            }
+            if(!cancel) {
+                Intent openSearchResultActivity = new Intent(getApplicationContext(), SearchResultActivity.class);
+                startActivity(openSearchResultActivity);
+            }
+        }
+    }
+
+    private void resetErrors() {
+        placeView.setError(null);
+        cancel = false;
+    }
+
+    private void checkForValidPlace() {
+        place = placeView.getEditText().getText().toString();
+        if (Validator.checkForAnyInput(place)) {
+            placeView.setError(getString(R.string.error_field_required));
+            focusView = placeView;
+            cancel = true;
+        } else if (!Validator.checkForValidPlace(place)) {
+            placeView.setError(getString(R.string.error_wrong_place));
+            focusView = placeView;
+            cancel = true;
         }
     }
 }

@@ -17,18 +17,16 @@ import com.wordpress.commonplayground.model.Validator;
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnSearch;
-    private Spinner type_spinner, genre_spinner;
+    private Spinner genre_spinner;
     private TextInputLayout placeView;
-    private String place;
     private boolean cancel = false;
-    private View focusView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        type_spinner = findViewById(R.id.type_spinner);
+        Spinner type_spinner = findViewById(R.id.type_spinner);
         genre_spinner = findViewById(R.id.genre_spinner);
         placeView = findViewById(R.id.PlaceInput);
 
@@ -80,14 +78,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void checkForValidPlace() {
-        place = placeView.getEditText().getText().toString();
-        if (Validator.checkForAnyInput(place)) {
-            placeView.setError(getString(R.string.error_field_required));
-            focusView = placeView;
-            cancel = true;
-        } else if (!Validator.checkForValidPlace(place)) {
+        String place = placeView.getEditText().getText().toString();
+        if (!Validator.checkForValidPlace(place)) {
             placeView.setError(getString(R.string.error_wrong_place));
-            focusView = placeView;
             cancel = true;
         }
     }

@@ -90,7 +90,7 @@ jobs:
     - cd frontend/
     - openssl aes-256-cbc -K $encrypted_ba187bd0e4a1_key -iv $encrypted_ba187bd0e4a1_iv -in ../keystore.jks.enc -out keystore.jks -d
     - "./gradlew assembleRelease"
-    after_success: echo "Publish release build ti github releases"
+    #after_success: echo "Publish release build ti github releases"
     deploy:
     - provider: releases
       api_key: $GITHUB_TOKEN
@@ -98,6 +98,7 @@ jobs:
       file_glob: true
       skip_cleanup: true
       on:
+        tags: false
         branch: CPG-215_cd_frontedn OR master
     #after_success:
     #  - echo "EXEC Script"

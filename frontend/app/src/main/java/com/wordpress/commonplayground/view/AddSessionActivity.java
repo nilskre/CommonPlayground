@@ -1,19 +1,18 @@
 package com.wordpress.commonplayground.view;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -26,11 +25,11 @@ import com.wordpress.commonplayground.viewmodel.SessionManager;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class AddSessionActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddSessionActivity extends AppCompatActivity {
 
     private Button btnPublish;
     private ImageButton btnDatePicker, btnTimePicker;
-    private TextInputLayout titleView, gameView, placeView, dateView, timeView, numberOfPlayersView, descriptionView;
+    private  EditText titleView, gameView, placeView, dateView, timeView, numberOfPlayersView, descriptionView;
     private String title, game, place, date, time, numberOfPlayers, description, genre, type;
     private Spinner type_spinner, genre_spinner;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -43,6 +42,13 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
+        setUpSpinners();
+        setOnclickListeners();
+        accessUIInputFields();
+        session = new SessionManager(this);
+    }
+
+    private void setUpSpinners() {
         type_spinner = findViewById(R.id.type_spinner);
         genre_spinner = findViewById(R.id.genre_spinner);
 
@@ -55,36 +61,69 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                 //do nothing
             }
         });
-
-        setOnclickListeners();
-        accessUIInputFields();
-        session = new SessionManager(getApplicationContext());
     }
 
     private void setOnclickListeners() {
         btnPublish = findViewById(R.id.ButtonPublish);
-        btnPublish.setOnClickListener(this);
+        btnPublish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              onPublish(v);
+            }
+         });
 
         btnDatePicker = findViewById(R.id.btn_date);
-        btnDatePicker.setOnClickListener(this);
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCurrentDate();
+            }
+        });
 
         btnTimePicker = findViewById(R.id.btn_time);
-        btnTimePicker.setOnClickListener(this);
+        btnTimePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCurrentTime();
+            }
+        });
+    }
+
+    private void onPublish(View v) {
+        resetErrors();
+        readFields();
+        if (validInput()) {
+            focusView.requestFocus();
+        } else {
+            sendRequestToBackend(v);
+        }
+        if (!cancel) {
+            returnToMainActivity();
+        }
+    }
+
+    private void readFields() {
+       title =  titleView.getText().toString();
+        place = placeView.getText().toString();
+        game = gameView.getText().toString();
+        date = dateView.getText().toString();
+        numberOfPlayers = numberOfPlayersView.getText().toString();
+        time = timeView.getText().toString();
     }
 
     private void accessUIInputFields() {
-        titleView = findViewById(R.id.TitleInput);
-        gameView = findViewById(R.id.GameInput);
-        placeView = findViewById(R.id.PlaceInput);
-        dateView = findViewById(R.id.DateInput);
-        timeView = findViewById(R.id.TimeInput);
-        numberOfPlayersView = findViewById(R.id.PlayersInput);
-        descriptionView = findViewById(R.id.DescriptionInput);
+        titleView = findViewById(R.id.TitleInputField);
+        gameView = findViewById(R.id.GameInputField);
+        placeView = findViewById(R.id.PlaceInputField);
+        dateView = findViewById(R.id.DateInputField);
+        timeView = findViewById(R.id.TimeInputField);
+        numberOfPlayersView = findViewById(R.id.PlayersInputField);
+        descriptionView = findViewById(R.id.DescriptionInputField);
     }
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
     }
@@ -93,25 +132,6 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view.equals(btnPublish)) {
-            sendRequestToBackend(view);
-            if (!cancel) {
-                returnToMainActivity();
-            }
-        }
-
-        if (view.equals(btnDatePicker)) {
-            getCurrentDate();
-        }
-
-        if (view.equals(btnTimePicker)) {
-            getCurrentTime();
-        }
-
     }
 
     private void returnToMainActivity() {
@@ -132,13 +152,14 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
         launchDatePickerDialog();
     }
 
+    @SuppressLint("NewApi")
     private void launchDatePickerDialog() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         String setDateTo = ((dayOfMonth >= 10) ? "" : "0") + dayOfMonth + "-" + ((monthOfYear + 1 >= 10) ? "" : "0") + (monthOfYear + 1) + "-" + year;
-                        dateView.getEditText().setText(setDateTo);
+                        dateView.setText(setDateTo);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
@@ -158,40 +179,37 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String setTimeTo = ((hourOfDay >= 10) ? "" : "0") + hourOfDay + ":" + ((minute >= 10) ? "" : "0") + minute;
-                        timeView.getEditText().setText(setTimeTo);
+                        timeView.setText(setTimeTo);
                     }
                 }, mHour, mMinute, true);
         timePickerDialog.show();
     }
 
     private void sendRequestToBackend(View view) {
-        resetErrors();
+        description = descriptionView.getText().toString();
+        genre = genre_spinner.getSelectedItem().toString();
+        type = type_spinner.getSelectedItem().toString();
 
-        if (validInput()) {
-            focusView.requestFocus();
-        } else {
-            description = descriptionView.getEditText().getText().toString();
-            genre = genre_spinner.getSelectedItem().toString();
-            type = type_spinner.getSelectedItem().toString();
-            PostSessionRequest request = new PostSessionRequest(this.getResources());
+            HashMap<String, String> parameters = new HashMap<String, String>()
+            {{
+             put("title", title);
+             put("description", description);
+             put("game", game);
+             put("date", date);
+             put("time", time);
+             put("numberOfPlayers", numberOfPlayers);
+             put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
+             put("genre", genre);
+             put("isOnline", type);
+             if ("offline".equals(type)) {
+                put("place", place);
+             }
+            }};
 
-            HashMap<String, String> parameters = new HashMap<String, String>();
-            parameters.put("title", title);
-            parameters.put("description", description);
-            parameters.put("game", game);
-                    if (placeView.getVisibility() != View.GONE) {
-                        parameters.put("place", place);
-                    }
-            parameters.put("date", date);
-            parameters.put("time", time);
-            parameters.put("numberOfPlayers", numberOfPlayers);
-            parameters.put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
-            parameters.put("genre", genre);
-            parameters.put("isOnline", type);
-
-            request.stringRequest("postNewSession", "PostSession", this.getApplication(), parameters, view);
-        }
+        PostSessionRequest request = new PostSessionRequest(getResources());
+        request.stringRequest("postNewSession", "PostSession", parameters, view);
     }
+
 
     private void resetErrors() {
         titleView.setError(null);
@@ -204,24 +222,25 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void updateView(int item) {
-        Log.d("Selection", Integer.toString(item));
+        ArrayAdapter<CharSequence> adapter;
+        int array;
         if (item==0){
            placeView.setVisibility(View.GONE);
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.online_genres, android.R.layout.simple_spinner_item);
-            genre_spinner.setAdapter(adapter);
+           array = (R.array.online_genres);
         }else{
             placeView.setVisibility(View.VISIBLE);
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.offline_genres, android.R.layout.simple_spinner_item);
-            genre_spinner.setAdapter(adapter);
+            array = (R.array.offline_genres);
         }
-
+        adapter = ArrayAdapter.createFromResource(this, array, android.R.layout.simple_spinner_dropdown_item);
+        genre_spinner.setAdapter(adapter);
     }
 
+
     private boolean validInput() {
-        checkForValidNumberOFPlayers();
-        checkForValidTime();
-        checkForValidDate();
-        if (placeView.getVisibility() != View.GONE) {
+        checkForAnyInput(numberOfPlayers, numberOfPlayersView);
+        checkForAnyInput(time, timeView);
+        checkForAnyInput(date, dateView);
+        if ("offline".equals(genre)) {
             checkForValidPlace();
         }
         checkForValidGame();
@@ -230,12 +249,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void checkForValidTitle() {
-        title = titleView.getEditText().getText().toString();
-        if (checkForAnyInput(title)) {
-            titleView.setError(getString(R.string.error_field_required));
-            focusView = titleView;
-            cancel = true;
-        } else if (title.length() > 30) {
+        checkForAnyInput(title,titleView);
+        if (title.length() > 30) {
             titleView.setError(getString(R.string.error_too_long));
             focusView = titleView;
             cancel = true;
@@ -243,12 +258,8 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void checkForValidGame() {
-        game = gameView.getEditText().getText().toString();
-        if (checkForAnyInput(game)) {
-            gameView.setError(getString(R.string.error_field_required));
-            focusView = gameView;
-            cancel = true;
-        } else if (game.length() > 30) {
+        checkForAnyInput(game, gameView);
+        if (game.length() > 30) {
             gameView.setError(getString(R.string.error_too_long));
             focusView = gameView;
             cancel = true;
@@ -256,46 +267,20 @@ public class AddSessionActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void checkForValidPlace() {
-        place = placeView.getEditText().getText().toString();
-        if (checkForAnyInput(place)) {
-            placeView.setError(getString(R.string.error_field_required));
-            focusView = placeView;
-            cancel = true;
-        } else if (!Validator.checkForValidPlace(place)) {
+        checkForAnyInput(place, placeView);
+        if (!Validator.checkForValidPlace(place)) {
             placeView.setError(getString(R.string.error_wrong_place));
             focusView = placeView;
             cancel = true;
         }
     }
 
-    private void checkForValidDate() {
-        date = dateView.getEditText().getText().toString();
-        if (checkForAnyInput(date)) {
-            dateView.setError(getString(R.string.error_field_required));
-            focusView = dateView;
+    private void checkForAnyInput(String input, View view) {
+        if (input.trim().length() <= 0){
+            EditText validate= (EditText ) view;
+            validate.setError(getString(R.string.error_field_required));
+            focusView = view;
             cancel = true;
         }
-    }
-
-    private void checkForValidTime() {
-        time = timeView.getEditText().getText().toString();
-        if (checkForAnyInput(time)) {
-            timeView.setError(getString(R.string.error_field_required));
-            focusView = timeView;
-            cancel = true;
-        }
-    }
-
-    private void checkForValidNumberOFPlayers() {
-        numberOfPlayers = numberOfPlayersView.getEditText().getText().toString();
-        if (TextUtils.isEmpty(numberOfPlayers)) {
-            numberOfPlayersView.setError(getString(R.string.error_field_required));
-            focusView = numberOfPlayersView;
-            cancel = true;
-        }
-    }
-
-    private boolean checkForAnyInput(String input) {
-        return input.trim().length() <= 0;
     }
 }

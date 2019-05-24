@@ -10,12 +10,10 @@ import android.view.View;
 import com.wordpress.commonplayground.R;
 
 public class PostMessagePollRequest extends VolleyStringTemplate {
-    private final Resources r;
     private final Activity activity;
 
-    public PostMessagePollRequest(Resources r, Activity activity) {
+    public PostMessagePollRequest( Activity activity) {
         super();
-        this.r = r;
         this.activity = activity;
     }
 
@@ -24,8 +22,8 @@ public class PostMessagePollRequest extends VolleyStringTemplate {
         Log.d("joinRequest", response);
         if ("true".equals(response)) {
             AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
-            alertDialog.setMessage(r.getString(R.string.new_message));
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, r.getString(R.string.confirm),
+            alertDialog.setMessage(view.getResources().getString(R.string.new_message));
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, view.getResources().getString(R.string.confirm),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();

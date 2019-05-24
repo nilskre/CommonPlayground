@@ -15,9 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class VolleyStringTemplate {
-    protected Resources r;
-
-    public void stringRequest(String api, String tag, Context context, HashMap<String, String> parameters, View view) {
+    public void stringRequest(String api, String tag, HashMap<String, String> parameters, View view) {
         String url = BuildConfig.SERVER_URL + api;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -37,7 +35,7 @@ public abstract class VolleyStringTemplate {
                 return parameters;
             }
         };
-        VolleyRequestQueue.getInstance(context).addToQueue(stringRequest, tag);
+        VolleyRequestQueue.getInstance(view.getContext()).addToQueue(stringRequest, tag);
     }
 
     protected abstract void handleString(String response, View view);

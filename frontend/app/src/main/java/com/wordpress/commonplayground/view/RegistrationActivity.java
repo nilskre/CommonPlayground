@@ -1,6 +1,9 @@
 package com.wordpress.commonplayground.view;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -24,6 +27,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private boolean cancel = false;
     private View focusView = null;
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,26 +35,27 @@ public class RegistrationActivity extends AppCompatActivity {
         setupRegisteringForm();
     }
 
+    @SuppressLint("NewApi")
     private void setupRegisteringForm() {
         mUsernameView = findViewById(R.id.username);
         mEmailView = findViewById(R.id.email);
-
         mPasswordView = findViewById(R.id.password);
+        mPasswordConfirmView = findViewById(R.id.password_confirm);
+        Button mRegistrationButton = findViewById(R.id.registration_button);
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptRegister(textView); /* RICHTIGE VIEW?!*/
+                    attemptRegister(textView);
                     return true;
                 }
                 return false;
             }
         });
 
-        mPasswordConfirmView = findViewById(R.id.password_confirm);
-
-        Button mRegistrationButton = findViewById(R.id.registration_button);
         mRegistrationButton.setOnClickListener(new OnClickListener() {
+            @SuppressLint("NewApi")
             @Override
             public void onClick(View view) {
                 attemptRegister(view);
@@ -63,19 +68,17 @@ public class RegistrationActivity extends AppCompatActivity {
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
+    @SuppressLint("NewApi")
     private void attemptRegister(View view) {
         resetErrors();
         storeRegisteringCredentials();
 
-        // Check for valid input from the bottom to the top that the focus is at the top if there are several mistakes
         checkIfPasswordsAreEqual();
         checkForValidPassword();
         checkForValidEMailAddress();
-        checkForFilledUsername();
+        checkEmpty(username, mUsernameView);
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
             requestToBackendRegister(view);
@@ -97,12 +100,9 @@ public class RegistrationActivity extends AppCompatActivity {
         passwordConfirm = mPasswordConfirmView.getText().toString();
     }
 
+    @SuppressLint("NewApi")
     private void checkForValidPassword() {
-        if (TextUtils.isEmpty(passwordConfirm)) {
-            mPasswordConfirmView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordConfirmView;
-            cancel = true;
-        }
+        checkEmpty(password, mPasswordView);
 
         String validPassword = Validator.checkForValidPassword(password, this);
         if (!validPassword.isEmpty()) {
@@ -112,19 +112,12 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("NewApi")
     private void checkForValidEMailAddress() {
         String errorEmail = Validator.checkForValidEmail(email, this);
         if (!errorEmail.isEmpty()) {
             mEmailView.setError(errorEmail);
             focusView = mEmailView;
-            cancel = true;
-        }
-    }
-
-    private void checkForFilledUsername() {
-        if (TextUtils.isEmpty(username)) {
-            mUsernameView.setError(getString(R.string.error_field_required));
-            focusView = mUsernameView;
             cancel = true;
         }
     }
@@ -138,18 +131,23 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
+    private void checkEmpty(String input, EditText view){
+        if (TextUtils.isEmpty(input)) {
+            view.setError(getString(R.string.error_field_required));
+            focusView = view;
+            cancel = true;
+        }
+    }
+
     private void requestToBackendRegister(View view) {
-        /*get screen content*/
-        final String username = mUsernameView.getText().toString();
-        final String email = mEmailView.getText().toString();
-        final String password = mPasswordView.getText().toString();
 
-        HashMap<String, String> parameters = new HashMap<>();
-        parameters.put("username", username);
-        parameters.put("email", email);
-        parameters.put("password", password);
-
-        PostRegistrationRequest request = new PostRegistrationRequest(this.getResources(), this);
-        request.stringRequest("registerNewUser", "Registration", getApplicationContext(), parameters, view);
+        HashMap<String, String> parameters = new HashMap<String, String>(){
+            {
+                put("username", username);
+                put("email", email);
+                put("password", password);
+            }};
+        PostRegistrationRequest request = new PostRegistrationRequest(this);
+        request.stringRequest("registerNewUser", "Registration", parameters, view);
     }
 }

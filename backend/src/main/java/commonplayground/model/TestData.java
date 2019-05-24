@@ -7,7 +7,7 @@ import java.util.Date;
 public class TestData {
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-    String todaysDate = simpleDateFormat.format(new Date());
+    private String todaysDate = simpleDateFormat.format(new Date());
 
     private ArrayList<Session> testSessions = new ArrayList<>();
     private User testUser = new User("iBims", "123456789", "test@test.de");

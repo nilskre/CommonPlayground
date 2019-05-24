@@ -91,16 +91,24 @@ jobs:
     - openssl aes-256-cbc -K $encrypted_ba187bd0e4a1_key -iv $encrypted_ba187bd0e4a1_iv -in ../keystore.jks.enc -out keystore.jks -d
     - "./gradlew assembleRelease"
     #after_success: echo "Publish release build ti github releases"
+    before_deploy:
+      - echo "Start Deployment"
+      - export APP_VERSION=$(./gradlew :app:printVersionName)
     deploy:
     - provider: releases
       api_key: $GITHUB_TOKEN
       file: app/build/outputs/apk/release/app-release.apk
       file_glob: true
       skip_cleanup: true
+      overwrite: true
+      name: "$APP_VERSION"
+      tag_name: "$APP_VERSION"
       on:
-        tags: false
-        branch: CPG-215_cd_frontedn OR master
-    #after_success:
+        branch: master
+
+        #CPG-215_cd_frontedn OR 
+        #tags: false
+        #after_success:
     #  - echo "EXEC Script"
     #  - ./set_tags.sh
 

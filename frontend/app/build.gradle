@@ -12,7 +12,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testApplicationId "com.wordpress.commonplayground.test"
         testInstrumentationRunner 'cucumber.api.android.CucumberAndroidJUnitRunner'
     }
@@ -43,6 +43,12 @@ android {
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
+    }
+}
+
+task printVersionName {
+    doLast {
+        println android.defaultConfig.versionName
     }
 }
 

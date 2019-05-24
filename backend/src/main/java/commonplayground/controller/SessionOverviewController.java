@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 public class SessionOverviewController {
 
-    private List<Session> sessions = new ArrayList<>();
+    private List<Session> sessions;
     private final SessionRepository sessionRepository;
 
     @Autowired
@@ -26,6 +26,7 @@ public class SessionOverviewController {
 
     @RequestMapping("/getSessionList")
     public List<Session> getSessionList() throws ParseException {
+        sessions = new ArrayList<>();
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date today = new Date();

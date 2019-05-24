@@ -95,9 +95,14 @@ jobs:
     api_key:
       secure: $GITHUB_SECURE_API_KEY
     file: frontend/app/build/outputs/apk/release/app-release.apk
-    on:
-      repo: nilskre/CommonPlayground
-      branch: cd_f_v3
+    # whitelist
+    branches:
+      only:
+        - master
+        - cd_f_v3
+    #on:
+    #  repo: nilskre/CommonPlayground
+    #  branch: cd_f_v3
     
     #deploy:
     #- provider: releases

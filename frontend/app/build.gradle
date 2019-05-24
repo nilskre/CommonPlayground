@@ -12,9 +12,21 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testApplicationId "com.wordpress.commonplayground.test"
         testInstrumentationRunner 'cucumber.api.android.CucumberAndroidJUnitRunner'
+    }
+    signingConfigs {
+        debug
+        release
+    }
+    // Travis build env vars
+    def isRunningOnTravis = System.getenv("CI") == "true"
+    if (isRunningOnTravis) {
+        signingConfigs.release.storeFile = file("../keystore.jks")
+        signingConfigs.release.storePassword = System.getenv("F_D_ENC_KESTORE_PW")
+        signingConfigs.release.keyAlias = System.getenv("F_D_ENC_KEYSTORE_KEY")
+        signingConfigs.release.keyPassword = System.getenv("F_D_ENC_KEYSTORE_KEY_PW")
     }
     buildTypes {
         debug {
@@ -26,13 +38,18 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "SERVER_URL", '"https://commonplayground.herokuapp.com/"'
-            // workaround for signing. Has to be changed later:
-            signingConfig debug.signingConfig
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
+    }
+}
+
+task printVersionName {
+    doLast {
+        println android.defaultConfig.versionName
     }
 }
 

@@ -22,7 +22,7 @@ public class PostNewSessionController {
     }
 
     @RequestMapping("/postNewSession")
-    public void postNewSession(@RequestParam(value = "title", defaultValue = "not given") String title,
+    public Long postNewSession(@RequestParam(value = "title", defaultValue = "not given") String title,
                                @RequestParam(value = "description", defaultValue = "not given") String description,
                                @RequestParam(value = "game", defaultValue = "not given") String game,
                                @RequestParam(value = "place", defaultValue = "not given") String place,
@@ -37,5 +37,6 @@ public class PostNewSessionController {
         Session addedSession = new Session(title, description, game, place, date, time, numberOfPlayers, idOfHostAsLong, genre, isOnline);
         addedSession.addUserToSession(sessionHost);
         sessionRepository.save(addedSession);
+        return addedSession.getId();
     }
 }

@@ -73,6 +73,7 @@ jobs:
     - docker push registry.heroku.com/commonplayground/web
     - heroku container:release web -a commonplayground
   - stage: deploy-frontend
+    if: branch = master
     language: android
     android:
       components:
@@ -110,4 +111,4 @@ deploy:
   tag_name: "$APP_VERSION"
   on:
     repo: nilskre/CommonPlayground
-    branch: cd_f_v3
+    branch: master

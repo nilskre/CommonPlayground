@@ -47,7 +47,6 @@ public class SessionDetailActivity extends AppCompatActivity {
      */
     private List<Session> sessionList;
     private SessionManager credentials;
-    private Resources r;
 
 
     @Override
@@ -165,12 +164,12 @@ public class SessionDetailActivity extends AppCompatActivity {
             description.setText(args.getString(ARG_SESSION_DESCRIPTION));
             Button joinButton = rootView.findViewById(R.id.ButtonJoinSession);
             Button leaveButton = rootView.findViewById(R.id.ButtonLeaveSession);
-            setUpButtons(joinButton, leaveButton, args.getBoolean("isHost"), args.getBoolean("canLeave"), args.getString("uID"), args.getString("sID"), rootView, getActivity(), getActivity().getResources());
+            setUpButtons(joinButton, leaveButton, args.getBoolean("isHost"), args.getBoolean("canLeave"), args.getString("uID"), args.getString("sID"), rootView);
             return rootView;
         }
     }
 
-    private static void setUpButtons(Button joinButton, Button leaveButton, boolean isHost, boolean canLeave, String uID, String sID, View view, Context context, Resources r) {
+    private static void setUpButtons(Button joinButton, Button leaveButton, boolean isHost, boolean canLeave, String uID, String sID, View view) {
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("userID", uID);
         parameters.put("sessionID", sID);
@@ -178,7 +177,7 @@ public class SessionDetailActivity extends AppCompatActivity {
         leaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PostLeaveRequest request = new PostLeaveRequest(r);
+                PostLeaveRequest request = new PostLeaveRequest();
                 request.stringRequest("leaveSession", "LeaveRequest", parameters, view);
                 leaveButton.setVisibility(GONE);
                 joinButton.setVisibility(View.VISIBLE);
@@ -188,7 +187,7 @@ public class SessionDetailActivity extends AppCompatActivity {
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PostJoinRequest request = new PostJoinRequest(r);
+                PostJoinRequest request = new PostJoinRequest();
                 request.stringRequest("joinRequestForSession", "JoinRequest", parameters, view);
                 joinButton.setVisibility(GONE);
                 leaveButton.setVisibility(View.VISIBLE);

@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class PostJoinRequest extends VolleyStringTemplate {
 
-    public PostJoinRequest(Resources r) {
+    public PostJoinRequest() {
         super();
     }
 

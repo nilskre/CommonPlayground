@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class PostLeaveRequest extends VolleyStringTemplate {
 
-    public PostLeaveRequest(Resources r) {
+    public PostLeaveRequest() {
         super();
     }
 

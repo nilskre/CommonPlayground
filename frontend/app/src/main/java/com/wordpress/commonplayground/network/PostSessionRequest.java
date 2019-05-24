@@ -8,7 +8,7 @@ import com.wordpress.commonplayground.R;
 
 public class PostSessionRequest extends VolleyStringTemplate {
 
-    public PostSessionRequest(Resources r) {
+    public PostSessionRequest() {
         super();
     }
 

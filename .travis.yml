@@ -61,7 +61,7 @@ jobs:
       # Run unit tests
       - ./gradlew test 
       # Run UI tests
-      - ./gradlew build connectedCheck
+      - ./gradlew clean connectedCheck
 
 
   - stage: deploy-backend

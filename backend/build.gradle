@@ -39,8 +39,12 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
+    // Spring Boot
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile("org.springframework.boot:spring-boot-starter-web")
+    
+    // Spring Boot Test
+    implementation 'org.springframework.boot:spring-boot-starter-test:2.1.4.RELEASE'
 
     // Database
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -55,6 +59,8 @@ dependencies {
     testRuntime("org.junit.vintage:junit-vintage-engine:5.4.1")
     // Cucumber
     testCompile 'io.cucumber:cucumber-java:4.2.6'
+    implementation 'io.cucumber:cucumber-junit:4.3.1'
+    implementation 'io.cucumber:cucumber-spring:4.3.1'
 
     // rest-assured
     compile 'io.rest-assured:json-path:3.2.0'
@@ -78,6 +84,9 @@ dependencies {
 
     // codacy
     codacy 'com.github.codacy:codacy-coverage-reporter:-SNAPSHOT'
+
+    // Jacoco Agent
+    compile group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.8.3'
 }
 
 test {
@@ -95,19 +104,20 @@ configurations {
 }
 
 def jacocoAgent = zipTree(configurations.jacocoAgent.singleFile).filter { it.name == "jacocoagent.jar" }.singleFile
-
+// Task is deprecated
+// Cucumber tests are running because of RunCucumberTests class as part of gradle test task (with coverage)
 task cucumber() {
     dependsOn assemble, compileTestJava
     doLast {
         javaexec {
             main = 'cucumber.api.cli.Main'
-            jvmArgs = ["-javaagent:$jacocoAgent=destfile=$buildDir/jacoco/cucumber.exec,append=false"]
+            //jvmArgs = ["-javaagent:$jacocoAgent=destfile=$buildDir/jacoco/cucumber.exec,append=false"]
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = ['--plugin', "html:build/reports/cucumber",
-                    //'--plugin', "junit:${project.buildDir}/test-results/cucumber-report.xml",
+                    //'--plugin', "j unit:${project.buildDir}/test-results/cucumber-report.xml",
                     //'--plugin', "json:${project.buildDir}/test-results/cucumber-report.json",
-                    '--glue', 'commonplayground.controller.cucumber.api',
-                    'src/test/resources/cucumber']
+                    '--glue', 'commonplayground.controller.cucumber.api.steps'/*, 'cucumber.api.spring'*/,
+                    'src/test/resources/cucumber/api']
         }
     }
 }
@@ -129,14 +139,14 @@ jacoco {
 }
 
 jacocoTestReport() {
-    dependsOn test, cucumber
+    dependsOn test//, cucumber
 
     reports {
         xml.enabled = true
         html.enabled = true
     }
 
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*', '**/commonplayground/controller/cucumber/api/*']
     def debugTree = fileTree(dir: "$project.buildDir/classes/", excludes: fileFilter)
     def mainSrc = "$project.projectDir/src/main/java"
 

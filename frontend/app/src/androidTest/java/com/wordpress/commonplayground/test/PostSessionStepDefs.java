@@ -57,7 +57,7 @@ public class PostSessionStepDefs {
         Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         SessionManager sessionManager = new SessionManager(targetContext);
         sessionManager.logoutUser();
-        sessionManager.createLoginSession("3", "test@test.de");
+        sessionManager.createLoginSession("4", "test@test.de");
 
         Intent openAddSessionActivity = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(), MainActivity.class);
         activityTestRule.launchActivity(openAddSessionActivity);

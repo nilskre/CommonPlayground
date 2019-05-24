@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.network.PostMessagePollRequest;
 import com.wordpress.commonplayground.viewmodel.SessionManager;
 
 import java.util.HashMap;
@@ -31,7 +32,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
         setUpUIElements();
+        pollMessages();
+    }
 
+    private void pollMessages() {
+        HashMap<String, String> parameters = new HashMap<>();
+        parameters.put("userID", session.getUserDetails().get(SessionManager.KEY_ID));
+
+        PostMessagePollRequest request = new PostMessagePollRequest(this.getResources(), this);
+        request.stringRequest("hasNewMessages", "Login", getApplicationContext(), parameters, findViewById(R.id.drawer_layout));
     }
 
     private void setUpUIElements() {
@@ -71,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onRestart() {
         super.onRestart();
         session.checkLogin();
+        pollMessages();
     }
 
     @Override

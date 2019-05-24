@@ -18,7 +18,6 @@ jobs:
     language: java
     script:
     - "(cd backend/; ./gradlew assemble)"
-
   - stage: build-frontend
     language: android
     android:
@@ -27,43 +26,36 @@ jobs:
       - android-$ANDROID_API_LEVEL
     script:
     - "(cd frontend/; ./gradlew assembleDebug)"
-  
-  
   - stage: test-backend
     language: java
     script:
-      - cd backend/ 
-      # Run unit tests
-      - ./gradlew test clean
+    - cd backend/
+    - "./gradlew test clean"
   - stage: test-frontend
     language: android
     android:
       components:
-        - build-tools-$ANDROID_BUILD_TOOLS_VERSION_UI_TESTS
-        - android-$ANDROID_API_LEVEL_UI_TESTS
-        - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-        - android-$ANDROID_API_LEVEL
-        - add-on
-        - extra
-        - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL_UI_TESTS
+      - build-tools-$ANDROID_BUILD_TOOLS_VERSION_UI_TESTS
+      - android-$ANDROID_API_LEVEL_UI_TESTS
+      - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+      - android-$ANDROID_API_LEVEL
+      - add-on
+      - extra
+      - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL_UI_TESTS
     before_script:
-      # start Android Emulator
-      - cd frontend/
-      - android list targets
-      - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL_UI_TESTS --abi default/armeabi-v7a
-      - emulator -avd test -no-window &
-      - android-wait-for-emulator
-      - adb shell settings put global window_animation_scale 0 &
-      - adb shell settings put global transition_animation_scale 0 &
-      - adb shell settings put global animator_duration_scale 0 &
-      - adb shell input keyevent 82 &
+    - cd frontend/
+    - android list targets
+    - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL_UI_TESTS
+      --abi default/armeabi-v7a
+    - emulator -avd test -no-window &
+    - android-wait-for-emulator
+    - adb shell settings put global window_animation_scale 0 &
+    - adb shell settings put global transition_animation_scale 0 &
+    - adb shell settings put global animator_duration_scale 0 &
+    - adb shell input keyevent 82 &
     script:
-      # Run unit tests
-      - ./gradlew test 
-      # Run UI tests
-      - ./gradlew clean connectedCheck
-
-
+    - "./gradlew test"
+    - "./gradlew clean connectedCheck"
   - stage: deploy-backend
     if: branch = master
     language: java
@@ -80,7 +72,6 @@ jobs:
     - docker tag commonplayground/commonplayground:latest registry.heroku.com/commonplayground/web
     - docker push registry.heroku.com/commonplayground/web
     - heroku container:release web -a commonplayground
-  
   - stage: deploy-frontend
     if: branch = master
     language: android
@@ -90,34 +81,36 @@ jobs:
       - android-$ANDROID_API_LEVEL
     script:
     - cd frontend/
-    - openssl aes-256-cbc -K $encrypted_ba187bd0e4a1_key -iv $encrypted_ba187bd0e4a1_iv -in ../keystore.jks.enc -out keystore.jks -d
+    - openssl aes-256-cbc -K $encrypted_ba187bd0e4a1_key -iv $encrypted_ba187bd0e4a1_iv
+      -in ../keystore.jks.enc -out keystore.jks -d
     - "./gradlew assembleRelease"
-    #after_success: echo "Publish release build ti github releases"
     before_deploy:
-      - echo "Start Deployment"
-      - pwd
-      - ls -la
-      - export APP_VERSION=$(./gradlew :app:printVersionName)
-      - echo $APP_VERSION
+    - echo "Start Deployment"
+    - pwd
+    - ls -la
+    - export APP_VERSION=$(./gradlew :app:printVersionName)
+    - echo $APP_VERSION
     deploy:
-    - provider: releases
-      api_key: $GITHUB_TOKEN
-      file: app/build/outputs/apk/release/app-release.apk
-      file_glob: true
-      skip_cleanup: true
-      overwrite: true
-      name: "$APP_VERSION"
-      tag_name: "$APP_VERSION"
-      on:
-        repo: nilskre/CommonPlayground
-        branch: master
-
-        #CPG-215_cd_frontedn OR 
-        #tags: false
-        #after_success:
-    #  - echo "EXEC Script"
-    #  - ./set_tags.sh
-
+    provider: releases
+    api_key:
+      secure: $GITHUB_SECURE_API_KEY
+    file: frontend/app/build/outputs/apk/release/app-release.apk
+    on:
+      repo: nilskre/CommonPlayground
+      branch: cd_f_v3
+    
+    #deploy:
+    #- provider: releases
+    #  api_key: "$GITHUB_TOKEN"
+    #  file: app/build/outputs/apk/release/app-release.apk
+    #  file_glob: true
+    #  skip_cleanup: true
+    #  overwrite: true
+    #  name: "$APP_VERSION"
+    #  tag_name: "$APP_VERSION"
+    #  on:
+    #    repo: nilskre/CommonPlayground
+    #    branch: master
   - stage: send-coverage
     language: java
     script:

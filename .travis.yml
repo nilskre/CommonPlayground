@@ -105,8 +105,8 @@ deploy:
   file_glob: true
   skip_cleanup: true
   overwrite: true
-  #name: "$APP_VERSION"
-  #tag_name: "$APP_VERSION"
+  name: "$APP_VERSION"
+  tag_name: "$APP_VERSION"
   on:
     repo: nilskre/CommonPlayground
     branch: cd_f_v3

@@ -29,38 +29,39 @@ jobs:
     - "(cd frontend/; ./gradlew assembleDebug)"
   
   
-  - stage: test-backend
-    language: java
-    script:
-    - cd backend/
-    - "./gradlew test clean"
-    - "./gradlew cucumber"
-  
-  - stage: test-frontend
-    language: android
-    android:
-      components:
-      - build-tools-$ANDROID_BUILD_TOOLS_VERSION_UI_TESTS
-      - android-$ANDROID_API_LEVEL_UI_TESTS
-      - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-      - android-$ANDROID_API_LEVEL
-      - add-on
-      - extra
-      - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL_UI_TESTS
-    before_script:
-    - cd frontend/
-    - android list targets
-    - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL_UI_TESTS
-      --abi default/armeabi-v7a
-    - emulator -avd test -no-window &
-    - android-wait-for-emulator
-    - adb shell settings put global window_animation_scale 0 &
-    - adb shell settings put global transition_animation_scale 0 &
-    - adb shell settings put global animator_duration_scale 0 &
-    - adb shell input keyevent 82 &
-    script:
-    - "./gradlew test"
-    - "./gradlew build connectedCheck"
+    - stage: test-backend
+      language: java
+      script:
+        - cd backend/ 
+        # Run unit tests
+        - ./gradlew test clean
+    - stage: test-frontend
+      language: android
+      android:
+        components:
+          - build-tools-$ANDROID_BUILD_TOOLS_VERSION_UI_TESTS
+          - android-$ANDROID_API_LEVEL_UI_TESTS
+          - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+          - android-$ANDROID_API_LEVEL
+          - add-on
+          - extra
+          - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL_UI_TESTS
+      before_script:
+        # start Android Emulator
+        - cd frontend/
+        - android list targets
+        - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL_UI_TESTS --abi default/armeabi-v7a
+        - emulator -avd test -no-window &
+        - android-wait-for-emulator
+        - adb shell settings put global window_animation_scale 0 &
+        - adb shell settings put global transition_animation_scale 0 &
+        - adb shell settings put global animator_duration_scale 0 &
+        - adb shell input keyevent 82 &
+      script:
+        # Run unit tests
+        - ./gradlew test 
+        # Run UI tests
+        - ./gradlew build connectedCheck
 
   
   - stage: deploy-backend
@@ -111,7 +112,6 @@ jobs:
         #after_success:
     #  - echo "EXEC Script"
     #  - ./set_tags.sh
-
 
   - stage: send-coverage
     language: java

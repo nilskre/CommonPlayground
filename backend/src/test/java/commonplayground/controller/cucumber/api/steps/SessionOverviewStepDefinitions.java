@@ -1,4 +1,4 @@
-package commonplayground.controller.cucumber.api;
+package commonplayground.controller.cucumber.api.steps;
 
 import cucumber.api.java.en.Then;
 

@@ -10,10 +10,6 @@ import java.util.HashMap;
 
 public class PostLeaveRequest extends VolleyStringTemplate {
 
-    public PostLeaveRequest() {
-        super();
-    }
-
     @Override
     protected void handleString(String response, View view) {
         HashMap<Integer,String> snackText = new HashMap <Integer, String> (){{

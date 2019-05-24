@@ -102,8 +102,8 @@ jobs:
       file_glob: true
       skip_cleanup: true
       overwrite: true
-      name: "$APP_VERSION"
-      tag_name: "$APP_VERSION"
+      name: "$APP_VERSION_GIT_HASH"
+      tag_name: "$APP_VERSION_GIT_HASH"
       on:
         repo: nilskre/CommonPlayground
         branch: master

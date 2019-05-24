@@ -94,7 +94,8 @@ jobs:
     
 before_deploy:
   - echo "Start Frontend Deployment"
-  - export APP_VERSION=$(./gradlew :app:printVersionName)
+  - export APP_VERSION_RAW=$(./gradlew :app:printVersionName --warning-mode=none)
+  - export APP_VERSION="$(echo $APP_VERSION_RAW | sed 's/^.*[^0-9]\([0-9]*\.[0-9]*\.[0-9]*\).*$/\1/')"
   - echo $APP_VERSION
 
 deploy:

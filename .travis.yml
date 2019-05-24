@@ -93,17 +93,20 @@ jobs:
     - "./gradlew sendCoverageToCodacy"
     
 before_deploy:
-  - echo "Start Deployment"
-  - pwd
-  - ls -la
+  - echo "Start Frontend Deployment"
   - export APP_VERSION=$(./gradlew :app:printVersionName)
   - echo $APP_VERSION
 
 deploy:
   provider: releases
   api_key:
-    secure: BRN+/GjSJvwH3rn3MK8harchvtW57Qi/+bJANjP+1Qg+qS0xnxmFDYtUUU1nU3O2yXBsdJLbyIsx9MrID01L0YBT8kYw5JfuayyVlaQzqa+ibZ2WLGMcmS/sKHoGtBXCnG9/wWfqa+hXvxUBTPxo9JRU8P2dIpT49yPcJC+V7ZDMj2YiCe7odbwI/ixjUVIfsk59RcnvbhdyTSd2w0vbGwHyd4Yb6W4Hh1ICWIivWhaafp4lwPa4xObeKUyTOWP7cxEMUIwatQbEK3eX91QcrQiloMPrNem1zoL3q62KeoJMmcixSp7fixtxAY461u/ezVlAsc7tVVW79ytoGCq17fMQJf9jHDeWd8RBIEhaq2uhmI/Evy6cKYYFJyzjk5U1lyxHe05vWRF6F9ZQQvl3v8pmBkJtfVik5/AWDmUayk80VUW5K/VyUEmeMdU8R5d+rGIlju9r787SsE+rgcKYbgjSARMx39N22umEg1z7QZMsBFyoKaYtPZrLCviwExF5Bj5S+RqbjMCmMqyrnOx5vumtzKld3LYAcKDJM4SyLmqa8+KDZ4FuwCH7uv+22tSr2vypoGeE+Zug5trhrAURyHVRAnLswntQ3SDVlX4Yxf6uuGAh0ZSTJrBvKjWRkxOwf4yRq2q/Zj8qxRpRjn1qU/zPWv3TCDcn2BAzMe1KpCU=
+    secure: $GITHUB_SECURE_API_KEY
   file: app/build/outputs/apk/release/app-release.apk
+  file_glob: true
+  skip_cleanup: true
+  overwrite: true
+  name: "$APP_VERSION"
+  tag_name: "$APP_VERSION"
   on:
     repo: nilskre/CommonPlayground
     branch: cd_f_v3

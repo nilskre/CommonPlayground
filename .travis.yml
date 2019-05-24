@@ -95,7 +95,10 @@ jobs:
     #after_success: echo "Publish release build ti github releases"
     before_deploy:
       - echo "Start Deployment"
+      - pwd
+      - ls -la
       - export APP_VERSION=$(./gradlew :app:printVersionName)
+      - echo $APP_VERSION
     deploy:
     - provider: releases
       api_key: $GITHUB_TOKEN
@@ -106,6 +109,7 @@ jobs:
       name: "$APP_VERSION"
       tag_name: "$APP_VERSION"
       on:
+        repo: nilskre/CommonPlayground
         branch: master
 
         #CPG-215_cd_frontedn OR 

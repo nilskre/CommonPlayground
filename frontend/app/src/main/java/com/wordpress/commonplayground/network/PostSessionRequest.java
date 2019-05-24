@@ -10,12 +10,11 @@ public class PostSessionRequest extends VolleyStringTemplate {
 
     public PostSessionRequest(Resources r) {
         super();
-        this.r = r;
     }
 
     @Override
     protected void handleString(String response, View view) {
-        Snackbar.make(view, r.getString(R.string.new_response_fine), 5000)
+        Snackbar.make(view, view.getResources().getString(R.string.new_response_fine), 5000)
                 .setAction("Action", null).show();
     }
 }

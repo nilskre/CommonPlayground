@@ -179,7 +179,7 @@ public class SessionDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PostLeaveRequest request = new PostLeaveRequest(r);
-                request.stringRequest("leaveSession", "LeaveRequest", context, parameters, view);
+                request.stringRequest("leaveSession", "LeaveRequest", parameters, view);
                 leaveButton.setVisibility(GONE);
                 joinButton.setVisibility(View.VISIBLE);
             }
@@ -189,7 +189,7 @@ public class SessionDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PostJoinRequest request = new PostJoinRequest(r);
-                request.stringRequest("joinRequestForSession", "JoinRequest", context, parameters, view);
+                request.stringRequest("joinRequestForSession", "JoinRequest", parameters, view);
                 joinButton.setVisibility(GONE);
                 leaveButton.setVisibility(View.VISIBLE);
             }

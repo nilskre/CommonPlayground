@@ -138,8 +138,8 @@ public class LoginActivity extends AppCompatActivity {
         parameters.put("email", email);
         parameters.put("password", password);
 
-        PostLoginRequest request = new PostLoginRequest(this.getResources(), session, email, this);
-        request.stringRequest("login", "Login", getApplicationContext(), parameters, view);
+        PostLoginRequest request = new PostLoginRequest(session, email, this);
+        request.stringRequest("login", "Login", parameters, view);
     }
 
     @Override

@@ -6,9 +6,7 @@ Build: ```./gradlew build```
 
 Run: ```./gradlew bootRun```
 
-Run Unit Tests:```./gradlew test clean```
-
-Run Cucumber Api Tests:```./gradlew cucumber```
+Run Unit and Api tests:```./gradlew test clean```
 
 Install Dependencies: ```./gradlew clean```
 

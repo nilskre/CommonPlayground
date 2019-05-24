@@ -1,7 +1,5 @@
 package com.wordpress.commonplayground.network;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 import android.view.View;
 

@@ -2,7 +2,6 @@ package com.wordpress.commonplayground.network;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;

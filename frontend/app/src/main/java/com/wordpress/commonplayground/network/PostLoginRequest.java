@@ -2,7 +2,6 @@ package com.wordpress.commonplayground.network;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;

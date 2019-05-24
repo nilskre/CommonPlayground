@@ -17,6 +17,7 @@ android {
         testInstrumentationRunner 'cucumber.api.android.CucumberAndroidJUnitRunner'
     }
     signingConfigs {
+        debug
         release
     }
     // Travis build env vars

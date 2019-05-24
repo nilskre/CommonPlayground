@@ -91,7 +91,7 @@ jobs:
       - export APP_VERSION="$(echo $APP_VERSION_RAW | sed 's/^.*[^0-9]\([0-9]*\.[0-9]*\.[0-9]*\).*$/\1/')"
       - echo $APP_VERSION
       - export LATEST_GIT_COMMIT_HASH="$(git rev-parse HEAD)"
-      - export APP_VERSION_GIT_HASH="$APP_VERSION_$LATEST_GIT_COMMIT_HASH"
+      - export APP_VERSION_GIT_HASH="$APP_VERSION/$LATEST_GIT_COMMIT_HASH"
       - echo $APP_VERSION_GIT_HASH
 
     deploy:

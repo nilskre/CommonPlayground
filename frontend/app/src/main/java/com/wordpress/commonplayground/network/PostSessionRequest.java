@@ -7,10 +7,7 @@ import android.view.View;
 import com.wordpress.commonplayground.R;
 
 public class PostSessionRequest extends VolleyStringTemplate {
-
-    public PostSessionRequest(Resources r) {
-        super();
-    }
+    
 
     @Override
     protected void handleString(String response, View view) {

@@ -65,7 +65,7 @@ public class PostSessionStepDefs {
         activity = activityTestRule.getActivity();
 
         ViewInteraction floatingActionButton = onView(withId(R.id.fab));
-        floatingActionButton.perform(ViewActions.click());
+        floatingActionButton.perform(click());
     }
 
     @After("@postsession-feature")

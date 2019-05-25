@@ -126,7 +126,6 @@ public class Session implements Parcelable {
             }
 
             Session parsed = new Session(sessionObject.getString("title"), sessionObject.getString("description"), sessionObject.getString("game"), sessionObject.getString("place"), sessionObject.getString("date"), sessionObject.getString("time"), sessionObject.getInt("numberOfPlayers"), sessionObject.getLong("id"), sessionObject.getString("genre"), sessionObject.getString("isOnline"), users, idOfHost, usersPending);
-            Log.v("PARSED", "ID: " + parsed.getId() + " " + parsed.toString());
             return parsed;
 
         } catch (JSONException e) {

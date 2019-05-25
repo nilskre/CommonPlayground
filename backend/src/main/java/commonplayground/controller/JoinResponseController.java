@@ -37,10 +37,12 @@ public class JoinResponseController {
 
         if (joinAccepted) {
             removeMessageFromHostsMessages(sessionHost, relevantMessage);
+            System.out.println("Deleted Request Message for Host");
             joinPlayerToSession(sessionUserWantsToJoin, userWhoWantsToJoinSession);
             messageToUserThatJoinWasSuccessful(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
         } else if (!joinAccepted) {
             removeMessageFromHostsMessages(sessionHost, relevantMessage);
+            System.out.println("DELTE HOST MESSAGE");
             messageToUserThatJoinWasRejected(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
         }
     }
@@ -60,7 +62,6 @@ public class JoinResponseController {
     private void removeMessageFromHostsMessages(User sessionHost, Message relevantMessage) {
         messageRepository.save(relevantMessage);
         sessionHost.removeMessage(relevantMessage);
-        messageRepository.delete(relevantMessage);
     }
 
     private Long joinPlayerToSession(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession) {

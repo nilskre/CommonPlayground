@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @ToString
 @Entity
@@ -49,7 +47,7 @@ public class Session {
     )
     @Getter
     @ToString.Exclude
-    private List<User> userWantToJoin = new ArrayList<>();
+    private Set<User> userWantToJoin = new HashSet<>();
 
     public Session() {
     }
@@ -72,6 +70,8 @@ public class Session {
             return -10;
         } else if (userAlreadyJoined(user)) {
             return -11;
+        } else if (joinRequestPending(user)) {
+            return -12;
         } else {
             return 0;
         }
@@ -89,17 +89,24 @@ public class Session {
         }
     }
 
+    private boolean sessionFull() {
+        return users.size() >= numberOfPlayers;
+    }
+
     private boolean userAlreadyJoined(User user) {
         return users.contains(user);
     }
 
-    private boolean sessionFull() {
-        return users.size() >= numberOfPlayers;
+    private boolean joinRequestPending(User user) {
+        return userWantToJoin.contains(user);
     }
 
     public int removeUserFromSession(User userToLeaveSession) {
         if (userIsHost(userToLeaveSession)) {
             return -20;
+        } else if (userWantToJoin.contains(userToLeaveSession)){
+            userWantToJoin.remove(userToLeaveSession);
+            return 0;
         } else {
             this.users.remove(userToLeaveSession);
             return 0;
@@ -110,8 +117,8 @@ public class Session {
         return Objects.equals(userToLeaveSession.getId(), this.idOfHost);
     }
 
-    public void addUserWantToJoin(User user) {
-        this.userWantToJoin.add(user);
+    public boolean addUserWantToJoin(User user) {
+        return this.userWantToJoin.add(user);
     }
 
     private void removeUserWantToJoin(User user) {

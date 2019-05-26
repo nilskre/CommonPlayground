@@ -27,8 +27,6 @@ import java.util.HashMap;
 
 public class AddSessionActivity extends AppCompatActivity {
 
-    private Button btnPublish;
-    private ImageButton btnDatePicker, btnTimePicker;
     private  EditText titleView, gameView, placeView, dateView, timeView, numberOfPlayersView, descriptionView;
     private String title, game, place, date, time, numberOfPlayers, description, genre, type;
     private Spinner type_spinner, genre_spinner;
@@ -64,7 +62,7 @@ public class AddSessionActivity extends AppCompatActivity {
     }
 
     private void setOnclickListeners() {
-        btnPublish = findViewById(R.id.ButtonPublish);
+        Button btnPublish = findViewById(R.id.ButtonPublish);
         btnPublish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +70,7 @@ public class AddSessionActivity extends AppCompatActivity {
             }
          });
 
-        btnDatePicker = findViewById(R.id.btn_date);
+        ImageButton btnDatePicker = findViewById(R.id.btn_date);
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +78,7 @@ public class AddSessionActivity extends AppCompatActivity {
             }
         });
 
-        btnTimePicker = findViewById(R.id.btn_time);
+        ImageButton btnTimePicker = findViewById(R.id.btn_time);
         btnTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -206,7 +204,7 @@ public class AddSessionActivity extends AppCompatActivity {
              }
             }};
 
-        PostSessionRequest request = new PostSessionRequest(getResources());
+        PostSessionRequest request = new PostSessionRequest();
         request.stringRequest("postNewSession", "PostSession", parameters, view);
     }
 

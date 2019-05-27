@@ -39,15 +39,6 @@ public class Application {
                 log.info(session.toString());
             }
             log.info("");
-
-            // fetch an individual session by ID
-            sessionRepository.findById(1L)
-                    .ifPresent(customer -> {
-                        log.info("Customer found with findById(1L):");
-                        log.info("--------------------------------");
-                        log.info(customer.toString());
-                        log.info("");
-                    });
         };
     }
 

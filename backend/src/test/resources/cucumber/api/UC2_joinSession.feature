@@ -17,7 +17,8 @@ Feature: UC2 Join Session
     Then I have joined the session
 
   Scenario: normalUser leaves the session
-    And I login with "g@h.j""123456789" as test user type "normalUser"
+    When I register a new account "NormalUser42""123456""gg@hh.jj"
+    And I login with "gg@hh.jj""123456" as test user type "normalUser"
     And "normalUser" sends a leave request for one session
     When "normalUser" requests his messages
     Then There should be a leave message

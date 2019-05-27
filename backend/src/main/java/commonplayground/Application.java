@@ -26,11 +26,11 @@ public class Application {
     @Bean
     public CommandLineRunner demo(SessionRepository sessionRepository, UserRepository userRepository, MessageRepository messageRepository) {
         return (args) -> {
-            sessionRepository.save(testData.getTestSessions().get(0));
-            sessionRepository.save(testData.getTestSessions().get(1));
-            sessionRepository.save(testData.getTestSessions().get(2));
-            userRepository.save(testData.getTestUser());
-            messageRepository.save(testData.getTestMessage());
+            //sessionRepository.save(testData.getTestSessions().get(0));
+            //sessionRepository.save(testData.getTestSessions().get(1));
+            //sessionRepository.save(testData.getTestSessions().get(2));
+            //userRepository.save(testData.getTestUser());
+            //messageRepository.save(testData.getTestMessage());
 
             // fetch all sessions
             log.info("Customers found with findAll():");
@@ -39,15 +39,6 @@ public class Application {
                 log.info(session.toString());
             }
             log.info("");
-
-            // fetch an individual session by ID
-            sessionRepository.findById(1L)
-                    .ifPresent(customer -> {
-                        log.info("Customer found with findById(1L):");
-                        log.info("--------------------------------");
-                        log.info(customer.toString());
-                        log.info("");
-                    });
         };
     }
 

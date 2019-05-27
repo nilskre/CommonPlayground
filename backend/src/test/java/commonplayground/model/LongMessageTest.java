@@ -42,4 +42,9 @@ public class LongMessageTest {
     public void testAuthorName() {
         assertEquals(testMessage.getAuthorName(), "CommonPlayground");
     }
+
+    @Test
+    public void testToString() {
+        assertEquals(testMessage.toString(), "Message(id=null, type=JoinRequest, authorName=CommonPlayground, title=MessageTitle, description=MessageDescription, userIdWhoWantsToJoin=1, sessionIdUserWantsToJoin=2, seen=false)");
+    }
 }

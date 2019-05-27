@@ -32,4 +32,9 @@ public class ShortMessageTest {
     public void testAuthorName() {
         assertEquals(testMessage.getAuthorName(), "CommonPlayground");
     }
+
+    @Test
+    public void testToString() {
+        assertEquals(testMessage.toString(), "Message(id=null, type=Info, authorName=CommonPlayground, title=MessageTitle, description=MessageDescription, userIdWhoWantsToJoin=null, sessionIdUserWantsToJoin=null, seen=false)");
+    }
 }

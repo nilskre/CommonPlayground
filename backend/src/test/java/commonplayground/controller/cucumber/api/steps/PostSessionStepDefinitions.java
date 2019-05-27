@@ -4,11 +4,13 @@ import commonplayground.Application;
 import commonplayground.controller.cucumber.api.globaldict.GlobalSessionId;
 import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
 import commonplayground.model.Session;
+import commonplayground.model.SessionRepository;
 import commonplayground.model.TestData;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,9 +25,16 @@ public class PostSessionStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private TestData testData = new TestData();
 
+    private final SessionRepository sessionRepository;
+
+    @Autowired
+    public PostSessionStepDefinitions(SessionRepository sessionRepository) {
+        this.sessionRepository = sessionRepository;
+    }
+
     @When("I post a new Session with correct Data as test user type {string}")
     public void iPostANewSessionWithCorrectData(String testUserType) {
-        String hostID = "-20";
+        String hostID;
         if (testUserType.equals("sessionHost") && GlobalUserId.getSessionHostUserID() != null) {
             hostID = GlobalUserId.getSessionHostUserID();
         } else if (testUserType.equals("normalUser") && GlobalUserId.getSessionHostUserID() != null) {
@@ -83,7 +92,7 @@ public class PostSessionStepDefinitions {
             assertTrue(get("/getSessionList").jsonPath().getList("date").contains(testSession.getDate()));
             assertTrue(get("/getSessionList").jsonPath().getList("time").contains(testSession.getTime()));
             assertTrue(get("/getSessionList").jsonPath().getList("numberOfPlayers").contains(testSession.getNumberOfPlayers()));
-            assertTrue(get("/getSessionList").jsonPath().getList("idOfHost").contains(testSession.getIdOfHost().intValue()));
+            assertTrue(get("/getSessionList").jsonPath().getList("idOfHost").contains(sessionRepository.findAllByTitle(testSession.getTitle()).get(0).getIdOfHost().intValue()));
             assertTrue(get("/getSessionList").jsonPath().getList("genre").contains(testSession.getGenre()));
             assertTrue(get("/getSessionList").jsonPath().getList("isOnline").contains(testSession.getIsOnline()));
         }

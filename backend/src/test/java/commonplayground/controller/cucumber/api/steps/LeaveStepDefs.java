@@ -7,19 +7,18 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import static org.junit.Assert.assertEquals;
 
 public class LeaveStepDefs {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
-    private StringBuilder leaveSessionResponse;
+    private String leaveSessionResponse;
 
     @When("{string} sends a leave request for one session")
     public void iSendALeaveRequestForOneSession(String testUserType) {
@@ -31,44 +30,28 @@ public class LeaveStepDefs {
         } else {
             userID = GlobalUserId.getAnotherUserID();
         }
-        System.out.println("User ID (Leave) " + GlobalUserId.getSessionHostUserID());
-        try {
-            String body =
-                    "userID=" + URLEncoder.encode(userID, "UTF-8") + "&" +
-                            "sessionID=" + URLEncoder.encode(GlobalSessionId.getSessionID(), "UTF-8");
+        System.out.println("User ID (Leave) " + userID + " Session to leave: " + GlobalSessionId.getSessionID());
 
-            URL url = new URL("http://localhost:8080/leaveSession");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-            connection.setUseCaches(false);
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Content-Length", String.valueOf(body.length()));
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
 
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-            writer.write(body);
-            writer.flush();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("userID", userID);
+        body.add("sessionID", GlobalSessionId.getSessionID());
 
-            leaveSessionResponse = new StringBuilder();
-            for (String line; (line = reader.readLine()) != null; ) {
-                leaveSessionResponse.append(line);
-            }
-            log.info("Response of Leaving Controller: " + leaveSessionResponse);
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
 
-            writer.close();
-            reader.close();
-        } catch (Exception e) {
-            assert false;
-        }
+        leaveSessionResponse = testRestTemplate.postForObject("http://localhost:8080/leaveSession", request, String.class);
+
+        log.info("Response of Leave Session Controller: (0 if all ok) " + leaveSessionResponse);
     }
 
     @Then("The return code should be {int}")
     public void theReturnCodeShouldBe(int expectedResult) {
-        System.out.println("DAS IST erwartet" + expectedResult + " real: " + leaveSessionResponse.toString());
-        assertEquals(expectedResult, Integer.parseInt(leaveSessionResponse.toString()));
+        System.out.println("DAS IST erwartet" + expectedResult + " real: " + leaveSessionResponse);
+        assertEquals(expectedResult, Integer.parseInt(leaveSessionResponse));
     }
 
     @When("I unset global session id var")

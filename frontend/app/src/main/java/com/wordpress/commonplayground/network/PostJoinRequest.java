@@ -11,11 +11,6 @@ import java.util.HashMap;
 
 public class PostJoinRequest extends VolleyStringTemplate {
 
-    public PostJoinRequest (){
-        super();
-
-    }
-
     @Override
     protected void handleString(String response, View view) {
         Log.d("JOIN", response);

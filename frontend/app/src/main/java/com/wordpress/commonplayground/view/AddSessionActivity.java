@@ -199,7 +199,7 @@ public class AddSessionActivity extends AppCompatActivity {
              put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
              put("genre", genre);
              put("isOnline", type);
-             if ("offline".equals(type)) {
+             if ("Offline".equals(type)) {
                 put("place", place);
              }
             }};

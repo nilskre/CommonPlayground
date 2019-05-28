@@ -54,4 +54,8 @@ public class Validator {
         Matcher matcher = Pattern.compile(validPlace).matcher(place);
         return matcher.matches();
     }
+
+    public static boolean checkForAnyInput(String input) {
+        return input.trim().length() <= 0;
+    }
 }

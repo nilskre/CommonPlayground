@@ -17,7 +17,7 @@
     <string name="menu_faq">FAQ</string>
     <string name="menu_contactAdmin">Contact Admin</string>
     <string name="tooltip_tbi">Coming soon!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
     <!-- Strings related to AddSession -->
     <string name="new_title">Title</string>
     <string name="new_game">Game</string>
@@ -33,13 +33,27 @@
         <item>Online</item>
         <item>Offline</item>
     </string-array>
-    <string-array name="online_genres">
+    <string-array name="add_online_genres">
         <item>MMO RPG</item>
         <item>Shooter</item>
         <item>MOBA</item>
         <item>Strategy</item>
     </string-array>
-    <string-array name="offline_genres">
+    <string-array name="add_offline_genres">
+        <item>Board Game</item>
+        <item>Card Game</item>
+        <item>Pen and Paper</item>
+        <item>Outdoors Activity</item>
+    </string-array>
+    <string-array name="search_online_genres">
+        <item>No selection for genre</item>
+        <item>MMO RPG</item>
+        <item>Shooter</item>
+        <item>MOBA</item>
+        <item>Strategy</item>
+    </string-array>
+    <string-array name="search_offline_genres">
+        <item>No selection for genre</item>
         <item>Board Game</item>
         <item>Card Game</item>
         <item>Pen and Paper</item>
@@ -89,4 +103,8 @@
     <string name="leave_success">You are no longer part of this session.</string>
     <string name="new_message">There are new messages in your inbox.</string>
     <string name="confirm" translatable="false">OK</string>
+    <string name="title_activity_search">Search</string>
+    <string name="btn_search">Search</string>
+    <string name="title_activity_add_session">New Session</string>
+    <string name="title_activity_search_result">Search Result</string>
 </resources>

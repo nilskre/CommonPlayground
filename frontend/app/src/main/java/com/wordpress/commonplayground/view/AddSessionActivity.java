@@ -224,10 +224,10 @@ public class AddSessionActivity extends AppCompatActivity {
         int array;
         if (item==0){
            placeView.setVisibility(View.GONE);
-           array = (R.array.online_genres);
+           array = (R.array.add_online_genres);
         }else{
             placeView.setVisibility(View.VISIBLE);
-            array = (R.array.offline_genres);
+            array = (R.array.add_offline_genres);
         }
         adapter = ArrayAdapter.createFromResource(this, array, android.R.layout.simple_spinner_dropdown_item);
         genre_spinner.setAdapter(adapter);
@@ -272,7 +272,7 @@ public class AddSessionActivity extends AppCompatActivity {
             cancel = true;
         }
     }
-
+  
     private void checkForAnyInput(String input, View view) {
         if (input.trim().length() <= 0){
             EditText validate= (EditText ) view;

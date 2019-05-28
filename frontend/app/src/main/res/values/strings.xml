@@ -46,14 +46,14 @@
         <item>Outdoors Activity</item>
     </string-array>
     <string-array name="search_online_genres">
-        <item>Any</item>
+        <item>Any genre</item>
         <item>MMO RPG</item>
         <item>Shooter</item>
         <item>MOBA</item>
         <item>Strategy</item>
     </string-array>
     <string-array name="search_offline_genres">
-        <item>Any</item>
+        <item>Any genre</item>
         <item>Board Game</item>
         <item>Card Game</item>
         <item>Pen and Paper</item>

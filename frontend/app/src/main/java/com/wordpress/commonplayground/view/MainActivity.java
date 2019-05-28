@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("userID", session.getUserDetails().get(SessionManager.KEY_ID));
 
-        PostMessagePollRequest request = new PostMessagePollRequest(this.getResources(), this);
-        request.stringRequest("hasNewMessages", "Login", getApplicationContext(), parameters, findViewById(R.id.drawer_layout));
+        PostMessagePollRequest request = new PostMessagePollRequest(this);
+        request.stringRequest("hasNewMessages", "Login", parameters, findViewById(R.id.drawer_layout));
     }
 
     private void setUpUIElements() {

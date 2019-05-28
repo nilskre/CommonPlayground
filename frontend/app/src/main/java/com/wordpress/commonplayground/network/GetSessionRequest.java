@@ -16,11 +16,11 @@ public class GetSessionRequest extends VolleyJSONTemplate {
     @Override
     public void handleJSON(JSONArray response, MutableLiveData<List<?>> list) {
         List<Session> allSessionsTmpList = new ArrayList<>();
+        Log.d("Received Sessions", ""+response.length());
         for (int i = 0; i < response.length(); i++) {
             try {
                 Session session = Session.parseSession(response.getJSONObject(i));
                 allSessionsTmpList.add(i, session);
-                Log.d("Received Sessions", session.toString());
             } catch (JSONException e) {
                 Log.d("Parse.Error.Main", e.toString());
             }

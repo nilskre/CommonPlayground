@@ -65,7 +65,7 @@ public class PostSessionStepDefs {
         activity = activityTestRule.getActivity();
 
         ViewInteraction floatingActionButton = onView(withId(R.id.fab));
-        floatingActionButton.perform(ViewActions.click());
+        floatingActionButton.perform(click());
     }
 
     @After("@postsession-feature")
@@ -132,7 +132,7 @@ public class PostSessionStepDefs {
     @And("^The user picks the time ([^\"]*)$")
     public void theUserTypesTheTimeAndTheInputIsCorrect(String testTime) {
         ViewInteraction buttonTime = onView(withId(R.id.btn_time));
-        buttonTime.perform(click());
+        buttonTime.perform(scrollTo(), click());
         String [] time = testTime.split(":");
         onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(Integer.parseInt(time[0]), Integer.parseInt(time[1])));
         ViewInteraction buttonAccept = onView(withText("OK"));

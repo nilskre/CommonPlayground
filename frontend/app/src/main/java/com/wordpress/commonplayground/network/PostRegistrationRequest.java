@@ -25,7 +25,7 @@ public class PostRegistrationRequest extends VolleyStringTemplate {
         HashMap<Integer,String> snackText = new HashMap <Integer, String> (){{
             put (-3, view.getResources().getString(R.string.email_double_error));
             put (-2, view.getResources().getString(R.string.username_double_error));
-            put (0, view.getResources().getString(R.string.registration_succsess));
+            put (0, view.getResources().getString(R.string.registration_success));
         }};
         Snackbar.make(view, snackText.get(Integer.parseInt(response)), 5000).show();
 

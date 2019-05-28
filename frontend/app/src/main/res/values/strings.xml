@@ -46,14 +46,14 @@
         <item>Outdoors Activity</item>
     </string-array>
     <string-array name="search_online_genres">
-        <item>No selection for genre</item>
+        <item>Any</item>
         <item>MMO RPG</item>
         <item>Shooter</item>
         <item>MOBA</item>
         <item>Strategy</item>
     </string-array>
     <string-array name="search_offline_genres">
-        <item>No selection for genre</item>
+        <item>Any</item>
         <item>Board Game</item>
         <item>Card Game</item>
         <item>Pen and Paper</item>
@@ -65,7 +65,7 @@
     <string name="username_double_error">This username already exists.</string>
     <string name="username_error">This email does not exist.</string>
     <string name="email_double_error">This email is already registered.</string>
-    <string name="registration_succsess">Your account has been registered.</string>
+    <string name="registration_success">Your account has been registered.</string>
     <string name="login_error">Email or password wrong.</string>
     <string name="title_activity_login">Login</string>
     <string name="prompt_username">Username</string>

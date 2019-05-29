@@ -127,8 +127,9 @@
                     android:id="@+id/DateInputField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/new_date"
+                    android:clickable="false"
                     android:focusable="false"
+                    android:hint="@string/new_date"
                     android:inputType="none" />
             </android.support.design.widget.TextInputLayout>
 
@@ -157,8 +158,9 @@
                     android:id="@+id/TimeInputField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/new_time"
+                    android:clickable="false"
                     android:focusable="false"
+                    android:hint="@string/new_time"
                     android:inputType="none" />
             </android.support.design.widget.TextInputLayout>
 
@@ -210,15 +212,27 @@
             </android.support.design.widget.TextInputLayout>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
+    <LinearLayout
+        android:id="@+id/button_container_join"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+        app:layout_constraintBottom_toBottomOf="parent">
 
     <Button
         android:id="@+id/ButtonPublish"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/new_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/scrollView2" />
+        />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

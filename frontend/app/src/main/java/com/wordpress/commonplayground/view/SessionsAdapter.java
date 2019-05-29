@@ -49,7 +49,9 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
         TextView gameTextView = viewHolder.gameTextView;
         gameTextView.setText(session.getGame());
         TextView placeTextView = viewHolder.placeTextView;
+        if ("Offline".equals(session.getType())){
         placeTextView.setText(session.getPlace());
+        }
         TextView dateTextView = viewHolder.dateTextView;
         dateTextView.setText(session.getDate());
 

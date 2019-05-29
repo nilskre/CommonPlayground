@@ -82,7 +82,9 @@
             android:textColor="@color/colorSecondaryText"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_place" />
+            app:layout_constraintEnd_toStartOf="@id/session_time"
+            app:layout_constraintTop_toBottomOf="@+id/session_type"
+            />
 
         <TextView
             android:id="@+id/session_place"
@@ -132,7 +134,8 @@
             android:textColor="@color/colorSecondaryText"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_game" />
+            app:layout_constraintTop_toBottomOf="@+id/session_game"
+            app:layout_constraintBottom_toTopOf="@id/session_date"/>
 
         <LinearLayout
             android:id="@+id/button_container_join"
@@ -182,5 +185,16 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_container_join" />
+
+        <TextView
+            android:layout_width="142dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_container_join" />
+
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

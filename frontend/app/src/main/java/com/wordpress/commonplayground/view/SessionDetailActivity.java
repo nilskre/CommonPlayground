@@ -152,8 +152,10 @@ public class SessionDetailActivity extends AppCompatActivity {
             genre.setText(args.getString(ARG_SESSION_GENRE));
             TextView type = rootView.findViewById(R.id.session_type);
             type.setText(args.getString(ARG_SESSION_TYPE));
-            TextView place = rootView.findViewById(R.id.session_place);
-            place.setText(args.getString(ARG_SESSION_PLACE));
+            if ("Offline".equals(args.getString(ARG_SESSION_TYPE))) {
+                TextView place = rootView.findViewById(R.id.session_place);
+                place.setText(args.getString(ARG_SESSION_PLACE));
+            }
             TextView date = rootView.findViewById(R.id.session_date);
             date.setText(args.getString(ARG_SESSION_DATE));
             TextView time = rootView.findViewById(R.id.session_time);

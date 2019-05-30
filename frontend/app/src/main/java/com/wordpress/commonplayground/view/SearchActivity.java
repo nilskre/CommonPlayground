@@ -79,13 +79,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private void checkForValidPlace() {
         String place = placeView.getEditText().getText().toString();
-        if (checkForAnyInput(place) && !Validator.checkForValidPlace(place)) {
+        if (Validator.checkForAnyInput(place) && !Validator.checkForValidPlace(place)) {
             placeView.setError(getString(R.string.error_wrong_place));
             cancel = true;
         }
-    }
-
-    private boolean checkForAnyInput(String input) {
-        return input.trim().length() > 0;
     }
 }

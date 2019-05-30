@@ -90,7 +90,7 @@ public class AddSessionActivity extends AppCompatActivity {
     private void onPublish(View v) {
         resetErrors();
         readFields();
-        if (validInput()) {
+        if (validateInput()) {
             focusView.requestFocus();
         } else {
             sendRequestToBackend(v);
@@ -234,7 +234,7 @@ public class AddSessionActivity extends AppCompatActivity {
     }
 
 
-    private boolean validInput() {
+    private boolean validateInput() {
         checkForAnyInput(numberOfPlayers, numberOfPlayersView);
         checkForAnyInput(time, timeView);
         checkForAnyInput(date, dateView);
@@ -275,7 +275,7 @@ public class AddSessionActivity extends AppCompatActivity {
   
     private void checkForAnyInput(String input, View view) {
         if (input.trim().length() <= 0){
-            EditText validate= (EditText ) view;
+            EditText validate = (EditText) view;
             validate.setError(getString(R.string.error_field_required));
             focusView = view;
             cancel = true;

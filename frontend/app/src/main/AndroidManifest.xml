@@ -31,7 +31,7 @@
             android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".view.SendMessageActivity"
-            android:label="@string/title_activity_add_message"
+            android:label="@string/title_activity_send_message"
             android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".view.LoginActivity"

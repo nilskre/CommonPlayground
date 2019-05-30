@@ -11,8 +11,7 @@ import android.widget.EditText;
 
 public class SendMessageActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnSend;
-    String username, message;
+    private String username, message;
     private EditText usernameView, messageView;
     private boolean cancel = false;
     private View focusView = null;
@@ -22,7 +21,7 @@ public class SendMessageActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_message);
 
-        btnSend = findViewById(R.id.ButtonSend);
+        Button btnSend = findViewById(R.id.ButtonSend);
         btnSend.setOnClickListener(this);
         usernameView = findViewById(R.id.usernameInputField);
         messageView = findViewById(R.id.messageInputField);

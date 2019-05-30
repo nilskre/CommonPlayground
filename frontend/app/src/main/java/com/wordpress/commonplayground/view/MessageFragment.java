@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -45,6 +46,7 @@ public class MessageFragment extends Fragment {
         setUpSwipeToRefresh();
         rvMessage = view.findViewById(R.id.recyclerView);
         rvMessage.setLayoutManager(new LinearLayoutManager(getContext()));
+        setUpFab();
         VolleyRequestQueue.getInstance(getContext());
         messageViewModel = ViewModelProviders.of(this).get(MessageViewModel.class);
         session = new SessionManager(getContext());
@@ -83,6 +85,17 @@ public class MessageFragment extends Fragment {
         MessagesAdapter adapter = new MessagesAdapter(inbox, session, messageViewModel, rvMessage);
         rvMessage.setAdapter(adapter);
         rvMessage.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private void setUpFab() {
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openSendMessageActivity = new Intent(getContext(), SendMessageActivity.class);
+                startActivity(openSendMessageActivity);
+            }
+        });
     }
 
     @Override

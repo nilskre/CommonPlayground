@@ -65,12 +65,6 @@ public class Session {
         this.isOnline = isOnline;
     }
 
-    public static ArrayList<Session> getAllOnlineSessions() {
-    }
-
-    public static ArrayList<Session> getAllOfflineSessions() {
-    }
-
     public int joinRequestToSession(User user){
         if (sessionFull()) {
             return -10;

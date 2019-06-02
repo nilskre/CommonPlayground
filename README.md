@@ -27,4 +27,5 @@ This will download the latest Docker container from DockerHub and executes the S
 
 ### Frontend
 
-tbd
+Allow installation of apps from unknown sources. Then download our latest release and install it: [Releases](https://github.com/nilskre/CommonPlayground/releases)
+If it isn't working the first time, then install a older version first uninstall it again. Then you should be able to install the latest release.

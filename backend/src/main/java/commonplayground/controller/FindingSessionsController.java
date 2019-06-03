@@ -92,8 +92,20 @@ public class FindingSessionsController {
             }
             in.close();
             System.out.println("API ANTWORT !!!!!!!!!!!!!!!!!!!!!!!: " + content.toString());
+            System.out.println("Char AT: " + content.substring(102));
+            System.out.println("CITY: " + getCityOutOfResponse(content.toString()));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return city;
+    }
+
+    private String getCityOutOfResponse(String response){
+        String city = new String();
+        int iterationValue= 102;
+        while (response.charAt(iterationValue) != '"') {
+            city+= response.charAt(iterationValue);
+            iterationValue++;
         }
         return city;
     }

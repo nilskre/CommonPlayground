@@ -47,7 +47,7 @@ public class FindingSessionsController {
 
     private ArrayList<Session> matchOnlineSessions() {
         ArrayList<Session> onlineSessions = new ArrayList<>();
-        onlineSessions= sessionRepository.findAllByIsOnline("true");
+        onlineSessions= sessionRepository.findAllByIsOnline("online");
         onlineSessions= matchSessionsByGenre(onlineSessions);
 
         return onlineSessions;
@@ -64,8 +64,6 @@ public class FindingSessionsController {
     private ArrayList<Session> matchSessionsByPlace(ArrayList<Session> sessionsToMatch) {
         ArrayList<Session> sessionsByPlace = new ArrayList<>();
         String cityToMatch= sendRequestToPlaceAPI(place);
-        //String cityToMatch= "123";
-        //String cityOfSession= "123";
 
         for (Session session: sessionsToMatch) {
             String cityOfSession= sendRequestToPlaceAPI(session.getPlace());
@@ -91,9 +89,7 @@ public class FindingSessionsController {
             { content.append(inputLine);
             }
             in.close();
-            System.out.println("API ANTWORT !!!!!!!!!!!!!!!!!!!!!!!: " + content.toString());
-            System.out.println("Char AT: " + content.substring(102));
-            System.out.println("CITY: " + getCityOutOfResponse(content.toString()));
+            city= getCityOutOfResponse(content.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }

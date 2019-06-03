@@ -1,6 +1,5 @@
 package com.wordpress.commonplayground.view;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,10 +13,6 @@ import android.widget.Spinner;
 
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.model.Validator;
-import com.wordpress.commonplayground.network.PostSessionRequest;
-import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
-
-import java.util.HashMap;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,7 +21,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     String type, genre, place;
     private EditText placeView;
     private boolean cancel = false;
-    private MainActivityViewModel mainActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +33,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         btnSearch = findViewById(R.id.ButtonPublish);
         btnSearch.setOnClickListener(this);
-        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
         type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -74,8 +67,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 checkForValidPlace();
             }
             if(!cancel) {
-                sendRequestToBackend();
                 Intent openSearchResultActivity = new Intent(getApplicationContext(), SearchResultActivity.class);
+                openSearchResultActivity.putExtra("api", getUrl());
                 startActivity(openSearchResultActivity);
             }
         }
@@ -98,7 +91,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         return input.trim().length() > 0;
     }
 
-    private void sendRequestToBackend() {
+    private String getUrl() {
         genre = genre_spinner.getSelectedItem().toString();
         type = type_spinner.getSelectedItem().toString();
 
@@ -111,7 +104,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         if ("Offline".equals(type)) {
             url += "&place=" + place;
         }
-        mainActivityViewModel.getSessions(url);
 
+        return url;
     }
 }

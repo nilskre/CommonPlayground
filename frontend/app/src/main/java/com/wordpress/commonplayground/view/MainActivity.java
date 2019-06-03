@@ -65,16 +65,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String menuItem = user.get(SessionManager.KEY_MENU_ITEM_MAIN);
         int idMenuItem;
         MenuItem navItem;
-        if ("-1".equals(menuItem) || menuItem == null) {
+        //if ("-1".equals(menuItem) || menuItem == null) {
             navItem = navigationView.getMenu().findItem(R.id.nav_dashboard);
-            idMenuItem = -1;
+        /*    idMenuItem = -1;
         } else {
             idMenuItem = Integer.parseInt(menuItem);
             navItem = navigationView.getMenu().findItem(idMenuItem);
-        }
+        }*/
         navigationView.setNavigationItemSelectedListener(this);
         onNavigationItemSelected(navItem);
-        navigationView.setCheckedItem(idMenuItem);
+        navigationView.setCheckedItem(0);
     }
 
     @Override

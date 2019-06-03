@@ -33,45 +33,58 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/session_number_of_players"
-            android:layout_width="match_parent"
+            android:id="@+id/session_host"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/button_container_join"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_date" />
+            app:layout_constraintTop_toBottomOf="@+id/session_title" />
+
+        <ImageView
+            android:id="@+id/session_game_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/session_host"
+            android:layout_marginTop="24dp"
+            app:srcCompat="@drawable/ic_detail_game" />
 
         <TextView
             android:id="@+id/session_game"
-            android:layout_width="190dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="4dp"
             android:textColor="@color/colorSecondaryText"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_host" />
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/session_game_icon"
+            app:layout_constraintTop_toTopOf="@+id/session_game_icon" />
+
+        <ImageView
+            android:id="@+id/session_genre_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/session_game"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/session_host"
+            android:layout_marginTop="24dp"
+            app:srcCompat="@drawable/ic_detail_genre" />
 
         <TextView
             android:id="@+id/session_genre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="4dp"
             android:layout_marginEnd="16dp"
             android:textColor="@color/colorSecondaryText"
-            android:textSize="24sp"
-            android:textStyle="italic"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/session_game"
-            app:layout_constraintTop_toBottomOf="@+id/session_host" />
+            app:layout_constraintStart_toEndOf="@+id/session_genre_icon"
+            app:layout_constraintTop_toTopOf="@+id/session_genre_icon" />
 
         <TextView
             android:id="@+id/session_date"
@@ -100,18 +113,6 @@
             app:layout_constraintTop_toBottomOf="@+id/session_genre" />
 
         <TextView
-            android:id="@+id/session_host"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/session_title" />
-
-        <TextView
             android:id="@+id/session_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -136,6 +137,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/session_game"
             app:layout_constraintBottom_toTopOf="@id/session_date"/>
+
+        <TextView
+            android:id="@+id/session_number_of_players"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/button_container_join"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/session_date" />
 
         <LinearLayout
             android:id="@+id/button_container_join"

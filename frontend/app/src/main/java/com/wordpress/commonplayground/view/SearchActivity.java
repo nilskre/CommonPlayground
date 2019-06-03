@@ -68,7 +68,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
             if(!cancel) {
                 Intent openSearchResultActivity = new Intent(getApplicationContext(), SearchResultActivity.class);
-                openSearchResultActivity.putExtra("api", getUrl());
+                openSearchResultActivity.putExtra("url", getUrl());
                 startActivity(openSearchResultActivity);
             }
         }

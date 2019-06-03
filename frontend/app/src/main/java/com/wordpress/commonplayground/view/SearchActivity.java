@@ -1,7 +1,7 @@
 package com.wordpress.commonplayground.view;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,29 +9,37 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.model.Validator;
+import com.wordpress.commonplayground.network.PostSessionRequest;
+import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
+
+import java.util.HashMap;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnSearch;
-    private Spinner genre_spinner;
-    private TextInputLayout placeView;
+    private Spinner type_spinner, genre_spinner;
+    String type, genre, place;
+    private EditText placeView;
     private boolean cancel = false;
+    private MainActivityViewModel mainActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        Spinner type_spinner = findViewById(R.id.type_spinner);
+        type_spinner = findViewById(R.id.type_spinner);
         genre_spinner = findViewById(R.id.genre_spinner);
         placeView = findViewById(R.id.PlaceInput);
 
         btnSearch = findViewById(R.id.ButtonPublish);
         btnSearch.setOnClickListener(this);
+        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
         type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -66,6 +74,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 checkForValidPlace();
             }
             if(!cancel) {
+                sendRequestToBackend();
                 Intent openSearchResultActivity = new Intent(getApplicationContext(), SearchResultActivity.class);
                 startActivity(openSearchResultActivity);
             }
@@ -78,7 +87,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void checkForValidPlace() {
-        String place = placeView.getEditText().getText().toString();
+        place = placeView.getText().toString();
         if (checkForAnyInput(place) && !Validator.checkForValidPlace(place)) {
             placeView.setError(getString(R.string.error_wrong_place));
             cancel = true;
@@ -87,5 +96,22 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private boolean checkForAnyInput(String input) {
         return input.trim().length() > 0;
+    }
+
+    private void sendRequestToBackend() {
+        genre = genre_spinner.getSelectedItem().toString();
+        type = type_spinner.getSelectedItem().toString();
+
+        String api = "findSessions";
+        String url = api + "?isOnline=" + type;
+        if (genre_spinner.getSelectedItemId() != 0) {
+            url += "&genre=" + genre;
+        }
+
+        if ("Offline".equals(type)) {
+            url += "&place=" + place;
+        }
+        mainActivityViewModel.getSessions(url);
+
     }
 }

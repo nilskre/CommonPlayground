@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -23,7 +22,6 @@ public class FindingSessionsController {
     private ArrayList<Session> matchingSessions = new ArrayList<>();
     private String genre;
     private String place;
-    private String isOnline;
 
     @Autowired
     public FindingSessionsController(SessionRepository sessionRepository) {
@@ -37,11 +35,11 @@ public class FindingSessionsController {
                                              @RequestParam(value = "isOnline", defaultValue = "not given") String isOnline) {
         this.genre= genre;
         this.place= place;
-        this.isOnline= isOnline.toLowerCase();
+        String isOnline1 = isOnline.toLowerCase();
 
-        if (this.isOnline.equals("online")){
+        if (isOnline1.equals("online")){
             matchingSessions= matchOnlineSessions();
-        }else if (this.isOnline.equals("offline")){
+        }else if (isOnline1.equals("offline")){
             matchingSessions= matchOfflineSessions();
         }
         return matchingSessions;

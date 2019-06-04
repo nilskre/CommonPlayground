@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 public class FindingSessionsController {
@@ -22,6 +23,8 @@ public class FindingSessionsController {
     private ArrayList<Session> matchingSessions = new ArrayList<>();
     private String genre;
     private String place;
+    private HashMap<String, String> onlineGenres = new HashMap<>();
+    private HashMap<String, String> offlineGenres = new HashMap<>();
 
     @Autowired
     public FindingSessionsController(SessionRepository sessionRepository) {
@@ -33,20 +36,38 @@ public class FindingSessionsController {
     public ArrayList<Session> postNewSession(@RequestParam(value = "place", defaultValue = "not given") String place,
                                              @RequestParam(value = "genre", defaultValue = "not given") String genre,
                                              @RequestParam(value = "isOnline", defaultValue = "not given") String isOnline) {
-        this.genre= genre;
         this.place= place;
-        String isOnline1 = isOnline.toLowerCase();
 
-        if (isOnline1.equals("online")){
+        if ("online".equals(isOnline.toLowerCase())){
+            fillOnlineHashMaps();
+            this.genre= onlineGenres.get(genre);
             matchingSessions= matchOnlineSessions();
-        }else if (isOnline1.equals("offline")){
+        }else if ("offline".equals(isOnline.toLowerCase())){
+            fillOfflineHashMap();
+            this.genre= offlineGenres.get(genre);
             matchingSessions= matchOfflineSessions();
         }
         return matchingSessions;
     }
 
+    private void fillOnlineHashMaps() {
+        onlineGenres.put("0", "any");
+        onlineGenres.put("1", "MMO RPG");
+        onlineGenres.put("2", "Shooter");
+        onlineGenres.put("3", "MOBA");
+        onlineGenres.put("4", "Strategy");
+    }
+
+    private void fillOfflineHashMap(){
+        offlineGenres.put("0", "any");
+        offlineGenres.put("1", "Board Game");
+        offlineGenres.put("2", "Card Game");
+        offlineGenres.put("3", "Pen and Paper");
+        offlineGenres.put("4", "Outdoors Activity");
+    }
+
     private ArrayList<Session> matchOnlineSessions() {
-        ArrayList<Session> onlineSessions = new ArrayList<>();
+        ArrayList<Session> onlineSessions;
         onlineSessions= sessionRepository.findAllByIsOnline("online");
         onlineSessions= matchSessionsByGenre(onlineSessions);
 
@@ -54,7 +75,7 @@ public class FindingSessionsController {
     }
 
     private ArrayList<Session> matchOfflineSessions() {
-        ArrayList<Session> offlineSessions = new ArrayList<>();
+        ArrayList<Session> offlineSessions;
         offlineSessions= sessionRepository.findAllByIsOnline("offline");
         offlineSessions= matchSessionsByPlace(offlineSessions);
         offlineSessions= matchSessionsByGenre(offlineSessions);
@@ -108,9 +129,13 @@ public class FindingSessionsController {
 
     private ArrayList<Session> matchSessionsByGenre(ArrayList<Session> sessionsToMatch) {
         ArrayList<Session> matchingSessions = new ArrayList<>();
-        for (Session session: sessionsToMatch) {
-            if (session.getGenre().equals(genre)){
-                matchingSessions.add(session);
+        if("any".equals(genre)){
+            matchingSessions= sessionsToMatch;
+        }else {
+            for (Session session: sessionsToMatch) {
+                if (session.getGenre().equals(genre)){
+                    matchingSessions.add(session);
+                }
             }
         }
         return matchingSessions;

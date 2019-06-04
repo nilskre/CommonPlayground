@@ -11,8 +11,8 @@ import android.widget.EditText;
 
 public class SendMessageActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private String username, message;
-    private EditText usernameView, messageView;
+    private String username, title, message;
+    private EditText usernameView, titleView, messageView;
     private boolean cancel = false;
     private View focusView = null;
 
@@ -24,6 +24,7 @@ public class SendMessageActivity extends AppCompatActivity implements View.OnCli
         Button btnSend = findViewById(R.id.ButtonSend);
         btnSend.setOnClickListener(this);
         usernameView = findViewById(R.id.usernameInputField);
+        titleView = findViewById(R.id.messageTitleInputField);
         messageView = findViewById(R.id.messageInputField);
     }
 
@@ -47,6 +48,7 @@ public class SendMessageActivity extends AppCompatActivity implements View.OnCli
 
     private void readFields() {
         username =  usernameView.getText().toString();
+        title = titleView.getText().toString();
         message = messageView.getText().toString();
     }
 
@@ -58,6 +60,7 @@ public class SendMessageActivity extends AppCompatActivity implements View.OnCli
 
     private boolean validateInput() {
         checkForAnyInput(message, messageView);
+        checkForAnyInput(title, titleView);
         checkForAnyInput(username, usernameView);
         return cancel;
     }

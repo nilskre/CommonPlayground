@@ -73,6 +73,7 @@
     <string name="title_activity_search_result">Suchergebnis</string>
     <string name="title_activity_send_message">Nachricht senden</string>
     <string name="send_message_message">Nachricht</string>
-    <string name="send_message_username">Nutzer den du kontaktieren möchtest</string>
+    <string name="send_message_username">Empfänger</string>
     <string name="send_message_button">Senden</string>
+    <string name="send_message_title">Betreff</string>
 </resources>

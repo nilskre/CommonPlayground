@@ -107,7 +107,8 @@
     <string name="title_activity_add_session">New Session</string>
     <string name="title_activity_search_result">Search Result</string>
     <string name="title_activity_send_message">Send Message</string>
-    <string name="send_message_username">User you want to contact</string>
+    <string name="send_message_username">Recipient</string>
+    <string name="send_message_title">Message title</string>
     <string name="send_message_message">Message</string>
     <string name="send_message_button">Send</string>
 </resources>

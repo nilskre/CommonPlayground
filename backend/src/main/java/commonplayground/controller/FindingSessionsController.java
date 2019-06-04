@@ -35,11 +35,10 @@ public class FindingSessionsController {
                                              @RequestParam(value = "isOnline", defaultValue = "not given") String isOnline) {
         this.genre= genre;
         this.place= place;
-        String isOnline1 = isOnline.toLowerCase();
 
-        if (isOnline1.equals("online")){
+        if ("online".equals(isOnline.toLowerCase())){
             matchingSessions= matchOnlineSessions();
-        }else if (isOnline1.equals("offline")){
+        }else if ("offline".equals(isOnline.toLowerCase())){
             matchingSessions= matchOfflineSessions();
         }
         return matchingSessions;

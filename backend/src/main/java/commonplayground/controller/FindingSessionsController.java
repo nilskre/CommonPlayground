@@ -23,6 +23,7 @@ public class FindingSessionsController {
     private ArrayList<Session> matchingSessions = new ArrayList<>();
     private String genre;
     private String place;
+    private String isOnline;
 
     @Autowired
     public FindingSessionsController(SessionRepository sessionRepository) {
@@ -36,10 +37,11 @@ public class FindingSessionsController {
                                              @RequestParam(value = "isOnline", defaultValue = "not given") String isOnline) {
         this.genre= genre;
         this.place= place;
+        this.isOnline= isOnline.toLowerCase();
 
-        if (isOnline.equals("online")){
+        if (this.isOnline.equals("online")){
             matchingSessions= matchOnlineSessions();
-        }else if (isOnline.equals("offline")){
+        }else if (this.isOnline.equals("offline")){
             matchingSessions= matchOfflineSessions();
         }
         return matchingSessions;

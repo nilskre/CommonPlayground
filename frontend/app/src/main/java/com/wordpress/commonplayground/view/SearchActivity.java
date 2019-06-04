@@ -1,6 +1,7 @@
 package com.wordpress.commonplayground.view;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.wordpress.commonplayground.R;
@@ -18,8 +18,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private Button btnSearch;
     private Spinner type_spinner, genre_spinner;
-    String type, genre, place;
-    private EditText placeView;
+    private String type, place;
+    private TextInputEditText placeView;
     private boolean cancel = false;
 
     @Override
@@ -29,7 +29,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         type_spinner = findViewById(R.id.type_spinner);
         genre_spinner = findViewById(R.id.genre_spinner);
-        placeView = findViewById(R.id.PlaceInput);
+        placeView = findViewById(R.id.PlaceInputField);
 
         btnSearch = findViewById(R.id.ButtonPublish);
         btnSearch.setOnClickListener(this);
@@ -81,7 +81,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private void checkForValidPlace() {
         place = placeView.getText().toString();
-        if (checkForAnyInput(place) && !Validator.checkForValidPlace(place)) {
+        if(!checkForAnyInput(place)) {
+            placeView.setError(getString(R.string.error_field_required));
+            cancel = true;
+        } else if (!Validator.checkForValidPlace(place)) {
             placeView.setError(getString(R.string.error_wrong_place));
             cancel = true;
         }
@@ -92,14 +95,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private String getUrl() {
-        genre = genre_spinner.getSelectedItem().toString();
         type = type_spinner.getSelectedItem().toString();
 
         String api = "findSessions";
-        String url = api + "?isOnline=" + type;
-        if (genre_spinner.getSelectedItemId() != 0) {
-            url += "&genre=" + genre;
-        }
+        String url = api + "?isOnline=" + type + "&genre=" + genre_spinner.getSelectedItemId();
 
         if ("Offline".equals(type)) {
             url += "&place=" + place;

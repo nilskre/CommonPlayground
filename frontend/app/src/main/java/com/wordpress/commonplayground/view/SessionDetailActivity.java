@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -141,9 +142,15 @@ public class SessionDetailActivity extends AppCompatActivity {
             genre.setText(args.getString(ARG_SESSION_GENRE));
             TextView type = rootView.findViewById(R.id.session_type);
             type.setText(args.getString(ARG_SESSION_TYPE));
+            TextView place = rootView.findViewById(R.id.session_place);
             if ("Offline".equals(args.getString(ARG_SESSION_TYPE))) {
-                TextView place = rootView.findViewById(R.id.session_place);
                 place.setText(args.getString(ARG_SESSION_PLACE));
+                ImageView typeIcon = rootView.findViewById(R.id.session_type_icon);
+                typeIcon.setBackgroundResource(R.drawable.ic_detail_offline);
+            } else {
+                ImageView placeIcon = rootView.findViewById(R.id.session_place_icon);
+                placeIcon.setVisibility(View.INVISIBLE);
+                place.setVisibility(View.INVISIBLE);
             }
             TextView date = rootView.findViewById(R.id.session_date);
             date.setText(args.getString(ARG_SESSION_DATE));

@@ -84,7 +84,6 @@
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_registration">Register</string>
     <string name="title_activity_session_detail" translatable="false">Session Detail</string>
-    <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_my_sessions">My Sessions</string>
     <string name="tab_text_1">Hosted</string>
     <string name="tab_text_2">Joined</string>
@@ -108,4 +107,9 @@
     <string name="title_activity_add_session">New Session</string>
     <string name="title_activity_search_result">Search Result</string>
     <string name="participants">Participants:&#160;</string>
+    <string name="title_activity_send_message">Send Message</string>
+    <string name="send_message_username">Recipient</string>
+    <string name="send_message_title">Message title</string>
+    <string name="send_message_message">Message</string>
+    <string name="send_message_button">Send</string>
 </resources>

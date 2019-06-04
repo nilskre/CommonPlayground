@@ -55,6 +55,9 @@
 
     <Button
         android:id="@+id/ButtonPublish"
+        style="?android:attr/buttonStyleSmall"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"

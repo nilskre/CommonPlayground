@@ -14,8 +14,6 @@ public class SendCommentController {
 
     private UserRepository userRepository;
     private MessageRepository messageRepository;
-    private Message message;
-    private User receiver;
     private int status;
 
     @Autowired
@@ -30,8 +28,8 @@ public class SendCommentController {
                                @RequestParam(value = "messageTitle", defaultValue = "not given") String messageTitle,
                                @RequestParam(value = "messageContent", defaultValue = "not given")String messageContent){
 
-        message = new Message(messageTitle, messageContent, userID);
-        receiver= userRepository.findByUsername(receiverName);
+        Message message = new Message(messageTitle, messageContent, userID);
+        User receiver = userRepository.findByUsername(receiverName);
 
         if(receiver != null){
             status= 200;

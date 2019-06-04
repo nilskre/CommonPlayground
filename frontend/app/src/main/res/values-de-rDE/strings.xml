@@ -47,7 +47,6 @@
     <string name="error_field_required">Dies ist ein Pflichtfeld</string>
     <string name="title_activity_registration">Registrierung</string>
     <string name="app_name">CommonPlayground</string>
-    <string name="section_format">Hallo Welt für Sektion: %1$d</string>
     <string name="tab_text_1">Gastgeber</string>
     <string name="tab_text_2">Teilnehmer</string>
     <string name="title_activity_my_sessions">Meine Sessions</string>
@@ -72,4 +71,9 @@
     <string name="title_activity_add_session">Session erstellen</string>
     <string name="btn_search">Suchen</string>
     <string name="title_activity_search_result">Suchergebnis</string>
+    <string name="title_activity_send_message">Nachricht senden</string>
+    <string name="send_message_message">Nachricht</string>
+    <string name="send_message_username">Empfänger</string>
+    <string name="send_message_button">Senden</string>
+    <string name="send_message_title">Betreff</string>
 </resources>

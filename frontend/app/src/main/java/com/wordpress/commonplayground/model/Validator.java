@@ -56,6 +56,6 @@ public class Validator {
     }
 
     public static boolean checkForAnyInput(String input) {
-        return input.trim().length() <= 0;
+        return input.trim().length() > 0;
     }
 }

@@ -11,6 +11,7 @@
 - [Overall Description](#2-overall-description)
     - [Vision](#21-vision)
     - [Use Case Diagram](#22-use-case-diagram)
+	- [Technology Stack](#23-technology-stack)
 - [Specific Requirements](#3-specific-requirements)
     - [Functionality](#31-functionality)
     - [Usability](#32-usability)
@@ -84,7 +85,7 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 - Green: Planned till end of december
 - Yellow: Planned till end of june
 
-### 2.2 Technology Stack
+### 2.3 Technology Stack
 The technology we use is:
 
 Backend:
@@ -111,6 +112,7 @@ Testing:
 -Espresso
 -JUnit
 -Codacy
+-CodeMR
 -RestAssured
 
 ## 3. Specific Requirements

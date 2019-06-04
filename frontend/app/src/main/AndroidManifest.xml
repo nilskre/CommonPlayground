@@ -27,7 +27,11 @@
         </activity>
         <activity
             android:name=".view.AddSessionActivity"
-            android:label="New Session"
+            android:label="@string/title_activity_add_session"
+            android:parentActivityName=".view.MainActivity" />
+        <activity
+            android:name=".view.SendMessageActivity"
+            android:label="@string/title_activity_send_message"
             android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".view.LoginActivity"
@@ -55,6 +59,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wordpress.commonplayground.view.MainActivity" />
         </activity>
+        <activity
+            android:name=".view.SearchResultActivity"
+            android:label="@string/title_activity_search_result"
+            android:parentActivityName=".view.SearchActivity" />
+        <activity
+            android:name=".view.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:parentActivityName=".view.MainActivity" />
     </application>
 
 </manifest>

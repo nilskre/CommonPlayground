@@ -90,7 +90,7 @@ public class AddSessionActivity extends AppCompatActivity {
     private void onPublish(View v) {
         resetErrors();
         readFields();
-        if (validInput()) {
+        if (validateInput()) {
             focusView.requestFocus();
         } else {
             sendRequestToBackend(v);
@@ -199,7 +199,7 @@ public class AddSessionActivity extends AppCompatActivity {
              put("idOfHost", session.getUserDetails().get(SessionManager.KEY_ID));
              put("genre", genre);
              put("isOnline", type);
-             if ("offline".equals(type)) {
+             if ("Offline".equals(type)) {
                 put("place", place);
              }
             }};
@@ -224,17 +224,17 @@ public class AddSessionActivity extends AppCompatActivity {
         int array;
         if (item==0){
            placeView.setVisibility(View.GONE);
-           array = (R.array.online_genres);
+           array = (R.array.add_online_genres);
         }else{
             placeView.setVisibility(View.VISIBLE);
-            array = (R.array.offline_genres);
+            array = (R.array.add_offline_genres);
         }
         adapter = ArrayAdapter.createFromResource(this, array, android.R.layout.simple_spinner_dropdown_item);
         genre_spinner.setAdapter(adapter);
     }
 
 
-    private boolean validInput() {
+    private boolean validateInput() {
         checkForAnyInput(numberOfPlayers, numberOfPlayersView);
         checkForAnyInput(time, timeView);
         checkForAnyInput(date, dateView);
@@ -272,10 +272,10 @@ public class AddSessionActivity extends AppCompatActivity {
             cancel = true;
         }
     }
-
+  
     private void checkForAnyInput(String input, View view) {
         if (input.trim().length() <= 0){
-            EditText validate= (EditText ) view;
+            EditText validate = (EditText) view;
             validate.setError(getString(R.string.error_field_required));
             focusView = view;
             cancel = true;

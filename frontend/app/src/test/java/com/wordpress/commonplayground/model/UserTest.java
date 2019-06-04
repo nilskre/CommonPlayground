@@ -3,7 +3,7 @@ package com.wordpress.commonplayground.model;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserTest {
     private static User testUser;

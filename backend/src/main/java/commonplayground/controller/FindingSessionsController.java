@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -36,10 +35,11 @@ public class FindingSessionsController {
                                              @RequestParam(value = "isOnline", defaultValue = "not given") String isOnline) {
         this.genre= genre;
         this.place= place;
+        String isOnline1 = isOnline.toLowerCase();
 
-        if (isOnline.equals("online")){
+        if (isOnline1.equals("online")){
             matchingSessions= matchOnlineSessions();
-        }else if (isOnline.equals("offline")){
+        }else if (isOnline1.equals("offline")){
             matchingSessions= matchOfflineSessions();
         }
         return matchingSessions;

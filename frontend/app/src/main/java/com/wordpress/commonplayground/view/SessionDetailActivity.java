@@ -1,7 +1,5 @@
 package com.wordpress.commonplayground.view;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -17,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wordpress.commonplayground.R;
 import com.wordpress.commonplayground.model.Session;
@@ -33,18 +32,6 @@ import static android.view.View.GONE;
 
 public class SessionDetailActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private List<Session> sessionList;
     private SessionManager credentials;
 
@@ -99,6 +86,7 @@ public class SessionDetailActivity extends AppCompatActivity {
         private static final String ARG_SESSION_TIME = "time";
         private static final String ARG_SESSION_NUMBER_OF_PLAYERS = "numberOfPlayers";
         private static final String ARG_SESSION_DESCRIPTION = "description";
+        private static final String ARG_SESSION_PARTICIPANTS = "participants";
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -128,6 +116,7 @@ public class SessionDetailActivity extends AppCompatActivity {
             args.putString(ARG_SESSION_TIME, session.getTime());
             args.putString(ARG_SESSION_NUMBER_OF_PLAYERS, users.size() + "/" + session.getNumberOfPlayers() + " players");
             args.putString(ARG_SESSION_DESCRIPTION, session.getDescription());
+            args.putString(ARG_SESSION_PARTICIPANTS, session.getParticipants());
 
             boolean canLeave = (isPending(uID, session) || hasJoined(uID, session));
             boolean isHost = isHost(uID, session);
@@ -162,6 +151,12 @@ public class SessionDetailActivity extends AppCompatActivity {
             time.setText(args.getString(ARG_SESSION_TIME));
             TextView numberOfPlayers = rootView.findViewById(R.id.session_number_of_players);
             numberOfPlayers.setText(args.getString(ARG_SESSION_NUMBER_OF_PLAYERS));
+            numberOfPlayers.setOnLongClickListener(new View.OnLongClickListener() {
+                public boolean onLongClick(View v) {
+                    Toast.makeText(v.getContext(), getResources().getString(R.string.participants) + args.getString(ARG_SESSION_PARTICIPANTS), Toast.LENGTH_LONG).show();
+                    return true;
+                }
+            });
             TextView description = rootView.findViewById(R.id.session_description);
             description.setText(args.getString(ARG_SESSION_DESCRIPTION));
             Button joinButton = rootView.findViewById(R.id.ButtonJoinSession);

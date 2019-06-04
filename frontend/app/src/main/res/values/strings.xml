@@ -107,4 +107,5 @@
     <string name="btn_search">Search</string>
     <string name="title_activity_add_session">New Session</string>
     <string name="title_activity_search_result">Search Result</string>
+    <string name="participants">Participants:&#160;</string>
 </resources>

@@ -72,4 +72,5 @@
     <string name="title_activity_add_session">Session erstellen</string>
     <string name="btn_search">Suchen</string>
     <string name="title_activity_search_result">Suchergebnis</string>
+    <string name="participants">"Teilnehmer: "</string>
 </resources>

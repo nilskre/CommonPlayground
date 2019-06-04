@@ -106,6 +106,7 @@
     <string name="btn_search">Search</string>
     <string name="title_activity_add_session">New Session</string>
     <string name="title_activity_search_result">Search Result</string>
+    <string name="participants">Participants:&#160;</string>
     <string name="title_activity_send_message">Send Message</string>
     <string name="send_message_username">Recipient</string>
     <string name="send_message_title">Message title</string>

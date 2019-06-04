@@ -71,6 +71,7 @@
     <string name="title_activity_add_session">Session erstellen</string>
     <string name="btn_search">Suchen</string>
     <string name="title_activity_search_result">Suchergebnis</string>
+    <string name="participants">"Teilnehmer:&#160;"</string>
     <string name="title_activity_send_message">Nachricht senden</string>
     <string name="send_message_message">Nachricht</string>
     <string name="send_message_username">Empfänger</string>

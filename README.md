@@ -22,7 +22,7 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 
 ### Backend
 
-- requirements: [![Docker](https://docs.docker.com/install/)](https://www.codacy.com/app/CommonPlayground/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Coverage)]  
+- requirements: [Docker](https://docs.docker.com/install/)](https://www.codacy.com/app/CommonPlayground/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Coverage)  
 - Execute: ```docker run -p 8080:8080 commonplayground/commonplayground```  
 This will download the latest Docker container from DockerHub and executes the Spring Boot backend on ```http://localhost:8080```
 

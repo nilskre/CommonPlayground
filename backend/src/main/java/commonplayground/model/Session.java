@@ -106,7 +106,7 @@ public class Session {
             return -20;
         } else if (userWantToJoin.contains(userToLeaveSession)) {
             userWantToJoin.remove(userToLeaveSession);
-            return 0;
+            return 1;
         } else {
             this.users.remove(userToLeaveSession);
             return 0;

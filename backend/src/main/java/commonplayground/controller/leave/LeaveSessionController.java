@@ -39,43 +39,17 @@ public class LeaveSessionController {
             sessionRepository.save(sessionUserWantsToLeave);
             Message hostMessage = new Message("Join request for " + sessionUserWantsToLeave.getTitle(), userToLeaveSession.getUsername() + " wants to join this session", userToLeaveSession.getId(), sessionIDAsLong, userToLeaveSession.getUsername());
             if (tryToLeaveResultCode == 1) {
-                //for (Message message:sessionHost.getMessages()) {
-                //    System.out.println("\n");
-                //    System.out.println("Messages " + message.getDescription());
-                //    System.out.println("Messages origin " + hostMessage.getDescription());
-                //    System.out.println("Condition " + message.getDescription().equals(hostMessage.getDescription()));
-                //    if (message.getDescription().equals(hostMessage.getDescription())){
-                //        sessionHost.removeMessage(message);
-                //        //messageRepository.delete(message);
-                //        //messageRepository.deleteById(message.getId());
-                //        System.out.println("Message deleted");
-                //    }
-                //}
-
-                //messageRepository.delete(hostMessage);
-
-                //messageRepository.delete(messageRepository.findAllByDescription(hostMessage.getDescription()));
-                //messageHostAboutLeave(sessionUserWantsToLeave, userToLeaveSession, sessionHost);
                 messageLeavingUser(sessionUserWantsToLeave, userToLeaveSession);
                 for (int i = 0; i < sessionHost.getMessages().size(); i++) {
-                    System.out.println("\n");
-                    System.out.println("Messages " + sessionHost.getMessages().get(i).getDescription());
-                    System.out.println("Messages origin " + hostMessage.getDescription());
-                    System.out.println("Condition " + sessionHost.getMessages().get(i).getDescription().equals(hostMessage.getDescription()));
                     if (sessionHost.getMessages().get(i).getDescription().equals(hostMessage.getDescription())){
-                        System.out.println("\n Session Host Messages in for before del" + sessionHost.getMessages());
                         Message toBeDeleted = sessionHost.getMessages().get(i);
                         sessionHost.getMessages().remove(i);
                         messageRepository.delete(toBeDeleted);
-                        //sessionHost.removeMessage(sessionHost.getMessages().get(i));
-                        System.out.println("\n Session Host Messages in for after del " + sessionHost.getMessages());
-                        System.out.println("Message deleted");
+                        log.info("Hosts Join Request messages deleted");
                         i--;
                     }
                 }
             }
-            System.out.println("\n Between messages " + sessionHost.getMessages());
-            System.out.println("All messages " + messageRepository.findAll());
             if (tryToLeaveResultCode == 0) {
                 messageHostAboutLeave(sessionUserWantsToLeave, userToLeaveSession, sessionHost);
                 messageLeavingUser(sessionUserWantsToLeave, userToLeaveSession);

@@ -50,6 +50,5 @@ public class User {
 
     public void removeMessage(Message message) {
         this.messages.remove(message);
-        System.out.println("Messages in modelclass " + messages);
     }
 }

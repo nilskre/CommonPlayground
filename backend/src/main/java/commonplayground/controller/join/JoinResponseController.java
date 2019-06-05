@@ -28,7 +28,7 @@ public class JoinResponseController {
     public void joinRequestForSession(@RequestParam(value = "userID", defaultValue = "not given") String userID,
                                       @RequestParam(value = "messageID", defaultValue = "not given") String messageID,
                                       @RequestParam(value = "userIDToJoin", defaultValue = "not given") String userIDToJoin,
-                                      @RequestParam(value = "joinAccepted", defaultValue = "false") boolean joinAccepted) throws Exception {
+                                      @RequestParam(value = "joinAccepted", defaultValue = "false") boolean joinAccepted) throws CorruptFrontendException {
         Long userIDAsLong = Long.parseLong(userID);
         if (userRepository.findAllById(userIDAsLong) != null) {
             User sessionHost = userRepository.findAllById(userIDAsLong);
@@ -53,7 +53,7 @@ public class JoinResponseController {
             }
         } else {
             log.info("Corrupt Frontend tried to access Backend");
-            throw new Exception("");
+            throw new CorruptFrontendException();
         }
 
     }

@@ -1,10 +1,7 @@
 package commonplayground.controller.session;
 
 import commonplayground.Application;
-import commonplayground.model.Session;
-import commonplayground.model.SessionRepository;
-import commonplayground.model.User;
-import commonplayground.model.UserRepository;
+import commonplayground.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +32,7 @@ public class PostNewSessionController {
                                @RequestParam(value = "numberOfPlayers", defaultValue = "1") int numberOfPlayers,
                                @RequestParam(value = "idOfHost", defaultValue = "-1") String idOfHost,
                                @RequestParam(value = "genre", defaultValue = "not given")String genre,
-                               @RequestParam(value= "isOnline", defaultValue = "not given")String isOnline) throws Exception {
+                               @RequestParam(value= "isOnline", defaultValue = "not given")String isOnline) throws CorruptFrontendException {
         Long idOfHostAsLong = Long.parseLong(idOfHost);
         if (userRepository.findAllById(idOfHostAsLong) != null) {
             User sessionHost = userRepository.findAllById(idOfHostAsLong);
@@ -45,7 +42,7 @@ public class PostNewSessionController {
             return addedSession.getId();
         } else {
             log.info("Corrupt Frontend tried to access Backend");
-            throw new Exception("");
+            throw new CorruptFrontendException();
         }
     }
 }

@@ -1,6 +1,7 @@
 package commonplayground.controller.keeptrack;
 
 import commonplayground.Application;
+import commonplayground.model.CorruptFrontendException;
 import commonplayground.model.Session;
 import commonplayground.model.SessionRepository;
 import commonplayground.model.UserRepository;
@@ -27,13 +28,13 @@ public class MyHostedSessionsController {
     }
 
     @RequestMapping("/getMyHostedSessions")
-    public ArrayList<Session> getMyHostedSessions(@RequestParam(value = "userID", defaultValue = "not given") String userID) throws Exception {
+    public ArrayList<Session> getMyHostedSessions(@RequestParam(value = "userID", defaultValue = "not given") String userID) throws CorruptFrontendException {
         Long userIDAsLong = Long.parseLong(userID);
         if (userRepository.findAllById(userIDAsLong) != null) {
             return sessionRepository.findAllByIdOfHost(userIDAsLong);
         } else {
             log.info("Corrupt Frontend tried to access Backend");
-            throw new Exception("");
+            throw new CorruptFrontendException();
         }
     }
 }

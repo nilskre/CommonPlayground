@@ -1,10 +1,7 @@
 package commonplayground.controller.messages;
 
 import commonplayground.Application;
-import commonplayground.model.Message;
-import commonplayground.model.MessageRepository;
-import commonplayground.model.User;
-import commonplayground.model.UserRepository;
+import commonplayground.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +27,7 @@ public class SendCommentController {
     public int sendComment(@RequestParam(value = "userID", defaultValue = "not given") String userID,
                            @RequestParam(value = "receiverName", defaultValue = "not given") String receiverName,
                            @RequestParam(value = "messageTitle", defaultValue = "not given") String messageTitle,
-                           @RequestParam(value = "messageContent", defaultValue = "not given") String messageContent) throws Exception {
+                           @RequestParam(value = "messageContent", defaultValue = "not given") String messageContent) throws CorruptFrontendException {
         Long userIDAsLong = Long.parseLong(userID);
         if (userRepository.findAllById(userIDAsLong) != null) {
             Message message = new Message(messageTitle, messageContent, userID);
@@ -46,7 +43,7 @@ public class SendCommentController {
             return status;
         } else {
             log.info("Corrupt Frontend tried to access Backend");
-            throw new Exception("");
+            throw new CorruptFrontendException();
         }
     }
 }

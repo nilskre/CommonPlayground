@@ -26,7 +26,7 @@ public class LeaveSessionController {
 
     @RequestMapping("/leaveSession")
     public Long leaveSession(@RequestParam(value = "userID", defaultValue = "not given") String userID,
-                               @RequestParam(value = "sessionID", defaultValue = "not given") String sessionID) throws Exception {
+                               @RequestParam(value = "sessionID", defaultValue = "not given") String sessionID) throws CorruptFrontendException {
         Long userIDAsLong = Long.parseLong(userID);
         if (userRepository.findAllById(userIDAsLong) != null) {
             Long sessionIDAsLong = Long.parseLong(sessionID);
@@ -57,7 +57,7 @@ public class LeaveSessionController {
             return (long) tryToLeaveResultCode;
         } else {
             log.info("Corrupt Frontend tried to access Backend");
-            throw new Exception("");
+            throw new CorruptFrontendException();
         }
 
     }

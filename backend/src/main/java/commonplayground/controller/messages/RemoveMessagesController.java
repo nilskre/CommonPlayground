@@ -1,10 +1,7 @@
 package commonplayground.controller.messages;
 
 import commonplayground.Application;
-import commonplayground.model.Message;
-import commonplayground.model.MessageRepository;
-import commonplayground.model.User;
-import commonplayground.model.UserRepository;
+import commonplayground.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +24,7 @@ public class RemoveMessagesController {
 
     @RequestMapping("/removeMessage")
     public void removeMessage(@RequestParam(value = "userID", defaultValue = "not given") String userID,
-                              @RequestParam(value = "messageID", defaultValue = "not given") String messageID) throws Exception {
+                              @RequestParam(value = "messageID", defaultValue = "not given") String messageID) throws CorruptFrontendException {
         Long userIDAsLong = Long.parseLong(userID);
         if (userRepository.findAllById(userIDAsLong) != null) {
             User user = userRepository.findAllById(userIDAsLong);
@@ -47,7 +44,7 @@ public class RemoveMessagesController {
             }
         } else {
             log.info("Corrupt Frontend tried to access Backend");
-            throw new Exception("");
+            throw new CorruptFrontendException();
         }
     }
 }

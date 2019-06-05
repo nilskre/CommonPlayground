@@ -1,6 +1,7 @@
 package commonplayground.controller.messages;
 
 import commonplayground.Application;
+import commonplayground.model.CorruptFrontendException;
 import commonplayground.model.Message;
 import commonplayground.model.User;
 import commonplayground.model.UserRepository;
@@ -23,7 +24,7 @@ public class HasNewMessagesController {
     }
 
     @RequestMapping("/hasNewMessages")
-    public boolean getMyMessages(@RequestParam(value = "userID", defaultValue = "not given") String userID) throws Exception {
+    public boolean getMyMessages(@RequestParam(value = "userID", defaultValue = "not given") String userID) throws CorruptFrontendException {
         Long userIDAsLong = Long.parseLong(userID);
         if (userRepository.findAllById(userIDAsLong) != null) {
             User userWhoWantsToMessageStatus = userRepository.findAllById(userIDAsLong);
@@ -40,7 +41,7 @@ public class HasNewMessagesController {
             return hasNewMessages;
         } else {
             log.info("Corrupt Frontend tried to access Backend");
-            throw new Exception("");
+            throw new CorruptFrontendException();
         }
     }
 }

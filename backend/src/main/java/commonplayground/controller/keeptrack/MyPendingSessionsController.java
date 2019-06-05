@@ -1,10 +1,7 @@
 package commonplayground.controller.keeptrack;
 
 import commonplayground.Application;
-import commonplayground.model.Session;
-import commonplayground.model.SessionRepository;
-import commonplayground.model.User;
-import commonplayground.model.UserRepository;
+import commonplayground.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +25,7 @@ public class MyPendingSessionsController {
     }
 
     @RequestMapping("/getMyPendingSessions")
-    public ArrayList<Session> getMySessions(@RequestParam(value = "userID", defaultValue = "not given") String userID) throws Exception {
+    public ArrayList<Session> getMySessions(@RequestParam(value = "userID", defaultValue = "not given") String userID) throws CorruptFrontendException {
         Long userIDAsLong = Long.parseLong(userID);
         if (userRepository.findAllById(userIDAsLong) != null) {
             User relevantUser = userRepository.findAllById(userIDAsLong);
@@ -36,7 +33,7 @@ public class MyPendingSessionsController {
             return sessionRepository.findAllByUserWantToJoin(relevantUser);
         } else {
             log.info("Corrupt Frontend tried to access Backend");
-            throw new Exception("");
+            throw new CorruptFrontendException();
         }
     }
 }

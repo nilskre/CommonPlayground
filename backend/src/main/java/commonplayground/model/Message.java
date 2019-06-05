@@ -1,6 +1,7 @@
 package commonplayground.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@NoArgsConstructor
 @ToString
 public class Message {
 
@@ -30,9 +32,6 @@ public class Message {
     private Long sessionIdUserWantsToJoin;
     @Getter
     private boolean seen;
-
-    public Message() {
-    }
 
     public Message(String title, String description, Long userIDWHoWantsToJoin, Long sessionIdUserWantsToJoin, String authorName) {
         this.type = "JoinRequest";

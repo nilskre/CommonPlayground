@@ -1,13 +1,16 @@
 package commonplayground.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.*;
 
-@ToString
+
 @Entity
+@NoArgsConstructor
+@ToString
 public class Session {
 
     @Id
@@ -49,9 +52,6 @@ public class Session {
     @ToString.Exclude
     private Set<User> userWantToJoin = new HashSet<>();
 
-    public Session() {
-    }
-
     public Session(String title, String description, String game, String place, String date, String time, int numberOfPlayers, Long idOfHost, String genre, String isOnline) {
         this.title = title;
         this.description = description;
@@ -65,7 +65,7 @@ public class Session {
         this.isOnline = isOnline;
     }
 
-    public int joinRequestToSession(User user){
+    public int joinRequestToSession(User user) {
         if (sessionFull()) {
             return -10;
         } else if (userAlreadyJoined(user)) {
@@ -104,7 +104,7 @@ public class Session {
     public int removeUserFromSession(User userToLeaveSession) {
         if (userIsHost(userToLeaveSession)) {
             return -20;
-        } else if (userWantToJoin.contains(userToLeaveSession)){
+        } else if (userWantToJoin.contains(userToLeaveSession)) {
             userWantToJoin.remove(userToLeaveSession);
             return 0;
         } else {

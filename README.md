@@ -22,13 +22,14 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 
 ### Backend
 
-- requirements: [Docker](https://docs.docker.com/install/)  
-- Execute: ```docker run -p 8080:8080 commonplayground/commonplayground```  
-This will download the latest Docker container from DockerHub and executes the Spring Boot backend on ```http://localhost:8080```
+- requirements: [Docker](https://docs.docker.com/install/)
+
+- Execute: ```docker run -p 8080:8080 commonplayground/commonplayground``` This will download the latest Docker container from DockerHub and executes the Spring Boot backend on ```http://localhost:8080```
 
 ### Frontend
 
-- Allow installation of apps from unknown sources.  
+- Allow installation of apps from unknown sources.
+
 - Then download our latest release and install it: [Releases](https://github.com/nilskre/CommonPlayground/releases)
 
 If it isn't working the first time, then install a older version first, and uninstall it again. Then you should be able to install the latest release.

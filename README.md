@@ -16,13 +16,13 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 | Build status master | [![Build Status](https://travis-ci.com/nilskre/CommonPlayground.svg?branch=master)](https://travis-ci.com/nilskre/CommonPlayground)  |
 | Build status dev    | [![Build Status](https://travis-ci.com/nilskre/CommonPlayground.svg?branch=dev)](https://travis-ci.com/nilskre/CommonPlayground)  |
 | Codacy Grade        | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7fdcfeca10b94f4c9b6bc1a809669c2b)](https://www.codacy.com/app/CommonPlayground/CommonPlayground?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nilskre/CommonPlayground&amp;utm_campaign=Badge_Grade)  |
-| Code Test Coverage  | [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/7fdcfeca10b94f4c9b6bc1a809669c2b)]
+| Code Test Coverage  | [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/7fdcfeca10b94f4c9b6bc1a809669c2b)](https://www.codacy.com/app/CommonPlayground/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Coverage)  |
 
 ## Installation
 
 ### Backend
 
-- requirements: [![Docker](https://docs.docker.com/install/)](https://www.codacy.com/app/CommonPlayground/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Coverage)  
+- requirements: [![Docker](https://docs.docker.com/install/)](https://www.codacy.com/app/CommonPlayground/CommonPlayground?utm_source=github.com&utm_medium=referral&utm_content=nilskre/CommonPlayground&utm_campaign=Badge_Coverage)]  
 - Execute: ```docker run -p 8080:8080 commonplayground/commonplayground```  
 This will download the latest Docker container from DockerHub and executes the Spring Boot backend on ```http://localhost:8080```
 

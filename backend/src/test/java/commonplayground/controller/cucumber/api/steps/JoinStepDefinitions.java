@@ -65,6 +65,7 @@ public class JoinStepDefinitions {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("userID", GlobalUserId.getSessionHostUserID());
         body.add("messageID", GlobalMessageId.getMessageID());
+        body.add("userIDToJoin", GlobalUserId.getNormalUserID());
         body.add("joinAccepted", joinAccepted);
 
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);

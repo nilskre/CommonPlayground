@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.wordpress.commonplayground.network.GetMessagesRequest;
 import com.wordpress.commonplayground.network.VolleyStringNoResponse;
@@ -47,6 +48,9 @@ public class MessageViewModel extends AndroidViewModel {
         parameters.put("messageID", messageID);
         parameters.put("userIDToJoin", requesterID);
         parameters.put("joinAccepted", joinAccepted);
+
+        Log.d("Host", parameters.get("userID"));
+        Log.d("Joiner", parameters.get("userIDToJoin"));
 
         VolleyStringNoResponse request = new VolleyStringNoResponse();
         request.stringRequest("joinResponse", "JoinResponse", this.getApplication(), parameters);

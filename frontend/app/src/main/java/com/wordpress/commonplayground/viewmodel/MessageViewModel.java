@@ -51,6 +51,8 @@ public class MessageViewModel extends AndroidViewModel {
 
         Log.d("Host", parameters.get("userID"));
         Log.d("Joiner", parameters.get("userIDToJoin"));
+        Log.d("messageID", parameters.get("messageID"));
+        Log.d("accepted", parameters.get("joinAccepted"));
 
         VolleyStringNoResponse request = new VolleyStringNoResponse();
         request.stringRequest("joinResponse", "JoinResponse", this.getApplication(), parameters);

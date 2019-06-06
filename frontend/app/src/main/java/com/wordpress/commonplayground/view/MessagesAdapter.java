@@ -77,7 +77,6 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
                 viewModel.deleteMessage(passUID, passMID);
                 inbox.remove(pos);
                 Objects.requireNonNull(parent.getAdapter()).notifyDataSetChanged();
-                ;
             }
         });
 
@@ -102,7 +101,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
                     viewModel.answerRequest(passUID, passMID, passRID, "false");
                     viewModel.deleteMessage(passUID, passMID);
                     inbox.remove(pos);
-                    Objects.requireNonNull(parent.getAdapter()).notifyItemRemoved(pos);
+                    Objects.requireNonNull(parent.getAdapter()).notifyDataSetChanged();
                 }
             });
         }

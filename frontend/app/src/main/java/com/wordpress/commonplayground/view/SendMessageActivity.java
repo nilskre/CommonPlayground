@@ -1,7 +1,6 @@
 package com.wordpress.commonplayground.view;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -43,9 +42,6 @@ public class SendMessageActivity extends AppCompatActivity implements View.OnCli
         } else {
             sendRequestToBackend();
         }
-        if (!cancel) {
-            //  returnToMainActivity();
-        }
     }
 
     private void sendRequestToBackend() {
@@ -57,7 +53,9 @@ public class SendMessageActivity extends AppCompatActivity implements View.OnCli
         parameters.put("messageContent", messageView.getEditableText().toString());
 
         PostMessageRequest request = new PostMessageRequest();
-        request.stringRequest("sendComment", "Send Message", parameters, this.findViewById(android.R.id.content));
+        request.stringRequest("sendComment", "Send Message", parameters, getWindow().getDecorView().findViewById(android.R.id.content));
+
+
     }
 
 
@@ -89,13 +87,13 @@ public class SendMessageActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    private void returnToMainActivity() {
+/*    private void returnToMainActivity() {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 onBackPressed();
             }
-        }, 5000);
-    }
+        }, 3000);
+    } */
 }

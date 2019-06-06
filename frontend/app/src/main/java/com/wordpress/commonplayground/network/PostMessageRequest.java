@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 public class PostMessageRequest extends VolleyStringTemplate {
 
+
     @Override
     protected void handleString(String response, View view) {
 
@@ -18,6 +19,7 @@ public class PostMessageRequest extends VolleyStringTemplate {
             put(200, view.getResources().getString(R.string.send_message_success));
         }};
         Snackbar.make(view, snackText.get(Integer.parseInt(response)), 5000).show();
+
 
     }
 

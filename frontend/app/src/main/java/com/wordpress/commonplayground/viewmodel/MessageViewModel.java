@@ -41,10 +41,11 @@ public class MessageViewModel extends AndroidViewModel {
         request.stringRequest("removeMessage", "DeleteMessage", this.getApplication(), parameters);
     }
 
-    public void answerRequest(String userID, String messageID, String joinAccepted) {
+    public void answerRequest(String userID, String messageID, String requesterID, String joinAccepted) {
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("userID", userID);
         parameters.put("messageID", messageID);
+        parameters.put("userIDToJoin", requesterID);
         parameters.put("joinAccepted", joinAccepted);
 
         VolleyStringNoResponse request = new VolleyStringNoResponse();

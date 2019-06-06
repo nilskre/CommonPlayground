@@ -76,20 +76,22 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             public void onClick(View v) {
                 viewModel.deleteMessage(passUID, passMID);
                 inbox.remove(pos);
-                Objects.requireNonNull(parent.getAdapter()).notifyItemRemoved(pos);
+                Objects.requireNonNull(parent.getAdapter()).notifyDataSetChanged();
+                ;
             }
         });
 
         if (((Message) inbox.get(position)).getType().contentEquals("JoinRequest")) {
+            String passRID = ((Message) inbox.get(position)).getRequesterID().toString();
             deleteButton.setVisibility(View.GONE);
             acceptButton.setVisibility(View.VISIBLE);
             acceptButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewModel.answerRequest(passUID, passMID, "true");
+                    viewModel.answerRequest(passUID, passMID, passRID, "true");
                     viewModel.deleteMessage(passUID, passMID);
                     inbox.remove(pos);
-                    Objects.requireNonNull(parent.getAdapter()).notifyItemRemoved(pos);
+                    Objects.requireNonNull(parent.getAdapter()).notifyDataSetChanged();
                 }
             });
 
@@ -97,7 +99,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             rejectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewModel.answerRequest(passUID, passMID, "false");
+                    viewModel.answerRequest(passUID, passMID, passRID, "false");
                     viewModel.deleteMessage(passUID, passMID);
                     inbox.remove(pos);
                     Objects.requireNonNull(parent.getAdapter()).notifyItemRemoved(pos);

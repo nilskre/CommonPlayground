@@ -322,4 +322,23 @@ public class MessagesStepDefs {
 
         assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Then("Corrupt request sent and internal server error is returned removeMessage")
+    public void corruptRequestSentAndInternalServerErrorIsReturnedRemoveMessage() {
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("userID", -2);
+        body.add("messageID", 2);
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> tmp = testRestTemplate.postForEntity("http://localhost:8080/removeMessage", request, String.class);
+        String response = tmp.getBody();
+
+        log.info("Response of Remove Messages Controller (Corrupt Test): " + response);
+    }
 }

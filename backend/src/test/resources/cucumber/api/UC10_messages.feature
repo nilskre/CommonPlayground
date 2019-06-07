@@ -30,5 +30,8 @@ Feature: Part of UC10 Message Join
   Scenario: reciever does not exist
     Then  Reciever does not exist sendmessage
 
-  Scenario: corruot frontend hasNewMessages
+  Scenario: corrupt frontend hasNewMessages
     Then Corrupt request sent and internal server error is returned hasNewMessage
+
+  Scenario: corruot frontend removeMessage
+    Then Corrupt request sent and internal server error is returned removeMessage

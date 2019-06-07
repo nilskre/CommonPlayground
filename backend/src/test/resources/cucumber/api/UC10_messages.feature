@@ -12,3 +12,6 @@ Feature: Part of UC10 Message Join
     And I send a join request for one session
     And "sessionHost" requests his messages
     Then  There should be my messages
+
+  Scenario: corrupt frontend exception
+    Then  Corrupt request sent and internal server error is returned message

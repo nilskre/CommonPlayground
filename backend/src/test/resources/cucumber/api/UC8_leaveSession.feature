@@ -30,3 +30,6 @@ Feature: UC8 Leave Session
     And I post a new Session with correct Data as test user type "sessionHost"
     And "sessionHost" sends a leave request for one session
     Then The return code should be -20
+
+  Scenario: corrupt frontend exception
+    Then  Corrupt request sent and internal server error is returned leave

@@ -52,10 +52,8 @@ public class SendMessageActivity extends AppCompatActivity implements View.OnCli
         parameters.put("messageTitle", titleView.getEditableText().toString());
         parameters.put("messageContent", messageView.getEditableText().toString());
 
-        PostMessageRequest request = new PostMessageRequest();
+        PostMessageRequest request = new PostMessageRequest(this);
         request.stringRequest("sendComment", "Send Message", parameters, getWindow().getDecorView().findViewById(android.R.id.content));
-
-
     }
 
 
@@ -87,13 +85,4 @@ public class SendMessageActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-/*    private void returnToMainActivity() {
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                onBackPressed();
-            }
-        }, 3000);
-    } */
 }

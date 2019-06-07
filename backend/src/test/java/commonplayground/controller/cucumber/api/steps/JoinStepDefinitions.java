@@ -159,4 +159,24 @@ public class JoinStepDefinitions {
 
         assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Then("Corrupt request sent and internal server error is returned joinResponse")
+    public void corruptRequestSentAndInternalServerErrorIsReturnedJoinResponse() {
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("userID", -2);
+        body.add("messageID", GlobalMessageId.getMessageID());
+        body.add("userIDToJoin", GlobalUserId.getNormalUserID());
+        body.add("joinAccepted", "true");
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> responseEntity = testRestTemplate.postForEntity("http://localhost:8080/joinResponse", request, String.class);
+
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

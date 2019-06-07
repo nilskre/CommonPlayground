@@ -38,3 +38,4 @@ Feature: UC2 Join Session
 
   Scenario: corrupt frontend exception
     Then  Corrupt request sent and internal server error is returned join
+    Then  Corrupt request sent and internal server error is returned joinResponse

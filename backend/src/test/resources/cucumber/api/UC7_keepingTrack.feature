@@ -17,3 +17,4 @@ Feature: UC7 Keeping Track (My hosted Sessions)
   Scenario: corrupt frontend exception
     Then  Corrupt request sent and internal server error is returned hosted
     Then  Corrupt request sent and internal server error is returned joined
+    Then  Corrupt request sent and internal server error is returned pending

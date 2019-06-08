@@ -1,6 +1,9 @@
-package commonplayground.controller;
+package commonplayground.controller.join;
 
+import commonplayground.Application;
 import commonplayground.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JoinResponseController {
 
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
     private final SessionRepository sessionRepository;
     private final UserRepository userRepository;
     private final MessageRepository messageRepository;
@@ -23,28 +27,35 @@ public class JoinResponseController {
     @RequestMapping("/joinResponse")
     public void joinRequestForSession(@RequestParam(value = "userID", defaultValue = "not given") String userID,
                                       @RequestParam(value = "messageID", defaultValue = "not given") String messageID,
-                                      @RequestParam(value = "joinAccepted", defaultValue = "false") boolean joinAccepted) {
+                                      @RequestParam(value = "userIDToJoin", defaultValue = "not given") String userIDToJoin,
+                                      @RequestParam(value = "joinAccepted", defaultValue = "false") boolean joinAccepted) throws CorruptFrontendException {
         Long userIDAsLong = Long.parseLong(userID);
-        User sessionHost = userRepository.findAllById(userIDAsLong);
-        int messageIDAsInt = Integer.parseInt(messageID);
+        if (userRepository.findAllById(userIDAsLong) != null) {
+            User sessionHost = userRepository.findAllById(userIDAsLong);
+            int messageIDAsInt = Integer.parseInt(messageID);
 
-        Message relevantMessage = getRelevantMessage(sessionHost, messageIDAsInt);
+            Message relevantMessage = getRelevantMessage(sessionHost, messageIDAsInt);
 
-        Long sessionIdUserWantsToJoin = relevantMessage.getSessionIdUserWantsToJoin();
-        Session sessionUserWantsToJoin = sessionRepository.findAllById(sessionIdUserWantsToJoin);
-        Long userWantsToJoin = relevantMessage.getUserIdWhoWantsToJoin();
-        User userWhoWantsToJoinSession = userRepository.findAllById(userWantsToJoin);
+            Long sessionIdUserWantsToJoin = relevantMessage.getSessionIdUserWantsToJoin();
+            Session sessionUserWantsToJoin = sessionRepository.findAllById(sessionIdUserWantsToJoin);
+            Long userWantsToJoin = Long.parseLong(userIDToJoin); //relevantMessage.getUserIdWhoWantsToJoin();
+            User userWhoWantsToJoinSession = userRepository.findAllById(userWantsToJoin);
 
-        if (joinAccepted) {
-            removeMessageFromHostsMessages(sessionHost, relevantMessage);
-            System.out.println("Deleted Request Message for Host");
-            joinPlayerToSession(sessionUserWantsToJoin, userWhoWantsToJoinSession);
-            messageToUserThatJoinWasSuccessful(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
-        } else if (!joinAccepted) {
-            removeMessageFromHostsMessages(sessionHost, relevantMessage);
-            System.out.println("DELTE HOST MESSAGE");
-            messageToUserThatJoinWasRejected(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
+            if (joinAccepted) {
+                removeMessageFromHostsMessages(sessionHost, relevantMessage);
+                System.out.println("Deleted Request Message for Host");
+                joinPlayerToSession(sessionUserWantsToJoin, userWhoWantsToJoinSession);
+                messageToUserThatJoinWasSuccessful(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
+            } else if (!joinAccepted) {
+                removeMessageFromHostsMessages(sessionHost, relevantMessage);
+                System.out.println("DELTE HOST MESSAGE");
+                messageToUserThatJoinWasRejected(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
+            }
+        } else {
+            log.info("Corrupt Frontend tried to access Backend");
+            throw new CorruptFrontendException();
         }
+
     }
 
     private void messageToUserThatJoinWasSuccessful(Session sessionUserWantsToJoin, User userWhoWantsToJoinSession, User sessionHost) {

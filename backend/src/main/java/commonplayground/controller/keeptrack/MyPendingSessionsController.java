@@ -1,9 +1,9 @@
-package commonplayground.controller;
+package commonplayground.controller.keeptrack;
 
-import commonplayground.model.Session;
-import commonplayground.model.SessionRepository;
-import commonplayground.model.User;
-import commonplayground.model.UserRepository;
+import commonplayground.Application;
+import commonplayground.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 @RestController
 public class MyPendingSessionsController {
 
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
     private final SessionRepository sessionRepository;
     private final UserRepository userRepository;
 
@@ -24,10 +25,15 @@ public class MyPendingSessionsController {
     }
 
     @RequestMapping("/getMyPendingSessions")
-    public ArrayList<Session> getMySessions(@RequestParam(value = "userID", defaultValue = "not given") String userID) {
+    public ArrayList<Session> getMySessions(@RequestParam(value = "userID", defaultValue = "not given") String userID) throws CorruptFrontendException {
         Long userIDAsLong = Long.parseLong(userID);
-        User relevantUser = userRepository.findAllById(userIDAsLong);
+        if (userRepository.findAllById(userIDAsLong) != null) {
+            User relevantUser = userRepository.findAllById(userIDAsLong);
 
-        return sessionRepository.findAllByUserWantToJoin(relevantUser);
+            return sessionRepository.findAllByUserWantToJoin(relevantUser);
+        } else {
+            log.info("Corrupt Frontend tried to access Backend");
+            throw new CorruptFrontendException();
+        }
     }
 }

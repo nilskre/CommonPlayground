@@ -1,9 +1,9 @@
-package commonplayground.controller;
+package commonplayground.controller.session;
 
-import commonplayground.model.Session;
-import commonplayground.model.SessionRepository;
-import commonplayground.model.User;
-import commonplayground.model.UserRepository;
+import commonplayground.Application;
+import commonplayground.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PostNewSessionController {
 
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
     private final SessionRepository sessionRepository;
     private final UserRepository userRepository;
 
@@ -31,12 +32,17 @@ public class PostNewSessionController {
                                @RequestParam(value = "numberOfPlayers", defaultValue = "1") int numberOfPlayers,
                                @RequestParam(value = "idOfHost", defaultValue = "-1") String idOfHost,
                                @RequestParam(value = "genre", defaultValue = "not given")String genre,
-                               @RequestParam(value= "isOnline", defaultValue = "not given")String isOnline){
+                               @RequestParam(value= "isOnline", defaultValue = "not given")String isOnline) throws CorruptFrontendException {
         Long idOfHostAsLong = Long.parseLong(idOfHost);
-        User sessionHost = userRepository.findAllById(idOfHostAsLong);
-        Session addedSession = new Session(title, description, game, place, date, time, numberOfPlayers, idOfHostAsLong, genre, isOnline);
-        addedSession.addUserToSession(sessionHost);
-        sessionRepository.save(addedSession);
-        return addedSession.getId();
+        if (userRepository.findAllById(idOfHostAsLong) != null) {
+            User sessionHost = userRepository.findAllById(idOfHostAsLong);
+            Session addedSession = new Session(title, description, game, place, date, time, numberOfPlayers, idOfHostAsLong, genre, isOnline);
+            addedSession.addUserToSession(sessionHost);
+            sessionRepository.save(addedSession);
+            return addedSession.getId();
+        } else {
+            log.info("Corrupt Frontend tried to access Backend");
+            throw new CorruptFrontendException();
+        }
     }
 }

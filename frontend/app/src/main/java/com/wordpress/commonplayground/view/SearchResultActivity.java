@@ -1,7 +1,7 @@
 package com.wordpress.commonplayground.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.wordpress.commonplayground.R;
 

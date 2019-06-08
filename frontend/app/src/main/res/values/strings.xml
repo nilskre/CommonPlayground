@@ -84,7 +84,6 @@
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_registration">Register</string>
     <string name="title_activity_session_detail" translatable="false">Session Detail</string>
-    <string name="title_activity_my_sessions">My Sessions</string>
     <string name="tab_text_1">Hosted</string>
     <string name="tab_text_2">Joined</string>
     <string name="tab_text_3">Pending</string>

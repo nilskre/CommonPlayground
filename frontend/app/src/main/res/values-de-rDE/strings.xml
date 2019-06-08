@@ -49,7 +49,6 @@
     <string name="app_name">CommonPlayground</string>
     <string name="tab_text_1">Gastgeber</string>
     <string name="tab_text_2">Teilnehmer</string>
-    <string name="title_activity_my_sessions">Meine Sessions</string>
     <string name="menu_messages">Nachrichten</string>
     <string name="error_too_long">Diese Eingabe ist zu lang</string>
     <string name="error_wrong_place">Bitte geben sie eine korrekte Postleitzahl ein</string>

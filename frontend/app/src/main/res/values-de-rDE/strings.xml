@@ -79,4 +79,6 @@
     <string name="send_message_title">Betreff</string>
     <string name="send_message_success">Deine Nachricht wurde gesendet.</string>
     <string name="send_message_failure">Unbekannter Empfänger</string>
+    <string name="join_error_pending">Du hast bereits eine Beitrittsanfrage für diese Runde gesendet.</string>
+    <string name="leave_retracted">Deine Anfrage wurde zurückgezogen.</string>
 </resources>

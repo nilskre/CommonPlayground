@@ -14,6 +14,7 @@ public class PostJoinRequest extends VolleyStringTemplate {
     protected void handleString(String response, View view) {
         Log.d("JOIN", response);
         HashMap<Integer,String> snackText = new HashMap <Integer, String> (){{
+            put(-12, view.getResources().getString(R.string.join_error_pending));
             put (-11, view.getResources().getString(R.string.join_error_joined));
             put (-10, view.getResources().getString(R.string.join_error_full));
             put (0, view.getResources().getString(R.string.join_success));

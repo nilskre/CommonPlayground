@@ -14,6 +14,7 @@ public class PostLeaveRequest extends VolleyStringTemplate {
         HashMap<Integer,String> snackText = new HashMap <Integer, String> (){{
             put (-20, view.getResources().getString(R.string.leave_error));
             put (0, view.getResources().getString(R.string.leave_success));
+            put(1, view.getResources().getString(R.string.leave_retracted));
         }};
         Snackbar.make(view, snackText.get(Integer.parseInt(response)), 5000).show();
     }

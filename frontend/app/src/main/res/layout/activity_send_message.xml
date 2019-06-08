@@ -71,7 +71,9 @@
 
     <Button
         android:id="@+id/ButtonSend"
-        style="?android:attr/buttonBarButtonStyle"
+        style="?android:attr/buttonStyleSmall"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

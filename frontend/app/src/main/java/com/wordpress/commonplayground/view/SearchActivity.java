@@ -1,6 +1,12 @@
 package com.wordpress.commonplayground.view;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +18,16 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.wordpress.commonplayground.R;
+import com.wordpress.commonplayground.model.Session;
 import com.wordpress.commonplayground.model.Validator;
+import com.wordpress.commonplayground.network.GetSessionRequest;
+import com.wordpress.commonplayground.viewmodel.MainActivityViewModel;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,6 +36,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private String type, place;
     private TextInputEditText placeView;
     private boolean cancel = false;
+    private List<?> sessionList;
+    private LiveData<List<?>> sessionLive;
+    private MainActivityViewModel mainActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +51,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         btnSearch = findViewById(R.id.ButtonPublish);
         btnSearch.setOnClickListener(this);
+        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
         type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -67,9 +86,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 checkForValidPlace();
             }
             if(!cancel) {
-                Intent openSearchResultActivity = new Intent(getApplicationContext(), SearchResultActivity.class);
-                openSearchResultActivity.putExtra("url", getUrl());
-                startActivity(openSearchResultActivity);
+                observeChangesInSessionList(getUrl());
+                if (sessionList == null) {
+                    Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), "Couldn't find any sessions", 2000).show();
+                } else {
+                    Intent openSearchResultActivity = new Intent(getApplicationContext(), SearchResultActivity.class);
+                    Bundle b = new Bundle();
+                    b.putParcelableArrayList("Sessions", (ArrayList<? extends Parcelable>) sessionList);
+                    openSearchResultActivity.putExtras(b);
+                    startActivity(openSearchResultActivity);
+                }
             }
         }
     }
@@ -105,5 +131,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         return url;
+    }
+
+    private void observeChangesInSessionList(String url) {
+        sessionLive = mainActivityViewModel.getSessions(url);
+        sessionList = sessionLive.getValue();
     }
 }

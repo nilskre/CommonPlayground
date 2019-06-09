@@ -1,4 +1,4 @@
-package commonplayground.controller;
+package commonplayground.controller.messages;
 
 import commonplayground.model.Message;
 import commonplayground.model.MessageRepository;

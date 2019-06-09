@@ -1,4 +1,4 @@
-package commonplayground.controller;
+package commonplayground.controller.session;
 
 import commonplayground.model.Session;
 import commonplayground.model.SessionRepository;

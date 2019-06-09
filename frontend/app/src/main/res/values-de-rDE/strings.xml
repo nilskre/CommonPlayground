@@ -49,7 +49,6 @@
     <string name="app_name">CommonPlayground</string>
     <string name="tab_text_1">Gastgeber</string>
     <string name="tab_text_2">Teilnehmer</string>
-    <string name="title_activity_my_sessions">Meine Sessions</string>
     <string name="menu_messages">Nachrichten</string>
     <string name="error_too_long">Diese Eingabe ist zu lang</string>
     <string name="error_wrong_place">Bitte geben sie eine korrekte Postleitzahl ein</string>
@@ -77,4 +76,8 @@
     <string name="send_message_username">Empfänger</string>
     <string name="send_message_button">Senden</string>
     <string name="send_message_title">Betreff</string>
+    <string name="send_message_success">Deine Nachricht wurde gesendet.</string>
+    <string name="send_message_failure">Unbekannter Empfänger</string>
+    <string name="join_error_pending">Du hast bereits eine Beitrittsanfrage für diese Runde gesendet.</string>
+    <string name="leave_retracted">Deine Anfrage wurde zurückgezogen.</string>
 </resources>

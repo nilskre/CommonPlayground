@@ -1,4 +1,4 @@
-package commonplayground.controller;
+package commonplayground.controller.messages;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

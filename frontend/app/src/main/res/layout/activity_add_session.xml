@@ -139,7 +139,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_calendar"
-                android:tint="@color/colorIcons"
+                android:tint="@color/colorPrimaryDark"
+                android:backgroundTint="@color/colorPrimaryLight"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/DateInput" />
 
@@ -170,7 +171,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_clock"
-                android:tint="@color/colorIcons"
+                android:tint="@color/colorPrimaryDark"
+                android:backgroundTint="@color/colorPrimaryLight"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/TimeInput" />
 
@@ -212,27 +214,18 @@
             </android.support.design.widget.TextInputLayout>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
-    <LinearLayout
-        android:id="@+id/button_container_join"
-        style="?android:attr/buttonBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layoutDirection="rtl"
-        android:orientation="horizontal"
-        android:paddingEnd="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/scrollView2"
-        app:layout_constraintBottom_toBottomOf="parent">
 
     <Button
         android:id="@+id/ButtonPublish"
-        style="?android:attr/buttonBarButtonStyle"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/new_button"
-        />
-    </LinearLayout>
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 </android.support.constraint.ConstraintLayout>

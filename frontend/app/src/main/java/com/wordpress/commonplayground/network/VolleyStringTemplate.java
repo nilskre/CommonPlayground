@@ -36,6 +36,7 @@ public abstract class VolleyStringTemplate {
         VolleyRequestQueue.getInstance(view.getContext()).addToQueue(stringRequest, tag);
     }
 
+
     protected abstract void handleString(String response, View view);
 
 

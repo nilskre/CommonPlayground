@@ -84,8 +84,6 @@
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_registration">Register</string>
     <string name="title_activity_session_detail" translatable="false">Session Detail</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_my_sessions">My Sessions</string>
     <string name="tab_text_1">Hosted</string>
     <string name="tab_text_2">Joined</string>
     <string name="tab_text_3">Pending</string>
@@ -96,15 +94,25 @@
     <string name="message_button_reject">Reject</string>
     <string name="join_error_full">This session is already full</string>
     <string name="join_error_joined">You have already joined this session</string>
+    <string name="join_error_pending">You have already requested to join this session</string>
     <string name="join_success">Your request to join this session has been sent.</string>
     <string name="join_button_join">Join</string>
     <string name="join_button_leave">Leave</string>
     <string name="leave_error">You cannot leave your own sessions.</string>
     <string name="leave_success">You are no longer part of this session.</string>
+    <string name="leave_retracted">You have retracted your join request.</string>
     <string name="new_message">There are new messages in your inbox.</string>
     <string name="confirm" translatable="false">OK</string>
     <string name="title_activity_search">Search</string>
     <string name="btn_search">Search</string>
     <string name="title_activity_add_session">New Session</string>
     <string name="title_activity_search_result">Search Result</string>
+    <string name="participants">Participants:&#160;</string>
+    <string name="title_activity_send_message">Send Message</string>
+    <string name="send_message_username">Recipient</string>
+    <string name="send_message_title">Message title</string>
+    <string name="send_message_message">Message</string>
+    <string name="send_message_button">Send</string>
+    <string name="send_message_success">Your message has been sent.</string>
+    <string name="send_message_failure">Recipient username unkown</string>
 </resources>

@@ -126,26 +126,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_mysessions) {
             fragment = new MySessionsFragment();
+            setTitle(R.string.menu_mySessions);
         } else {
             MySessionsFragment.resetTabPostition();
         }
 
         if (id == R.id.nav_dashboard) {
             fragment = new DashboardFragment();
+            setTitle(R.string.menu_dashboard);
 
         } else if (id == R.id.nav_messages) {
             fragment = new MessageFragment();
+            setTitle(R.string.menu_messages);
 
         //} else if (id == R.id.nav_profile) {
-
+            //setTitle(R.string.menu_profile);
         //} else if (id == R.id.nav_friendlist) {
-
+            //setTitle(R.string.menu_friendlist);
         } else if (id == R.id.nav_logout) {
             session.logoutUser();
         //} else if (id == R.id.nav_faq) {
-
+            //setTitle(R.string.menu_faq);
         //} else if (id == R.id.nav_contactAdmin) {
-
+            //setTitle(R.string.menu_contactAdmin);
         }
 
         if (fragment != null) {

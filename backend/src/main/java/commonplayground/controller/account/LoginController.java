@@ -1,4 +1,4 @@
-package commonplayground.controller;
+package commonplayground.controller.account;
 
 import commonplayground.model.User;
 import commonplayground.model.UserRepository;

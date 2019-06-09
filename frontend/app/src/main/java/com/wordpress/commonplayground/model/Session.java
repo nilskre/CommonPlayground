@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Session implements Parcelable {
@@ -97,7 +98,7 @@ public class Session implements Parcelable {
 
     public static Session parseSession(JSONObject sessionObject) {
         ArrayList<User> users = new ArrayList();
-        Long idOfHost;
+        long idOfHost;
 
         try {
             JSONArray parsedUsers = sessionObject.getJSONArray("users");
@@ -187,5 +188,21 @@ public class Session implements Parcelable {
             s += user.getName() + " ";
         }
         return s;
+    }
+
+    public String getParticipants() {
+        if (users.size() > 0) {
+            StringBuilder userlist = new StringBuilder();
+            userlist.append(users.get(0).getName());
+            Iterator<User> iterator = users.iterator();
+            iterator.next();
+            while (iterator.hasNext()) {
+                User user = iterator.next();
+                userlist.append(", ");
+                userlist.append(user.getName());
+            }
+            return userlist.toString();
+        }
+        return "None";
     }
 }

@@ -2,6 +2,7 @@ package com.wordpress.commonplayground.view;
 
 import android.os.Bundle;
 
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -31,7 +32,7 @@ public class SearchResultActivity extends AppCompatActivity {
         }
     }
 
-    private void displayListData(List<?> sessions) {
+    private void displayListData(List<Session> sessions) {
         SessionsAdapter adapter = new SessionsAdapter(sessions);
         rvSessions.setAdapter(adapter);
         rvSessions.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

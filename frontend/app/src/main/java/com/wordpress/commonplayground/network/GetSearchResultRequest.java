@@ -2,9 +2,14 @@ package com.wordpress.commonplayground.network;
 
 import android.app.Activity;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import com.wordpress.commonplayground.model.Session;
+import com.wordpress.commonplayground.view.SearchResultActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +37,15 @@ public class GetSearchResultRequest extends VolleyJSONTemplate {
                 Log.d("Parse.Error.Main", e.toString());
             }
         }
-        list.setValue(allSessionsTmpList);
+
+        if (allSessionsTmpList.size() == 0) {
+            Snackbar.make(activity.getWindow().getDecorView().findViewById(android.R.id.content), "Couldn't find any sessions", 2000).show();
+        } else {
+            Intent openSearchResultActivity = new Intent(activity.getApplicationContext(), SearchResultActivity.class);
+            Bundle b = new Bundle();
+            b.putParcelableArrayList("Sessions", (ArrayList<? extends Parcelable>) allSessionsTmpList);
+            openSearchResultActivity.putExtras(b);
+            activity.startActivity(openSearchResultActivity);
+        }
     }
 }

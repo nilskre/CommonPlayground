@@ -11,7 +11,7 @@ import com.wordpress.commonplayground.R;
 public class PostMessagePollRequest extends VolleyStringTemplate {
     private final Activity activity;
 
-    public PostMessagePollRequest( Activity activity) {
+    public PostMessagePollRequest(Activity activity) {
         super();
         this.activity = activity;
     }

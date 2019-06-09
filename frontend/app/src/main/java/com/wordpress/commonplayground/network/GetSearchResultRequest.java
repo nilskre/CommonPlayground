@@ -1,5 +1,6 @@
 package com.wordpress.commonplayground.network;
 
+import android.app.Activity;
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
@@ -11,7 +12,13 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetSessionRequest extends VolleyJSONTemplate {
+public class GetSearchResultRequest extends VolleyJSONTemplate {
+    private final Activity activity;
+
+    public GetSearchResultRequest(Activity activity) {
+        super();
+        this.activity = activity;
+    }
 
     @Override
     public void handleJSON(JSONArray response, MutableLiveData<List<?>> list) {

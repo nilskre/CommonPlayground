@@ -53,12 +53,7 @@
         <activity
             android:name=".view.SessionDetailActivity"
             android:label="@string/title_activity_session_detail"
-            android:parentActivityName=".view.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.wordpress.commonplayground.view.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.SearchResultActivity"
             android:label="@string/title_activity_search_result"

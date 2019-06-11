@@ -49,9 +49,11 @@ public class GetMessagesInterceptor implements HandlerInterceptor {
 
         User userWhoWantsToGetMessages = userRepository.findAllById(userIDAsLong);
 
-        for (Message message : userWhoWantsToGetMessages.getMessages()) {
-            message.messageSeen();
-            messageRepository.save(message);
+        if (userWhoWantsToGetMessages != null) {
+            for (Message message : userWhoWantsToGetMessages.getMessages()) {
+                message.messageSeen();
+                messageRepository.save(message);
+            }
         }
 
         System.out.println("Request and Response is completed and messages are seen");

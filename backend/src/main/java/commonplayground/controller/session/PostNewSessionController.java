@@ -36,7 +36,7 @@ public class PostNewSessionController {
         Long idOfHostAsLong = Long.parseLong(idOfHost);
         if (userRepository.findAllById(idOfHostAsLong) != null) {
             User sessionHost = userRepository.findAllById(idOfHostAsLong);
-            Session addedSession = new Session(title, description, game, place, date, time, numberOfPlayers, idOfHostAsLong, genre, isOnline);
+            Session addedSession = new Session(title, description, game, place, date, time, numberOfPlayers, idOfHostAsLong, genre, isOnline.toLowerCase());
             addedSession.addUserToSession(sessionHost);
             sessionRepository.save(addedSession);
             return addedSession.getId();

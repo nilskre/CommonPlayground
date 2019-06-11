@@ -4,9 +4,14 @@ import commonplayground.Application;
 import commonplayground.controller.cucumber.api.globaldict.GlobalSessionId;
 import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,6 +19,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import static org.junit.Assert.assertEquals;
 
 public class MyPendingSessionsStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
@@ -64,5 +71,22 @@ public class MyPendingSessionsStepDefinitions {
     @And("There is the session I want to join")
     public void thereIsTheSessionIWantToJoin() {
         //tbd
+    }
+
+    @Then("Corrupt request sent and internal server error is returned pending")
+    public void corruptRequestSentAndInternalServerErrorIsReturnedPending() {
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("userID", -2);
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> responseEntity = testRestTemplate.postForEntity("http://localhost:8080/getMyPendingSessions", request, String.class);
+
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

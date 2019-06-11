@@ -7,3 +7,6 @@ Feature: UC1 Posting a Session
     When I post a new Session with correct Data as test user type "sessionHost"
     And  I look for the session list "http://localhost:8080/getSessionList"
     Then  There should be my PostedSession with correct Data
+
+  Scenario: corrupt frontend exception
+    Then  Corrupt request sent and internal server error is returned

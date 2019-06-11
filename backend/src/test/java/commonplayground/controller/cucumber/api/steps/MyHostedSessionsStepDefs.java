@@ -3,6 +3,10 @@ package commonplayground.controller.cucumber.api.steps;
 import commonplayground.controller.cucumber.api.globaldict.GlobalUserId;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,6 +14,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import static org.junit.Assert.assertEquals;
 
 public class MyHostedSessionsStepDefs {
     private StringBuilder response;
@@ -56,5 +62,39 @@ public class MyHostedSessionsStepDefs {
     public void thereShouldBeMyPostedSessionWithCorrectData() {
         //tbd
         System.out.println("My hosted sessions " + response);
+    }
+
+    @Then("Corrupt request sent and internal server error is returned hosted")
+    public void corruptRequestSentAndInternalServerErrorIsReturnedHosted() {
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("userID", -2);
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> responseEntity = testRestTemplate.postForEntity("http://localhost:8080/getMyHostedSessions", request, String.class);
+
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Then("Corrupt request sent and internal server error is returned joined")
+    public void corruptRequestSentAndInternalServerErrorIsReturnedJoined() {
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("userID", -2);
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> responseEntity = testRestTemplate.postForEntity("http://localhost:8080/getMyJoinedSessions", request, String.class);
+
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

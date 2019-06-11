@@ -35,3 +35,7 @@ Feature: UC2 Join Session
     And The Session Host approves the request "false"
     And "normalUser" requests his messages
     Then There should be a reject message
+
+  Scenario: corrupt frontend exception
+    Then  Corrupt request sent and internal server error is returned join
+    Then  Corrupt request sent and internal server error is returned joinResponse

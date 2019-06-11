@@ -12,18 +12,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import static io.restassured.RestAssured.get;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class PostSessionStepDefinitions {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private TestData testData = new TestData();
+    private Session testDataSession = testData.getTestSessions().get(0);
 
     private final SessionRepository sessionRepository;
 
@@ -97,5 +97,31 @@ public class PostSessionStepDefinitions {
             assertTrue(get("/getSessionList").jsonPath().getList("isOnline").contains(testSession.getIsOnline()));
         }
         GlobalSessionId.setSessionID(null);
+    }
+
+    @Then("Corrupt request sent and internal server error is returned")
+    public void anInternalServerErrorIsReturned() {
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        body.add("title", testDataSession.getTitle());
+        System.out.println("TITLE " + testDataSession.getTitle());
+        body.add("description", testDataSession.getDescription());
+        body.add("game", testDataSession.getGame());
+        body.add("place", testDataSession.getPlace());
+        body.add("date", testDataSession.getDate());
+        body.add("time", testDataSession.getTime());
+        body.add("numberOfPlayers", testDataSession.getNumberOfPlayers());
+        body.add("idOfHost", -2);
+        body.add("genre", testDataSession.getGenre());
+        body.add("isOnline", testDataSession.getIsOnline());
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> responseEntity = testRestTemplate.postForEntity("http://localhost:8080/postNewSession", request, String.class);
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

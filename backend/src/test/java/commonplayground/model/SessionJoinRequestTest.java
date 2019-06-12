@@ -22,6 +22,14 @@ public class SessionJoinRequestTest {
     }
 
     @Test
+    public void testUserRequestPending() {
+        Session testSession = new Session("Title", "Description", "Game", "Place", "12.12.2020", "12:00", 2, (long)100, "Genre", "Online");
+        User testUser = new User("Username", "_pswAPP89.", "test@test.de");
+        testSession.addUserWantToJoin(testUser);
+        assertEquals(testSession.joinRequestToSession(testUser), -12);
+    }
+
+    @Test
     public void testSessionIsFull() {
         Session testSession = new Session("Title", "Description", "Game", "Place", "12.12.2020", "12:00", 2, (long)100, "Genre", "Online");
         User testUser1 = new User("Username1", "_pswAPP89.", "test@test.de");

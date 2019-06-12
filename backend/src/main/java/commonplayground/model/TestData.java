@@ -15,9 +15,11 @@ public class TestData {
     private static int testUserID;
 
     private void fillSessionData(){
-        Session testSession1 = new Session("Card Game", "Card fun", "Doppelkopf", "Schlosspark", "22-11-2024", "12:00", 4, Long.parseLong(String.valueOf(testUserID)), "genre", "false");
-        Session testSession3 = new Session("GW2 World Boss Run", "Tequatl->Behemoth->Destroyer", "Guild Wars 2", "Lionsarch", "12-12-2020", "15:00", 50, Long.parseLong(String.valueOf(testUserID)), "genre", "true");
+        Session testSession1 = new Session("Card Game", "Card fun", "Doppelkopf", "76131", "22-11-2024", "12:00", 4, Long.parseLong(String.valueOf(testUserID)), "Board Game", "offline");
+        Session testSession2 = new Session("Card Game", "Card fun", "Doppelkopf", "76131", "22-11-2024", "12:00", 4, Long.parseLong(String.valueOf(testUserID)), "Card Game", "offline");
+        Session testSession3 = new Session("GW2 World Boss Run", "Tequatl->Behemoth->Destroyer", "Guild Wars 2", "76131", "12-12-2020", "15:00", 50, Long.parseLong(String.valueOf(testUserID)), "MMO RPG", "online");
         testSessions.add(testSession1);
+        testSessions.add(testSession2);
         testSessions.add(testSession3);
         testUser.addMessage(testMessage);
     }

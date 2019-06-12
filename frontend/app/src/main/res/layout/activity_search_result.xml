@@ -6,4 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".view.SearchResultActivity">
 
+    <include layout="@layout/recycler_view" />
+
 </android.support.constraint.ConstraintLayout>

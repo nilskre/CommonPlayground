@@ -16,6 +16,15 @@ public class SessionRemoveUserTest {
     }
 
     @Test
+    public void testUserIsPending() {
+        Session testSession = new Session("Title", "Description", "Game", "Place", "12.12.2020", "12:00", 2, (long)100, "Genre", "Online");
+        User testUser = new User("Username", "_pswAPP89.", "test@test.de");
+        testSession.addUserWantToJoin(testUser);
+        assertEquals(testSession.removeUserFromSession(testUser), 1);
+        assertFalse(testSession.getUserWantToJoin().contains(testUser));
+    }
+
+    @Test
     public void testUserIsHostRemovingFails() {
         User testUser = new User("Username", "_pswAPP89.", "test@test.de");
         Long hostId = testUser.getId();

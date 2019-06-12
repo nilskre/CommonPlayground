@@ -26,6 +26,5 @@ public class GetSessionRequest extends VolleyJSONTemplate {
             }
         }
         list.setValue(allSessionsTmpList);
-
     }
 }

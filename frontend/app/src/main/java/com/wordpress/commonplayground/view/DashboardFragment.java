@@ -72,7 +72,7 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<?> sessions) {
                 Log.d("Observed: ", "SessionList changed");
-                Log.d("Observed: ", "No:"+sessions.size());
+                Log.d("Observed: ", "No:" + sessions.size());
                 updateAndDisplayListData(sessions);
             }
         });

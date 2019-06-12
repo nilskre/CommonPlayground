@@ -191,15 +191,18 @@ public class Session implements Parcelable {
     }
 
     public String getParticipants() {
-        StringBuilder userlist = new StringBuilder();
-        userlist.append(users.get(0).getName());
-        Iterator<User> iterator = users.iterator();
-        iterator.next();
-        while (iterator.hasNext()) {
-            User user = iterator.next();
-            userlist.append(", ");
-            userlist.append(user.getName());
+        if (users.size() > 0) {
+            StringBuilder userlist = new StringBuilder();
+            userlist.append(users.get(0).getName());
+            Iterator<User> iterator = users.iterator();
+            iterator.next();
+            while (iterator.hasNext()) {
+                User user = iterator.next();
+                userlist.append(", ");
+                userlist.append(user.getName());
+            }
+            return userlist.toString();
         }
-        return userlist.toString();
+        return "None";
     }
 }

@@ -38,6 +38,4 @@ public abstract class VolleyStringTemplate {
 
 
     protected abstract void handleString(String response, View view);
-
-
 }

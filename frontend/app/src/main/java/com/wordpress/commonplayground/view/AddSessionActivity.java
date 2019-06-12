@@ -238,7 +238,7 @@ public class AddSessionActivity extends AppCompatActivity {
         checkForAnyInput(numberOfPlayers, numberOfPlayersView);
         checkForAnyInput(time, timeView);
         checkForAnyInput(date, dateView);
-        if ("offline".equals(genre)) {
+        if ("Offline".equals(type)) {
             checkForValidPlace();
         }
         checkForValidGame();

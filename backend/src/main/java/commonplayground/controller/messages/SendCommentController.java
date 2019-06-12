@@ -5,6 +5,7 @@ import commonplayground.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,9 @@ public class SendCommentController {
                            @RequestParam(value = "messageContent", defaultValue = "not given") String messageContent) throws CorruptFrontendException {
         Long userIDAsLong = Long.parseLong(userID);
         if (userRepository.findAllById(userIDAsLong) != null) {
-            Message message = new Message(messageTitle, messageContent, userID);
+            User sender = userRepository.findById(userID);
+            System.out.println("USER " + sender);
+            Message message = new Message(messageTitle, messageContent, sender.getUsername());
             User receiver = userRepository.findByUsername(receiverName);
 
             if (receiver != null) {

@@ -1,6 +1,6 @@
-package commonplayground.controller;
+package commonplayground.controller.keeptrack;
 
-
+import commonplayground.controller.PlaceAPI;
 import commonplayground.model.Session;
 import commonplayground.model.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,6 +21,7 @@ public class FindingSessionsController {
     private String place;
     private HashMap<String, String> onlineGenres = new HashMap<>();
     private HashMap<String, String> offlineGenres = new HashMap<>();
+    private PlaceAPI placeAPI= new PlaceAPI();
 
     @Autowired
     public FindingSessionsController(SessionRepository sessionRepository) {
@@ -84,47 +81,15 @@ public class FindingSessionsController {
 
     private ArrayList<Session> matchSessionsByPlace(ArrayList<Session> sessionsToMatch) {
         ArrayList<Session> sessionsByPlace = new ArrayList<>();
-        String cityToMatch= sendRequestToPlaceAPI(place);
+        String cityToMatch= placeAPI.sendRequestToPlaceAPI(place);
 
         for (Session session: sessionsToMatch) {
-            String cityOfSession= sendRequestToPlaceAPI(session.getPlace());
+            String cityOfSession= session.getPlace();
             if (cityOfSession.equals(cityToMatch)){
                 sessionsByPlace.add(session);
             }
         }
         return sessionsByPlace;
-    }
-
-    private String sendRequestToPlaceAPI(String place){
-        String city = "123";
-        try {
-            URL url = new URL("http://api.zippopotam.us/de/" + place);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer content = new StringBuffer();
-            while ((inputLine = in.readLine()) != null)
-            { content.append(inputLine);
-            }
-            in.close();
-            city= getCityOutOfResponse(content.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return city;
-    }
-
-    private String getCityOutOfResponse(String response){
-        String city = new String();
-        int iterationValue= 102;
-        while (response.charAt(iterationValue) != '"') {
-            city+= response.charAt(iterationValue);
-            iterationValue++;
-        }
-        return city;
     }
 
     private ArrayList<Session> matchSessionsByGenre(ArrayList<Session> sessionsToMatch) {

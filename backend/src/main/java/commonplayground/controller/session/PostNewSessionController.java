@@ -1,6 +1,7 @@
 package commonplayground.controller.session;
 
 import commonplayground.Application;
+import commonplayground.controller.PlaceAPI;
 import commonplayground.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,8 @@ public class PostNewSessionController {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private final SessionRepository sessionRepository;
     private final UserRepository userRepository;
+    private String city;
+    private PlaceAPI placeAPI = new PlaceAPI();
 
     @Autowired
     public PostNewSessionController(SessionRepository sessionRepository, UserRepository userRepository) {
@@ -36,9 +39,12 @@ public class PostNewSessionController {
         Long idOfHostAsLong = Long.parseLong(idOfHost);
         if (userRepository.findAllById(idOfHostAsLong) != null) {
             User sessionHost = userRepository.findAllById(idOfHostAsLong);
-            Session addedSession = new Session(title, description, game, place, date, time, numberOfPlayers, idOfHostAsLong, genre, isOnline.toLowerCase());
+            city= placeAPI.sendRequestToPlaceAPI(place);
+
+            Session addedSession = new Session(title, description, game, city, date, time, numberOfPlayers, idOfHostAsLong, genre, isOnline.toLowerCase());
             addedSession.addUserToSession(sessionHost);
             sessionRepository.save(addedSession);
+
             return addedSession.getId();
         } else {
             log.info("Corrupt Frontend tried to access Backend");

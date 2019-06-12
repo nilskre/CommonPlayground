@@ -88,7 +88,7 @@ public class PostSessionStepDefinitions {
             assertTrue(get("/getSessionList").jsonPath().getList("title").contains(testSession.getTitle()));
             assertTrue(get("/getSessionList").jsonPath().getList("description").contains(testSession.getDescription()));
             assertTrue(get("/getSessionList").jsonPath().getList("game").contains(testSession.getGame()));
-            assertTrue(get("/getSessionList").jsonPath().getList("place").contains(testSession.getPlace()));
+            assertTrue(get("/getSessionList").jsonPath().getList("place").contains("Karlsruhe"));
             assertTrue(get("/getSessionList").jsonPath().getList("date").contains(testSession.getDate()));
             assertTrue(get("/getSessionList").jsonPath().getList("time").contains(testSession.getTime()));
             assertTrue(get("/getSessionList").jsonPath().getList("numberOfPlayers").contains(testSession.getNumberOfPlayers()));

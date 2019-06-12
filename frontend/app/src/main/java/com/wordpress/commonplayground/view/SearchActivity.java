@@ -19,7 +19,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private Button btnSearch;
     private Spinner type_spinner, genre_spinner;
-    private String type, place;
+    private String place;
     private TextInputEditText placeView;
     private boolean cancel = false;
 
@@ -94,7 +94,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private String getUrl() {
-        type = type_spinner.getSelectedItem().toString();
+        String type = type_spinner.getSelectedItem().toString();
         String api = "findSessions";
         String url = api + "?isOnline=" + type + "&genre=" + genre_spinner.getSelectedItemId();
 

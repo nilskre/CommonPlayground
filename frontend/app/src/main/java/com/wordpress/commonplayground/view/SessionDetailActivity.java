@@ -173,7 +173,11 @@ public class SessionDetailActivity extends AppCompatActivity {
                 }
             });
             TextView description = rootView.findViewById(R.id.session_description);
-            description.setText(args.getString(ARG_SESSION_DESCRIPTION));
+            if ("not given".equals(args.getString(ARG_SESSION_DESCRIPTION))) {
+                description.setVisibility(GONE);
+            } else {
+                description.setText(args.getString(ARG_SESSION_DESCRIPTION));
+            }
             Button joinButton = rootView.findViewById(R.id.ButtonJoinSession);
             Button leaveButton = rootView.findViewById(R.id.ButtonLeaveSession);
             setUpButtons(joinButton, leaveButton, args.getBoolean("isHost"), args.getBoolean("canLeave"), args.getString("uID"), args.getString("sID"), rootView);

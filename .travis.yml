@@ -12,6 +12,10 @@ env:
   - ANDROID_BUILD_TOOLS_VERSION=28.0.3
   - ANDROID_API_LEVEL_UI_TESTS=21
   - ANDROID_BUILD_TOOLS_VERSION_UI_TESTS=21.0.3
+
+before_install:
+    - yes | sdkmanager "platforms;android-28"
+    
 jobs:
   include:
   - stage: build-backend

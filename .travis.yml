@@ -13,9 +13,6 @@ env:
   - ANDROID_API_LEVEL_UI_TESTS=21
   - ANDROID_BUILD_TOOLS_VERSION_UI_TESTS=21.0.3
 
-before_install:
-    - yes | sdkmanager "platforms;android-28"
-    
 jobs:
   include:
   - stage: build-backend
@@ -23,6 +20,8 @@ jobs:
     script:
     - "(cd backend/; ./gradlew assemble)"
   - stage: build-frontend
+    before_install:
+      - yes | sdkmanager "platforms;android-28"
     language: android
     android:
       components:
@@ -36,6 +35,8 @@ jobs:
     - cd backend/
     - "./gradlew test clean"
   - stage: test-frontend
+    before_install:
+      - yes | sdkmanager "platforms;android-28"
     language: android
     android:
       components:
@@ -78,6 +79,8 @@ jobs:
     - heroku container:release web -a commonplayground
   - stage: deploy-frontend
     if: branch = master
+    before_install:
+      - yes | sdkmanager "platforms;android-28"
     language: android
     android:
       components:

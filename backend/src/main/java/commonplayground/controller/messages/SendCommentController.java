@@ -30,7 +30,9 @@ public class SendCommentController {
                            @RequestParam(value = "messageContent", defaultValue = "not given") String messageContent) throws CorruptFrontendException {
         Long userIDAsLong = Long.parseLong(userID);
         if (userRepository.findAllById(userIDAsLong) != null) {
-            User sender = userRepository.findById(userID);
+
+            User sender = userRepository.findAllById(userIDAsLong);
+
             System.out.println("USER " + sender);
             Message message = new Message(messageTitle, messageContent, sender.getUsername());
             User receiver = userRepository.findByUsername(receiverName);

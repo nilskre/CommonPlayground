@@ -47,18 +47,22 @@ This document describes the architecture of the CommonPlayground project.
 
 ### 1.4 References
 
-| Title                                                              | Date       | Publishing organization   |
-| -------------------------------------------------------------------|:----------:| ------------------------- |
-| [CommonPlayground Blog](https://commonplayground.wordpress.com/)   | 2018-10-09 | CommonPlayground Team     |
-| [Repository on GitHub](https://github.com/nilskre/CommonPlayground)| 2018-10-09 | CommonPlayground Team     |
-| [UC1 Posting a session](./use_cases/UC1_Post_Session.md)           | 2018-11-04 | CommonPlayground Team     |
-| [UC2 Joining a session](./use_cases/UC2_Join_Session.md)           | 2018-10-28 | CommonPlayground Team     |
-| [UC3 Getting an overview](./use_cases/UC3_Session_Overview.md)     | 2018-10-28 | CommonPlayground Team     |
-| [UC4 Creating an account](./use_cases/UC4_Create_Account.md)       | 2018-11-04 | CommonPlayground Team     |
-| [UC5 Logging in](./use_cases/UC5_Login.md)                         | 2018-11-12 | CommonPlayground Team     |
-| [UC6 Logout](./use_cases/UC6_Logout.md)                            | 2018-11-12 | CommonPlayground Team     |
-| [tbd Test plan](../tbd)                                            | tbd 2018-XX-XX | CommonPlayground Team     |
-| [SRS](./SoftwareRequirementsSpecification.md)                      | tbd 2018-10-14 | CommonPlayground Team     |
+| Title                                                              		| Date       | Publishing organization   |
+| --------------------------------------------------------------------------|:----------:| ------------------------- |
+| [CommonPlayground Blog](https://commonplayground.wordpress.com/)   		| 2018-10-09 | CommonPlayground Team     |
+| [Repository on GitHub](https://github.com/nilskre/CommonPlayground)		| 2018-10-09 | CommonPlayground Team     |
+| [UC1 Posting a session](./use_cases/UC1_Post_Session.md)           		| 2019-04-17 | CommonPlayground Team     |
+| [UC2 Joining a session](./use_cases/UC2_Join_Session.md)           		| 2019-04-17 | CommonPlayground Team     |
+| [UC3 Getting an overview](./use_cases/UC3_Session_Overview.md)     		| 2019-04-17 | CommonPlayground Team     |
+| [UC4 Creating an account](./use_cases/UC4_Create_Account.md)       		| 2019-04-17 | CommonPlayground Team     |
+| [UC5 Logging in](./use_cases/UC5_Login.md)                         		| 2019-04-17 | CommonPlayground Team     |
+| [UC6 Logout](./use_cases/UC6_Logout.md)                            		| 2019-04-17 | CommonPlayground Team     |
+| [UC7 Keeping track of your sessions](./use_cases/UC7_Keeping_Track.md)  	| 2019-06-15 | CommonPlayground Team     |
+| [UC8 Leaving a session](./use_cases/UC8_Leave_Session.md)                 | 2019-06-15 | CommonPlayground Team     |
+| [UC9 Finding a session](./use_cases/UC9_Find_Session.md)                  | 2019-06-15 | CommonPlayground Team     |
+| [UC10 Getting in touch](./use_cases/UC10_Getting_In_Touch.md)             | 2019-06-15 | CommonPlayground Team     |
+| [tbd Test plan](./test_plan/TestPlan.md)                                  | 2019-06-07 | CommonPlayground Team     |
+| [SRS](./SoftwareRequirementsSpecification.md)                      		| 2019-06-14 | CommonPlayground Team     |
 
 ### 1.5 Overview
 This document contains the architectural representation, goals and constraints as well 

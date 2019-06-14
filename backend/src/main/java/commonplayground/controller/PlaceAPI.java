@@ -8,7 +8,7 @@ import java.net.URL;
 public class PlaceAPI {
 
     public String sendRequestToPlaceAPI(String place){
-        String city = "123";
+        String city = "falsche PLZ";
         try {
             URL url = new URL("http://api.zippopotam.us/de/" + place);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();

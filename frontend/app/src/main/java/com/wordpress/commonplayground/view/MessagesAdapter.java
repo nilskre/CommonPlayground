@@ -75,7 +75,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         deleteButton.setVisibility(View.VISIBLE);
         acceptButton.setVisibility(View.GONE);
         rejectButton.setVisibility(View.GONE);
-        
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,9 +85,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             }
         });
 
-        Log.d("Bugfix", position+" " +message.getType() + " " +message.getTitle());
-        if (message.getType().toLowerCase().equals("joinrequest")) {
-            Log.d("Bugfix", "joined");
+        if (message.getType().equalsIgnoreCase("JoinRequest")) {
             String passRID = ((Message) inbox.get(position)).getRequesterID().toString();
             deleteButton.setVisibility(View.GONE);
             acceptButton.setVisibility(View.VISIBLE);

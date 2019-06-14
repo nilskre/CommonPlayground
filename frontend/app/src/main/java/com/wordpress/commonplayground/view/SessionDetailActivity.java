@@ -149,6 +149,7 @@ public class SessionDetailActivity extends AppCompatActivity {
             genre.setText(args.getString(ARG_SESSION_GENRE));
             TextView type = rootView.findViewById(R.id.session_type);
             TextView place = rootView.findViewById(R.id.session_place);
+            place.setText(args.getString(ARG_SESSION_PLACE));
             String[] game_types = getResources().getStringArray(R.array.game_types);
             if ("offline".equals(args.getString(ARG_SESSION_TYPE).toLowerCase())) {
                 type.setText(game_types[1]);

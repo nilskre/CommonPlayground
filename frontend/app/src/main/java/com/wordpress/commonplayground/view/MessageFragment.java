@@ -82,7 +82,7 @@ public class MessageFragment extends Fragment {
     }
 
     private void updateAndDisplayListData(List<?> inbox) {
-        MessagesAdapter adapter = new MessagesAdapter(inbox, session, messageViewModel, rvMessage);
+        MessagesAdapter adapter = new MessagesAdapter(inbox, session, messageViewModel, rvMessage, this);
         rvMessage.setAdapter(adapter);
         rvMessage.setLayoutManager(new LinearLayoutManager(getContext()));
     }

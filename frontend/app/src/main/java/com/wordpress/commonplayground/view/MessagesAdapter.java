@@ -27,11 +27,13 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     private MessageViewModel viewModel;
     private RecyclerView parent;
     private Resources r;
+    private MessageFragment messageFragment;
 
-    public MessagesAdapter(List<?> inbox, SessionManager session, MessageViewModel viewModel, RecyclerView recyclerView) {
+    public MessagesAdapter(List<?> inbox, SessionManager session, MessageViewModel viewModel, RecyclerView recyclerView, MessageFragment messageFragment) {
         this.inbox = inbox;
         this.session = session;
         this.viewModel = viewModel;
+        this.messageFragment = messageFragment;
         parent = recyclerView;
         r = parent.getResources();
         expansionsCollection.openOnlyOne(true);
@@ -77,6 +79,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
                 viewModel.deleteMessage(passUID, passMID);
                 inbox.remove(pos);
                 Objects.requireNonNull(parent.getAdapter()).notifyDataSetChanged();
+                messageFragment.observeChangesInMessageList();
             }
         });
 
@@ -91,6 +94,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
                     viewModel.deleteMessage(passUID, passMID);
                     inbox.remove(pos);
                     Objects.requireNonNull(parent.getAdapter()).notifyDataSetChanged();
+                    messageFragment.observeChangesInMessageList();
                 }
             });
 
@@ -102,6 +106,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
                     viewModel.deleteMessage(passUID, passMID);
                     inbox.remove(pos);
                     Objects.requireNonNull(parent.getAdapter()).notifyDataSetChanged();
+                    messageFragment.observeChangesInMessageList();
                 }
             });
         }

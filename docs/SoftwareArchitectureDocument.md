@@ -152,4 +152,5 @@ Database ER-Diagram:
 n/a
 
 ## 11. Quality/Metrics
-tbd
+The application is being measured in terms of complexity, coupling and cohesion. Due to the MVC Pattern the backend is unproblematic regarding any of these metrics. The Android framework makes it more difficult to achieve similarly good metrics for the frontend. Handling the UI elements requires many method calls from framework classes, contexts and views have to be handled and passed which increases all of the above mentioned metrics. However we have commited to still avoid high ratings in these categories even though we could not prevent several classes to be rated medium-high.
+One measurment to achieve this is the use of patterns. We implemented the template method pattern to handle the frontend http requests. We created two templates which contain the sending of the two requests types (JSON and string). We then created specific request classes which extend from the templates and which implement their own specific ways to handle the response as the sending is the same for each request but the reponses have to be dealt with individually. This way we avoid duplicating the common parts.

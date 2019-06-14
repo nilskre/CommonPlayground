@@ -121,7 +121,7 @@ public class Session {
         return this.userWantToJoin.add(user);
     }
 
-    private void removeUserWantToJoin(User user) {
+    public void removeUserWantToJoin(User user) {
         this.userWantToJoin.remove(user);
     }
 }

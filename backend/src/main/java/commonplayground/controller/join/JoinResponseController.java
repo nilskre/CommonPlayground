@@ -48,6 +48,7 @@ public class JoinResponseController {
                 messageToUserThatJoinWasSuccessful(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
             } else if (!joinAccepted) {
                 removeMessageFromHostsMessages(sessionHost, relevantMessage);
+                sessionUserWantsToJoin.removeUserWantToJoin(userWhoWantsToJoinSession);
                 System.out.println("DELTE HOST MESSAGE");
                 messageToUserThatJoinWasRejected(sessionUserWantsToJoin, userWhoWantsToJoinSession, sessionHost);
             }

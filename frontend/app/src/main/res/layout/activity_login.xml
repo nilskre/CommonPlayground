@@ -81,73 +81,52 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-                app:layout_constraintEnd_toEndOf="parent"
-                >
+                app:layout_constraintEnd_toEndOf="parent" >
 
-            <Space
-                android:id="@+id/left_space"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/email_sign_in_button"
-                />
-            <Button
-                android:id="@+id/email_sign_in_button"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/colorAccent"
-                android:text="@string/action_sign_in"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/left_space"
-                app:layout_constraintEnd_toStartOf="@id/center_space"
-                app:layout_constraintTop_toBottomOf="parent" />
+                <Button
+                    android:id="@+id/email_sign_in_button"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/center_space"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="@string/action_sign_in"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
 
                 <Space
                     android:id="@+id/center_space"
                     android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    app:layout_constraintStart_toEndOf="@id/email_sign_in_button"
-                    app:layout_constraintTop_toBottomOf="parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
                     />
 
-            <Button
-                android:id="@+id/register_button"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:backgroundTint="@color/colorAccent"
-                android:text="@string/action_register"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/center_space"
-                app:layout_constraintTop_toBottomOf="parent" />
+                <Button
+                    android:id="@+id/register_button"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toEndOf="@+id/center_space"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="@string/action_register"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
 
-                <Space
-                    android:id="@+id/right_space"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    app:layout_constraintStart_toEndOf="@id/register_button"
-
-                    app:layout_constraintTop_toBottomOf="parent"
-                    />
-
-            </LinearLayout>
+            </RelativeLayout>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 

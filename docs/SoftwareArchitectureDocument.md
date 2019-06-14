@@ -61,7 +61,7 @@ This document describes the architecture of the CommonPlayground project.
 | [UC8 Leaving a session](./use_cases/UC8_Leave_Session.md)                 | 2019-06-15 | CommonPlayground Team     |
 | [UC9 Finding a session](./use_cases/UC9_Find_Session.md)                  | 2019-06-15 | CommonPlayground Team     |
 | [UC10 Getting in touch](./use_cases/UC10_Getting_In_Touch.md)             | 2019-06-15 | CommonPlayground Team     |
-| [tbd Test plan](./test_plan/TestPlan.md)                                  | 2019-06-07 | CommonPlayground Team     |
+| [Test plan](./test_plan/TestPlan.md)                                      | 2019-06-07 | CommonPlayground Team     |
 | [SRS](./SoftwareRequirementsSpecification.md)                      		| 2019-06-14 | CommonPlayground Team     |
 
 ### 1.5 Overview

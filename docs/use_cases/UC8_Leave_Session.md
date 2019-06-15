@@ -8,8 +8,8 @@ This use case allows users to leave an already joined session.
 ## 1.2 Mockup 
 ![Mockup Leave a Session](../mockups/Join_Session_afterjoin.png)
 
-## 1.3 Screenshots
-tbd
+## 1.3 Screenshot
+<img src="./Screenshots/UC8_Leave_Session_Screenshot.png" alt="Leaving" width="300"/>
 
 # 2. Flow of Events
 

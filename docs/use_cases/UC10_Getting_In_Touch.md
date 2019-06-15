@@ -7,10 +7,11 @@ This use case allows people to communicate about with each other. This will add 
 
 ## 1.2 Mockup
 ![Mockup commenting section](../mockups/UC10_Getting_In_Touch.png)
+
 Note: while developing this use case specification changed which is why the mockup deviates from the screenshot
 
-## 1.3 Screenshot
-tbd
+## 1.3 Screenshots
+<img src="./Screenshots/UC10_Getting_In_Touch_Screenshot0.png" alt="Getting in touch" width="300"/> <img src="./Screenshots/UC10_Getting_In_Touch_Screenshot1.png" alt="Getting in touch" width="300"/> <img src="./Screenshots/UC10_Getting_In_Touch_Screenshot2.png" alt="Getting in touch" width="300"/> <img src="./Screenshots/UC10_Getting_In_Touch_Screenshot3.png" alt="Getting in touch" width="300"/> <img src="./Screenshots/UC10_Getting_In_Touch_Screenshot4.png" alt="Getting in touch" width="300"/> <img src="./Screenshots/UC10_Getting_In_Touch_Screenshot5.png" alt="Getting in touch" width="300"/>
 
 # 2. Flow of Events
 
@@ -51,4 +52,4 @@ The Postconditions for this use case are:
 The message workflow works according to the communication that is part of UC 2 [Join a session](./use_cases/UC2_Join_Session.md)
 
 # 6. Function Points
-tbd
+n/a

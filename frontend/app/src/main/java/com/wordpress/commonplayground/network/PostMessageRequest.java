@@ -18,7 +18,6 @@ public class PostMessageRequest extends VolleyStringTemplate {
         this.activity = activity;
     }
 
-
     @Override
     protected void handleString(String response, View view) {
 
@@ -41,7 +40,7 @@ public class PostMessageRequest extends VolleyStringTemplate {
 
     }
 
-  private void returnToMainActivity() {
+    private void returnToMainActivity() {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -50,5 +49,4 @@ public class PostMessageRequest extends VolleyStringTemplate {
             }
         }, 2000);
     }
-
 }

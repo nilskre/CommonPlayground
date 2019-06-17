@@ -36,7 +36,6 @@ public class SessionDetailActivity extends AppCompatActivity {
     private List<Session> sessionList;
     private SessionManager credentials;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +45,8 @@ public class SessionDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -63,6 +64,12 @@ public class SessionDetailActivity extends AppCompatActivity {
         ViewPager mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(index);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     /**
@@ -141,13 +148,15 @@ public class SessionDetailActivity extends AppCompatActivity {
             TextView genre = rootView.findViewById(R.id.session_genre);
             genre.setText(args.getString(ARG_SESSION_GENRE));
             TextView type = rootView.findViewById(R.id.session_type);
-            type.setText(args.getString(ARG_SESSION_TYPE));
             TextView place = rootView.findViewById(R.id.session_place);
-            if ("Offline".equals(args.getString(ARG_SESSION_TYPE))) {
-                place.setText(args.getString(ARG_SESSION_PLACE));
+            place.setText(args.getString(ARG_SESSION_PLACE));
+            String[] game_types = getResources().getStringArray(R.array.game_types);
+            if ("offline".equals(args.getString(ARG_SESSION_TYPE).toLowerCase())) {
+                type.setText(game_types[1]);
                 ImageView typeIcon = rootView.findViewById(R.id.session_type_icon);
                 typeIcon.setBackgroundResource(R.drawable.ic_detail_offline);
             } else {
+                type.setText(game_types[0]);
                 ImageView placeIcon = rootView.findViewById(R.id.session_place_icon);
                 placeIcon.setVisibility(View.INVISIBLE);
                 place.setVisibility(View.INVISIBLE);
@@ -165,7 +174,11 @@ public class SessionDetailActivity extends AppCompatActivity {
                 }
             });
             TextView description = rootView.findViewById(R.id.session_description);
-            description.setText(args.getString(ARG_SESSION_DESCRIPTION));
+            if ("not given".equals(args.getString(ARG_SESSION_DESCRIPTION))) {
+                description.setVisibility(GONE);
+            } else {
+                description.setText(args.getString(ARG_SESSION_DESCRIPTION));
+            }
             Button joinButton = rootView.findViewById(R.id.ButtonJoinSession);
             Button leaveButton = rootView.findViewById(R.id.ButtonLeaveSession);
             setUpButtons(joinButton, leaveButton, args.getBoolean("isHost"), args.getBoolean("canLeave"), args.getString("uID"), args.getString("sID"), rootView);

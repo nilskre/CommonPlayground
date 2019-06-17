@@ -45,7 +45,6 @@ public class SendMessageActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void sendRequestToBackend() {
-
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("userID", credentials.getUserDetails().get(SessionManager.KEY_ID));
         parameters.put("receiverName", usernameView.getEditableText().toString());
@@ -84,5 +83,4 @@ public class SendMessageActivity extends AppCompatActivity implements View.OnCli
             cancel = true;
         }
     }
-
 }

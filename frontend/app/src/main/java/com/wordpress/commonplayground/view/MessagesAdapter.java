@@ -47,6 +47,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder viewHolder, int position) {
         Message message = (Message) inbox.get(position);
+
         TextView titleTextView = viewHolder.titleTextView;
         TextView descriptionTextView = viewHolder.descriptionTextView;
         TextView authorTextView = viewHolder.authorTextView;
@@ -61,46 +62,49 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             titleTextView.setTextColor(r.getColor(R.color.colorPrimaryDark));
         }
 
-        setUpButtons(viewHolder, position, deleteButton, acceptButton, rejectButton);
+        setUpButtons(position, deleteButton, acceptButton, rejectButton, message);
 
         expansionsCollection.add(viewHolder.getExpansionLayout());
         viewHolder.bind(inbox.get(position));
     }
 
-    private void setUpButtons(MessageViewHolder viewHolder, int position, Button deleteButton, Button acceptButton, Button rejectButton) {
-        int pos = viewHolder.getAdapterPosition();
-        String passMID = Long.toString(((Message) inbox.get(pos)).getId());
+    private void setUpButtons(int position, Button deleteButton, Button acceptButton, Button rejectButton, Message message) {
+        String passMID = Long.toString(((Message) inbox.get(position)).getId());
         String passUID = session.getUserDetails().get(SessionManager.KEY_ID);
+        deleteButton.setVisibility(View.VISIBLE);
+        acceptButton.setVisibility(View.GONE);
+        rejectButton.setVisibility(View.GONE);
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewModel.deleteMessage(passUID, passMID);
-                inbox.remove(pos);
+                inbox.remove(position);
                 Objects.requireNonNull(parent.getAdapter()).notifyDataSetChanged();
             }
         });
 
-        if (((Message) inbox.get(position)).getType().contentEquals("JoinRequest")) {
+        if (message.getType().equalsIgnoreCase("JoinRequest")) {
             String passRID = ((Message) inbox.get(position)).getRequesterID().toString();
             deleteButton.setVisibility(View.GONE);
             acceptButton.setVisibility(View.VISIBLE);
+
             acceptButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     viewModel.answerRequest(passUID, passMID, passRID, "true");
                     viewModel.deleteMessage(passUID, passMID);
-                    inbox.remove(pos);
+                    inbox.remove(position);
                     Objects.requireNonNull(parent.getAdapter()).notifyDataSetChanged();
                 }
             });
-
             rejectButton.setVisibility(View.VISIBLE);
             rejectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     viewModel.answerRequest(passUID, passMID, passRID, "false");
                     viewModel.deleteMessage(passUID, passMID);
-                    inbox.remove(pos);
+                    inbox.remove(position);
                     Objects.requireNonNull(parent.getAdapter()).notifyDataSetChanged();
                 }
             });

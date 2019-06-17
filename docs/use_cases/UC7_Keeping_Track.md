@@ -9,8 +9,8 @@ This use case allows a user to keep track of his sessions. The session has the f
 ![Mockup keeping track hosted](../mockups/Keeping_Track_Hosted.png)
 ![Mockup keeping track joined](../mockups/Keeping_Track_Joined.png)
 
-## 1.3 Screenshot
-tbd
+## 1.3 Screenshots
+<img src="./Screenshots/UC7_Keeping_Track_Screenshot0.png" alt="Keeping track" width="300"/> <img src="./Screenshots/UC7_Keeping_Track_Screenshot1.png" alt="Keeping track" width="300"/> <img src="./Screenshots/UC7_Keeping_Track_Screenshot2.png" alt="Keeping track" width="300"/>
 
 # 2. Flow of Events
 

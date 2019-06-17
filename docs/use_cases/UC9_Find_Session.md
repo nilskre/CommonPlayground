@@ -11,9 +11,8 @@ This use case allows a user to find a gaming session they might want to join. Th
 ![Mockup finding online filter form](../mockups/UC9_Filter_Online.png)
 ![Mockup finding online genre dropdown](../mockups/UC9_Dropdown_Online.png)
 
-
-## 1.3 Screenshot
-tbd
+## 1.3 Screenshots
+<img src="./Screenshots/UC9_Finding_Screenshot0.png" alt="Finding" width="300"/> <img src="./Screenshots/UC9_Finding_Screenshot1.png" alt="Finding" width="300"/> <img src="./Screenshots/UC9_Finding_Screenshot2.png" alt="Finding" width="300"/> <img src="./Screenshots/UC9_Finding_Screenshot3.png" alt="Finding" width="300"/>
 
 # 2. Flow of Events
 

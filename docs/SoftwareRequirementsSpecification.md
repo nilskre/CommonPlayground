@@ -170,7 +170,6 @@ The app provides the user with a seperate page view where they get an overview o
 
 #### 3.1.8 Leaving a session
 The user gets also the possibility to delete a session he posted or to leave a session he joined.
-[Leaving a Session](./use_cases/UC8_Leave_Session.md)
 
 [Leaving a session](./use_cases/UC8_Leave_Session.md)
 
@@ -181,6 +180,8 @@ Based on the overview over all sessions this features enables the user to find s
 
 #### 3.1.10 Getting in touch
 There must be the possibility that two people who want to play together can communicate with each other. The player who joins the session gets the possibility to contact the owner and vice versa. Later on, when we will have implemented profiles, then they will form another way to communicate with each other.
+
+[Getting in Touch](./use_cases/UC10_Getting_In_Touch.md)
 
 #### 3.1.11 Presenting yourself and checking out others
 With the possibility to log in there comes another functionality, the profile. Every user will have their own profile where they can write some informations about themselves. Because of the privacy policy in Europe, the user has the possibility to only write the information they want other people to see. Using the profile, users can also check out other players and learn e.g. their favorite games.

@@ -12,7 +12,7 @@ This use case allows anyone to register and create an account. Also the data wil
 ![Registration Fail 3](../mockups/Registration_Fail3.png)
 
 ## 1.3 Screenshots
-<img src="./Screenshots/UC4_Create_Account_Screenshot.png" alt="Screenshot register fail 1" width="300"/> <img src="./Screenshots/UC4_Create_Account_Screenshot2.png" alt="Screenshot register fail 2" width="300"/> <img src="./Screenshots/UC4_Create_Account_Screenshot3.png" alt="Screenshot register fail 3" width="300"/> <img src="./Screenshots/UC4_Create_Account_Screenshot4.png" alt="Screenshot register fail 4" width="300"/>
+<img src="./Screenshots/UC4_Create_Account_Screenshot0.png" alt="Register" width="300"/> <img src="./Screenshots/UC4_Create_Account_Screenshot1.png" alt="Register" width="300"/>
 
 There are several more error messages.
 

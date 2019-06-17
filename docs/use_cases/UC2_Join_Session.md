@@ -12,7 +12,8 @@ This use case allows a user to join an existing game session that is not yet ful
 ![Mockup Joining a Session](../mockups/Join_Session_afterjoin.png)
 
 
-## 1.3 Screenshot
+## 1.3 Screenshots
+<img src="./Screenshots/UC2_Join_Session_Screenshot0.png" alt="Joining" width="300"/> <img src="./Screenshots/UC2_Join_Session_Screenshot1.png" alt="Joining" width="300"/> <img src="./Screenshots/UC2_Join_Session_Screenshot2.png" alt="Joining" width="300"/>
 
 # 2. Flow of Events
 

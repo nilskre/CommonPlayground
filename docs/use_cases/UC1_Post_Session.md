@@ -15,7 +15,7 @@ This use case allows users to post a session onto the session overview page. A s
 ![Mockup Post a Session](../mockups/post_a_session_mockup.png)
 
 ## 1.3 Screenshots
-<img src="./Screenshots/UC1_Post_Session_Screenshot.png" alt="Screenshot posting a session" width="300"/> <img src="./Screenshots/UC1_Post_Session_Screenshot2.png" alt="Screenshot using calendar" width="300"/> <img src="./Screenshots/UC1_Post_Session_Screenshot3.png" alt="Screenshot using clock" width="300"/>
+<img src="./Screenshots/UC1_Post_Session_Screenshot0.png" alt="Posting" width="300"/> <img src="./Screenshots/UC1_Post_Session_Screenshot1.png" alt="Posting" width="300"/> <img src="./Screenshots/UC1_Post_Session_Screenshot2.png" alt="Posting" width="300"/> <img src="./Screenshots/UC1_Post_Session_Screenshot3.png" alt="Posting" width="300"/> <img src="./Screenshots/UC1_Post_Session_Screenshot4.png" alt="Posting" width="300"/>
 
 # 2. Flow of Events
 
@@ -44,22 +44,23 @@ Feature: Use Case 1 Posting a Session
 
   @postsession-feature
   Scenario Outline: Add a new session
-    When
     When The user types the title <title> and the input is correct
-    And The user types the description <description> and the input is correct
     And The user types the game <game> and the input is correct
-    And The user types the place <place> and the input is correct
-    And The user types the date <date> and the input is correct
-    And The user types the time <time> and the input is correct
+    And The user chooses <type> as type
+    And The user chooses <genre> as genre
+    And The user types the post code <postCode> and the input is correct
+    And The user picks the date <date>
+    And The user picks the time <time>
     And The user types the number of players <numberOfPlayers> and the input is correct
+    And The user types the description <description> and the input is correct
     And The user presses the publish button
-    Then A Request is sent
-    And The posting screen is closed
+    Then The posting screen is closed
+    And The new session with <title> is shown
 
     Examples: Sessions
-      | title | description | game       | place       | date       | time  | numberOfPlayers |
-      | Raid  | online Game | Game       | web         | 01.11.2018 | 12:00 | 10              |
-      | Cards | fun         | Doppelkopf | Schlosspark | 29.10.2019 | 06:00 | 4               |
+      | title | game       | type     | genre     | postCode  | date       | time  | numberOfPlayers | description |
+      | Cards | Doppelkopf | Offline  | Card Game | 23456     | 29-10-2019 | 06:00 | 4               | fun         |
+      | Raid  | Game       | Online   | MMO RPG   | -         | 01-11-2020 | 12:00 | 10              | online Game |
 
   @postsession-feature
   Scenario: Leaving the Activity New Session without sending a Request
